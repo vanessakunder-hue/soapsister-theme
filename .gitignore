@@ -1,0 +1,23 @@
+# Zugangsdaten und lokale Konfiguration nie hochladen
+.env
+.env.*
+*.env
+.shopify/
+config.yml
+shopify.theme.toml
+*.key
+*.pem
+*.p12
+*secret*
+*credentials*
+
+# Abhängigkeiten und Build-Artefakte
+node_modules/
+dist/
+
+# System- und Editor-Dateien
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
