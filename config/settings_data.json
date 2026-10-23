@@ -108,12 +108,14 @@
     "color_palette": {
       "background": "#EAEDE8",
       "foreground": "#1D3F51",
-      "color1": "#333333",
-      "color2": "#dfdfdf",
-      "color3": "#EEAAEE",
-      "color4": "#1D3F51",
+      "color1": "#21B5EA",
+      "color2": "{{ settings.color_palette.color8 }}",
+      "color3": "{{ settings.color_palette.background }}",
+      "color4": "{{ settings.color_palette.foreground }}",
       "color5": "#E08FBC",
-      "color6": "#751F65"
+      "color6": "#751F65",
+      "color7": "{{ settings.color_palette.background }}",
+      "color8": "#CAC8C4"
     }
   },
   "presets": {
