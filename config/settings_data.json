@@ -106,8 +106,8 @@
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "color_palette": {
-      "background": "#ffffff",
-      "foreground": "#000000",
+      "background": "#EAEDE8",
+      "foreground": "#1D3F51",
       "color1": "#333333",
       "color2": "#dfdfdf",
       "color3": "#EEAAEE",
