@@ -366,7 +366,7 @@
             "icon_eHCxwY": {
               "type": "icon",
               "settings": {
-                "icon": "leaf",
+                "icon": "heart",
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
@@ -416,7 +416,7 @@
                 "text_T6DpWJ": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Aloe Vera & Mandelöl</h2>",
+                    "text": "<h2>Zart zur Haut&nbsp;</h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -441,7 +441,7 @@
                 "text_frPrXe": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Pflegt deine Haut bei jeder Dusche.&nbsp;</p>",
+                    "text": "<p>Mit Aloe Vera und Mandelöl für ein weiches Gefühl nach jeder Dusche.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -567,7 +567,7 @@
                 "text_7BALgE": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>96 % natürlich&nbsp;</h2>",
+                    "text": "<h2>Natürlich gut</h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -668,7 +668,7 @@
             "icon_tyN6jb": {
               "type": "icon",
               "settings": {
-                "icon": "heart",
+                "icon": "map_pin",
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
@@ -743,7 +743,7 @@
                 "text_i9MLKe": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Eine Marke mit Herz aus München.&nbsp;</p>",
+                    "text": "<p>Gemacht für deine kleinen Wohlfühlmomente.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -788,7 +788,7 @@
         "content_direction": "row",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
+        "vertical_alignment": "flex-start",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
@@ -1115,8 +1115,8 @@
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
-    "section_pzd4Tb",
     "section_XwT7nV",
-    "section_B9dnwg"
+    "section_B9dnwg",
+    "section_pzd4Tb"
   ]
 }
