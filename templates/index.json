@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Together in care</p>",
+            "text": "<h1><strong>Together in care</strong></h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -42,7 +42,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Duschmousse mit Aloe Vera und Mandelöl</p>",
+            "text": "<h3>Duschmousse mit Aloe Vera und Mandelöl</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
