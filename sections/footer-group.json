@@ -18,7 +18,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p><strong>Kontakt:</strong></p><p><a href=\"mailto:hello@soapsister.de\" title=\"mailto:hello@soapsister.de\">hello@soapsister.de</a></p>",
+            "text": "<h4><strong>Kontakt:</strong></h4><p><strong>Fragen? Schreib uns!</strong><br/><a href=\"mailto:hello@soapsister.de\" title=\"mailto:hello@soapsister.de\">hello@soapsister.de</a></p><p>SOAPSISTER GmbH<br/>Adolf-Kolping-Str. 9<br/>80336 München</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -78,83 +78,91 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
-        },
-        "text_eWdRbt": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Werde Teil der Sisterhood</h2>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+          "blocks": {
+            "text_nJJaP9": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h4>Werde Teil der Sisterhood</h4>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_TjdYLb": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Melde dich an und sei immer als Erste dabei:<br/>🫧 bei neuen Düften<br/>💗 bei Pflegetipps für Haut und Seele<br/>🦆 bei Neuigkeiten aus der Sisterhood</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_CrmWQC": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Mit deiner Anmeldung erhältst du unseren Newsletter. Du kannst dich jederzeit abmelden. Mehr dazu in der Datenschutzerklärung.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
           },
-          "blocks": {}
-        },
-        "text_pLbDLY": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Melde dich an und sei immer als Erste dabei:<br/>🫧 bei neuen Düften<br/>💗 bei Pflegetipps für Haut und Seele<br/>🦆 bei Neuigkeiten aus der Sisterhood</p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "{{ settings.color_palette.color6 }}",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_7KLLtf": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>Mit deiner Anmeldung erhältst du unseren Newsletter. Du kannst dich jederzeit abmelden. Mehr dazu in der Datenschutzerklärung.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+          "block_order": [
+            "text_nJJaP9",
+            "text_TjdYLb",
+            "text_CrmWQC"
+          ]
         },
         "email_signup_k8PFqb": {
           "type": "email-signup",
@@ -162,14 +170,14 @@
             "width": "fill",
             "custom_width": 100,
             "heading": "",
-            "heading_text_color": "",
+            "heading_text_color": "{{ settings.color_palette.color1 }}",
             "heading_preset": "h3",
             "border_style": "all",
             "input_style": "custom",
-            "border_width": 1,
+            "border_width": 0,
             "border_radius": 100,
             "input_background_color": "{{ settings.color_palette.color5 }}",
-            "input_text_color": "{{ settings.color_palette.foreground }}",
+            "input_text_color": "{{ settings.color_palette.color6 }}",
             "input_border_color": "{{ settings.color_palette.color2 }}",
             "input_type_preset": "paragraph",
             "style_class": "button-unstyled",
@@ -192,16 +200,13 @@
       "block_order": [
         "text_WFBf7K",
         "group_H6VpwJ",
-        "text_eWdRbt",
-        "text_pLbDLY",
-        "text_7KLLtf",
         "email_signup_k8PFqb"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
         "gap": 20,
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_color": "{{ settings.color_palette.color6 }}",
         "padding-block-start": 30,
         "padding-block-end": 30
       }
