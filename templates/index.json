@@ -452,7 +452,7 @@
           "settings": {
             "image": "shopify://shop_images/feelgood_badewanne_schaum_2400x1600_aced6a5f-96ce-47dc-92b7-e40433454b28.png",
             "link": "",
-            "image_ratio": "square",
+            "image_ratio": "landscape",
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1115,28 +1115,6 @@
     "section_78Kybe": {
       "type": "section",
       "blocks": {
-        "image_REf78i": {
-          "type": "image",
-          "settings": {
-            "link": "",
-            "image_ratio": "square",
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "group_bTAHHb": {
           "type": "group",
           "settings": {
@@ -1181,7 +1159,7 @@
               "name": "t:names.heading",
               "settings": {
                 "text": "<h2>For skin, soul and sisterhood&nbsp;</h2>",
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "h3",
@@ -1206,7 +1184,7 @@
               "type": "text",
               "settings": {
                 "text": "<p>Soapsister ist eine Marke aus München, gegründet von Veronika Löwen.&nbsp;</p><p>Together in care: Für uns ist Pflege mehr als sauber werden. Es geht um kleine Wohlfühlmomente für dich und deine Sisters.</p>",
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1251,17 +1229,40 @@
             "text_jmkGbG",
             "button_LJd9VE"
           ]
+        },
+        "image_BwU6rp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image-1793632160546.png",
+            "link": "",
+            "image_ratio": "square",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "image_REf78i",
-        "group_bTAHHb"
+        "group_bTAHHb",
+        "image_BwU6rp"
       ],
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "center",
         "vertical_alignment": "center",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
