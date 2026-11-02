@@ -14,6 +14,51 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
+        "announcement_7L86Qi": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "10 % Rabatt auf die erste Bestellung&nbsp;",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_RdkfMx": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Versand mit DHL in 1 bis 3 Werktagen",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_QQCRy7": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "96 % natürliche Inhaltstoffe&nbsp;",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
@@ -30,11 +75,14 @@
         }
       },
       "block_order": [
+        "announcement_7L86Qi",
+        "announcement_RdkfMx",
+        "announcement_QQCRy7",
         "announcement_BxgCk9"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "speed": 5,
+        "speed": 4,
         "section_width": "page-width",
         "background_color": "{{ settings.color_palette.color5 }}",
         "divider_width": 1,
