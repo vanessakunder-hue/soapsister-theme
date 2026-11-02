@@ -109,7 +109,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Melde dich an und sei immer als Erste dabei:<br/>🫧 bei neuen Düften<br/>💗 bei Pflegetipps für Haut und Seele<br/>🦆 bei Neuigkeiten aus der Sisterhood</p>",
+                "text": "<p>Melde dich an und sei immer als Erste dabei:<br/>🧼 bei neuen Düften<br/>💗 bei Pflegetipps für Haut und Seele<br/>🦆 bei Neuigkeiten aus der Sisterhood</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -177,7 +177,7 @@
             "border_width": 0,
             "border_radius": 100,
             "input_background_color": "{{ settings.color_palette.color5 }}",
-            "input_text_color": "{{ settings.color_palette.color6 }}",
+            "input_text_color": "{{ settings.color_palette.background }}",
             "input_border_color": "{{ settings.color_palette.color2 }}",
             "input_type_preset": "paragraph",
             "style_class": "button-unstyled",
