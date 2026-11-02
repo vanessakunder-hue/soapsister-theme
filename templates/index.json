@@ -669,7 +669,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": ""
+                "icon_color": "{{ settings.color_palette.background }}"
               },
               "blocks": {}
             },
@@ -726,7 +726,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -751,7 +751,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -820,7 +820,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": ""
+                "icon_color": "{{ settings.color_palette.background }}"
               },
               "blocks": {}
             },
@@ -877,7 +877,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -902,7 +902,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -971,7 +971,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": ""
+                "icon_color": "{{ settings.color_palette.background }}"
               },
               "blocks": {}
             },
@@ -1028,7 +1028,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -1053,7 +1053,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.background }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -1096,7 +1096,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "{{ settings.color_palette.color5 }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
