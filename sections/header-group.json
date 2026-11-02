@@ -11,84 +11,126 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
+    "marquee_dUJJMx": {
+      "type": "marquee",
       "blocks": {
-        "announcement_7L86Qi": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
+        "text_Ur8JEw": {
+          "type": "text",
+          "name": "t:names.text",
           "settings": {
-            "text": "10 % Rabatt auf die erste Bestellung&nbsp;",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
+            "text": "<p>Versand mit DHL in 1 bis 3 Werktagen</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
-        "announcement_RdkfMx": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
+        "text_nxNxHJ": {
+          "type": "text",
+          "name": "t:names.text",
           "settings": {
-            "text": "Versand mit DHL in 1 bis 3 Werktagen",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
+            "text": "<p>10 % Rabatt auf die erste Bestellung&nbsp;</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
-        "announcement_QQCRy7": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
+        "text_RXKiFF": {
+          "type": "text",
+          "name": "t:names.text",
           "settings": {
-            "text": "96 % natürliche Inhaltstoffe&nbsp;",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
+            "text": "<p>For Skin, soul and sisterhood</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
-        "announcement_BxgCk9": {
-          "type": "_announcement",
+        "text_JkR7Wb": {
+          "type": "text",
           "settings": {
-            "text": "For Skin, Soul and Sisterhood",
-            "link": "",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.25rem",
-            "weight": "",
-            "letter_spacing": "normal",
+            "text": "<p>96 % natürliche Inhaltsstoffe&nbsp;</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
             "case": "none",
-            "text_color": "{{ settings.color_palette.background }}"
+            "wrap": "nowrap",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "announcement_7L86Qi",
-        "announcement_RdkfMx",
-        "announcement_QQCRy7",
-        "announcement_BxgCk9"
+        "text_Ur8JEw",
+        "text_nxNxHJ",
+        "text_RXKiFF",
+        "text_JkR7Wb"
       ],
-      "name": "t:names.announcement_bar",
+      "name": "t:names.marquee_section",
       "settings": {
-        "speed": 4,
-        "section_width": "page-width",
+        "movement_direction": "reverse",
         "background_color": "{{ settings.color_palette.color5 }}",
-        "divider_width": 1,
-        "divider_color": "{{ settings.color_palette.color2 }}",
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "padding-block-start": 10,
+        "padding-block-end": 10,
+        "gap_between_elements": 70
       }
     },
     "header_section": {
@@ -176,7 +218,7 @@
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
+    "marquee_dUJJMx",
     "header_section"
   ]
 }
