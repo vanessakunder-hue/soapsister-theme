@@ -905,6 +905,7 @@
         "text_MkAWp3",
         "email_signup_ifpGqz"
       ],
+      "disabled": true,
       "name": "t:names.email_signup",
       "settings": {
         "content_direction": "column",
