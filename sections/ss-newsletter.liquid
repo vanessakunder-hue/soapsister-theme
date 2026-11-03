@@ -6,7 +6,7 @@
 {%- assign sid = '#SsNewsletter-' | append: section.id -%}
 <style>
   {{ sid }} { display: grid; gap: clamp(28px, 4vw, 56px); padding: clamp(64px, 8vw, 120px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
-  {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: 900; font-size: clamp(48px, 7.4vw, 120px); line-height: 1.05; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
+  {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(48px, 7.4vw, 120px); line-height: 1.05; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
   {{ sid }} .ssn__foot { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px clamp(16px, 3vw, 48px); align-items: start; }
   {{ sid }} .ssn__copy { grid-column: 1 / 6; display: grid; gap: 12px; }
   {{ sid }} .ssn__text { margin: 0; font-size: 18px; line-height: 1.5; }
