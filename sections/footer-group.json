@@ -230,7 +230,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Pflege für Haut und Seele, jetzt auch per Mail.&nbsp;💌</p><p>Mehr in der Datenschutzerklärung.</p>",
+                "text": "<p>Pflege für Haut und Seele, jetzt auch per Mail.&nbsp;💌</p><p>Abmeldung jederzeit möglich. Mehr in der Datenschutzerklärung.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
