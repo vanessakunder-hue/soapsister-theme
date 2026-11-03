@@ -1,13 +1,13 @@
 {%- comment -%}
   SOAP SISTER Newsletter (aus dem Soapsister-Theme, 03.11.2026): Plum-Fläche, kleine Überschrift
-  "Jetzt 10 % sparen", darunter linksbündig Satz, Feld und runder Button (Kundenwunsch 03.11.2026). Shopify-Kundenformular mit Tag newsletter; Double-Opt-in im Shop einschalten.
+  "Jetzt 10 % sparen", darunter mittig Satz, Feld und runder Button (Kundenwunsch 03.11.2026). Shopify-Kundenformular mit Tag newsletter; Double-Opt-in im Shop einschalten.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
 {%- assign sid = '#SsNewsletter-' | append: section.id -%}
 <style>
-  {{ sid }} { display: grid; justify-items: start; gap: 16px; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
+  {{ sid }} { display: grid; justify-items: center; gap: 16px; text-align: center; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
   {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.1; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
-  {{ sid }} .ssn__foot { display: grid; gap: 20px; width: min(100%, 560px); }
+  {{ sid }} .ssn__foot { display: grid; gap: 20px; width: min(100%, 560px); margin-inline: auto; }
   {{ sid }} .ssn__copy { display: grid; gap: 12px; }
   {{ sid }} .ssn__text { margin: 0; font-size: 18px; line-height: 1.5; }
   {{ sid }} .ssn__fine { margin: 0; font-size: 15px; line-height: 1.5; }
