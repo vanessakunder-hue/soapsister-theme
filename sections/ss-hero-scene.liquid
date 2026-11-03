@@ -1,7 +1,8 @@
 {%- comment -%}
   Hero "Szene" (03.11.2026): die gerenderte Wolkenszene mit allen Produkten als Bild, oben im freien Himmel Überschrift,
   ein Satz und zwei Wege in die Seite. Hochformat-Bild für Handys und Tablets im Hochformat, Querformat sonst.
-  Das Bild läuft immer über die volle Breite, damit alle Produkte zu sehen sind. Eigenständig: Styles stecken in der
+  Das Bild läuft immer über die volle Breite, damit alle Produkte zu sehen sind; am Desktop oben um 15 % gekürzt, Text und
+  Button mittig im freien Himmel (Kundenwunsch 03.11.2026). Eigenständig: Styles stecken in der
   Section, Schriften und Farben aus snippets/ss-tokens.liquid (Horizon-Theme). Button rund (Kundenwunsch 03.11.2026).
 {%- endcomment -%}
 {%- liquid
@@ -32,8 +33,8 @@
 {%- render 'ss-tokens' -%}
 <style>
   {{ sid }} { --hs-ink: var(--ss-ink); --hs-plum: var(--ss-plum); --hs-white: var(--ss-white);
-    position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: start;
-    aspect-ratio: {{ wide_w }} / {{ wide_h }}; min-height: 560px; padding: clamp(32px, 4.5vw, 72px) 16px 0; text-align: center; color: var(--hs-ink); background: #F2D3E6; }
+    position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: center;
+    aspect-ratio: {{ wide_w }} / {{ wide_h | times: 0.85 | round }}; min-height: 560px; padding: 24px 16px 12vw; text-align: center; color: var(--hs-ink); background: #F2D3E6; }
   {{ sid }} picture { position: absolute; inset: 0; z-index: -1; }
   {{ sid }} .hero-scene__img { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; max-width: none; }
   {{ sid }} .hero-scene__copy { display: grid; gap: clamp(14px, 1.6vw, 22px); justify-items: center; max-width: 680px; }
@@ -45,7 +46,7 @@
   {{ sid }} .hero-scene__btn:focus-visible, {{ sid }} .hero-scene__link:focus-visible { outline: 3px solid var(--hs-plum); outline-offset: 3px; }
   {{ sid }} .hero-scene__link { display: inline-flex; align-items: center; min-height: 44px; color: var(--hs-ink); font-family: var(--ss-text); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
   @media (max-aspect-ratio: 1/1) {
-    {{ sid }} { aspect-ratio: {{ tall_w }} / {{ tall_h }}; min-height: 0; padding-top: clamp(32px, 9vw, 72px); }
+    {{ sid }} { aspect-ratio: {{ tall_w }} / {{ tall_h }}; min-height: 0; align-content: start; padding: clamp(32px, 9vw, 72px) 16px 0; }
   }
   @media (max-width: 720px) {
     {{ sid }} .hero-scene__title { font-size: clamp(30px, 9vw, 44px); }
