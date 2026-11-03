@@ -1,0 +1,558 @@
+{%- comment -%}
+  Soapsister Feelgood-Sets: Sorten-Knöpfe zum Umschalten zwischen den Sets.
+  Je Set: Bild links, rechts die Einzelteile mit Preisen, Vergleich Einzelpreis
+  zu Set-Preis und ein Knopf, der das Set-Produkt in den Warenkorb legt.
+{%- endcomment -%}
+
+<div class="section section--{{ section.settings.section_width }}">
+  <soapsister-feelgood
+    class="soapsister-feelgood"
+    style="
+      --soapsister-feelgood-radius: {{ section.settings.corner_radius }}px;
+      padding-block-start: {{ section.settings.padding-block-start }}px;
+      padding-block-end: {{ section.settings.padding-block-end }}px;
+    "
+  >
+    {%- if section.settings.heading != blank -%}
+      <h2 class="soapsister-feelgood__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="soapsister-feelgood__tabs" role="tablist" aria-label="{{ section.settings.heading | default: 'Feelgood Sets' | escape }}">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          role="tab"
+          class="soapsister-feelgood__tab"
+          id="FeelgoodTab-{{ block.id }}"
+          aria-controls="FeelgoodPanel-{{ block.id }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          {% unless forloop.first %}
+            tabindex="-1"
+          {% endunless %}
+          style="--set-background: {{ block.settings.background_color }}; --set-accent: {{ block.settings.accent_color }};"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.label }}
+        </button>
+      {%- endfor -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign set_product = block.settings.set_product
+        assign sum = 0
+      -%}
+      <div
+        role="tabpanel"
+        class="soapsister-feelgood__panel"
+        id="FeelgoodPanel-{{ block.id }}"
+        aria-labelledby="FeelgoodTab-{{ block.id }}"
+        style="
+          --set-background: {{ block.settings.background_color }};
+          --set-accent: {{ block.settings.accent_color }};
+          --set-text: {{ block.settings.text_color }};
+        "
+        {% unless forloop.first %}
+          hidden
+        {% endunless %}
+      >
+        <div class="soapsister-feelgood__media">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'lazy',
+                widths: '600, 900, 1200, 1400',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                class: 'soapsister-feelgood__image'
+            }}
+          {%- elsif set_product.featured_image -%}
+            {{
+              set_product.featured_image
+              | image_url: width: 1400
+              | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw', class: 'soapsister-feelgood__image'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'soapsister-feelgood__image' }}
+          {%- endif -%}
+        </div>
+
+        <div class="soapsister-feelgood__card">
+          <h3 class="soapsister-feelgood__title">{{ block.settings.title | default: set_product.title }}</h3>
+
+          <ul class="soapsister-feelgood__items">
+            {%- for i in (1..3) -%}
+              {%- liquid
+                assign key = 'item_' | append: i
+                assign item = block.settings[key]
+              -%}
+              {%- if item != blank -%}
+                {%- assign item_variant = item.selected_or_first_available_variant | default: item.variants.first -%}
+                {%- assign sum = sum | plus: item_variant.price -%}
+                <li class="soapsister-feelgood__item">
+                  <a href="{{ item.url }}" class="soapsister-feelgood__item-name">
+                    {{ item.title -}}
+                    {%- if item.has_only_default_variant == false %} {{ item_variant.title }}{% endif -%}
+                  </a>
+                  <span class="soapsister-feelgood__item-price">{{ item_variant.price | money }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+
+          {%- if set_product != blank -%}
+            {%- assign set_variant = set_product.selected_or_first_available_variant -%}
+            <div class="soapsister-feelgood__prices">
+              {%- if sum > set_variant.price -%}
+                <span class="soapsister-feelgood__single">
+                  Einzeln <s>{{ sum | money }}</s>
+                </span>
+              {%- endif -%}
+              <span class="soapsister-feelgood__set-price">
+                Im Set <strong>{{ set_variant.price | money }}</strong>
+              </span>
+              {%- if sum > set_variant.price -%}
+                <span class="soapsister-feelgood__saving">
+                  Du sparst {{ sum | minus: set_variant.price | money }}
+                </span>
+              {%- endif -%}
+            </div>
+
+            {%- if section.settings.tax_note != blank -%}
+              <p class="soapsister-feelgood__tax">
+                {{ section.settings.tax_note }}
+                {%- if shop.shipping_policy.body != blank %}
+                  <a href="{{ shop.shipping_policy.url }}">{{ section.settings.shipping_label }}</a>
+                {%- else %}
+                  {{ section.settings.shipping_label }}
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+
+            {%- form 'product', set_product, class: 'soapsister-feelgood__form' -%}
+              <input type="hidden" name="id" value="{{ set_variant.id }}">
+              <button
+                type="submit"
+                name="add"
+                class="soapsister-feelgood__button"
+                {% unless set_variant.available %}
+                  disabled
+                {% endunless %}
+              >
+                {%- if set_variant.available -%}
+                  {{ section.settings.button_label }}
+                {%- else -%}
+                  Ausverkauft
+                {%- endif -%}
+              </button>
+            {%- endform -%}
+          {%- else -%}
+            <p class="soapsister-feelgood__hint">Bitte im Editor das Set-Produkt auswählen.</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </soapsister-feelgood>
+</div>
+
+{% stylesheet %}
+  .soapsister-feelgood {
+    display: grid;
+    gap: 24px;
+  }
+
+  .soapsister-feelgood__heading {
+    margin: 0;
+    font-family: var(--font-heading--family);
+  }
+
+  .soapsister-feelgood__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .soapsister-feelgood__tab {
+    min-height: 44px;
+    padding: 0 22px;
+    font: inherit;
+    font-weight: 700;
+    color: var(--set-accent);
+    background: var(--set-background);
+    border: 1.5px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .soapsister-feelgood__tab[aria-selected='true'] {
+    color: #fff;
+    background: var(--set-accent);
+  }
+
+  .soapsister-feelgood__tab:focus-visible {
+    outline: 2px solid var(--set-accent);
+    outline-offset: 2px;
+  }
+
+  .soapsister-feelgood__panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+    color: var(--set-text);
+    background: var(--set-background);
+    border-radius: var(--soapsister-feelgood-radius);
+  }
+
+  .soapsister-feelgood__panel[hidden] {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .soapsister-feelgood__panel {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 40px;
+      padding: 32px;
+    }
+  }
+
+  .soapsister-feelgood__media {
+    overflow: hidden;
+    border-radius: calc(var(--soapsister-feelgood-radius) / 1.5);
+  }
+
+  .soapsister-feelgood__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 65%; /* Produkte stehen in den Set-Bildern im unteren Drittel */
+  }
+
+  .soapsister-feelgood__card {
+    display: grid;
+    gap: 16px;
+  }
+
+  .soapsister-feelgood__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--set-accent);
+  }
+
+  .soapsister-feelgood__items {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .soapsister-feelgood__item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    background: rgb(255 255 255 / 0.6);
+    border-radius: calc(var(--soapsister-feelgood-radius) / 1.5);
+  }
+
+  .soapsister-feelgood__item-name {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .soapsister-feelgood__item-name:hover {
+    text-decoration: underline;
+  }
+
+  .soapsister-feelgood__item-price {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .soapsister-feelgood__prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 16px;
+  }
+
+  .soapsister-feelgood__set-price strong {
+    font-size: 1.5rem;
+    color: var(--set-accent);
+  }
+
+  .soapsister-feelgood__saving {
+    padding: 4px 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--set-accent);
+    border-radius: 999px;
+  }
+
+  .soapsister-feelgood__tax,
+  .soapsister-feelgood__hint {
+    margin: 0;
+    font-size: 0.8125rem;
+  }
+
+  .soapsister-feelgood__tax a {
+    color: inherit;
+  }
+
+  .soapsister-feelgood__form {
+    display: grid;
+  }
+
+  .soapsister-feelgood__button {
+    min-height: 52px;
+    padding: 0 24px;
+    font: inherit;
+    font-weight: 700;
+    color: #fff;
+    background: var(--set-accent);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+  }
+
+  .soapsister-feelgood__button:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+  }
+
+  .soapsister-feelgood__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class SoapsisterFeelgood extends HTMLElement {
+    connectedCallback() {
+      this.tabs = Array.from(this.querySelectorAll('[role="tab"]'));
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => this.select(index));
+        tab.addEventListener('keydown', (event) => this.onKeydown(event, index));
+      });
+    }
+
+    select(index) {
+      this.tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        const panel = this.querySelector(`#${tab.getAttribute('aria-controls')}`);
+        if (panel) panel.hidden = !selected;
+      });
+    }
+
+    onKeydown(event, index) {
+      const keys = { ArrowRight: 1, ArrowLeft: -1 };
+      if (!(event.key in keys)) return;
+      event.preventDefault();
+      const next = (index + keys[event.key] + this.tabs.length) % this.tabs.length;
+      this.select(next);
+      this.tabs[next].focus();
+    }
+  }
+
+  if (!customElements.get('soapsister-feelgood')) {
+    customElements.define('soapsister-feelgood', SoapsisterFeelgood);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Soapsister Feelgood-Sets",
+  "tag": "section",
+  "class": "section-wrapper",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Dein Duschmoment im Set"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Text auf dem Knopf",
+      "default": "Set in den Warenkorb"
+    },
+    {
+      "type": "text",
+      "id": "tax_note",
+      "label": "Steuerhinweis",
+      "default": "inkl. MwSt., zzgl."
+    },
+    {
+      "type": "text",
+      "id": "shipping_label",
+      "label": "Wort für den Versand-Link",
+      "default": "Versand"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Breite",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Seitenbreite"
+        },
+        {
+          "value": "full-width",
+          "label": "Volle Breite"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Abrundung der Ecken",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Abstand oben",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Abstand unten",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "set",
+      "name": "Set",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name auf dem Knopf",
+          "default": "Lollipop"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Überschrift (leer = Name des Set-Produkts)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bild (leer = Bild des Set-Produkts)"
+        },
+        {
+          "type": "product",
+          "id": "set_product",
+          "label": "Set-Produkt (wird in den Warenkorb gelegt)"
+        },
+        {
+          "type": "header",
+          "content": "Einzelteile für die Preisliste"
+        },
+        {
+          "type": "product",
+          "id": "item_1",
+          "label": "Teil 1 (z. B. Duschmousse)"
+        },
+        {
+          "type": "product",
+          "id": "item_2",
+          "label": "Teil 2 (z. B. Netzschwamm)"
+        },
+        {
+          "type": "product",
+          "id": "item_3",
+          "label": "Teil 3 (z. B. Badeente)"
+        },
+        {
+          "type": "header",
+          "content": "Farben"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Hintergrundfarbe",
+          "default": "#F3D2E4"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Akzentfarbe (Knöpfe und Überschrift)",
+          "default": "#751F65"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Textfarbe",
+          "default": "#1D3F51"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Soapsister Feelgood-Sets",
+      "blocks": [
+        {
+          "type": "set",
+          "settings": {
+            "label": "Lollipop",
+            "background_color": "#F3D2E4",
+            "accent_color": "#751F65",
+            "text_color": "#1D3F51"
+          }
+        },
+        {
+          "type": "set",
+          "settings": {
+            "label": "Coconut",
+            "background_color": "#E2E0DC",
+            "accent_color": "#1D3F51",
+            "text_color": "#1D3F51"
+          }
+        },
+        {
+          "type": "set",
+          "settings": {
+            "label": "Marshmallow",
+            "background_color": "#C2E9F8",
+            "accent_color": "#1D3F51",
+            "text_color": "#1D3F51"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
