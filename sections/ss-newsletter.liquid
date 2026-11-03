@@ -1,18 +1,18 @@
 {%- comment -%}
-  SOAP SISTER Newsletter "Neue Düfte zuerst" (aus dem Soapsister-Theme, 03.11.2026): Plum-Fläche, große Überschrift,
-  ein Satz, Feld und runder Button. Shopify-Kundenformular mit Tag newsletter; Double-Opt-in im Shop einschalten.
+  SOAP SISTER Newsletter (aus dem Soapsister-Theme, 03.11.2026): Plum-Fläche, kleine Überschrift
+  "Jetzt 10 % sparen", darunter linksbündig Satz, Feld und runder Button (Kundenwunsch 03.11.2026). Shopify-Kundenformular mit Tag newsletter; Double-Opt-in im Shop einschalten.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
 {%- assign sid = '#SsNewsletter-' | append: section.id -%}
 <style>
-  {{ sid }} { display: grid; gap: clamp(28px, 4vw, 56px); padding: clamp(64px, 8vw, 120px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
-  {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(48px, 7.4vw, 120px); line-height: 1.05; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
-  {{ sid }} .ssn__foot { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px clamp(16px, 3vw, 48px); align-items: start; }
-  {{ sid }} .ssn__copy { grid-column: 1 / 6; display: grid; gap: 12px; }
+  {{ sid }} { display: grid; justify-items: start; gap: 16px; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
+  {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.1; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
+  {{ sid }} .ssn__foot { display: grid; gap: 20px; width: min(100%, 560px); }
+  {{ sid }} .ssn__copy { display: grid; gap: 12px; }
   {{ sid }} .ssn__text { margin: 0; font-size: 18px; line-height: 1.5; }
   {{ sid }} .ssn__fine { margin: 0; font-size: 15px; line-height: 1.5; }
   {{ sid }} .ssn__fine a { color: inherit; }
-  {{ sid }} .ssn__form { grid-column: 7 / 13; display: grid; gap: 8px; margin: 0; }
+  {{ sid }} .ssn__form { display: grid; gap: 8px; margin: 0; }
   {{ sid }} .ssn__label { font-size: 18px; font-weight: 600; }
   {{ sid }} .ssn__fields { display: flex; gap: 8px; }
   {{ sid }} .ssn__input { flex: 1; min-width: 0; min-height: 56px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--ss-coconut); color: var(--ss-ink); font: inherit; font-size: 18px; }
@@ -21,7 +21,6 @@
   {{ sid }} .ssn__btn:hover { background: var(--ss-pink); color: var(--ss-ink); }
   {{ sid }} .ssn__message { margin: 0 0 8px; padding: 12px 18px; border-radius: 16px; background: var(--ss-coconut); color: var(--ss-ink); font-size: 18px; }
   {{ sid }} :focus-visible { outline-color: var(--ss-pink); }
-  @media (max-width: 900px) { {{ sid }} .ssn__copy, {{ sid }} .ssn__form { grid-column: 1 / -1; } }
   @media (max-width: 600px) { {{ sid }} .ssn__fields { flex-direction: column; } }
 </style>
 <section class="ss-scope ssn" id="SsNewsletter-{{ section.id }}" aria-labelledby="SsNewsletterTitle-{{ section.id }}">
@@ -51,8 +50,8 @@
 {
   "name": "Soapsister Newsletter",
   "settings": [
-    { "type": "text", "id": "title", "label": "Überschrift", "default": "Neue Düfte zuerst" },
-    { "type": "textarea", "id": "text", "label": "Satz", "default": "Wir schreiben dir, wenn eine neue Sorte kommt oder eine ausverkaufte wieder da ist." },
+    { "type": "text", "id": "title", "label": "Überschrift", "default": "Jetzt 10 % sparen" },
+    { "type": "textarea", "id": "text", "label": "Satz", "default": "Melde dich zum Newsletter an und spar 10 % auf deine erste Bestellung." },
     { "type": "text", "id": "label", "label": "Feldbeschriftung", "default": "Deine E-Mail-Adresse" },
     { "type": "text", "id": "button", "label": "Button", "default": "Eintragen" },
     { "type": "textarea", "id": "consent", "label": "Einwilligungstext", "default": "Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der", "info": "Rechtlich prüfen lassen." },

@@ -33,12 +33,12 @@
 <style>
   {{ sid }} { --hs-ink: var(--ss-ink); --hs-plum: var(--ss-plum); --hs-white: var(--ss-white);
     position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: start;
-    aspect-ratio: {{ wide_w }} / {{ wide_h }}; min-height: 560px; padding: clamp(40px, 7vw, 110px) 16px 0; text-align: center; color: var(--hs-ink); background: #F2D3E6; }
+    aspect-ratio: {{ wide_w }} / {{ wide_h }}; min-height: 560px; padding: clamp(32px, 4.5vw, 72px) 16px 0; text-align: center; color: var(--hs-ink); background: #F2D3E6; }
   {{ sid }} picture { position: absolute; inset: 0; z-index: -1; }
   {{ sid }} .hero-scene__img { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; max-width: none; }
-  {{ sid }} .hero-scene__copy { display: grid; gap: clamp(14px, 1.6vw, 22px); justify-items: center; max-width: 760px; }
-  {{ sid }} .hero-scene__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); text-transform: uppercase; letter-spacing: var(--ss-track-display); line-height: .92; font-size: clamp(44px, 6.4vw, 104px); color: var(--hs-ink); }
-  {{ sid }} .hero-scene__text { margin: 0; max-width: 52ch; font-family: var(--ss-text); font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; color: var(--hs-ink); }
+  {{ sid }} .hero-scene__copy { display: grid; gap: clamp(14px, 1.6vw, 22px); justify-items: center; max-width: 680px; }
+  {{ sid }} .hero-scene__title { margin: 0; font-family: var(--ss-display); font-weight: var(--ss-display-weight); text-transform: uppercase; letter-spacing: var(--ss-track-display); line-height: 1; font-size: clamp(34px, 3.8vw, 64px); color: var(--hs-ink); }
+  {{ sid }} .hero-scene__text { margin: 0; max-width: 52ch; font-family: var(--ss-text); font-size: clamp(16px, 1.2vw, 19px); line-height: 1.45; color: var(--hs-ink); }
   {{ sid }} .hero-scene__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 28px; margin-top: 6px; }
   {{ sid }} .hero-scene__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border-radius: 999px; background: var(--hs-plum); color: var(--hs-white); font-family: var(--ss-text); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ss-track-micro); text-decoration: none; transition: background-color .15s ease; }
   {{ sid }} .hero-scene__btn:hover { background: var(--hs-ink); }
@@ -48,8 +48,8 @@
     {{ sid }} { aspect-ratio: {{ tall_w }} / {{ tall_h }}; min-height: 0; padding-top: clamp(32px, 9vw, 72px); }
   }
   @media (max-width: 720px) {
-    {{ sid }} .hero-scene__title { font-size: clamp(40px, 12vw, 64px); }
-    {{ sid }} .hero-scene__text { font-size: 17px; }
+    {{ sid }} .hero-scene__title { font-size: clamp(30px, 9vw, 44px); }
+    {{ sid }} .hero-scene__text { font-size: 16px; }
     {{ sid }} .hero-scene__actions { flex-direction: column; gap: 6px; }
   }
   @media (prefers-reduced-motion: no-preference) {
