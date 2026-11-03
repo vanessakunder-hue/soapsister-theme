@@ -669,7 +669,9 @@
       "settings": {
         "heading": "So geht's: in 3 Schritten",
         "image": "shopify://shop_images/anleitung_3_schritte_produkt_handy_1080x1350_d47e7591-6c60-4ccc-a415-5223a2c588b4.png",
-        "accent_color": "#751F65",
+        "media_width": 40,
+        "media_ratio": "4 / 5",
+        "accent_color": "#751f65",
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
