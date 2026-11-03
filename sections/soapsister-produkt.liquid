@@ -118,7 +118,7 @@
           {%- for block in section.blocks -%}
             {%- if block.settings.product != blank -%}
               <a
-                href="{{ block.settings.product.url }}"
+                href="{{ block.settings.product.url }}{% if template.suffix != blank %}?view={{ template.suffix }}{% endif %}"
                 class="soapsister-produkt__sort"
                 style="--sort-dot: {{ block.settings.dot_color }}; --sort-accent: {{ block.settings.accent_color }};"
                 {% if block.settings.product.id == product.id %}

@@ -91,10 +91,17 @@
                 {%- assign item_variant = item.selected_or_first_available_variant | default: item.variants.first -%}
                 {%- assign sum = sum | plus: item_variant.price -%}
                 <li class="soapsister-feelgood__item">
-                  <a href="{{ item.url }}" class="soapsister-feelgood__item-name">
-                    {{ item.title -}}
-                    {%- if item.has_only_default_variant == false %} {{ item_variant.title }}{% endif -%}
-                  </a>
+                  {%- if i == 1 -%}
+                    <a href="{{ item.url }}{% if section.settings.product_view != blank %}?view={{ section.settings.product_view }}{% endif %}" class="soapsister-feelgood__item-name">
+                      {{ item.title -}}
+                      {%- if item.has_only_default_variant == false %} {{ item_variant.title }}{% endif -%}
+                    </a>
+                  {%- else -%}
+                    <span class="soapsister-feelgood__item-name">
+                      {{ item.title -}}
+                      {%- if item.has_only_default_variant == false %} {{ item_variant.title }}{% endif -%}
+                    </span>
+                  {%- endif -%}
                   <span class="soapsister-feelgood__item-price">{{ item_variant.price | money }}</span>
                 </li>
               {%- endif -%}
@@ -402,6 +409,12 @@
       "id": "shipping_label",
       "label": "Wort für den Versand-Link",
       "default": "Versand"
+    },
+    {
+      "type": "text",
+      "id": "product_view",
+      "label": "Produktvorlage für den Duschmousse-Link (leer = Standard)",
+      "default": "duschmousse"
     },
     {
       "type": "select",
