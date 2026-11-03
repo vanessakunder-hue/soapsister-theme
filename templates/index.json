@@ -170,6 +170,7 @@
         "button_label": "In den Warenkorb",
         "tax_note": "inkl. MwSt., zzgl.",
         "shipping_label": "Versand",
+        "product_view": "duschmousse",
         "section_width": "page-width",
         "gap": 24,
         "corner_radius": 24,
@@ -627,7 +628,48 @@
         "button_label": "Set in den Warenkorb",
         "tax_note": "inkl. MwSt., zzgl.",
         "shipping_label": "Versand",
+        "product_view": "duschmousse",
         "section_width": "page-width",
+        "corner_radius": 24,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "soapsister_tutorial_7BPLyk": {
+      "type": "soapsister-tutorial",
+      "blocks": {
+        "step_xk6U6Y": {
+          "type": "step",
+          "settings": {
+            "title": "Nehmen",
+            "text": "Nimm eine Fingerspitze Mousse aus dem Tiegel."
+          }
+        },
+        "step_PdQwNX": {
+          "type": "step",
+          "settings": {
+            "title": "Aufschäumen",
+            "text": "Schäum sie mit dem nassen Netzschwamm auf."
+          }
+        },
+        "step_66qgHw": {
+          "type": "step",
+          "settings": {
+            "title": "Abspülen",
+            "text": "Spül den Schaum gründlich ab."
+          }
+        }
+      },
+      "block_order": [
+        "step_xk6U6Y",
+        "step_PdQwNX",
+        "step_66qgHw"
+      ],
+      "name": "Soapsister Tutorial",
+      "settings": {
+        "heading": "So geht's: in 3 Schritten",
+        "image": "shopify://shop_images/anleitung_3_schritte_produkt_handy_1080x1350_d47e7591-6c60-4ccc-a415-5223a2c588b4.png",
+        "accent_color": "#751F65",
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
@@ -639,7 +681,7 @@
         "image_PDj8Pe": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/feelgood_badewanne_schaum_2400x1600_aced6a5f-96ce-47dc-92b7-e40433454b28.png",
+            "image": "shopify://shop_images/anleitung_3_schritte_produkt_quer_2400x1000_bffed860-3ffa-4883-98b5-5eaf5d061161.png",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
@@ -779,6 +821,7 @@
         "image_PDj8Pe",
         "group_b7NhQw"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -1942,6 +1985,7 @@
     "product_list_fa6P9H",
     "section_XwT7nV",
     "soapsister_feelgood_sets_hkiYcd",
+    "soapsister_tutorial_7BPLyk",
     "section_ek76at",
     "section_B9dnwg",
     "section_pzd4Tb",
