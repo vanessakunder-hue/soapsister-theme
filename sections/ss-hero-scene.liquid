@@ -1,0 +1,91 @@
+{%- comment -%}
+  Hero "Szene" (03.11.2026): die gerenderte Wolkenszene mit allen Produkten als Bild, oben im freien Himmel Überschrift,
+  ein Satz und zwei Wege in die Seite. Hochformat-Bild für Handys und Tablets im Hochformat, Querformat sonst.
+  Das Bild läuft immer über die volle Breite, damit alle Produkte zu sehen sind. Eigenständig: Styles stecken in der
+  Section, Schriften und Farben aus snippets/ss-tokens.liquid (Horizon-Theme). Button rund (Kundenwunsch 03.11.2026).
+{%- endcomment -%}
+{%- liquid
+  if section.settings.image != blank
+    assign wide = section.settings.image | image_url: width: 2400
+    assign wide_s = section.settings.image | image_url: width: 1400
+    assign wide_w = section.settings.image.width
+    assign wide_h = section.settings.image.height
+  else
+    assign wide = 'launch-scene-2400.webp' | asset_url
+    assign wide_s = 'launch-scene-1400.webp' | asset_url
+    assign wide_w = 2400
+    assign wide_h = 1340
+  endif
+  if section.settings.image_mobile != blank
+    assign tall = section.settings.image_mobile | image_url: width: 1200
+    assign tall_s = section.settings.image_mobile | image_url: width: 800
+    assign tall_w = section.settings.image_mobile.width
+    assign tall_h = section.settings.image_mobile.height
+  else
+    assign tall = 'launch-scene-tall-1200.webp' | asset_url
+    assign tall_s = 'launch-scene-tall-800.webp' | asset_url
+    assign tall_w = 1200
+    assign tall_h = 2150
+  endif
+  assign sid = '#HeroScene-' | append: section.id
+-%}
+{%- render 'ss-tokens' -%}
+<style>
+  {{ sid }} { --hs-ink: var(--ss-ink); --hs-plum: var(--ss-plum); --hs-white: var(--ss-white);
+    position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: start;
+    aspect-ratio: {{ wide_w }} / {{ wide_h }}; min-height: 560px; padding: clamp(40px, 7vw, 110px) 16px 0; text-align: center; color: var(--hs-ink); background: #F2D3E6; }
+  {{ sid }} picture { position: absolute; inset: 0; z-index: -1; }
+  {{ sid }} .hero-scene__img { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; max-width: none; }
+  {{ sid }} .hero-scene__copy { display: grid; gap: clamp(14px, 1.6vw, 22px); justify-items: center; max-width: 760px; }
+  {{ sid }} .hero-scene__title { margin: 0; font-family: var(--ss-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--ss-track-display); line-height: .92; font-size: clamp(44px, 6.4vw, 104px); color: var(--hs-ink); }
+  {{ sid }} .hero-scene__text { margin: 0; max-width: 52ch; font-family: var(--ss-text); font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; color: var(--hs-ink); }
+  {{ sid }} .hero-scene__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 28px; margin-top: 6px; }
+  {{ sid }} .hero-scene__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border-radius: 999px; background: var(--hs-plum); color: var(--hs-white); font-family: var(--ss-text); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ss-track-micro); text-decoration: none; transition: background-color .15s ease; }
+  {{ sid }} .hero-scene__btn:hover { background: var(--hs-ink); }
+  {{ sid }} .hero-scene__btn:focus-visible, {{ sid }} .hero-scene__link:focus-visible { outline: 3px solid var(--hs-plum); outline-offset: 3px; }
+  {{ sid }} .hero-scene__link { display: inline-flex; align-items: center; min-height: 44px; color: var(--hs-ink); font-family: var(--ss-text); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-aspect-ratio: 1/1) {
+    {{ sid }} { aspect-ratio: {{ tall_w }} / {{ tall_h }}; min-height: 0; padding-top: clamp(32px, 9vw, 72px); }
+  }
+  @media (max-width: 720px) {
+    {{ sid }} .hero-scene__title { font-size: clamp(40px, 12vw, 64px); }
+    {{ sid }} .hero-scene__text { font-size: 17px; }
+    {{ sid }} .hero-scene__actions { flex-direction: column; gap: 6px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    {{ sid }} .hero-scene__copy { animation: hero-scene-in .9s cubic-bezier(.2, .7, .2, 1) both; }
+    @keyframes hero-scene-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+<section class="hero-scene ss-scope" id="HeroScene-{{ section.id }}" aria-labelledby="HeroSceneTitle-{{ section.id }}">
+  <picture>
+    <source media="(max-aspect-ratio: 1/1)" srcset="{{ tall_s }} 800w, {{ tall }} 1200w" sizes="100vw" width="{{ tall_w }}" height="{{ tall_h }}">
+    <img class="hero-scene__img" src="{{ wide }}" srcset="{{ wide_s }} 1400w, {{ wide }} 2400w" sizes="100vw" alt="{{ section.settings.image_alt | escape }}" width="{{ wide_w }}" height="{{ wide_h }}" fetchpriority="high">
+  </picture>
+  <div class="hero-scene__copy">
+    <h1 class="hero-scene__title" id="HeroSceneTitle-{{ section.id }}">{{ section.settings.heading }}</h1>
+    {%- if section.settings.text != blank -%}<p class="hero-scene__text">{{ section.settings.text }}</p>{%- endif -%}
+    <div class="hero-scene__actions">
+      {%- if section.settings.button_label != blank -%}<a class="hero-scene__btn ss-btn" href="{{ section.settings.button_link | default: '/collections/duschmousse' }}">{{ section.settings.button_label }}</a>{%- endif -%}
+      {%- if section.settings.link_label != blank -%}<a class="hero-scene__link" href="{{ section.settings.link_link | default: '#' }}">{{ section.settings.link_label }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Soapsister Hero: Szene",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Bild Querformat (ersetzt die Szene aus dem Theme)", "info": "Produkte im unteren Bereich, oben freier Himmel für den Text." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Bild Hochformat fürs Handy (ersetzt die Szene aus dem Theme)" },
+    { "type": "text", "id": "image_alt", "label": "Bildbeschreibung", "default": "Die drei Soapsister-Duschmousse-Tiegel Lollipop, Coconut und Marshmallow mit Badeenten und Netzschwämmen auf rosa Boden unter Zuckerwatte-Wolken und Seifenblasen" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Duschmousse statt Duschgel." },
+    { "type": "textarea", "id": "text", "label": "Satz unter der Überschrift", "default": "Luftig aufgeschlagen, mit Aloe Vera und Mandelöl. In drei Düften: Lollipop, Coconut und Marshmallow." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Sorten entdecken" },
+    { "type": "text", "id": "button_link", "label": "Ziel des Buttons", "default": "/collections/duschmousse", "info": "z. B. /collections/duschmousse oder ein Anker wie #sorten" },
+    { "type": "text", "id": "link_label", "label": "Zweiter Link (optional)" },
+    { "type": "text", "id": "link_link", "label": "Ziel des zweiten Links", "default": "#sorten" }
+  ],
+  "presets": [{ "name": "Soapsister Hero: Szene" }]
+}
+{% endschema %}

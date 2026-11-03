@@ -1,0 +1,64 @@
+{%- comment -%}
+  SOAP SISTER Newsletter "Neue Düfte zuerst" (aus dem Soapsister-Theme, 03.11.2026): Plum-Fläche, große Überschrift,
+  ein Satz, Feld und runder Button. Shopify-Kundenformular mit Tag newsletter; Double-Opt-in im Shop einschalten.
+{%- endcomment -%}
+{%- render 'ss-tokens' -%}
+{%- assign sid = '#SsNewsletter-' | append: section.id -%}
+<style>
+  {{ sid }} { display: grid; gap: clamp(28px, 4vw, 56px); padding: clamp(64px, 8vw, 120px) clamp(16px, 3vw, 48px); background: var(--ss-plum); color: var(--ss-coconut); }
+  {{ sid }} .ssn__title { margin: 0; font-family: var(--ss-display); font-weight: 900; font-size: clamp(48px, 7.4vw, 120px); line-height: 1.05; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--ss-coconut); }
+  {{ sid }} .ssn__foot { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px clamp(16px, 3vw, 48px); align-items: start; }
+  {{ sid }} .ssn__copy { grid-column: 1 / 6; display: grid; gap: 12px; }
+  {{ sid }} .ssn__text { margin: 0; font-size: 18px; line-height: 1.5; }
+  {{ sid }} .ssn__fine { margin: 0; font-size: 15px; line-height: 1.5; }
+  {{ sid }} .ssn__fine a { color: inherit; }
+  {{ sid }} .ssn__form { grid-column: 7 / 13; display: grid; gap: 8px; margin: 0; }
+  {{ sid }} .ssn__label { font-size: 18px; font-weight: 600; }
+  {{ sid }} .ssn__fields { display: flex; gap: 8px; }
+  {{ sid }} .ssn__input { flex: 1; min-width: 0; min-height: 56px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--ss-coconut); color: var(--ss-ink); font: inherit; font-size: 18px; }
+  {{ sid }} .ssn__input::placeholder { color: var(--ss-plum); }
+  {{ sid }} .ssn__btn { min-height: 56px; background: var(--ss-coconut); color: var(--ss-plum); }
+  {{ sid }} .ssn__btn:hover { background: var(--ss-pink); color: var(--ss-ink); }
+  {{ sid }} .ssn__message { margin: 0 0 8px; padding: 12px 18px; border-radius: 16px; background: var(--ss-coconut); color: var(--ss-ink); font-size: 18px; }
+  {{ sid }} :focus-visible { outline-color: var(--ss-pink); }
+  @media (max-width: 900px) { {{ sid }} .ssn__copy, {{ sid }} .ssn__form { grid-column: 1 / -1; } }
+  @media (max-width: 600px) { {{ sid }} .ssn__fields { flex-direction: column; } }
+</style>
+<section class="ss-scope ssn" id="SsNewsletter-{{ section.id }}" aria-labelledby="SsNewsletterTitle-{{ section.id }}">
+  <h2 class="ssn__title" id="SsNewsletterTitle-{{ section.id }}">{{ section.settings.title }}</h2>
+  <div class="ssn__foot">
+    <div class="ssn__copy">
+      <p class="ssn__text">{{ section.settings.text }}</p>
+    </div>
+    {%- form 'customer', class: 'ssn__form', id: 'SsNewsletterForm' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="ssn__message" role="status" tabindex="-1">{{ section.settings.success }}</p>
+      {%- elsif form.errors -%}
+        <p class="ssn__message" id="SsNewsletterMsg-{{ section.id }}" role="alert" tabindex="-1">{{ section.settings.error }}</p>
+      {%- endif -%}
+      <label class="ssn__label" for="SsNewsletterEmail-{{ section.id }}">{{ section.settings.label }}</label>
+      <div class="ssn__fields">
+        <input class="ssn__input" type="email" name="contact[email]" id="SsNewsletterEmail-{{ section.id }}" autocomplete="email" required placeholder="name@beispiel.de" aria-describedby="SsNewsletterConsent-{{ section.id }}{% if form.errors %} SsNewsletterMsg-{{ section.id }}{% endif %}"{% if form.errors %} aria-invalid="true"{% endif %}>
+        <button class="ss-btn ssn__btn" type="submit">{{ section.settings.button }}</button>
+      </div>
+      <p class="ssn__fine" id="SsNewsletterConsent-{{ section.id }}">{{ section.settings.consent }} <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Datenschutzerklärung</a>.</p>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Soapsister Newsletter",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Überschrift", "default": "Neue Düfte zuerst" },
+    { "type": "textarea", "id": "text", "label": "Satz", "default": "Wir schreiben dir, wenn eine neue Sorte kommt oder eine ausverkaufte wieder da ist." },
+    { "type": "text", "id": "label", "label": "Feldbeschriftung", "default": "Deine E-Mail-Adresse" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Eintragen" },
+    { "type": "textarea", "id": "consent", "label": "Einwilligungstext", "default": "Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der", "info": "Rechtlich prüfen lassen." },
+    { "type": "text", "id": "success", "label": "Meldung nach dem Eintragen", "default": "Fast geschafft. Bitte bestätige deine Anmeldung über den Link in der E-Mail, die wir dir gerade geschickt haben." },
+    { "type": "text", "id": "error", "label": "Meldung bei Fehler", "default": "Das hat nicht geklappt. Bitte prüf deine E-Mail-Adresse." }
+  ],
+  "presets": [{ "name": "Soapsister Newsletter" }]
+}
+{% endschema %}

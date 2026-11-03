@@ -1,0 +1,80 @@
+{%- comment -%}
+  SOAP SISTER Footer (aus dem Soapsister-Theme, 03.11.2026): Wortmarke mit Claim, Spalten Shop, Rechtliches, Kontakt,
+  darunter Zahlarten, Copyright und Nach oben. Rechtliches kommt aus den Shopify-Richtlinien, nur gepflegte erscheinen.
+{%- endcomment -%}
+{%- render 'ss-tokens' -%}
+{%- assign sid = '#SsFooter-' | append: section.id -%}
+<style>
+  {{ sid }} { display: grid; gap: 40px; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px) 24px; background: var(--ss-ink); color: var(--ss-coconut); font-size: 18px; }
+  {{ sid }} a { color: inherit; }
+  {{ sid }} .ssf__top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 32px clamp(16px, 3vw, 48px); }
+  {{ sid }} .ssf__lockup { display: block; width: clamp(220px, 24vw, 380px); max-width: 100%; aspect-ratio: 455.527 / 126.929; background: var(--ss-coconut); -webkit-mask: var(--ssf-lockup) center / contain no-repeat; mask: var(--ssf-lockup) center / contain no-repeat; }
+  {{ sid }} .ssf__col { display: grid; gap: 0; align-content: start; }
+  {{ sid }} .ssf__heading { margin: 0 0 4px; font-family: var(--ss-text); font-weight: 600; font-size: 14px; letter-spacing: var(--ss-track-micro); text-transform: uppercase; color: var(--ss-coconut); }
+  {{ sid }} .ssf__col a { display: inline-flex; align-items: center; justify-self: start; min-height: 44px; text-decoration: none; }
+  {{ sid }} .ssf__col a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  {{ sid }} .ssf__col p { margin: 0; padding-top: 10px; line-height: 1.45; }
+  {{ sid }} .ssf__contact { overflow-wrap: anywhere; }
+  {{ sid }} .ssf__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--ss-grey); font-size: 14px; letter-spacing: var(--ss-track-micro); text-transform: uppercase; }
+  {{ sid }} .ssf__meta p { margin: 0; }
+  {{ sid }} .ssf__payments { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  {{ sid }} .ssf__payments svg { width: 38px; height: 24px; }
+  {{ sid }} .ssf__up { display: inline-flex; align-items: center; min-height: 44px; }
+  {{ sid }} :focus-visible { outline-color: var(--ss-pink); }
+  @media (max-width: 990px) { {{ sid }} .ssf__top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { {{ sid }} .ssf__top { grid-template-columns: 1fr; } }
+</style>
+<footer class="ss-scope ssf" id="SsFooter-{{ section.id }}" style="--ssf-lockup: url('{{ 'logo-wortmarke-claim.svg' | asset_url }}')">
+  <div class="ssf__top">
+    <div class="ssf__brand">
+      <span class="ssf__lockup" role="img" aria-label="Soapsister, Together in care, For skin, soul and sisterhood."></span>
+    </div>
+    <nav class="ssf__col" aria-label="Shop">
+      <h2 class="ssf__heading">Shop</h2>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in linklists[section.settings.menu].links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- else -%}
+        <a href="/collections/duschmousse">Duschmousse</a>
+        <a href="/collections/all">Alle Produkte</a>
+      {%- endif -%}
+    </nav>
+    <nav class="ssf__col" aria-label="Rechtliches">
+      <h2 class="ssf__heading">Rechtliches</h2>
+      {%- for policy in shop.policies -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{%- endfor -%}
+      {%- if section.settings.withdrawal_link != blank -%}<a href="{{ section.settings.withdrawal_link }}">Vertrag widerrufen</a>{%- endif -%}
+    </nav>
+    <div class="ssf__col">
+      <h2 class="ssf__heading">Kontakt</h2>
+      {%- if section.settings.email != blank -%}<a class="ssf__contact" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>{%- endif -%}
+      {%- if section.settings.contact_link != blank -%}<a href="{{ section.settings.contact_link }}">Kontaktformular</a>{%- endif -%}
+      {%- if section.settings.address != blank -%}<p>{{ section.settings.address }}</p>{%- endif -%}
+      {%- if section.settings.tiktok != blank -%}<a href="{{ section.settings.tiktok }}" rel="noopener">TikTok</a>{%- endif -%}
+      {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" rel="noopener">Instagram</a>{%- endif -%}
+    </div>
+  </div>
+  <div class="ssf__meta">
+    {%- if shop.enabled_payment_types.size > 0 -%}
+      <ul class="ssf__payments" aria-label="Zahlarten">
+        {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
+    <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+    <a class="ssf__up" href="#">Nach oben</a>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Soapsister Footer",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menü für die Spalte Shop", "default": "footer" },
+    { "type": "text", "id": "withdrawal_link", "label": "Link zum Online-Widerruf", "info": "Seite mit dem Widerrufsformular, z. B. /pages/widerruf. Leer lassen blendet den Link aus." },
+    { "type": "text", "id": "email", "label": "E-Mail", "default": "hello@soapsister.de" },
+    { "type": "text", "id": "contact_link", "label": "Link zur Kontaktseite", "default": "/pages/contact" },
+    { "type": "text", "id": "address", "label": "Anschrift", "default": "SOAPSISTER GmbH, Adolf-Kolping-Str. 9, 80336 München" },
+    { "type": "text", "id": "tiktok", "label": "TikTok (ganze Adresse)", "default": "https://www.tiktok.com/@soapsister.de" },
+    { "type": "text", "id": "instagram", "label": "Instagram (ganze Adresse)" }
+  ],
+  "presets": [{ "name": "Soapsister Footer" }]
+}
+{% endschema %}

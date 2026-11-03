@@ -1,0 +1,23 @@
+{%- comment -%}
+  SOAP SISTER CI für die ss-Sections (Hero, Newsletter, Footer, Launch-Seite) im Horizon-Theme: lädt die CI-Schriften
+  einmal pro Seite und setzt die CI-Farben und Laufweiten als Variablen auf .ss-scope. Horizon selbst bleibt unberührt.
+  Headline: "Soap Display" (Ostrich Sans Black mit Umlauten, OFL). Text: Barlow Condensed als Ersatz für Trade Gothic
+  Condensed, bis die Webfont-Lizenz da ist.
+{%- endcomment -%}
+<style>
+  @font-face { font-family: 'Soap Display'; font-weight: 900; font-display: swap; src: url('{{ 'soap-display-900.woff2' | asset_url }}') format('woff2'); }
+  @font-face { font-family: 'Soap Text'; font-weight: 300 500; font-display: swap; src: url('{{ 'barlow-condensed-latin-400-normal.woff2' | asset_url }}') format('woff2'); }
+  @font-face { font-family: 'Soap Text'; font-weight: 600 900; font-display: swap; src: url('{{ 'barlow-condensed-latin-600-normal.woff2' | asset_url }}') format('woff2'); }
+  .ss-scope {
+    --ss-coconut: #EAEDE8; --ss-coconut-dark: #CAC8C4; --ss-pink: #E08FBC; --ss-plum: #751F65; --ss-sky: #21B5EA; --ss-navy: #1D3F51;
+    --ss-ink: #1D1D1B; --ss-white: #FFFFFF; --ss-grey: #7F8486;
+    --ss-display: 'Soap Display', 'Oswald', 'Arial Narrow', sans-serif; --ss-text: 'Soap Text', 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --ss-track-display: .055em; --ss-track-micro: .05em; --ss-track-body: .02em;
+    font-family: var(--ss-text); font-weight: 400; letter-spacing: var(--ss-track-body); font-stretch: condensed;
+  }
+  .ss-scope *, .ss-scope *::before, .ss-scope *::after { box-sizing: border-box; }
+  .ss-scope .ss-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .ss-scope .ss-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border: 0; border-radius: 999px; background: var(--ss-plum); color: var(--ss-white); font-family: var(--ss-text); font-size: 18px; font-weight: 600; letter-spacing: var(--ss-track-micro); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color .15s ease; }
+  .ss-scope .ss-btn:hover { background: var(--ss-ink); }
+  .ss-scope :focus-visible { outline: 3px solid var(--ss-plum); outline-offset: 3px; }
+</style>
