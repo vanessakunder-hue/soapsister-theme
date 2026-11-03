@@ -685,7 +685,7 @@
             "button_KCAeE7": {
               "type": "button",
               "settings": {
-                "label": "Mehr erfahren",
+                "label": "Jetzt kaufen",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
