@@ -151,7 +151,12 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: var(--sorte-background);
+    background: linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--sorte-background) 55%, #fff) 0%,
+      var(--sorte-background) 55%,
+      color-mix(in srgb, var(--sorte-background) 85%, var(--sorte-accent)) 100%
+    );
     color: var(--sorte-text);
     border-radius: var(--soapsister-sorten-radius);
   }
@@ -159,6 +164,7 @@
   .soapsister-sorte__media {
     display: block;
     padding: 8% 8% 0;
+    margin-bottom: 24px;
   }
 
   .soapsister-sorte__image {
