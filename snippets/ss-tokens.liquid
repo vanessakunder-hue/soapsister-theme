@@ -1,0 +1,19 @@
+{%- comment -%}
+  SOAP SISTER CI für die ss-Sections (Hero, Newsletter, Footer, Launch-Seite) im Horizon-Theme: setzt die CI-Farben und
+  Laufweiten als Variablen auf .ss-scope. Die Schriften kommen aus den Theme-Einstellungen der Website (Typografie:
+  Überschrift und Text), damit alles wie der Rest des Shops aussieht. Horizon selbst bleibt unberührt.
+{%- endcomment -%}
+<style>
+  .ss-scope {
+    --ss-coconut: #EAEDE8; --ss-coconut-dark: #CAC8C4; --ss-pink: #E08FBC; --ss-plum: #751F65; --ss-sky: #21B5EA; --ss-navy: #1D3F51;
+    --ss-ink: #1D1D1B; --ss-white: #FFFFFF; --ss-grey: #7F8486;
+    --ss-display: var(--font-heading--family, 'Oswald', sans-serif); --ss-display-weight: var(--font-heading--weight, 700); --ss-text: var(--font-body--family, 'Inter', sans-serif); --ss-text-weight: var(--font-body--weight, 400);
+    --ss-track-display: .01em; --ss-track-micro: .04em; --ss-track-body: normal;
+    font-family: var(--ss-text); font-weight: var(--ss-text-weight); letter-spacing: normal;
+  }
+  .ss-scope *, .ss-scope *::before, .ss-scope *::after { box-sizing: border-box; }
+  .ss-scope .ss-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .ss-scope .ss-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border: 0; border-radius: 999px; background: var(--ss-plum); color: var(--ss-white); font-family: var(--ss-text); font-size: 16px; font-weight: 600; letter-spacing: var(--ss-track-micro); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color .15s ease; }
+  .ss-scope .ss-btn:hover { background: var(--ss-ink); }
+  .ss-scope :focus-visible { outline: 3px solid var(--ss-plum); outline-offset: 3px; }
+</style>

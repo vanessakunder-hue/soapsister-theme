@@ -1,0 +1,174 @@
+{%- comment -%}
+  Launch-Seite (03.11.2026): Solange der Shop ein Passwort hat, zeigt Shopify jedem Besucher diese Seite. Sie sammelt die
+  Leads bis zum Start: ein Bild über die ganze Fläche (die Wolkenszene mit den Produkten, mit Artlist gerendert), mittig Logo, ein Satz und das Formular.
+  Klaviyo: Sind öffentlicher Site-Key und Listen-ID gesetzt, trägt launch.js die Adresse direkt in diese Liste ein
+  (Client-API, kein geheimer Schlüssel). Ohne JS oder wenn Klaviyo nicht antwortet, geht das Shopify-Formular raus:
+  Kundin mit dem Tag launch, nichts geht verloren. Double-Opt-in in der Klaviyo-Liste und im Shop einschalten.
+{%- endcomment -%}
+{%- liquid
+  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+  assign privacy_link = '<a href="' | append: privacy_url | append: '">Datenschutzerklärung</a>'
+  assign klaviyo = false
+  if section.settings.klaviyo_company_id != blank and section.settings.klaviyo_list_id != blank
+    assign klaviyo = true
+  endif
+-%}
+{%- render 'ss-tokens' -%}
+<style>
+/* launch page: picture over the whole screen, centred logo, frosted Lollipop panel with the form (client 03.11.2026). Round field and button like the hero. */
+/* Horizon password layout: our page brings its own footer and password entry, so the theme's footer and dialog step back */
+.password-main-content { padding: 0 !important; }
+/* no grey from the theme anywhere around the scene: page, body and main take the sky pink, full width (client 03.11.2026) */
+html:has(.ss-launch), body:has(.ss-launch), body:has(.ss-launch) > main { background: #F2D3E6 !important; margin: 0 !important; max-width: none !important; width: 100% !important; }
+body:has(.ss-launch) > main { padding: 0 !important; display: block !important; min-height: 100svh; }
+body:has(.ss-launch) > footer { display: none; }
+.launch { position: relative; width: 100%; background: #F2D3E6; min-height: 100svh; display: grid; place-items: start center; padding: clamp(24px, 6vh, 64px) 16px 72px; overflow: hidden; color: var(--ss-ink); isolation: isolate; }
+/* the scene always shows its full width, so every product is in view; it sits on the bottom edge and a soft copy of the same
+   sky fills whatever height is left above it */
+.launch > picture { position: absolute; inset: 0; z-index: -2; display: block; }
+.launch::before { content: ''; position: absolute; inset: -40px; z-index: -3; background: var(--scene) 50% 0 / cover no-repeat; filter: blur(24px) saturate(1.05); }
+.launch__img { position: absolute; left: 0; bottom: 0; z-index: -2; width: 100%; height: auto; max-width: none; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%); mask-image: linear-gradient(to bottom, transparent 0, #000 16%); }
+
+.launch__stack { position: relative; width: min(100%, 440px); display: grid; gap: clamp(16px, 2.4vh, 28px); justify-items: center; }
+.launch__title { margin: 0; width: 100%; }
+.launch__logo { display: block; width: 100%; aspect-ratio: 455.53 / 126.93; background: var(--ss-ink); -webkit-mask: var(--logo) no-repeat center / contain; mask: var(--logo) no-repeat center / contain; }
+
+/* the form panel: frameless frosted glass with a faint Lollipop tint, plum type; no rim, no sheen (client 03.11.2026) */
+.launch__box { position: relative; width: min(100%, 460px); display: grid; gap: 12px; justify-items: center; padding: clamp(22px, 2.6vw, 32px) clamp(24px, 3vw, 40px); text-align: center; color: var(--ss-plum);
+  background: rgba(255, 236, 246, .58); -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15); }
+
+.launch__lead { margin: 0; font-size: 19px; line-height: 1.35; }
+.launch__date { margin: 0; color: var(--ss-plum); }
+.launch__form, .launch__fields { display: grid; gap: 12px; width: 100%; margin: 0; }
+.launch__row { display: grid; gap: 10px; }
+.launch__input { min-height: 52px; padding: 0 18px; border: 0; border-radius: 0; background: var(--ss-white); color: var(--ss-ink); font: inherit; font-size: 18px; }
+.launch__input::placeholder { color: var(--ss-ink); opacity: .6; }
+.launch__input:focus-visible { outline: 3px solid var(--ss-plum); outline-offset: 2px; }
+
+.launch__button { width: 100%; min-height: 52px; }
+.launch__input { border-radius: 999px; padding: 0 22px; }
+.launch__error { margin: 0; color: var(--ss-plum); font-weight: 600; }
+.launch__consent { margin: 4px 0 0; font-size: 15px; line-height: 1.45; color: var(--ss-plum); text-wrap: balance; }
+.launch__consent a, .launch__foot a, .launch__owner summary { color: inherit; }
+.launch__done { margin: 0; font-weight: 600; font-size: 18px; color: var(--ss-plum); }
+.launch__done:focus { outline: 3px solid var(--ss-plum); outline-offset: 4px; }
+
+.launch__foot { position: absolute; z-index: 1; left: 0; right: 0; bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 24px; font-size: 15px; color: var(--ss-plum); }
+.launch__foot a, .launch__owner summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.launch__owner details[open] { display: flex; gap: 8px; align-items: center; }
+.launch__owner .launch__input { min-height: 44px; }
+.launch__owner .button { min-height: 44px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .launch__stack { animation: launch-in .9s cubic-bezier(.2, .7, .2, 1) both; }
+}
+@keyframes launch-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+@media (max-aspect-ratio: 1/1) {
+  .launch::before { background-image: var(--scene-tall); }
+}
+/* phones first: the tall render fills the width and stands on the bottom edge, all products in its bottom third; logo,
+   sentence, field and button sit in the free sky above them */
+@media (max-width: 720px) {
+  .launch { padding: 20px 14px 64px; }
+  .launch__stack { width: 100%; gap: 22px; }
+  .launch__title { width: min(100%, 300px); }
+  .launch__box { gap: 10px; padding: 18px 18px 16px; }
+  .launch__lead { font-size: 17px; }
+  .launch__consent { font-size: 13px; }
+  .launch__foot { bottom: 2px; }
+}
+</style>
+{%- liquid
+  if section.settings.image != blank
+    assign scene_wide = section.settings.image | image_url: width: 2400
+    assign scene_wide_s = section.settings.image | image_url: width: 1400
+    assign wide_w = section.settings.image.width
+    assign wide_h = section.settings.image.height
+  else
+    assign scene_wide = 'launch-scene-2400.webp' | asset_url
+    assign scene_wide_s = 'launch-scene-1400.webp' | asset_url
+    assign wide_w = 2400
+    assign wide_h = 1340
+  endif
+  if section.settings.image_mobile != blank
+    assign scene_tall = section.settings.image_mobile | image_url: width: 1200
+    assign scene_tall_s = section.settings.image_mobile | image_url: width: 800
+  else
+    assign scene_tall = 'launch-scene-tall-1200.webp' | asset_url
+    assign scene_tall_s = 'launch-scene-tall-800.webp' | asset_url
+  endif
+-%}
+<section class="launch ss-launch ss-scope" aria-labelledby="LaunchTitle" style="--logo: url('{{ 'logo-wortmarke-claim.svg' | asset_url }}'); --scene: url('{{ scene_wide_s }}'); --scene-tall: url('{{ scene_tall_s }}')">
+  {%- comment -%} Portrait screens (phones, upright tablets) get the tall render with all products in the bottom third, landscape screens the wide one. {%- endcomment -%}
+  <picture>
+    <source media="(max-aspect-ratio: 1/1)" srcset="{{ scene_tall_s }} 800w, {{ scene_tall }} 1200w" sizes="100vw" width="1200" height="2150">
+    <img class="launch__img" src="{{ scene_wide }}" srcset="{{ scene_wide_s }} 1400w, {{ scene_wide }} 2400w" sizes="100vw" alt="" width="{{ wide_w }}" height="{{ wide_h }}" fetchpriority="high">
+  </picture>
+
+  <div class="launch__stack">
+  <h1 class="launch__title" id="LaunchTitle"><span class="launch__logo" role="img" aria-label="Soapsister"></span><span class="ss-hidden">: {{ section.settings.title_hidden }}</span></h1>
+  <div class="launch__box">
+    <p class="launch__lead">{{ shop.password_message | default: section.settings.lead | escape | replace: ". ", ".<br>" }}</p>
+    {%- if section.settings.launch_date != blank -%}<p class="launch__date">{{ section.settings.launch_date }}</p>{%- endif -%}
+
+    {%- capture form_attrs -%}{% if klaviyo %} data-klaviyo-company="{{ section.settings.klaviyo_company_id | escape }}" data-klaviyo-list="{{ section.settings.klaviyo_list_id | escape }}" data-launch-source="{{ section.settings.source | escape }}"{% endif %}{%- endcapture -%}
+    {%- form 'customer', class: 'launch__form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="launch__done" role="status" tabindex="-1">{{ section.settings.success_text }}</p>
+      {%- else -%}
+        <div class="launch__fields" data-launch-form{{ form_attrs }}>
+          <input type="hidden" name="contact[tags]" value="launch">
+          {%- if form.errors -%}<p class="launch__error" id="LaunchErrors" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+          <label class="ss-hidden" for="LaunchEmail">E-Mail-Adresse</label>
+          <div class="launch__row">
+            <input class="launch__input" type="email" id="LaunchEmail" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="Deine E-Mail-Adresse"
+              aria-describedby="{% if form.errors %}LaunchErrors {% endif %}LaunchConsent"{% if form.errors %} aria-invalid="true"{% endif %}>
+            <button class="ss-btn launch__button" type="submit">{{ section.settings.button }}</button>
+          </div>
+          <p class="launch__consent" id="LaunchConsent">{{ section.settings.consent_text | escape | replace: '[Datenschutzerklärung]', privacy_link }}</p>
+        </div>
+      {%- endif -%}
+    {%- endform -%}
+    <p class="launch__done" role="status" tabindex="-1" data-launch-done hidden>{{ section.settings.success_text }}</p>
+  </div>
+  </div>
+
+  <div class="launch__foot">
+    <a href="/policies/legal-notice">Impressum</a>
+    <a href="{{ privacy_url }}">Datenschutz</a>
+    {%- form 'storefront_password', class: 'launch__owner' -%}
+      <details{% if form.errors %} open{% endif %}>
+        <summary>Shop betreten</summary>
+        {%- if form.errors -%}<p class="launch__error" id="StorefrontPasswordErrors" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <label class="ss-hidden" for="StorefrontPassword">Passwort</label>
+        <input class="launch__input" type="password" id="StorefrontPassword" name="password" autocomplete="current-password" required placeholder="Passwort"
+          {%- if form.errors %} aria-invalid="true" aria-describedby="StorefrontPasswordErrors"{% endif %}>
+        <button class="ss-btn" type="submit">Betreten</button>
+      </details>
+    {%- endform -%}
+  </div>
+</section>
+{%- if klaviyo -%}<script src="{{ 'ss-launch.js' | asset_url }}" defer></script>{%- endif -%}
+
+{% schema %}
+{
+  "name": "Soapsister Launch-Seite",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hintergrundbild Querformat (ersetzt die Szene)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Hintergrundbild Hochformat fürs Handy (ersetzt die Szene)", "info": "Produkte im unteren Drittel, oben freier Himmel für Logo und Formular." },
+    { "type": "text", "id": "title_hidden", "label": "Seitentitel für Screenreader und Google", "default": "Duschmousse, bald im Shop" },
+    { "type": "textarea", "id": "lead", "label": "Satz unter dem Logo, falls in Shopify keine Passwort-Nachricht gesetzt ist", "default": "Jetzt eintragen und als Erstes vom Launch erfahren!" },
+    { "type": "text", "id": "launch_date", "label": "Starttermin (optional)", "info": "z. B. Start am 1. Dezember. Leer lassen, solange der Termin nicht fest ist." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Auf die Liste" },
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo: öffentlicher Site-Key", "info": "Sechs Zeichen, in Klaviyo unter Einstellungen, API-Schlüssel. Das ist der öffentliche Schlüssel, nie den privaten eintragen." },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo: Listen-ID", "info": "In Klaviyo die Liste öffnen, Einstellungen, Listen-ID. Double-Opt-in in der Liste einschalten." },
+    { "type": "text", "id": "source", "label": "Quelle im Klaviyo-Profil", "default": "Launch-Seite" },
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "consent_text", "label": "Hinweis zur Anmeldung", "default": "Du bekommst eine Mail zum Start und danach den Soapsister-Newsletter. Bestätigung per Link in der E-Mail, Abmelden jederzeit. [Datenschutzerklärung]", "info": "[Datenschutzerklärung] wird zum Link. Rechtlich prüfen lassen." },
+    { "type": "text", "id": "success_text", "label": "Text nach der Anmeldung", "default": "Fast geschafft. Bitte bestätige deine Anmeldung über den Link in der E-Mail." }
+  ],
+  "presets": [{ "name": "Soapsister Launch-Seite" }]
+}
+{% endschema %}
