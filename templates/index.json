@@ -1700,7 +1700,8 @@
         "border_radius": 0,
         "padding-block-start": 40,
         "padding-block-end": 40
-      }
+      },
+      "disabled": true
     },
     "section_nw73tP": {
       "type": "section",
@@ -1985,6 +1986,17 @@
     "ss_hero": {
       "type": "ss-hero-scene",
       "settings": {}
+    },
+    "ss_about": {
+      "type": "ss-about",
+      "settings": {
+        "heading": "Über uns",
+        "claim": "For skin, soul and sisterhood.",
+        "text": "<p>Soapsister ist eine Marke aus München, gegründet von Veronika Löwen. Die Idee dahinter: Duschen soll nicht nur sauber machen, sondern sich gut anfühlen. Für deine Haut, für deine Seele und für all die Frauen, die dir wichtig sind.</p><p>Darum gibt es bei uns Duschmousse statt Duschgel. Luftig, mit Aloe Vera und Mandelöl und zu 96 % aus natürlichen Inhaltsstoffen. Mit drei leckeren Düften, die gute Laune machen: Lollipop, Coconut und Marshmallow.</p><p>Together in care heißt für uns: Wir kümmern uns umeinander. Und manchmal fängt das mit einer kleinen Auszeit unter der Dusche an.</p>",
+        "button_label": "Mehr über uns",
+        "button_link": "/",
+        "image_1": "shopify://shop_images/image-1793632160546.png"
+      }
     }
   },
   "order": [
@@ -1999,6 +2011,7 @@
     "section_ek76at",
     "section_B9dnwg",
     "section_pzd4Tb",
+    "ss_about",
     "section_78Kybe",
     "section_nw73tP"
   ]
