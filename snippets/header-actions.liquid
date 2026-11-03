@@ -282,6 +282,26 @@
     font-weight: 700;
   }
 
+  /* Seifenblase kleiner und unten rechts am Körbchen; ohne Aussparung, weil die Blase durchsichtig ist */
+  .header-actions__cart-icon {
+    --cart-bubble-size: 15px;
+  }
+
+  .header-actions__cart-icon .cart-bubble {
+    top: auto;
+    bottom: 3px;
+    inset-inline-end: 0;
+  }
+
+  .header-actions__cart-icon .cart-bubble__text {
+    font-size: 9px;
+  }
+
+  .header-actions__cart-icon.header-actions__cart-icon--has-cart svg,
+  [dir='rtl'] .header-actions__cart-icon.header-actions__cart-icon--has-cart svg {
+    mask: none;
+  }
+
   @media screen and (min-width: 750px) {
     .header-actions__cart-icon--text.header-actions__cart-icon .cart-bubble {
       position: relative;
