@@ -18,8 +18,11 @@
 /* launch page: picture over the whole screen, centred logo, frosted Lollipop panel with the form (client 03.11.2026). Round field and button like the hero. */
 /* Horizon password layout: our page brings its own footer and password entry, so the theme's footer and dialog step back */
 .password-main-content { padding: 0 !important; }
+/* no grey from the theme anywhere around the scene: page, body and main take the sky pink, full width (client 03.11.2026) */
+html:has(.ss-launch), body:has(.ss-launch), body:has(.ss-launch) > main { background: #F2D3E6 !important; margin: 0 !important; max-width: none !important; width: 100% !important; }
+body:has(.ss-launch) > main { padding: 0 !important; display: block !important; min-height: 100svh; }
 body:has(.ss-launch) > footer { display: none; }
-.launch { position: relative; min-height: 100svh; display: grid; place-items: start center; padding: clamp(24px, 6vh, 64px) 16px 72px; overflow: hidden; color: var(--ss-ink); isolation: isolate; }
+.launch { position: relative; width: 100%; background: #F2D3E6; min-height: 100svh; display: grid; place-items: start center; padding: clamp(24px, 6vh, 64px) 16px 72px; overflow: hidden; color: var(--ss-ink); isolation: isolate; }
 /* the scene always shows its full width, so every product is in view; it sits on the bottom edge and a soft copy of the same
    sky fills whatever height is left above it */
 .launch > picture { position: absolute; inset: 0; z-index: -2; display: block; }
