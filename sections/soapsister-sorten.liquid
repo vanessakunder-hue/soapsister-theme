@@ -20,7 +20,13 @@
 
     <div class="soapsister-sorten__grid">
       {%- for block in section.blocks -%}
-        {%- assign product = block.settings.product -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign product_link = product.url
+          if section.settings.product_view != blank
+            assign product_link = product.url | append: '?view=' | append: section.settings.product_view
+          endif
+        -%}
         <article
           class="soapsister-sorte"
           style="
@@ -32,7 +38,7 @@
         >
           {%- if product != blank -%}
             {%- assign sorte_image = block.settings.cutout | default: product.featured_image -%}
-            <a class="soapsister-sorte__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+            <a class="soapsister-sorte__media" href="{{ product_link }}" tabindex="-1" aria-hidden="true">
               {%- if sorte_image -%}
                 {{
                   sorte_image
@@ -52,7 +58,7 @@
 
             <div class="soapsister-sorte__content">
               <h3 class="soapsister-sorte__title">
-                <a href="{{ product.url }}">{{ block.settings.title | default: product.title }}</a>
+                <a href="{{ product_link }}">{{ block.settings.title | default: product.title }}</a>
               </h3>
               {%- if block.settings.subtitle != blank -%}
                 <p class="soapsister-sorte__subtitle">{{ block.settings.subtitle }}</p>
@@ -323,6 +329,13 @@
       "id": "shipping_label",
       "label": "Wort für den Versand-Link",
       "default": "Versand"
+    },
+    {
+      "type": "text",
+      "id": "product_view",
+      "label": "Produktvorlage für die Links (leer = Standard)",
+      "info": "Solange die Vorlage im Admin noch nicht zugewiesen ist, führt dieser Zusatz direkt auf die neue Produktseite.",
+      "default": "duschmousse"
     },
     {
       "type": "select",
