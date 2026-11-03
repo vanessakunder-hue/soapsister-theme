@@ -129,6 +129,7 @@
           "type": "sorte",
           "settings": {
             "product": "duschmousse-lollipop",
+            "cutout": "shopify://shop_images/image-1793633653743.png",
             "title": "Lollipop",
             "subtitle": "Duschmousse, duftet nach Orange und Granatapfel",
             "background_color": "#f3d2e4",
@@ -140,6 +141,7 @@
           "type": "sorte",
           "settings": {
             "product": "duschmousse-coconut",
+            "cutout": "shopify://shop_images/tiegel_coconut_quadrat.png",
             "title": "Coconut",
             "subtitle": "Duschmousse, duftet nach Kokos",
             "background_color": "#e2e0dc",
@@ -151,6 +153,7 @@
           "type": "sorte",
           "settings": {
             "product": "duschmousse-marshmallow",
+            "cutout": "shopify://shop_images/image-1793633662354.png",
             "title": "Marshmallow",
             "subtitle": "Duschmousse, duftet nach Buttermilch",
             "background_color": "#c2e9f8",
