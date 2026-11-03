@@ -8,6 +8,8 @@
     style="
       --tutorial-accent: {{ section.settings.accent_color }};
       --tutorial-radius: {{ section.settings.corner_radius }}px;
+      --tutorial-media-width: {{ section.settings.media_width }}%;
+      --tutorial-media-ratio: {{ section.settings.media_ratio }};
       padding-block-start: {{ section.settings.padding-block-start }}px;
       padding-block-end: {{ section.settings.padding-block-end }}px;
     "
@@ -62,7 +64,7 @@
 
   @media screen and (min-width: 750px) {
     .soapsister-tutorial {
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: var(--tutorial-media-width, 45%) 1fr;
       gap: 56px;
     }
   }
@@ -77,7 +79,7 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--tutorial-media-ratio, 4 / 3);
     object-fit: cover;
   }
 
@@ -149,6 +151,27 @@
       "type": "image_picker",
       "id": "image",
       "label": "Bild (solange es kein Video gibt)"
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Breite Bild/Video (Desktop)",
+      "min": 25,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Bildformat",
+      "options": [
+        { "value": "4 / 3", "label": "Querformat 4:3" },
+        { "value": "1 / 1", "label": "Quadrat" },
+        { "value": "4 / 5", "label": "Hochformat 4:5" }
+      ],
+      "default": "4 / 3"
     },
     {
       "type": "color",
