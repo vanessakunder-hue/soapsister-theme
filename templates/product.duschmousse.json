@@ -1,0 +1,213 @@
+{
+  "sections": {
+    "main": {
+      "type": "soapsister-produkt",
+      "blocks": {
+        "lollipop": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "label": "Lollipop",
+            "scent": "Duftet nach Orange und Granatapfel",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, CI 16255.",
+            "accent_color": "#751F65",
+            "dot_color": "#E08FBC",
+            "tint_color": "#F3D2E4",
+            "addon_1": "netzschwamm-rosa",
+            "addon_2": "badeente-rosa",
+            "set_product": "feelgood-set-lollipop"
+          }
+        },
+        "coconut": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "label": "Coconut",
+            "scent": "Duftet nach Kokos",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, Vanillin, Linalool, Coumarin, Tetramethyl Acetyloctahydronaphthalenes, Alpha Isomethyl Ionone, Citrus Aurantium Peel Oil.",
+            "accent_color": "#1D3F51",
+            "dot_color": "#CAC8C4",
+            "tint_color": "#E2E0DC",
+            "addon_1": "netzschwamm-weiss",
+            "addon_2": "badeente-weiss",
+            "set_product": "feelgood-set-coconut"
+          }
+        },
+        "marshmallow": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "label": "Marshmallow",
+            "scent": "Duftet nach Buttermilch",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, Limonene, Citral, Citrus Limon Peel Oil, Citrus Aurantium Peel Oil, Pinene, Coumarin, CI 42090.",
+            "accent_color": "#1D3F51",
+            "dot_color": "#21B5EA",
+            "tint_color": "#C2E9F8",
+            "addon_1": "netzschwamm-blau",
+            "addon_2": "badeente-blau",
+            "set_product": "feelgood-set-marshmallow"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ],
+      "settings": {}
+    },
+    "tutorial": {
+      "type": "soapsister-tutorial",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Nehmen",
+            "text": "Nimm eine Fingerspitze Mousse aus dem Tiegel."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Aufschäumen",
+            "text": "Schäum sie mit dem nassen Netzschwamm auf."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Abspülen",
+            "text": "Spül den Schaum gründlich ab."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "heading": "So geht's: in 3 Schritten"
+      }
+    },
+    "feelgood": {
+      "type": "soapsister-feelgood-sets",
+      "blocks": {
+        "set_7rXYBK": {
+          "type": "set",
+          "settings": {
+            "label": "Lollipop",
+            "title": "",
+            "image": "shopify://shop_images/set_lollipop_tiegel_schwamm_ente.png",
+            "set_product": "feelgood-set-lollipop",
+            "item_1": "duschmousse-lollipop",
+            "item_2": "netzschwamm-rosa",
+            "item_3": "badeente-rosa",
+            "background_color": "#f3d2e4",
+            "accent_color": "#751f65",
+            "text_color": "#1d3f51"
+          }
+        },
+        "set_iK8kfU": {
+          "type": "set",
+          "settings": {
+            "label": "Coconut",
+            "title": "",
+            "image": "shopify://shop_images/set_coconut_tiegel_schwamm_ente.png",
+            "set_product": "feelgood-set-coconut",
+            "item_1": "duschmousse-coconut",
+            "item_2": "netzschwamm-weiss",
+            "item_3": "badeente-weiss",
+            "background_color": "#e2e0dc",
+            "accent_color": "#1d3f51",
+            "text_color": "#1d3f51"
+          }
+        },
+        "set_Wr8hEk": {
+          "type": "set",
+          "settings": {
+            "label": "Marshmallow",
+            "title": "",
+            "image": "shopify://shop_images/set_marshmallow_tiegel_schwamm_ente.png",
+            "set_product": "feelgood-set-marshmallow",
+            "item_1": "duschmousse-marshmallow",
+            "item_2": "netzschwamm-blau",
+            "item_3": "badeente-blau",
+            "background_color": "#c2e9f8",
+            "accent_color": "#1d3f51",
+            "text_color": "#1d3f51"
+          }
+        }
+      },
+      "block_order": [
+        "set_7rXYBK",
+        "set_iK8kfU",
+        "set_Wr8hEk"
+      ],
+      "settings": {
+        "heading": "Dein Duschmoment im Set",
+        "button_label": "Set in den Warenkorb",
+        "tax_note": "inkl. MwSt., zzgl.",
+        "shipping_label": "Versand",
+        "section_width": "page-width",
+        "corner_radius": 24,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "faq": {
+      "type": "soapsister-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Welche Größe passt zu mir?",
+            "answer": "<p>Der 75-g-Tiegel ist ideal zum Ausprobieren, der 250-g-Tiegel für den Alltag.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Wie benutze ich die Duschmousse?",
+            "answer": "<p>Nimm etwas Mousse aus dem Tiegel, schäum sie mit dem nassen Netzschwamm auf und spül sie gründlich ab.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Was ist drin?",
+            "answer": "<p>Alle Sorten enthalten Aloe Vera und Mandelöl. Die vollständige Liste findest du oben bei den Inhaltsstoffen.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Lohnt sich das Feelgood-Set?",
+            "answer": "<p>Im Set bekommst du Mousse, Netzschwamm und Badeente günstiger als einzeln.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Wie schnell ist meine Bestellung da?",
+            "answer": "<p>Wir versenden mit DHL, innerhalb Deutschlands in der Regel in 1 bis 3 Werktagen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "tutorial",
+    "feelgood",
+    "faq"
+  ]
+}
