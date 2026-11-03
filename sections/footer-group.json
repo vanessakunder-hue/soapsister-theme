@@ -277,7 +277,7 @@
         "social_links_Ew63Kq": {
           "type": "social-links",
           "settings": {
-            "icon_color": "{{ settings.color_palette.color6 }}",
+            "icon_color": "{{ settings.color_palette.background }}",
             "facebook_url": "",
             "instagram_url": "",
             "youtube_url": "",
@@ -304,7 +304,7 @@
       "settings": {
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_color": "{{ settings.color_palette.color6 }}",
         "divider_thickness": 1,
         "divider_color": "{{ settings.color_palette.color2 }}",
         "padding-block-start": 20,
