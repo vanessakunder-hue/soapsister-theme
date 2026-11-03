@@ -122,6 +122,61 @@
         "padding-block-end": 24
       }
     },
+    "soapsister_sorten_BeGNQG": {
+      "type": "soapsister-sorten",
+      "blocks": {
+        "sorte_CnLqLy": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "title": "Lollipop",
+            "subtitle": "Duschmousse, duftet nach Orange und Granatapfel",
+            "background_color": "#f3d2e4",
+            "accent_color": "#751f65",
+            "text_color": "#1d3f51"
+          }
+        },
+        "sorte_gtXtUV": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "title": "Coconut",
+            "subtitle": "Duschmousse, duftet nach Kokos",
+            "background_color": "#e2e0dc",
+            "accent_color": "#1d3f51",
+            "text_color": "#1d3f51"
+          }
+        },
+        "sorte_HEyaqd": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "title": "Marshmallow",
+            "subtitle": "Duschmousse, duftet nach Buttermilch",
+            "background_color": "#c2e9f8",
+            "accent_color": "#1d3f51",
+            "text_color": "#1d3f51"
+          }
+        }
+      },
+      "block_order": [
+        "sorte_CnLqLy",
+        "sorte_gtXtUV",
+        "sorte_HEyaqd"
+      ],
+      "name": "Soapsister Sortenkarten",
+      "settings": {
+        "heading": "Wähle deine Sorte",
+        "button_label": "In den Warenkorb",
+        "tax_note": "inkl. MwSt., zzgl.",
+        "shipping_label": "Versand",
+        "section_width": "page-width",
+        "gap": 24,
+        "corner_radius": 24,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -162,6 +217,7 @@
             "product_list_text_YFtzcL": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h3>Wähle deine Sorte</h3>",
                 "width": "fit-content",
@@ -188,6 +244,7 @@
             "product_list_button_MWeP9V": {
               "type": "_product-list-button",
               "name": "t:names.product_list_button",
+              "disabled": true,
               "settings": {
                 "label": "View all",
                 "open_in_new_tab": false,
@@ -212,6 +269,7 @@
         "static-product-card": {
           "type": "_product-card",
           "name": "t:names.product_card",
+          "disabled": true,
           "static": true,
           "settings": {
             "product_card_gap": 4,
@@ -300,6 +358,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.product_list",
       "settings": {
         "collection": "duschmousse",
@@ -1571,6 +1630,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "soapsister_sorten_BeGNQG",
     "product_list_fa6P9H",
     "section_XwT7nV",
     "section_B9dnwg",
