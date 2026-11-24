@@ -8,7 +8,7 @@
   {%- assign ss_bubble = 'soapsister-seifenblase-rosa.png' | file_url -%}
 {%- endif -%}
 {%- if s.show_trail -%}
-  <div class="ssh-trail" aria-hidden="true" data-src="{{ ss_bubble }}" data-seed="{{ seed | default: 0 }}" data-a="{{ s.trail_from }},0" {% if s.next_label != blank %}data-s="{{ s.trail_stop }}"{% endif %} data-b="{{ s.trail_to }}"></div>
+  <div class="ssh-trail" aria-hidden="true" data-tone="{{ s.tone }}" data-src="{{ ss_bubble }}" data-seed="{{ seed | default: 0 }}" data-a="{{ s.trail_from }},0" {% if s.next_label != blank %}data-s="{{ s.trail_stop }}"{% endif %} data-b="{{ s.trail_to }}"></div>
 {%- endif -%}
 {%- if s.next_label != blank -%}
   <a href="{{ s.next_link | default: '#' }}" class="ssh-stop" style="--x:{{ s.trail_stop }}%;--ink:{{ s.stop_ink }};--ring:{{ s.stop_ring }}" aria-label="Weiter zu {{ s.next_label | escape }}">

@@ -3,33 +3,33 @@
   function pt(v) { return String(v).split(',').map(Number); }
   function build(el) {
     if (el.dataset.built) return;
-    var sec = el.parentElement, H = sec.offsetHeight;
+    var sec = el.parentElement, H = sec.offsetHeight, W = sec.offsetWidth;
     if (!H) return;
     el.dataset.built = '1';
     var src = el.dataset.src, k = Number(el.dataset.seed || 0);
-    var stopPx = window.matchMedia('(max-width: 749px)').matches ? 75 : 105;
+    var mob = window.matchMedia('(max-width: 749px)').matches;
+    var stopPx = mob ? 75 : 105, stopR = mob ? 80 : 108, sp = null;
     var frag = document.createDocumentFragment();
     function seg(p, q) {
-      var n = Math.max(3, Math.round(((q[1] - p[1]) / 100) * H / 62));
+      var n = Math.max(3, Math.round(((q[1] - p[1]) / 100) * H / (mob ? 70 : 54)));
       var c1y = p[1] + (q[1] - p[1]) * 0.6, c2y = q[1] - (q[1] - p[1]) * 0.6;
       for (var j = 1; j < n; j++) {
         var t = j / n, u = 1 - t;
         var x = u*u*u*p[0] + 3*u*u*t*p[0] + 3*u*t*t*q[0] + t*t*t*q[0] + Math.sin(k * 2.1) * 1.6;
         var y = u*u*u*p[1] + 3*u*u*t*c1y + 3*u*t*t*c2y + t*t*t*q[1];
-        var sz = Math.round(14 + 52 * Math.pow(Math.abs(Math.sin(k * 1.7 + 0.4)), 2));
-        var img = document.createElement('img');
-        img.src = src; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
-        img.width = sz; img.height = sz;
-        img.style.cssText = 'left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + sz + 'px;height:' + sz + 'px;margin:' + (-sz / 2) + 'px 0 0 ' + (-sz / 2) + 'px;rotate:' + ((k * 67) % 360) + 'deg;--d:' + (-(k % 7) * 0.9).toFixed(1) + 's;--dur:' + (6 + (k % 4)) + 's;--w:' + (-(5.4 - (k * 0.14) % 5.4)).toFixed(2) + 's';
-        frag.appendChild(img);
+        if (sp && Math.hypot((x - sp[0]) / 100 * W, (y - sp[1]) / 100 * H) < stopR) { k++; continue; }
+        var sz = Math.round((24 + 60 * Math.pow(Math.abs(Math.sin(k * 1.7 + 0.4)), 2)) * (mob ? 0.5 : 1));
+        var b = document.createElement('i');
+        b.style.cssText = 'background-image:url(' + src + ');left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + sz + 'px;height:' + sz + 'px;margin:' + (-sz / 2) + 'px 0 0 ' + (-sz / 2) + 'px;--d:' + (-(k % 7) * 0.9).toFixed(1) + 's;--dur:' + (6 + (k % 4)) + 's;--w:' + (-(5.4 - (k * 0.14) % 5.4)).toFixed(2) + 's';
+        frag.appendChild(b);
         k++;
       }
     }
-    var a = pt(el.dataset.a), b = pt(el.dataset.b);
+    var a = pt(el.dataset.a), e = pt(el.dataset.b);
     if (el.dataset.s) {
-      var s = [Number(el.dataset.s), ((H - stopPx) / H) * 100];
-      seg(a, s); seg(s, b);
-    } else seg(a, b);
+      sp = [Number(el.dataset.s), ((H - stopPx) / H) * 100];
+      seg(a, sp); seg(sp, e);
+    } else seg(a, e);
     el.appendChild(frag);
   }
   function init() { document.querySelectorAll('.ssh-trail[data-src]').forEach(build); }
