@@ -2066,7 +2066,9 @@
     },
     "ssh_sorten": {
       "type": "ss-home-sorten",
-      "settings": {},
+      "settings": {
+        "show_trail": false
+      },
       "blocks": {
         "lollipop": {
           "type": "card",
@@ -2113,7 +2115,9 @@
     },
     "ssh_set": {
       "type": "ss-home-set",
-      "settings": {},
+      "settings": {
+        "show_trail": false
+      },
       "blocks": {
         "lollipop": {
           "type": "flavour",
@@ -2178,7 +2182,9 @@
     },
     "ssh_steps": {
       "type": "ss-home-steps",
-      "settings": {},
+      "settings": {
+        "show_trail": false
+      },
       "blocks": {
         "nehmen": {
           "type": "step",
@@ -2219,7 +2225,9 @@
     },
     "ssh_usp": {
       "type": "ss-home-usp",
-      "settings": {},
+      "settings": {
+        "show_trail": false
+      },
       "blocks": {
         "haut": {
           "type": "usp",
@@ -2257,12 +2265,15 @@
         "image_1": "shopify://shop_images/soapsister-veronika-loewen-gruenderin.jpg",
         "image_1_alt": "Veronika Löwen, Gründerin von Soapsister",
         "image_2": "shopify://shop_images/soapsister-veronika-loewen-dose.jpg",
-        "image_2_alt": "Veronika Löwen sitzt auf einer großen Soapsister Dose"
+        "image_2_alt": "Veronika Löwen sitzt auf einer großen Soapsister Dose",
+        "show_trail": false
       }
     },
     "ssh_faq": {
       "type": "ss-home-faq",
-      "settings": {},
+      "settings": {
+        "show_trail": false
+      },
       "blocks": {
         "accordion_row_7dgnx3": {
           "type": "question",
@@ -2299,6 +2310,10 @@
         "accordion_row_H3HGCU",
         "accordion_row_y7jiPc"
       ]
+    },
+    "ssh_ballpit": {
+      "type": "ss-home-ballpit",
+      "settings": {}
     }
   },
   "order": [
@@ -2309,6 +2324,7 @@
     "ssh_usp",
     "ssh_about",
     "ssh_faq",
+    "ssh_ballpit",
     "ss_hero",
     "hero_jVaWmY",
     "soapsister_sorten_BeGNQG",

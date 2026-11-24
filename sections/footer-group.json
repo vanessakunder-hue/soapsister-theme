@@ -347,7 +347,8 @@
     "ssh_newsletter": {
       "type": "ss-home-newsletter",
       "settings": {
-        "legal": "<p>Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der <a href=\"/policies/privacy-policy\" title=\"Datenschutzerklärung\">Datenschutzerklärung</a>.</p>"
+        "legal": "<p>Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der <a href=\"/policies/privacy-policy\" title=\"Datenschutzerklärung\">Datenschutzerklärung</a>.</p>",
+        "show_trail": false
       }
     }
   },

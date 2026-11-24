@@ -1,0 +1,42 @@
+{%- comment -%}
+  Bubble-Ebene: Ballpit von React Bits (reactbits.dev), ohne React umgebaut.
+  Component inspired by Kevin Levron: https://x.com/soju22/status/1858925191671271801
+  Das Script liegt unter Inhalte > Dateien als ssh-ballpit.js.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<script src="{{ 'ssh-ballpit.js' | file_url }}" defer></script>
+{%- capture cfg -%}
+{"count":{{ s.count }},"countMobile":{{ s.count_mobile }},"colors":["{{ s.color_1 }}","{{ s.color_2 }}","{{ s.color_3 }}"],"material":"{{ s.material }}","minSize":{{ s.min_size | divided_by: 100.0 }},"maxSize":{{ s.max_size | divided_by: 100.0 }},"gravity":0,"drift":{{ s.drift | divided_by: 100.0 }},"followCursor":{{ s.follow_cursor }},"cursorSize":0.6,"grab":true,"clickEffect":"burst","shadows":0.3,"depth":2,"dpr":1.5,"intro":true}
+{%- endcapture -%}
+<ssh-ballpit class="ssh-pit" data-settings="{{ cfg | strip | escape }}" aria-hidden="true"></ssh-ballpit>
+<style>
+  .ssh-pit{position:fixed;inset:0;z-index:{{ s.layer }};display:block;overflow:hidden;pointer-events:none;opacity:{{ s.opacity | divided_by: 100.0 }}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: Bubble-Ebene",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Schwebende Blasen über der ganzen Seite (Ballpit von React Bits). Buttons und Links bleiben klickbar. Klick auf eine freie Stelle lässt die Blasen auseinanderfliegen." },
+    { "type": "range", "id": "count", "min": 6, "max": 80, "step": 2, "label": "Anzahl Blasen (Desktop)", "default": 28 },
+    { "type": "range", "id": "count_mobile", "min": 4, "max": 40, "step": 2, "label": "Anzahl Blasen (Handy)", "default": 14 },
+    { "type": "color", "id": "color_1", "label": "Farbe 1", "default": "#EAEDE8" },
+    { "type": "color", "id": "color_2", "label": "Farbe 2", "default": "#E08FBC" },
+    { "type": "color", "id": "color_3", "label": "Farbe 3", "default": "#21B5EA" },
+    { "type": "select", "id": "material", "label": "Oberfläche", "options": [
+      { "value": "frosted", "label": "Durchscheinend" },
+      { "value": "gloss", "label": "Glänzend" },
+      { "value": "satin", "label": "Seidig" },
+      { "value": "matte", "label": "Matt" }
+    ], "default": "frosted" },
+    { "type": "range", "id": "min_size", "min": 10, "max": 100, "step": 5, "label": "Kleinste Blase", "default": 30 },
+    { "type": "range", "id": "max_size", "min": 20, "max": 150, "step": 5, "label": "Größte Blase", "default": 75 },
+    { "type": "range", "id": "drift", "min": 0, "max": 100, "step": 5, "label": "Eigenbewegung", "default": 40 },
+    { "type": "checkbox", "id": "follow_cursor", "label": "Blasen weichen der Maus aus", "default": true },
+    { "type": "range", "id": "opacity", "min": 30, "max": 100, "step": 5, "unit": "%", "label": "Deckkraft", "default": 90 },
+    { "type": "range", "id": "layer", "min": 1, "max": 9, "step": 1, "label": "Ebene (höher = weiter vorne)", "default": 5 }
+  ],
+  "presets": [{ "name": "Soapsister: Bubble-Ebene" }]
+}
+{% endschema %}
