@@ -46,7 +46,7 @@
       for (var j = 0; j < list.length; j++) {
         var vy = r.top + list[j].y * r.height;
         var f = Math.min(1, Math.max(0, (vy - end) / (start - end)));
-        f = 0.12 + 0.88 * f;
+        f = Math.round(f * 1000) / 1000;
         if (list[j].f !== f) { list[j].f = f; list[j].el.style.setProperty('--fade', f.toFixed(3)); }
       }
     }
