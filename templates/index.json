@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hero_jVaWmY": {
       "type": "hero",
@@ -1985,7 +1986,8 @@
     },
     "ss_hero": {
       "type": "ss-hero-scene",
-      "settings": {}
+      "settings": {},
+      "disabled": true
     },
     "ss_about": {
       "type": "ss-about",
@@ -1997,9 +1999,62 @@
         "button_link": "/",
         "image_1": "shopify://shop_images/image-1793632160546.png"
       }
+    },
+    "ss_hero_pop": {
+      "type": "ss-hero-pop",
+      "settings": {
+        "image": "shopify://shop_images/soapsister-hero-pop-duschmousse-2400.jpg",
+        "image_alt": "Duschmousse Coconut, Marshmallow und Lollipop in Seifenblasen",
+        "heading": "Duschmousse statt Duschgel.",
+        "text": "Tipp auf eine Bubble und entdeck dein Duschmousse: luftig aufgeschlagen, mit Aloe Vera und Mandelöl."
+      },
+      "blocks": {
+        "flavour_coconut": {
+          "type": "flavour",
+          "settings": {
+            "label": "Coconut",
+            "product": "duschmousse-coconut",
+            "title": "Pop. Coconut.",
+            "text": "Cremig wie frische Kokosmilch, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
+            "ink": "#1D3F51",
+            "center_x": 20.8,
+            "center_y": 51.4
+          }
+        },
+        "flavour_marshmallow": {
+          "type": "flavour",
+          "settings": {
+            "label": "Marshmallow",
+            "product": "duschmousse-marshmallow",
+            "title": "Pop. Marshmallow.",
+            "text": "Weich wie ein Marshmallow, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
+            "ink": "#1D3F51",
+            "center_x": 50.2,
+            "center_y": 51.4
+          }
+        },
+        "flavour_lollipop": {
+          "type": "flavour",
+          "settings": {
+            "label": "Lollipop",
+            "product": "duschmousse-lollipop",
+            "title": "Pop. Lollipop.",
+            "text": "Süß wie ein Lolli, luftig wie Sahne. 250 g für Face, Body und Shave.",
+            "ink": "#751F65",
+            "center_x": 78.8,
+            "center_y": 51.4
+          }
+        }
+      },
+      "block_order": [
+        "flavour_coconut",
+        "flavour_marshmallow",
+        "flavour_lollipop"
+      ]
     }
   },
   "order": [
+    "ss_hero_pop",
     "ss_hero",
     "hero_jVaWmY",
     "soapsister_sorten_BeGNQG",

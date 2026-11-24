@@ -1,0 +1,186 @@
+{%- comment -%}
+  Hero "Pop your flavour" (Design E, 24.11.2026): die drei Tiegel in Seifenblasen als Bild. Jede Blase ist ein Button:
+  Klick poppt die Blase, Überschrift und Satz wechseln auf die Sorte, die Pill darunter führt zum Produkt.
+  Die Linse in jeder Blase zeigt denselben Bildausschnitt und hebt ihn beim Hover leicht an. Positionen der Blasen
+  (Mitte X/Y in % des Bildes) pro Sorte einstellbar. Schriften und Farben aus snippets/ss-tokens.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign sid = '#HeroPop-' | append: section.id
+  assign img = section.settings.image
+  if img != blank
+    assign img_w = img.width
+    assign img_h = img.height
+  else
+    assign img_w = 2400
+    assign img_h = 1339
+  endif
+-%}
+{%- render 'ss-tokens' -%}
+<style>
+  {{ sid }} { --hp-plum: var(--ss-plum); --hp-text: #4A1240; --hp-ease: cubic-bezier(.16, 1, .3, 1);
+    display: block; position: relative; background: #E7D3EC; color: var(--ss-navy); }
+  {{ sid }} .hero-pop__copy { position: absolute; z-index: 3; inset: 0 0 auto 0; padding: 2.6vw 4.4vw 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; pointer-events: none; }
+  {{ sid }} .hero-pop__title { margin: 0; max-width: 62%; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(40px, 5.2vw, 80px); line-height: .92; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--hp-plum); transition: color .4s var(--hp-ease); }
+  {{ sid }} .hero-pop__text { margin: 0; padding-top: 8px; max-width: 32ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: var(--hp-text); }
+  {{ sid }} .hero-pop__stage { position: relative; aspect-ratio: {{ img_w }} / {{ img_h }}; overflow: hidden; }
+  {{ sid }} .hero-pop__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  {{ sid }} .hero-pop__bubble { position: absolute; z-index: 2; width: 26.8%; height: 48%; }
+  {{ sid }} .hero-pop__hot { position: absolute; inset: 0; margin: 0; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  {{ sid }} .hero-pop__hot:focus-visible { outline: 3px solid var(--hp-plum); outline-offset: 6px; }
+  {{ sid }} .hero-pop__lens { position: absolute; inset: 0; display: block; border-radius: 50%; overflow: hidden; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+  {{ sid }} .hero-pop__lens img { position: absolute; width: 373.134%; height: 208.333%; max-width: none; display: block; }
+  {{ sid }} .hero-pop__hot:hover .hero-pop__lens, {{ sid }} .hero-pop__hot:focus-visible .hero-pop__lens { transform: scale(1.06); }
+  {{ sid }} .hero-pop__hot:active .hero-pop__lens { transform: scale(.97); transition-duration: .12s; }
+  {{ sid }} .hero-pop__glow { position: absolute; inset: -2%; border-radius: 50%; box-shadow: 0 0 0 4px rgba(255,255,255,.85), 0 0 70px 10px rgba(255,255,255,.55); opacity: 0; pointer-events: none; transition: opacity .25s var(--hp-ease); }
+  {{ sid }} .hero-pop__hot:hover .hero-pop__glow, {{ sid }} .hero-pop__hot:focus-visible .hero-pop__glow, {{ sid }} .is-picked .hero-pop__glow { opacity: 1; }
+  {{ sid }} .hero-pop__hint { position: absolute; inset: -1.5%; border: 3px solid #fff; border-radius: 50%; opacity: 0; pointer-events: none; animation: hp-hint 3s ease-in-out infinite; }
+  {{ sid }} .hero-pop__ring { position: absolute; inset: 0; border: 6px solid #fff; border-radius: 50%; opacity: 0; pointer-events: none; }
+  {{ sid }} .hero-pop__drops { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+  {{ sid }} .hero-pop__drop { --s: calc(var(--bw, 380px) * var(--k)); position: absolute; left: calc(var(--s) / -2); top: calc(var(--s) / -2); width: var(--s); height: var(--s); border-radius: 50%; opacity: 0;
+    background: radial-gradient(circle at 32% 30%, rgba(255,255,255,.95) 0 14%, rgba(255,255,255,.3) 38%, rgba(255,255,255,.08) 70%); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.85); }
+  {{ sid }} .is-bursting .hero-pop__lens { animation: hp-boing .7s ease-out; }
+  {{ sid }} .is-bursting .hero-pop__ring { animation: hp-ring .7s var(--hp-ease) forwards; }
+  {{ sid }} .is-bursting .hero-pop__drop { animation: hp-drop .8s var(--hp-ease) var(--d) forwards; }
+  {{ sid }} .hero-pop__pill { position: absolute; left: 50%; top: 104%; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; white-space: nowrap; border-radius: 999px;
+    background: #fff; color: var(--ink); font-family: var(--ss-text); font-size: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; box-shadow: 0 8px 22px rgba(117,31,101,.16);
+    transition: transform .25s var(--hp-ease), background-color .25s var(--hp-ease), color .25s var(--hp-ease); }
+  {{ sid }} .hero-pop__bubble:hover .hero-pop__pill { transform: translateX(-50%) translateY(-4px); }
+  {{ sid }} .hero-pop__pill:active { transform: translateX(-50%) scale(.97); transition-duration: .12s; }
+  {{ sid }} .is-picked .hero-pop__pill { background: var(--ink); color: #fff; }
+  {{ sid }} .hero-pop__pill-more { display: none; }
+  {{ sid }} .is-picked .hero-pop__pill-more { display: inline; }
+  @keyframes hp-hint { 0%, 100% { transform: scale(1); opacity: 0; } 50% { transform: scale(1.04); opacity: .55; } }
+  @keyframes hp-boing { 0% { transform: scale(1.06); } 30% { transform: scale(1.16); } 55% { transform: scale(.95); } 78% { transform: scale(1.04); } 100% { transform: scale(1); } }
+  @keyframes hp-ring { from { transform: scale(.95); opacity: .95; } to { transform: scale(1.45); opacity: 0; } }
+  @keyframes hp-drop { from { opacity: 1; transform: rotate(var(--a)) translateY(calc(var(--bw, 380px) * -.4)) scale(1); } to { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--bw, 380px) * -.9)) scale(.35); } }
+  @media (max-width: 749px) {
+    {{ sid }} .hero-pop__copy { position: static; display: grid; gap: 10px; padding: 28px 16px 18px; pointer-events: auto; }
+    {{ sid }} .hero-pop__title { max-width: none; font-size: clamp(34px, 10vw, 48px); }
+    {{ sid }} .hero-pop__text { padding-top: 0; max-width: 40ch; font-size: 16px; }
+    {{ sid }} .hero-pop__pill { top: 102%; min-height: 36px; padding: 0 12px; font-size: 11px; letter-spacing: .1em; }
+    {{ sid }} .is-picked .hero-pop__pill-more { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    {{ sid }} .hero-pop__hint { animation: none; }
+    {{ sid }} .is-bursting .hero-pop__lens, {{ sid }} .is-bursting .hero-pop__ring, {{ sid }} .is-bursting .hero-pop__drop { animation: none; }
+    {{ sid }} .hero-pop__lens, {{ sid }} .hero-pop__pill, {{ sid }} .hero-pop__title, {{ sid }} .hero-pop__glow { transition: none; }
+  }
+</style>
+<ss-hero-pop class="hero-pop ss-scope" id="HeroPop-{{ section.id }}">
+  <div class="hero-pop__copy" aria-live="polite">
+    <h1 class="hero-pop__title" data-hp-title>{{ section.settings.heading | escape }}</h1>
+    <p class="hero-pop__text" data-hp-text>{{ section.settings.text | escape }}</p>
+  </div>
+  <div class="hero-pop__stage">
+    {%- if img != blank -%}
+      <img class="hero-pop__img" src="{{ img | image_url: width: 2400 }}" srcset="{{ img | image_url: width: 800 }} 800w, {{ img | image_url: width: 1200 }} 1200w, {{ img | image_url: width: 1600 }} 1600w, {{ img | image_url: width: 2400 }} 2400w" sizes="100vw" width="{{ img_w }}" height="{{ img_h }}" alt="{{ section.settings.image_alt | default: img.alt | escape }}" fetchpriority="high">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign cx = block.settings.center_x | times: 1.0
+          assign cy = block.settings.center_y | times: 1.0
+          assign l = cx | minus: 13.4
+          assign t = cy | minus: 24.0
+          assign lens_l = l | divided_by: 26.8 | times: -100
+          assign lens_t = t | divided_by: 48.0 | times: -100
+          assign ink = block.settings.ink
+          assign url = '/collections/duschmousse'
+          if block.settings.product != blank
+            assign url = block.settings.product.url
+          endif
+          assign hint_delay = forloop.index0 | times: -1
+        -%}
+        <div class="hero-pop__bubble" data-hp-bubble style="left: {{ l }}%; top: {{ t }}%; --ink: {{ ink }};" {{ block.shopify_attributes }}>
+          <button type="button" class="hero-pop__hot" data-hp-pop aria-pressed="false" aria-label="{{ block.settings.label | escape }}: Bubble poppen" data-title="{{ block.settings.title | escape }}" data-text="{{ block.settings.text | escape }}" data-ink="{{ ink }}">
+            <span class="hero-pop__hint" aria-hidden="true" style="animation-delay: {{ hint_delay }}s;"></span>
+            <span class="hero-pop__lens" aria-hidden="true"><img src="{{ img | image_url: width: 2400 }}" srcset="{{ img | image_url: width: 800 }} 800w, {{ img | image_url: width: 1200 }} 1200w, {{ img | image_url: width: 1600 }} 1600w, {{ img | image_url: width: 2400 }} 2400w" sizes="100vw" alt="" loading="eager" style="left: {{ lens_l }}%; top: {{ lens_t }}%;"></span>
+            <span class="hero-pop__glow" aria-hidden="true"></span>
+          </button>
+          <span class="hero-pop__ring" aria-hidden="true"></span>
+          <span class="hero-pop__drops" aria-hidden="true">
+            {%- assign angles = '0,36,72,108,144,180,216,252,288,324' | split: ',' -%}
+            {%- assign ks = '.058,.089,.12' | split: ',' -%}
+            {%- for a in angles -%}
+              {%- assign ki = forloop.index0 | modulo: 3 -%}
+              {%- assign di = forloop.index0 | modulo: 4 | times: 0.04 -%}
+              <span class="hero-pop__drop" style="--a: {{ a }}deg; --k: {{ ks[ki] }}; --d: {{ di }}s;"></span>
+            {%- endfor -%}
+          </span>
+          <a class="hero-pop__pill" href="{{ url }}">{{ block.settings.label | escape }}<span class="hero-pop__pill-more">&nbsp;entdecken</span></a>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero-pop__img' }}
+    {%- endif -%}
+  </div>
+</ss-hero-pop>
+<script>
+  if (!customElements.get('ss-hero-pop')) {
+    customElements.define('ss-hero-pop', class extends HTMLElement {
+      connectedCallback() {
+        if (this.hpReady) return;
+        this.hpReady = true;
+        this.titleEl = this.querySelector('[data-hp-title]');
+        this.textEl = this.querySelector('[data-hp-text]');
+        this.querySelectorAll('[data-hp-pop]').forEach((btn) => btn.addEventListener('click', () => this.pick(btn)));
+      }
+      pick(btn) {
+        const wrap = btn.closest('[data-hp-bubble]');
+        this.querySelectorAll('[data-hp-bubble]').forEach((w) => {
+          const on = w === wrap;
+          w.classList.toggle('is-picked', on);
+          w.querySelector('[data-hp-pop]').setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (btn.dataset.title) this.titleEl.textContent = btn.dataset.title;
+        if (btn.dataset.text) this.textEl.textContent = btn.dataset.text;
+        this.titleEl.style.color = btn.dataset.ink || '';
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        clearTimeout(wrap.hpTimer);
+        wrap.style.setProperty('--bw', wrap.offsetWidth + 'px');
+        wrap.classList.remove('is-bursting');
+        void wrap.offsetWidth;
+        wrap.classList.add('is-bursting');
+        wrap.hpTimer = setTimeout(() => wrap.classList.remove('is-bursting'), 850);
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Soapsister Hero: Pop",
+  "tag": "section",
+  "class": "ss-hero-pop-section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Bild mit den Tiegeln in Seifenblasen", "info": "Querformat. Die Blasen-Positionen stellst du pro Sorte ein." },
+    { "type": "text", "id": "image_alt", "label": "Bildbeschreibung", "default": "Duschmousse Coconut, Marshmallow und Lollipop in Seifenblasen" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Duschmousse statt Duschgel." },
+    { "type": "textarea", "id": "text", "label": "Satz neben der Überschrift", "default": "Tipp auf eine Bubble und entdeck dein Duschmousse: luftig aufgeschlagen, mit Aloe Vera und Mandelöl." }
+  ],
+  "blocks": [
+    {
+      "type": "flavour",
+      "name": "Sorte (Blase)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Name auf der Pill", "default": "Coconut" },
+        { "type": "product", "id": "product", "label": "Produkt" },
+        { "type": "text", "id": "title", "label": "Überschrift nach dem Poppen", "default": "Pop. Coconut." },
+        { "type": "textarea", "id": "text", "label": "Satz nach dem Poppen", "default": "Cremig wie frische Kokosmilch, luftig aufgeschlagen. 250 g für Face, Body und Shave." },
+        { "type": "color", "id": "ink", "label": "Farbe der Sorte", "default": "#1D3F51" },
+        { "type": "number", "id": "center_x", "label": "Blase Mitte waagerecht (in % der Bildbreite)", "default": 20.8 },
+        { "type": "number", "id": "center_y", "label": "Blase Mitte senkrecht (in % der Bildhöhe)", "default": 51.4 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Soapsister Hero: Pop",
+      "blocks": [
+        { "type": "flavour", "settings": { "label": "Coconut", "title": "Pop. Coconut.", "ink": "#1D3F51", "center_x": 20.8, "center_y": 51.4 } },
+        { "type": "flavour", "settings": { "label": "Marshmallow", "title": "Pop. Marshmallow.", "text": "Weich wie ein Marshmallow, luftig aufgeschlagen. 250 g für Face, Body und Shave.", "ink": "#1D3F51", "center_x": 50.2, "center_y": 51.4 } },
+        { "type": "flavour", "settings": { "label": "Lollipop", "title": "Pop. Lollipop.", "text": "Süß wie ein Lolli, luftig wie Sahne. 250 g für Face, Body und Shave.", "ink": "#751F65", "center_x": 78.8, "center_y": 51.4 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
