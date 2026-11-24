@@ -1,0 +1,73 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+<section class="ss-scope ssh-sec ssh-faq" id="{{ section.settings.anchor | default: section.id }}" style="background:{{ section.settings.bg }};color:{{ section.settings.ink }}">
+  {%- render 'ssh-trail', s: section.settings, seed: 85 -%}
+  <div class="ssh-sec__in ssh-faq__row">
+    <div class="ssh-faq__intro">
+      <h2 class="ssh-h2">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- if section.settings.text != blank -%}<p class="ssh-lead">{{ section.settings.text | escape }}</p>{%- endif -%}
+    </div>
+    <div class="ssh-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="ssh-faq__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="ssh-faq__q">{{ block.settings.question | escape }}<span class="ssh-faq__icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="ssh-faq__a">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ssh-faq__row{display:flex;gap:64px;flex-wrap:wrap;align-items:flex-start}
+  .ssh-faq__intro{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px}
+  .ssh-faq .ssh-h2{font-size:clamp(52px,5vw,76px)}
+  .ssh-faq__list{flex:1.5 1 520px;min-width:0;border-top:2px solid color-mix(in srgb,currentColor 25%,transparent)}
+  .ssh-faq__item{border-bottom:2px solid color-mix(in srgb,currentColor 25%,transparent)}
+  .ssh-faq__q{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:72px;cursor:pointer;list-style:none;font-weight:600;font-size:22px;letter-spacing:.02em}
+  .ssh-faq__q::-webkit-details-marker{display:none}
+  .ssh-faq__icon{width:34px;height:34px;flex:0 0 34px;border-radius:50%;border:2px solid #751F65;display:grid;place-items:center;color:#751F65;transition:transform .25s}
+  .ssh-faq__item[open] .ssh-faq__icon{transform:rotate(45deg)}
+  .ssh-faq__a{margin:0 0 22px;font-size:19px;line-height:1.5;max-width:60ch}
+  .ssh-faq__a p{margin:0 0 12px}
+  .ssh-faq__a p:last-child{margin:0}
+  @media (max-width:749px){.ssh-faq__row{gap:32px}.ssh-faq__list{flex-basis:100%}.ssh-faq__q{font-size:20px}.ssh-faq__a{font-size:18px}}
+  @media (prefers-reduced-motion:reduce){.ssh-faq__icon{transition:none}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: FAQ",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "faq" },
+    { "type": "textarea", "id": "heading", "label": "Überschrift", "default": "Bevor es in\ndie Dusche geht." },
+    { "type": "text", "id": "text", "label": "Text", "default": "Hier findest du Antworten auf die häufigsten Fragen." },
+    { "type": "checkbox", "id": "open_first", "label": "Erste Frage geöffnet", "default": true },
+    { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#EAEDE8" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#1D3F51" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "light"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 8},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 92},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "92,100"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble", "default": "10 % sparen"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood", "default": "#newsletter"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#751F65"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#751F65"}
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Frage",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage", "default": "Welche Größen gibt es?" },
+        { "type": "richtext", "id": "answer", "label": "Antwort" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Soapsister: FAQ" }]
+}
+{% endschema %}

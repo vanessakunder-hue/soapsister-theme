@@ -1,0 +1,198 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+{%- assign ring = 'soapsister-seifenblase-hell.png' | file_url -%}
+<ssh-set class="ss-scope ssh-sec ssh-set" id="{{ section.settings.anchor | default: section.id }}" style="display:block;background:{{ section.settings.bg }};color:{{ section.settings.ink }}">
+  {%- render 'ssh-trail', s: section.settings, seed: 20 -%}
+  <div class="ssh-sec__in ssh-set__row">
+    <div class="ssh-set__stage">
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings -%}
+        <div class="ssh-set__visual" data-panel="{{ block.id }}" {% unless forloop.first %}hidden{% endunless %}>
+          {%- if c.bubble != blank -%}{{ c.bubble | image_url: width: 900 | image_tag: class: 'ssh-set__bubble', alt: c.bubble_alt, loading: 'lazy', sizes: '(max-width: 749px) 52vw, 25vw' }}{%- endif -%}
+          <img class="ssh-set__ring" src="{{ ring }}" alt="" aria-hidden="true" loading="lazy" width="440" height="440">
+          {%- if c.duck_img != blank -%}{{ c.duck_img | image_url: width: 500 | image_tag: class: 'ssh-set__duck', alt: c.duck_alt, loading: 'lazy' }}{%- endif -%}
+          {%- if c.sponge_img != blank -%}{{ c.sponge_img | image_url: width: 500 | image_tag: class: 'ssh-set__sponge', alt: c.sponge_alt, loading: 'lazy' }}{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="ssh-set__copy">
+      <h2 class="ssh-h2">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- if section.blocks.size > 1 -%}
+        <div class="ssh-set__tabs" role="tablist" aria-label="Sorte für das Set">
+          {%- for block in section.blocks -%}
+            <button type="button" class="ssh-set__tab" role="tab" id="tab-{{ block.id }}" aria-controls="panel-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" data-tab="{{ block.id }}" {{ block.shopify_attributes }}>
+              <span class="ssh-set__dot" style="background:{{ block.settings.dot }}" aria-hidden="true"></span>{{ block.settings.name | escape }}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings -%}
+        {%- assign flavour = c.name | downcase -%}
+        {%- assign color = c.color | downcase -%}
+        {%- assign items = '' -%}
+        {%- assign sum = 0 -%}
+        {%- assign keys = 'mousse,sponge,duck' | split: ',' -%}
+        {%- capture rows -%}
+          {%- for key in keys -%}
+            {%- assign prod = c[key] -%}
+            {%- if prod != blank -%}
+              {%- assign v = prod.selected_or_first_available_variant -%}
+              {%- for pv in prod.variants -%}
+                {%- assign t = pv.title | downcase -%}
+                {%- if key == 'mousse' -%}
+                  {%- if t contains '250' -%}{%- assign v = pv -%}{%- endif -%}
+                {%- elsif color != blank and t contains color -%}
+                  {%- assign v = pv -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- assign sum = sum | plus: v.price -%}
+              {%- assign items = items | append: v.id | append: ',' -%}
+              <li class="ssh-set__item"><span>{{ prod.title | escape }}{% unless v.title == 'Default Title' %} {{ v.title | escape }}{% endunless %}</span><span>{{ v.price | money }}</span></li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign setp = c.set -%}
+        {%- assign setv = blank -%}
+        {%- if setp != blank -%}
+          {%- assign setv = setp.selected_or_first_available_variant -%}
+          {%- for pv in setp.variants -%}
+            {%- assign t = pv.title | downcase -%}
+            {%- if t contains flavour -%}{%- assign setv = pv -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="ssh-set__panel" role="tabpanel" id="panel-{{ block.id }}" aria-labelledby="tab-{{ block.id }}" data-panel="{{ block.id }}" {% unless forloop.first %}hidden{% endunless %}>
+          <ul class="ssh-set__list">{{ rows }}</ul>
+          <div class="ssh-set__price">
+            {%- if setv != blank -%}
+              {%- if sum > setv.price -%}<span class="ssh-set__single">Einzeln <s>{{ sum | money }}</s></span>{%- endif -%}
+              <span class="ssh-set__big">{{ setv.price | money }}</span>
+              {%- if sum > setv.price -%}<span class="ssh-set__save">Du sparst {{ sum | minus: setv.price | money }}</span>{%- endif -%}
+            {%- elsif sum > 0 -%}
+              <span class="ssh-set__big">{{ sum | money }}</span>
+            {%- endif -%}
+          </div>
+          <span class="ssh-note">inkl. MwSt., zzgl. Versand</span>
+          {%- if setv != blank -%}
+            <form action="{{ routes.cart_add_url }}" method="post" class="ssh-set__form">
+              <input type="hidden" name="id" value="{{ setv.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="ssh-btn ssh-set__add" {% unless setv.available %}disabled{% endunless %}>{% if setv.available %}{{ section.settings.button | escape }}{% else %}Ausverkauft{% endif %}</button>
+            </form>
+          {%- elsif items != '' -%}
+            {%- assign ids = items | split: ',' -%}
+            <form action="{{ routes.cart_add_url }}" method="post" class="ssh-set__form">
+              {%- for id in ids -%}
+                <input type="hidden" name="items[{{ forloop.index0 }}][id]" value="{{ id }}">
+                <input type="hidden" name="items[{{ forloop.index0 }}][quantity]" value="1">
+              {%- endfor -%}
+              <button type="submit" class="ssh-btn ssh-set__add">{{ section.settings.button | escape }}</button>
+            </form>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</ssh-set>
+
+<style>
+  .ssh-set__row{display:flex;gap:64px;flex-wrap:wrap;align-items:center}
+  .ssh-set .ssh-h2{font-size:clamp(48px,4.4vw,76px)}
+  .ssh-set__stage{flex:1.1 1 520px;min-width:0;position:relative;aspect-ratio:1/.86;border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#F7E1EE 0%,#EBD3EA 62%,#F6EAF3 62%,#F1DDEB 100%)}
+  .ssh-set__visual{position:absolute;inset:0}
+  .ssh-set__visual[hidden]{display:none}
+  .ssh-set__bubble{position:absolute;left:24%;top:9%;width:52%;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 44%;display:block;box-shadow:0 30px 60px rgba(117,31,101,.22)}
+  .ssh-set__ring{position:absolute;left:22.2%;top:7.2%;width:55.6%;height:auto;display:block}
+  .ssh-set__duck{position:absolute;left:9%;bottom:7%;width:25%;height:auto;display:block;filter:drop-shadow(0 14px 14px rgba(117,31,101,.22))}
+  .ssh-set__sponge{position:absolute;right:8%;bottom:8%;width:24%;height:auto;display:block;filter:drop-shadow(0 14px 14px rgba(117,31,101,.2))}
+  .ssh-set__copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
+  .ssh-set__tabs{display:flex;gap:10px;flex-wrap:wrap}
+  .ssh-set__tab{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 20px 0 10px;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#751F65;background:rgba(255,255,255,.55);border:0;transition:background .2s,color .2s}
+  .ssh-set__tab[aria-selected="true"]{background:#751F65;color:#fff}
+  .ssh-set__dot{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(117,31,101,.25)}
+  .ssh-set__panel{display:flex;flex-direction:column;gap:20px}
+  .ssh-set__panel[hidden]{display:none}
+  .ssh-set__list{list-style:none;margin:0;padding:0;border-top:2px solid rgba(117,31,101,.25)}
+  .ssh-set__item{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:2px solid rgba(117,31,101,.25);font-size:20px}
+  .ssh-set__item span:last-child{font-weight:600}
+  .ssh-set__price{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .ssh-set__single{font-size:18px}
+  .ssh-set__big{font-weight:600;font-size:46px;line-height:1;letter-spacing:.01em}
+  .ssh-set__save{background:#751F65;color:#fff;border-radius:999px;padding:8px 16px;font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+  .ssh-set__add{background:#751F65;color:#fff;padding:19px 36px}
+  .ssh-set__add:disabled{opacity:.5;cursor:not-allowed}
+  @media (max-width:749px){.ssh-set__row{gap:36px}.ssh-set__stage{flex-basis:100%}.ssh-set__copy{flex-basis:100%}.ssh-set__big{font-size:38px}.ssh-set__item{font-size:18px}.ssh-set__add{width:100%}}
+</style>
+
+<script>
+  if (!customElements.get('ssh-set')) {
+    customElements.define('ssh-set', class extends HTMLElement {
+      connectedCallback() {
+        this.tabs = [...this.querySelectorAll('[data-tab]')];
+        this.tabs.forEach((t, i) => {
+          t.addEventListener('click', () => this.show(t));
+          t.addEventListener('keydown', (e) => {
+            const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+            if (!d) return;
+            e.preventDefault();
+            const n = this.tabs[(i + d + this.tabs.length) % this.tabs.length];
+            n.focus(); this.show(n);
+          });
+        });
+      }
+      show(tab) {
+        const id = tab.dataset.tab;
+        this.tabs.forEach((t) => { const on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+        this.querySelectorAll('[data-panel]').forEach((p) => { p.hidden = p.dataset.panel !== id; });
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Soapsister: Feelgood Set",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "feelgood" },
+    { "type": "textarea", "id": "heading", "label": "Überschrift", "default": "Dein Duschmoment\nim Set." },
+    { "type": "text", "id": "button", "label": "Button-Text", "default": "Set in den Warenkorb" },
+    { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#E08FBC" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#751F65" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "dark"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 92},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 8},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "8,100"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble", "default": "So geht's"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood", "default": "#so-gehts"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#751F65"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#FFFFFF"}
+  ],
+  "blocks": [
+    {
+      "type": "flavour",
+      "name": "Sorte",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Sortenname", "default": "Lollipop" },
+        { "type": "text", "id": "color", "label": "Farbe von Ente und Schwamm", "default": "Rosa", "info": "Wird in den Varianten von Badeente und Netzschwamm gesucht." },
+        { "type": "color", "id": "dot", "label": "Farbpunkt im Tab", "default": "#E08FBC" },
+        { "type": "product", "id": "set", "label": "Set-Produkt", "info": "Kommt in den Warenkorb. Ohne Set-Produkt werden die drei Einzelprodukte hinzugefügt." },
+        { "type": "product", "id": "mousse", "label": "Duschmousse" },
+        { "type": "product", "id": "sponge", "label": "Netzschwamm" },
+        { "type": "product", "id": "duck", "label": "Badeente" },
+        { "type": "image_picker", "id": "bubble", "label": "Bild in der Blase" },
+        { "type": "text", "id": "bubble_alt", "label": "Alt-Text Blase" },
+        { "type": "image_picker", "id": "duck_img", "label": "Bild Badeente" },
+        { "type": "text", "id": "duck_alt", "label": "Alt-Text Badeente" },
+        { "type": "image_picker", "id": "sponge_img", "label": "Bild Netzschwamm" },
+        { "type": "text", "id": "sponge_alt", "label": "Alt-Text Netzschwamm" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Soapsister: Feelgood Set" }]
+}
+{% endschema %}

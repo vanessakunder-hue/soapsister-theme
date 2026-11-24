@@ -1,0 +1,80 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+{%- assign ring = 'soapsister-seifenblase-hell.png' | file_url -%}
+<section class="ss-scope ssh-sec ssh-steps" id="{{ section.settings.anchor | default: section.id }}" style="background:{{ section.settings.bg }};color:{{ section.settings.ink }}">
+  {%- render 'ssh-trail', s: section.settings, seed: 40 -%}
+  <div class="ssh-sec__in">
+    <div class="ssh-sec__head">
+      <h2 class="ssh-h2">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<p class="ssh-lead">{{ section.settings.text | escape }}</p>{%- endif -%}
+    </div>
+    <ol class="ssh-steps__list">
+      {%- for block in section.blocks -%}
+        <li class="ssh-step" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {%- capture focus %}object-position:50% {{ block.settings.focus_y }}%{% endcapture -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: class: 'ssh-step__img', alt: block.settings.image_alt, loading: 'lazy', sizes: '(max-width: 749px) 100vw, 30vw', widths: '400, 600, 900', style: focus }}
+          {%- endif -%}
+          <div class="ssh-step__head">
+            <span class="ssh-step__n"><img src="{{ ring }}" alt="" aria-hidden="true" width="72" height="72" loading="lazy" style="rotate:{{ forloop.index0 | times: 120 }}deg"><span>{{ forloop.index }}</span></span>
+            <h3 class="ssh-step__title">{{ block.settings.title | escape }}</h3>
+          </div>
+          {%- if block.settings.text != blank -%}<p class="ssh-step__text">{{ block.settings.text | escape }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .ssh-steps__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+  .ssh-step{display:flex;flex-direction:column;gap:22px}
+  .ssh-step__img{width:100%;height:auto;aspect-ratio:4/4.6;object-fit:cover;border-radius:32px;display:block}
+  .ssh-step__head{display:flex;align-items:center;gap:18px}
+  .ssh-step__n{position:relative;width:72px;height:72px;flex:0 0 72px;display:grid;place-items:center}
+  .ssh-step__n img{position:absolute;inset:0;width:100%;height:100%}
+  .ssh-step__n span{position:relative;font-family:var(--ss-display,'Ostrich Sans',sans-serif);font-weight:900;font-size:38px;line-height:1}
+  .ssh-step__title{margin:0;font-weight:600;font-size:30px;letter-spacing:.08em;text-transform:uppercase;color:inherit}
+  .ssh-step__text{margin:0;font-size:20px;line-height:1.4;max-width:30ch}
+  @media (max-width:989px){.ssh-steps__list{grid-template-columns:1fr;max-width:560px;gap:48px}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: So geht's",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "so-gehts" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "So geht's." },
+    { "type": "text", "id": "text", "label": "Text", "default": "In drei Schritten zum extra Fluff." },
+    { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#751F65" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#FFFFFF" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "dark"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 8},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 92},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "92,100"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble", "default": "Über uns"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood", "default": "#ueber-uns"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#FFFFFF"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#FFFFFF"}
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "image_alt", "label": "Alt-Text Bild" },
+        { "type": "range", "id": "focus_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Bildausschnitt vertikal", "default": 50 },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Nehmen" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Soapsister: So geht's" }]
+}
+{% endschema %}

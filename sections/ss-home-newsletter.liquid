@@ -1,0 +1,75 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+<section class="ss-scope ssh-sec ssh-news" id="{{ section.settings.anchor | default: section.id }}" style="background:{{ section.settings.bg }};color:{{ section.settings.ink }}">
+  {%- render 'ssh-trail', s: section.settings, seed: 100 -%}
+  <div class="ssh-sec__in ssh-news__row">
+    <div class="ssh-news__copy">
+      <h2 class="ssh-h2">{{ section.settings.heading | escape }}{% if section.settings.heading_2 != blank %}<br><span style="color:{{ section.settings.accent }}">{{ section.settings.heading_2 | escape }}</span>{% endif %}</h2>
+      {%- if section.settings.text != blank -%}<p class="ssh-lead">{{ section.settings.text | escape }}</p>{%- endif -%}
+    </div>
+    {%- form 'customer', id: 'SsNewsletter', class: 'ssh-news__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="ssh-news__msg" role="status">{{ section.settings.success | escape }}</p>
+      {%- else -%}
+        <label for="SsNewsletterMail" class="ssh-news__label">Deine E-Mail-Adresse</label>
+        <div class="ssh-news__fields">
+          <input id="SsNewsletterMail" type="email" name="contact[email]" required autocomplete="email" placeholder="name@beispiel.de" {% if form.errors %}aria-invalid="true" aria-describedby="SsNewsletterErr"{% endif %}>
+          <button type="submit" class="ssh-btn" style="background:{{ section.settings.accent }};color:{{ section.settings.bg }}">{{ section.settings.button | escape }}</button>
+        </div>
+        {%- if form.errors -%}<p id="SsNewsletterErr" class="ssh-news__msg" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+      {%- endif -%}
+      <div class="ssh-news__legal">{{ section.settings.legal }}</div>
+    {%- endform -%}
+  </div>
+</section>
+
+<style>
+  .ssh-sec.ssh-news{padding:110px 0 120px}
+  .ssh-news__row{display:flex;gap:64px;flex-wrap:wrap;align-items:center}
+  .ssh-news__copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px}
+  .ssh-news .ssh-h2{font-size:clamp(60px,6.4vw,100px)}
+  .ssh-news .ssh-lead{max-width:34ch;line-height:1.45}
+  .ssh-news__form{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:14px}
+  .ssh-news__label{font-weight:600;font-size:18px;letter-spacing:.08em;text-transform:uppercase}
+  .ssh-news__fields{display:flex;gap:10px;flex-wrap:wrap}
+  .ssh-news__fields input{flex:1 1 260px;min-width:0;height:60px;border-radius:999px;border:0;padding:0 24px;font-family:inherit;font-size:20px;color:#1D3F51;background:#F6EAF2}
+  .ssh-news__fields input:focus-visible{outline:3px solid #E08FBC;outline-offset:2px}
+  .ssh-news__fields .ssh-btn{height:60px;padding:0 32px}
+  .ssh-news__msg{margin:0;font-size:20px;font-weight:600}
+  .ssh-news__legal{font-size:15px;line-height:1.5;max-width:58ch;opacity:.9}
+  .ssh-news__legal p{margin:0}
+  .ssh-news__legal a{text-decoration:underline}
+  @media (max-width:749px){.ssh-sec.ssh-news{padding:72px 0 80px}.ssh-news__row{gap:32px}.ssh-news .ssh-h2{font-size:clamp(52px,14vw,72px)}.ssh-news__fields .ssh-btn{width:100%}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: Newsletter",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "newsletter" },
+    { "type": "text", "id": "heading", "label": "Überschrift Zeile 1", "default": "Jetzt 10 %" },
+    { "type": "text", "id": "heading_2", "label": "Überschrift Zeile 2 (Akzentfarbe)", "default": "sparen." },
+    { "type": "text", "id": "text", "label": "Text", "default": "Melde dich zum Newsletter an und spar 10 % auf deine erste Bestellung." },
+    { "type": "text", "id": "button", "label": "Button-Text", "default": "Eintragen" },
+    { "type": "text", "id": "success", "label": "Meldung nach Anmeldung", "default": "Danke! Schau gleich in dein Postfach." },
+    { "type": "richtext", "id": "legal", "label": "Einwilligungstext" },
+    { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#751F65" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent", "label": "Akzentfarbe", "default": "#E08FBC" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "dark"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 92},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 50},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "84,62"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#FFFFFF"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#FFFFFF"}
+  ],
+  "presets": [{ "name": "Soapsister: Newsletter" }]
+}
+{% endschema %}

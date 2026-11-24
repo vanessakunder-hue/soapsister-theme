@@ -180,7 +180,8 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     },
     "section_GVLLAH": {
       "type": "section",
@@ -637,7 +638,8 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     },
     "soapsister_tutorial_7BPLyk": {
       "type": "soapsister-tutorial",
@@ -679,7 +681,8 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     },
     "section_ek76at": {
       "type": "section",
@@ -1525,7 +1528,8 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     },
     "section_78Kybe": {
       "type": "section",
@@ -1982,7 +1986,8 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     },
     "ss_hero": {
       "type": "ss-hero-scene",
@@ -1998,7 +2003,8 @@
         "button_label": "Mehr über uns",
         "button_link": "/",
         "image_1": "shopify://shop_images/image-1793632160546.png"
-      }
+      },
+      "disabled": true
     },
     "ss_hero_pop": {
       "type": "ss-hero-pop",
@@ -2015,7 +2021,7 @@
             "label": "Coconut",
             "product": "duschmousse-coconut",
             "title": "Pop. Coconut.",
-            "text": "Cremig wie frische Kokosmilch, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
+            "text": "Duftet nach Kokos, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D3F51",
             "center_x": 20.8,
             "center_y": 51.4,
@@ -2029,7 +2035,7 @@
             "label": "Marshmallow",
             "product": "duschmousse-marshmallow",
             "title": "Pop. Marshmallow.",
-            "text": "Weich wie ein Marshmallow, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
+            "text": "Duftet nach Buttermilch, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D3F51",
             "center_x": 50.2,
             "center_y": 51.4,
@@ -2043,7 +2049,7 @@
             "label": "Lollipop",
             "product": "duschmousse-lollipop",
             "title": "Pop. Lollipop.",
-            "text": "Süß wie ein Lolli, luftig wie Sahne. 250 g für Face, Body und Shave.",
+            "text": "Duftet nach Orange und Granatapfel, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#751F65",
             "center_x": 78.8,
             "center_y": 51.4,
@@ -2057,10 +2063,252 @@
         "flavour_marshmallow",
         "flavour_lollipop"
       ]
+    },
+    "ssh_sorten": {
+      "type": "ss-home-sorten",
+      "settings": {},
+      "blocks": {
+        "lollipop": {
+          "type": "card",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "name": "Lollipop",
+            "scent": "Orange und Granatapfel",
+            "image": "shopify://shop_images/soapsister-duschmousse-lollipop-karte.jpg",
+            "image_alt": "Duschmousse Lollipop mit Granatapfel-Duft zwischen rosa Lollis",
+            "tint": "#F6E2EE",
+            "ink": "#751F65"
+          }
+        },
+        "coconut": {
+          "type": "card",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "name": "Coconut",
+            "scent": "Kokos",
+            "image": "shopify://shop_images/soapsister-duschmousse-coconut-karte.jpg",
+            "image_alt": "Duschmousse Coconut mit Kokos-Duft zwischen frischen Kokosnüssen",
+            "tint": "#F3F2EE",
+            "ink": "#1D3F51"
+          }
+        },
+        "marshmallow": {
+          "type": "card",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "name": "Marshmallow",
+            "scent": "Buttermilch",
+            "image": "shopify://shop_images/soapsister-duschmousse-marshmallow-karte.jpg",
+            "image_alt": "Duschmousse Marshmallow mit Buttermilch-Duft zwischen hellblauen Marshmallows",
+            "tint": "#E1F0F8",
+            "ink": "#1D3F51"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    },
+    "ssh_set": {
+      "type": "ss-home-set",
+      "settings": {},
+      "blocks": {
+        "lollipop": {
+          "type": "flavour",
+          "settings": {
+            "name": "Lollipop",
+            "color": "Rosa",
+            "dot": "#E08FBC",
+            "set": "feelgood-set-lollipop",
+            "mousse": "duschmousse-lollipop",
+            "sponge": "netzschwamm-rosa",
+            "duck": "badeente-rosa",
+            "bubble": "shopify://shop_images/soapsister-set-blase-lollipop.jpg",
+            "bubble_alt": "Duschmousse Lollipop in einer Seifenblase",
+            "duck_img": "shopify://shop_images/soapsister-hero-badeente-rosa.png",
+            "duck_alt": "Badeente Rosa",
+            "sponge_img": "shopify://shop_images/soapsister-hero-netzschwamm-rosa.png",
+            "sponge_alt": "Netzschwamm Rosa"
+          }
+        },
+        "coconut": {
+          "type": "flavour",
+          "settings": {
+            "name": "Coconut",
+            "color": "Weiß",
+            "dot": "#F7F5F0",
+            "set": "feelgood-set-coconut",
+            "mousse": "duschmousse-coconut",
+            "sponge": "netzschwamm-weiss",
+            "duck": "badeente-weiss",
+            "bubble": "shopify://shop_images/soapsister-set-blase-coconut.jpg",
+            "bubble_alt": "Duschmousse Coconut in einer Seifenblase",
+            "duck_img": "shopify://shop_images/soapsister-hero-badeente-weiss.png",
+            "duck_alt": "Badeente Weiß",
+            "sponge_img": "shopify://shop_images/soapsister-hero-netzschwamm-weiss.png",
+            "sponge_alt": "Netzschwamm Weiß"
+          }
+        },
+        "marshmallow": {
+          "type": "flavour",
+          "settings": {
+            "name": "Marshmallow",
+            "color": "Blau",
+            "dot": "#21B5EA",
+            "set": "feelgood-set-marshmallow",
+            "mousse": "duschmousse-marshmallow",
+            "sponge": "netzschwamm-blau",
+            "duck": "badeente-blau",
+            "bubble": "shopify://shop_images/soapsister-set-blase-marshmallow.jpg",
+            "bubble_alt": "Duschmousse Marshmallow in einer Seifenblase",
+            "duck_img": "shopify://shop_images/soapsister-hero-badeente-blau.png",
+            "duck_alt": "Badeente Blau",
+            "sponge_img": "shopify://shop_images/soapsister-hero-netzschwamm-blau.png",
+            "sponge_alt": "Netzschwamm Blau"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    },
+    "ssh_steps": {
+      "type": "ss-home-steps",
+      "settings": {},
+      "blocks": {
+        "nehmen": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-anwendung-1-nehmen.jpg",
+            "image_alt": "Soapsister Duschmousse Dose auf einer rosa gefliesten Ablage",
+            "focus_y": 55,
+            "title": "Nehmen",
+            "text": "Nimm eine Fingerspitze Mousse aus dem Tiegel."
+          }
+        },
+        "aufschaeumen": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-anwendung-2-aufschaeumen.jpg",
+            "image_alt": "Hände mit cremigem Duschmousse-Schaum vor rosa Fliesen",
+            "focus_y": 40,
+            "title": "Aufschäumen",
+            "text": "Schäum sie mit dem nassen Netzschwamm auf."
+          }
+        },
+        "abspuelen": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-anwendung-3-abspuelen.jpg",
+            "image_alt": "Wasser spült den Schaum vom Bein, in der Hand die Duschmousse-Dose",
+            "focus_y": 45,
+            "title": "Abspülen",
+            "text": "Spül den Schaum gründlich ab."
+          }
+        }
+      },
+      "block_order": [
+        "nehmen",
+        "aufschaeumen",
+        "abspuelen"
+      ]
+    },
+    "ssh_usp": {
+      "type": "ss-home-usp",
+      "settings": {},
+      "blocks": {
+        "haut": {
+          "type": "usp",
+          "settings": {
+            "title": "Zart zur Haut",
+            "text": "Mit Aloe Vera und Mandelöl für ein weiches Gefühl nach jeder Dusche."
+          }
+        },
+        "natur": {
+          "type": "usp",
+          "settings": {
+            "title": "Natürlich gut",
+            "text": "96 % natürliche Inhaltsstoffe. Vegan, ohne Silikone, Parabene und Sulfate."
+          }
+        },
+        "muenchen": {
+          "type": "usp",
+          "settings": {
+            "title": "Aus München",
+            "text": "Handmade in Germany. Gemacht für deine kleinen Wohlfühlmomente."
+          }
+        }
+      },
+      "block_order": [
+        "haut",
+        "natur",
+        "muenchen"
+      ]
+    },
+    "ssh_about": {
+      "type": "ss-home-about",
+      "settings": {
+        "text": "<p>Soapsister ist eine Marke aus München, gegründet von Veronika Löwen. Die Idee dahinter: Duschen soll nicht nur sauber machen, sondern sich gut anfühlen. Für deine Haut, für deine Seele und für all die Frauen, die dir wichtig sind.</p><p>Darum gibt es bei uns Duschmousse: luftig, mit Aloe Vera und Mandelöl und zu 96 % aus natürlichen Inhaltsstoffen. In drei Düften, die gute Laune machen.</p>",
+        "button_link": "/pages/uber-uns",
+        "image_1": "shopify://shop_images/soapsister-veronika-loewen-gruenderin.jpg",
+        "image_1_alt": "Veronika Löwen, Gründerin von Soapsister",
+        "image_2": "shopify://shop_images/soapsister-veronika-loewen-dose.jpg",
+        "image_2_alt": "Veronika Löwen sitzt auf einer großen Soapsister Dose"
+      }
+    },
+    "ssh_faq": {
+      "type": "ss-home-faq",
+      "settings": {},
+      "blocks": {
+        "accordion_row_7dgnx3": {
+          "type": "question",
+          "settings": {
+            "question": "Welche Größen gibt es?",
+            "answer": "<p>Jede Sorte gibt es im Tiegel mit 250 g und mit 75 g. Der kleine Tiegel ist ideal zum Ausprobieren.</p>"
+          }
+        },
+        "accordion_row_ygg69G": {
+          "type": "question",
+          "settings": {
+            "question": "Was ist drin?",
+            "answer": "<p>Alle Sorten enthalten Aloe Vera und Mandelöl und bestehen zu 96 % aus natürlichen Inhaltsstoffen. Die vollständige Liste findest du bei jedem Produkt und auf dem Tiegel.</p>"
+          }
+        },
+        "accordion_row_H3HGCU": {
+          "type": "question",
+          "settings": {
+            "question": "Wie lange dauert die Lieferung?",
+            "answer": "<p>Wir versenden mit DHL. Innerhalb Deutschlands dauert die Lieferung in der Regel 1 bis 3 Werktage.</p>"
+          }
+        },
+        "accordion_row_y7jiPc": {
+          "type": "question",
+          "settings": {
+            "question": "Wie benutze ich die Duschmousse?",
+            "answer": "<p>Nimm etwas Mousse aus dem Tiegel, schäume sie mit dem nassen Netzschwamm auf und spüle sie gründlich ab.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_row_7dgnx3",
+        "accordion_row_ygg69G",
+        "accordion_row_H3HGCU",
+        "accordion_row_y7jiPc"
+      ]
     }
   },
   "order": [
     "ss_hero_pop",
+    "ssh_sorten",
+    "ssh_set",
+    "ssh_steps",
+    "ssh_usp",
+    "ssh_about",
+    "ssh_faq",
     "ss_hero",
     "hero_jVaWmY",
     "soapsister_sorten_BeGNQG",

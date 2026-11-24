@@ -1,0 +1,19 @@
+{%- comment -%}
+  Bubble-Pfad und Weiter-Bubble fuer die Startseiten-Sections (Design F).
+  Erwartet: s (section.settings), seed (Zahl)
+{%- endcomment -%}
+{%- if s.tone == 'dark' -%}
+  {%- assign ss_bubble = 'soapsister-seifenblase-hell.png' | file_url -%}
+{%- else -%}
+  {%- assign ss_bubble = 'soapsister-seifenblase-rosa.png' | file_url -%}
+{%- endif -%}
+{%- if s.show_trail -%}
+  <div class="ssh-trail" aria-hidden="true" data-src="{{ ss_bubble }}" data-seed="{{ seed | default: 0 }}" data-a="{{ s.trail_from }},0" {% if s.next_label != blank %}data-s="{{ s.trail_stop }}"{% endif %} data-b="{{ s.trail_to }}"></div>
+{%- endif -%}
+{%- if s.next_label != blank -%}
+  <a href="{{ s.next_link | default: '#' }}" class="ssh-stop" style="--x:{{ s.trail_stop }}%;--ink:{{ s.stop_ink }};--ring:{{ s.stop_ring }}" aria-label="Weiter zu {{ s.next_label | escape }}">
+    <span class="ssh-stop__ring" aria-hidden="true"></span>
+    <img class="ssh-stop__b" src="{{ ss_bubble }}" alt="" width="156" height="156" loading="lazy">
+    <span class="ssh-stop__t">{{ s.next_label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg></span>
+  </a>
+{%- endif -%}

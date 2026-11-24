@@ -1,0 +1,59 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+<section class="ss-scope ssh-sec ssh-usp" id="{{ section.settings.anchor | default: section.id }}" aria-label="{{ section.settings.label | escape }}" style="background:{{ section.settings.bg }};color:{{ section.settings.ink }}">
+  {%- render 'ssh-trail', s: section.settings, seed: 60 -%}
+  <ul class="ssh-sec__in ssh-usp__list">
+    {%- for block in section.blocks -%}
+      <li class="ssh-usp__item" {{ block.shopify_attributes }}>
+        <span class="ssh-usp__t" style="color:{{ section.settings.accent }}">{{ block.settings.title | escape }}</span>
+        <span class="ssh-usp__x">{{ block.settings.text | escape }}</span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+<style>
+  .ssh-sec.ssh-usp{padding:72px 0}
+  .ssh-usp__list{list-style:none;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+  .ssh-usp__item{display:flex;flex-direction:column;gap:8px}
+  .ssh-usp__t{font-weight:600;font-size:34px;letter-spacing:.06em;text-transform:uppercase}
+  .ssh-usp__x{font-size:19px;line-height:1.4;max-width:30ch}
+  @media (max-width:749px){.ssh-sec.ssh-usp{padding:56px 0}.ssh-usp__list{grid-template-columns:1fr;gap:28px}.ssh-usp__t{font-size:28px}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: Vorteile",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "vorteile" },
+    { "type": "text", "id": "label", "label": "Name für Screenreader", "default": "Was Soapsister ausmacht" },
+    { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#EAEDE8" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#1D3F51" },
+    { "type": "color", "id": "accent", "label": "Farbe Titel", "default": "#751F65" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "light"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 92},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 50},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "50,100"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#751F65"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#751F65"}
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "Vorteil",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Zart zur Haut" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Soapsister: Vorteile" }]
+}
+{% endschema %}

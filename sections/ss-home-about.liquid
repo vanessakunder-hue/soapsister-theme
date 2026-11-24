@@ -1,0 +1,82 @@
+{{ 'ssh-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ssh-trail.js' | asset_url }}" defer></script>
+{%- render 'ss-tokens' -%}
+{%- assign st = section.settings -%}
+<section class="ss-scope ssh-sec ssh-about" id="{{ st.anchor | default: section.id }}" style="background:linear-gradient(180deg,{{ st.bg }} 0%,{{ st.bg_2 }} 100%);color:{{ st.ink }}">
+  {%- render 'ssh-trail', s: st, seed: 70 -%}
+  <div class="ssh-sec__in ssh-about__row">
+    <div class="ssh-about__photos">
+      {%- if st.image_2 != blank -%}
+        <figure class="ssh-about__pol ssh-about__pol--back">
+          {{ st.image_2 | image_url: width: 700 | image_tag: alt: st.image_2_alt, loading: 'lazy', sizes: '(max-width: 749px) 45vw, 22vw' }}
+        </figure>
+      {%- endif -%}
+      {%- if st.image_1 != blank -%}
+        <figure class="ssh-about__pol ssh-about__pol--front">
+          {{ st.image_1 | image_url: width: 800 | image_tag: alt: st.image_1_alt, loading: 'lazy', sizes: '(max-width: 749px) 55vw, 26vw' }}
+          {%- if st.caption != blank -%}<figcaption>{{ st.caption | escape }}</figcaption>{%- endif -%}
+        </figure>
+      {%- endif -%}
+    </div>
+    <div class="ssh-about__copy">
+      <h2 class="ssh-h2">{{ st.heading | newline_to_br }}</h2>
+      {%- if st.subheading != blank -%}<p class="ssh-about__sub">{{ st.subheading | escape }}</p>{%- endif -%}
+      <div class="ssh-about__text">{{ st.text }}</div>
+      {%- if st.button != blank -%}<a href="{{ st.button_link | default: '#' }}" class="ssh-btn ssh-about__btn">{{ st.button | escape }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ssh-sec.ssh-about{padding:130px 0 220px}
+  .ssh-about__row{display:flex;gap:72px;flex-wrap:wrap;align-items:center}
+  .ssh-about__photos{flex:1 1 460px;min-width:0;position:relative;height:600px}
+  .ssh-about__pol{position:absolute;margin:0;background:#fff;box-shadow:0 24px 50px rgba(117,31,101,.18)}
+  .ssh-about__pol img{width:100%;height:auto;object-fit:cover;display:block}
+  .ssh-about__pol--back{right:4%;top:0;width:48%;padding:14px 14px 52px;transform:rotate(5deg)}
+  .ssh-about__pol--back img{aspect-ratio:4/4.6;object-position:50% 30%}
+  .ssh-about__pol--front{left:0;top:70px;width:56%;padding:16px 16px 20px;box-shadow:0 30px 60px rgba(117,31,101,.22);transform:rotate(-4deg)}
+  .ssh-about__pol--front img{aspect-ratio:4/4.8;object-position:50% 25%}
+  .ssh-about__pol figcaption{padding-top:14px;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#1D3F51}
+  .ssh-about__copy{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:22px}
+  .ssh-about__sub{margin:0;font-weight:600;font-size:24px;letter-spacing:.04em}
+  .ssh-about__text{font-size:20px;line-height:1.5;color:#4A1240;max-width:44ch}
+  .ssh-about__text p{margin:0 0 16px}
+  .ssh-about__text p:last-child{margin:0}
+  .ssh-about__btn{align-self:flex-start;background:#751F65;color:#fff}
+  @media (max-width:749px){.ssh-sec.ssh-about{padding:72px 0 160px}.ssh-about__row{gap:40px}.ssh-about__photos{height:420px;flex-basis:100%}.ssh-about__copy{flex-basis:100%}.ssh-about__pol figcaption{font-size:14px}.ssh-about__text{font-size:18px}}
+</style>
+
+{% schema %}
+{
+  "name": "Soapsister: Über uns",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anker-ID", "default": "ueber-uns" },
+    { "type": "textarea", "id": "heading", "label": "Überschrift", "default": "Together\nin care." },
+    { "type": "text", "id": "subheading", "label": "Unterzeile", "default": "For skin, soul and sisterhood." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button", "label": "Button-Text", "default": "Mehr über uns" },
+    { "type": "url", "id": "button_link", "label": "Button-Link" },
+    { "type": "image_picker", "id": "image_1", "label": "Foto vorne" },
+    { "type": "text", "id": "image_1_alt", "label": "Alt-Text Foto vorne" },
+    { "type": "text", "id": "caption", "label": "Bildunterschrift Foto vorne", "default": "Veronika Löwen, Gründerin" },
+    { "type": "image_picker", "id": "image_2", "label": "Foto hinten" },
+    { "type": "text", "id": "image_2_alt", "label": "Alt-Text Foto hinten" },
+    { "type": "color", "id": "bg", "label": "Hintergrund oben", "default": "#F7E1EE" },
+    { "type": "color", "id": "bg_2", "label": "Hintergrund unten", "default": "#EFD6EA" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#751F65" },
+    {"type": "header", "content": "Bubble-Pfad"},
+    {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
+    {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "light"},
+    {"type": "range", "id": "trail_from", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Pfad-Start oben", "default": 50},
+    {"type": "range", "id": "trail_stop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Position Weiter-Bubble", "default": 8},
+    {"type": "text", "id": "trail_to", "label": "Pfad-Ende (x,y in %)", "default": "8,100"},
+    {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble", "default": "Fragen"},
+    {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood", "default": "#faq"},
+    {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#751F65"},
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#751F65"}
+  ],
+  "presets": [{ "name": "Soapsister: Über uns" }]
+}
+{% endschema %}

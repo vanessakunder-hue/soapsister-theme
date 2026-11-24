@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
@@ -336,17 +337,25 @@
     },
     "ss_newsletter": {
       "type": "ss-newsletter",
-      "settings": {}
+      "settings": {},
+      "disabled": true
     },
     "ss_footer": {
       "type": "ss-footer",
       "settings": {}
+    },
+    "ssh_newsletter": {
+      "type": "ss-home-newsletter",
+      "settings": {
+        "legal": "<p>Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der <a href=\"/policies/privacy-policy\" title=\"Datenschutzerklärung\">Datenschutzerklärung</a>.</p>"
+      }
     }
   },
   "order": [
     "footer_m9NzUG",
     "footer_utilities_jLGE8U",
     "ss_newsletter",
+    "ssh_newsletter",
     "ss_footer"
   ]
 }
