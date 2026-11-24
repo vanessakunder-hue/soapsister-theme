@@ -2076,7 +2076,7 @@
             "scent": "Orange und Granatapfel",
             "image": "shopify://shop_images/soapsister-duschmousse-lollipop-karte.jpg",
             "image_alt": "Duschmousse Lollipop mit Granatapfel-Duft zwischen rosa Lollis",
-            "tint": "#F6E2EE",
+            "tint": "#E08FBC",
             "ink": "#751F65"
           }
         },
@@ -2088,7 +2088,7 @@
             "scent": "Kokos",
             "image": "shopify://shop_images/soapsister-duschmousse-coconut-karte.jpg",
             "image_alt": "Duschmousse Coconut mit Kokos-Duft zwischen frischen Kokosnüssen",
-            "tint": "#F3F2EE",
+            "tint": "#CAC8C4",
             "ink": "#1D3F51"
           }
         },
@@ -2100,7 +2100,7 @@
             "scent": "Buttermilch",
             "image": "shopify://shop_images/soapsister-duschmousse-marshmallow-karte.jpg",
             "image_alt": "Duschmousse Marshmallow mit Buttermilch-Duft zwischen hellblauen Marshmallows",
-            "tint": "#E1F0F8",
+            "tint": "#21B5EA",
             "ink": "#1D3F51"
           }
         }
@@ -2138,7 +2138,7 @@
           "settings": {
             "name": "Coconut",
             "color": "Weiß",
-            "dot": "#F7F5F0",
+            "dot": "#EAEDE8",
             "set": "feelgood-set-coconut",
             "mousse": "duschmousse-coconut",
             "sponge": "netzschwamm-weiss",

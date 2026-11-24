@@ -55,25 +55,25 @@
 
 <style>
   .ssh-sorten__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-  .ssh-card{background:var(--tint);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;color:#1D3F51}
+  .ssh-card{background:var(--tint);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;color:var(--ink)}
   .ssh-card__img{width:100%;height:auto;aspect-ratio:4/3.4;object-fit:cover;object-position:50% 45%;display:block}
   .ssh-card__body{padding:28px 28px 30px;display:flex;flex-direction:column;gap:16px;flex:1}
   .ssh-card__name{margin:0;overflow-wrap:normal;word-break:normal;font-family:var(--ss-display,sans-serif);font-weight:900;font-size:clamp(34px,3.2vw,54px);line-height:.95;text-transform:uppercase;color:var(--ink)}
   .ssh-card__scent{margin:6px 0 0;font-size:18px;line-height:1.35}
   .ssh-card__form{display:flex;flex-direction:column;gap:16px;margin-top:auto}
   .ssh-sizes{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  .ssh-size{position:relative;display:flex;align-items:center;gap:14px;min-height:52px;padding:0 18px;border-radius:16px;cursor:pointer;font-size:18px;background:rgba(255,255,255,.5);border:2px solid transparent;transition:background .2s,border-color .2s}
+  .ssh-size{position:relative;display:flex;align-items:center;gap:14px;min-height:52px;padding:0 18px;border-radius:16px;cursor:pointer;font-size:18px;background:rgba(234,237,232,.55);border:2px solid transparent;transition:background .2s,border-color .2s}
   .ssh-size input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
   .ssh-size__dot{width:18px;height:18px;flex:0 0 18px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center}
   .ssh-size__dot::after{content:"";width:8px;height:8px;border-radius:50%;background:transparent}
-  .ssh-size:has(input:checked){background:#fff;border-color:var(--ink)}
+  .ssh-size:has(input:checked){background:#EAEDE8;border-color:var(--ink)}
   .ssh-size:has(input:checked) .ssh-size__dot::after{background:var(--ink)}
   .ssh-size:has(input:focus-visible){outline:3px solid var(--ink);outline-offset:2px}
   .ssh-size:has(input:disabled){opacity:.5;cursor:not-allowed}
   .ssh-size__t{font-weight:600;letter-spacing:.06em;min-width:52px}
   .ssh-size__p{font-weight:600}
   .ssh-size__u{margin-left:auto;font-size:15px;opacity:.8}
-  .ssh-card__add{background:var(--ink);color:#fff;width:100%}
+  .ssh-card__add{background:var(--ink);color:#EAEDE8;width:100%}
   .ssh-card__add:disabled{opacity:.5;cursor:not-allowed}
   @media (max-width:989px){.ssh-sorten__grid{grid-template-columns:1fr;max-width:560px}}
   @media (max-width:749px){.ssh-card__name{font-size:44px}.ssh-card__body{padding:22px}}
@@ -110,7 +110,7 @@
         { "type": "text", "id": "scent", "label": "Duft", "info": "Erscheint als: Duschmousse, duftet nach ..." },
         { "type": "image_picker", "id": "image", "label": "Bild" },
         { "type": "text", "id": "image_alt", "label": "Alt-Text Bild" },
-        { "type": "color", "id": "tint", "label": "Kartenfarbe", "default": "#F6E2EE" },
+        { "type": "color", "id": "tint", "label": "Kartenfarbe", "default": "#E08FBC" },
         { "type": "color", "id": "ink", "label": "Akzentfarbe", "default": "#751F65" }
       ]
     }

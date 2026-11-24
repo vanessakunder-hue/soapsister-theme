@@ -99,7 +99,7 @@
 <style>
   .ssh-set__row{display:flex;gap:64px;flex-wrap:wrap;align-items:center}
   .ssh-set .ssh-h2{font-size:clamp(48px,4.4vw,76px)}
-  .ssh-set__stage{flex:1.1 1 520px;min-width:0;position:relative;aspect-ratio:1/.86;border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#F7E1EE 0%,#EBD3EA 62%,#F6EAF3 62%,#F1DDEB 100%)}
+  .ssh-set__stage{flex:1.1 1 520px;min-width:0;position:relative;aspect-ratio:1/.86;border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#EAEDE8 0%,#EAEDE8 62%,#CAC8C4 62%,#CAC8C4 100%)}
   .ssh-set__visual{position:absolute;inset:0}
   .ssh-set__visual[hidden]{display:none}
   .ssh-set__bubble{position:absolute;left:24%;top:9%;width:52%;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 44%;display:block;box-shadow:0 30px 60px rgba(117,31,101,.22)}
@@ -108,8 +108,8 @@
   .ssh-set__sponge{position:absolute;right:8%;bottom:8%;width:24%;height:auto;display:block;filter:drop-shadow(0 14px 14px rgba(117,31,101,.2))}
   .ssh-set__copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
   .ssh-set__tabs{display:flex;gap:10px;flex-wrap:wrap}
-  .ssh-set__tab{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 20px 0 10px;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#751F65;background:rgba(255,255,255,.55);border:0;transition:background .2s,color .2s}
-  .ssh-set__tab[aria-selected="true"]{background:#751F65;color:#fff}
+  .ssh-set__tab{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 20px 0 10px;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#751F65;background:rgba(234,237,232,.6);border:0;transition:background .2s,color .2s}
+  .ssh-set__tab[aria-selected="true"]{background:#751F65;color:#EAEDE8}
   .ssh-set__dot{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(117,31,101,.25)}
   .ssh-set__panel{display:flex;flex-direction:column;gap:20px}
   .ssh-set__panel[hidden]{display:none}
@@ -119,8 +119,8 @@
   .ssh-set__price{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .ssh-set__single{font-size:18px}
   .ssh-set__big{font-weight:600;font-size:46px;line-height:1;letter-spacing:.01em}
-  .ssh-set__save{background:#751F65;color:#fff;border-radius:999px;padding:8px 16px;font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
-  .ssh-set__add{background:#751F65;color:#fff;padding:19px 36px}
+  .ssh-set__save{background:#751F65;color:#EAEDE8;border-radius:999px;padding:8px 16px;font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+  .ssh-set__add{background:#751F65;color:#EAEDE8;padding:19px 36px}
   .ssh-set__add:disabled{opacity:.5;cursor:not-allowed}
   @media (max-width:749px){.ssh-set__row{gap:36px}.ssh-set__stage{flex-basis:100%}.ssh-set__copy{flex-basis:100%}.ssh-set__big{font-size:38px}.ssh-set__item{font-size:18px}.ssh-set__add{width:100%}}
 </style>
@@ -169,7 +169,7 @@
     {"type": "text", "id": "next_label", "label": "Text Weiter-Bubble", "info": "Leer = keine Weiter-Bubble", "default": "So geht's"},
     {"type": "text", "id": "next_link", "label": "Ziel Weiter-Bubble", "info": "Anker der nächsten Section, z. B. #feelgood", "default": "#so-gehts"},
     {"type": "color", "id": "stop_ink", "label": "Textfarbe Weiter-Bubble", "default": "#751F65"},
-    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#FFFFFF"}
+    {"type": "color", "id": "stop_ring", "label": "Ringfarbe Weiter-Bubble", "default": "#EAEDE8"}
   ],
   "blocks": [
     {
