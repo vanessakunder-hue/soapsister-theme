@@ -67,7 +67,7 @@
   function init() { document.querySelectorAll('.ssh-trail[data-src]').forEach(build); update(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   window.addEventListener('load', init);
-  window.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('scroll', onScroll, { passive: true, capture: true });
   window.addEventListener('resize', schedule);
   document.addEventListener('shopify:section:load', init);
 })();
