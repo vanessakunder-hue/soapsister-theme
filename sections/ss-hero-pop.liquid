@@ -41,7 +41,7 @@
   {{ sid }} .is-bursting .hero-pop__lens { animation: hp-boing .7s ease-out; }
   {{ sid }} .is-bursting .hero-pop__ring { animation: hp-ring .7s var(--hp-ease) forwards; }
   {{ sid }} .is-bursting .hero-pop__drop { animation: hp-drop .8s var(--hp-ease) var(--d) forwards; }
-  {{ sid }} .hero-pop__pill { position: absolute; left: 50%; top: 104%; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; white-space: nowrap; border-radius: 999px;
+  {{ sid }} .hero-pop__pill { position: absolute; left: 50%; top: 109%; z-index: 5; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; white-space: nowrap; border-radius: 999px;
     background: #fff; color: var(--ink); font-family: var(--ss-text); font-size: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; box-shadow: 0 8px 22px rgba(117,31,101,.16);
     transition: transform .25s var(--hp-ease), background-color .25s var(--hp-ease), color .25s var(--hp-ease); }
   {{ sid }} .hero-pop__bubble:hover .hero-pop__pill { transform: translateX(-50%) translateY(-4px); }
@@ -49,6 +49,12 @@
   {{ sid }} .is-picked .hero-pop__pill { background: var(--ink); color: #fff; }
   {{ sid }} .hero-pop__pill-more { display: none; }
   {{ sid }} .is-picked .hero-pop__pill-more { display: inline; }
+  {{ sid }} .hero-pop__mate { position: absolute; z-index: 4; display: block; height: auto; opacity: 0; transform: translateY(28px) scale(.6); transform-origin: 50% 100%; pointer-events: none;
+    transition: opacity .2s var(--hp-ease), transform .25s var(--hp-ease); }
+  {{ sid }} .hero-pop__mate--duck { left: 1%; bottom: -7%; width: 34%; filter: drop-shadow(0 10px 12px rgba(117,31,101,.22)); }
+  {{ sid }} .hero-pop__mate--sponge { right: 0; bottom: -5%; width: 33%; filter: drop-shadow(0 10px 12px rgba(117,31,101,.2)); }
+  {{ sid }} .hero-pop__bubble:hover .hero-pop__mate, {{ sid }} .hero-pop__hot:focus-visible ~ .hero-pop__mate, {{ sid }} .is-picked .hero-pop__mate { opacity: 1; transform: none; transition: opacity .35s var(--hp-ease), transform .5s cubic-bezier(.3, 1.6, .5, 1); }
+  {{ sid }} .hero-pop__bubble:hover .hero-pop__mate--sponge, {{ sid }} .hero-pop__hot:focus-visible ~ .hero-pop__mate--sponge, {{ sid }} .is-picked .hero-pop__mate--sponge { transition-delay: .07s; }
   @keyframes hp-hint { 0%, 100% { transform: scale(1); opacity: 0; } 50% { transform: scale(1.04); opacity: .55; } }
   @keyframes hp-boing { 0% { transform: scale(1.06); } 30% { transform: scale(1.16); } 55% { transform: scale(.95); } 78% { transform: scale(1.04); } 100% { transform: scale(1); } }
   @keyframes hp-ring { from { transform: scale(.95); opacity: .95; } to { transform: scale(1.45); opacity: 0; } }
@@ -57,13 +63,13 @@
     {{ sid }} .hero-pop__copy { position: static; display: grid; gap: 10px; padding: 28px 16px 18px; pointer-events: auto; }
     {{ sid }} .hero-pop__title { max-width: none; font-size: clamp(34px, 10vw, 48px); }
     {{ sid }} .hero-pop__text { padding-top: 0; max-width: 40ch; font-size: 16px; }
-    {{ sid }} .hero-pop__pill { top: 102%; min-height: 36px; padding: 0 12px; font-size: 11px; letter-spacing: .1em; }
+    {{ sid }} .hero-pop__pill { top: 106%; min-height: 36px; padding: 0 12px; font-size: 11px; letter-spacing: .1em; }
     {{ sid }} .is-picked .hero-pop__pill-more { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     {{ sid }} .hero-pop__hint { animation: none; }
     {{ sid }} .is-bursting .hero-pop__lens, {{ sid }} .is-bursting .hero-pop__ring, {{ sid }} .is-bursting .hero-pop__drop { animation: none; }
-    {{ sid }} .hero-pop__lens, {{ sid }} .hero-pop__pill, {{ sid }} .hero-pop__title, {{ sid }} .hero-pop__glow { transition: none; }
+    {{ sid }} .hero-pop__lens, {{ sid }} .hero-pop__pill, {{ sid }} .hero-pop__title, {{ sid }} .hero-pop__glow, {{ sid }} .hero-pop__mate { transition: none; }
   }
 </style>
 <ss-hero-pop class="hero-pop ss-scope" id="HeroPop-{{ section.id }}">
@@ -105,6 +111,12 @@
               <span class="hero-pop__drop" style="--a: {{ a }}deg; --k: {{ ks[ki] }}; --d: {{ di }}s;"></span>
             {%- endfor -%}
           </span>
+          {%- if block.settings.duck != blank -%}
+            <img class="hero-pop__mate hero-pop__mate--duck" src="{{ block.settings.duck | image_url: width: 600 }}" srcset="{{ block.settings.duck | image_url: width: 300 }} 300w, {{ block.settings.duck | image_url: width: 600 }} 600w" sizes="(min-width: 750px) 10vw, 13vw" width="{{ block.settings.duck.width }}" height="{{ block.settings.duck.height }}" alt="" aria-hidden="true" loading="lazy">
+          {%- endif -%}
+          {%- if block.settings.sponge != blank -%}
+            <img class="hero-pop__mate hero-pop__mate--sponge" src="{{ block.settings.sponge | image_url: width: 600 }}" srcset="{{ block.settings.sponge | image_url: width: 300 }} 300w, {{ block.settings.sponge | image_url: width: 600 }} 600w" sizes="(min-width: 750px) 10vw, 13vw" width="{{ block.settings.sponge.width }}" height="{{ block.settings.sponge.height }}" alt="" aria-hidden="true" loading="lazy">
+          {%- endif -%}
           <a class="hero-pop__pill" href="{{ url }}">{{ block.settings.label | escape }}<span class="hero-pop__pill-more">&nbsp;entdecken</span></a>
         </div>
       {%- endfor -%}
@@ -167,6 +179,8 @@
         { "type": "text", "id": "title", "label": "Überschrift nach dem Poppen", "default": "Pop. Coconut." },
         { "type": "textarea", "id": "text", "label": "Satz nach dem Poppen", "default": "Cremig wie frische Kokosmilch, luftig aufgeschlagen. 250 g für Face, Body und Shave." },
         { "type": "color", "id": "ink", "label": "Farbe der Sorte", "default": "#1D3F51" },
+        { "type": "image_picker", "id": "duck", "label": "Badeente (Freisteller)", "info": "Erscheint beim Hover und nach dem Poppen links unten an der Blase." },
+        { "type": "image_picker", "id": "sponge", "label": "Netzschwamm (Freisteller)", "info": "Erscheint beim Hover und nach dem Poppen rechts unten an der Blase." },
         { "type": "number", "id": "center_x", "label": "Blase Mitte waagerecht (in % der Bildbreite)", "default": 20.8 },
         { "type": "number", "id": "center_y", "label": "Blase Mitte senkrecht (in % der Bildhöhe)", "default": 51.4 }
       ]

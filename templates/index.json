@@ -2018,7 +2018,9 @@
             "text": "Cremig wie frische Kokosmilch, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
             "ink": "#1D3F51",
             "center_x": 20.8,
-            "center_y": 51.4
+            "center_y": 51.4,
+            "duck": "shopify://shop_images/soapsister-hero-badeente-weiss.png",
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-weiss.png"
           }
         },
         "flavour_marshmallow": {
@@ -2030,7 +2032,9 @@
             "text": "Weich wie ein Marshmallow, luftig aufgeschlagen. 250 g für Face, Body und Shave.",
             "ink": "#1D3F51",
             "center_x": 50.2,
-            "center_y": 51.4
+            "center_y": 51.4,
+            "duck": "shopify://shop_images/soapsister-hero-badeente-blau.png",
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-blau.png"
           }
         },
         "flavour_lollipop": {
@@ -2042,7 +2046,9 @@
             "text": "Süß wie ein Lolli, luftig wie Sahne. 250 g für Face, Body und Shave.",
             "ink": "#751F65",
             "center_x": 78.8,
-            "center_y": 51.4
+            "center_y": 51.4,
+            "duck": "shopify://shop_images/soapsister-hero-badeente-rosa.png",
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-rosa.png"
           }
         }
       },
