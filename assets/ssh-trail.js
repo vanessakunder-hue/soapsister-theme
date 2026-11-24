@@ -1,7 +1,9 @@
 /* Soapsister: Bubble-Pfad zwischen den Startseiten-Sections.
-   Blasen, die beim Scrollen ins obere Drittel wandern, blenden nach und nach aus. */
+   Die Blasen sind nur beim Scrollen sichtbar: sie poppen auf, solange gescrollt wird,
+   und verschwinden kurz nach dem Stillstand sowie am oberen Bildschirmrand. */
 (function () {
-  var trails = [], ticking = false;
+  var trails = [], ticking = false, active = false, idle = 0;
+  var IDLE_MS = 650;
   function pt(v) { return String(v).split(',').map(Number); }
   function build(el) {
     if (el.dataset.built) return;
@@ -22,9 +24,9 @@
         if (sp && Math.hypot((x - sp[0]) / 100 * W, (y - sp[1]) / 100 * H) < stopR) { k++; continue; }
         var sz = Math.round((24 + 60 * Math.pow(Math.abs(Math.sin(k * 1.7 + 0.4)), 2)) * (mob ? 0.5 : 1));
         var b = document.createElement('i');
-        b.style.cssText = 'background-image:url(' + src + ');left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + sz + 'px;height:' + sz + 'px;margin:' + (-sz / 2) + 'px 0 0 ' + (-sz / 2) + 'px;--d:' + (-(k % 7) * 0.9).toFixed(1) + 's;--dur:' + (6 + (k % 4)) + 's;--w:' + (-(5.4 - (k * 0.14) % 5.4)).toFixed(2) + 's';
+        b.style.cssText = 'background-image:url(' + src + ');left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + sz + 'px;height:' + sz + 'px;margin:' + (-sz / 2) + 'px 0 0 ' + (-sz / 2) + 'px;--d:' + (-(k % 7) * 0.9).toFixed(1) + 's;--dur:' + (6 + (k % 4)) + 's;--w:' + (-(5.4 - (k * 0.14) % 5.4)).toFixed(2) + 's;--td:' + ((k % 5) * 0.06).toFixed(2) + 's;--fade:0';
         frag.appendChild(b);
-        items.push({ el: b, y: y / 100 });
+        items.push({ el: b, y: y / 100, f: 0 });
         k++;
       }
     }
@@ -41,21 +43,31 @@
     var vh = window.innerHeight, start = vh * 0.45, end = vh * 0.08;
     for (var i = 0; i < trails.length; i++) {
       var r = trails[i].el.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > vh + 200) continue;
       var list = trails[i].items;
+      var near = !(r.bottom < -200 || r.top > vh + 200);
       for (var j = 0; j < list.length; j++) {
-        var vy = r.top + list[j].y * r.height;
-        var f = Math.min(1, Math.max(0, (vy - end) / (start - end)));
-        f = Math.round(f * 1000) / 1000;
-        if (list[j].f !== f) { list[j].f = f; list[j].el.style.setProperty('--fade', f.toFixed(3)); }
+        var f = 0;
+        if (active && near) {
+          var vy = r.top + list[j].y * r.height;
+          f = Math.min(1, Math.max(0, (vy - end) / (start - end)));
+          if (vy > vh) f = 0;
+          f = Math.round(f * 100) / 100;
+        }
+        if (list[j].f !== f) { list[j].f = f; list[j].el.style.setProperty('--fade', f); }
       }
     }
   }
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  function schedule() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  function onScroll() {
+    active = true;
+    clearTimeout(idle);
+    idle = setTimeout(function () { active = false; schedule(); }, IDLE_MS);
+    schedule();
+  }
   function init() { document.querySelectorAll('.ssh-trail[data-src]').forEach(build); update(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   window.addEventListener('load', init);
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+  window.addEventListener('resize', schedule);
   document.addEventListener('shopify:section:load', init);
 })();
