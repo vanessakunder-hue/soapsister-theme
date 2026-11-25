@@ -18,7 +18,7 @@
 {%- render 'ss-tokens' -%}
 <style>
   {{ sid }} { --hp-plum: var(--ss-plum); --hp-text: #751F65; --hp-ease: cubic-bezier(.16, 1, .3, 1);
-    display: block; position: relative; background: #EAEDE8; color: var(--ss-ink); }
+    display: block; position: relative; background: #F1F1E9; color: var(--ss-ink); }
   {{ sid }} .hero-pop__copy { position: absolute; z-index: 1; inset: auto 0 73.5% 0; padding: 0 2vw; display: flex; justify-content: center; pointer-events: none; }
   {{ sid }} .hero-pop__title { margin: 0; max-width: none; width: 100%; text-align: center; white-space: nowrap; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: var(--hp-fs, 13.6vw); line-height: .85; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--hp-plum); transition: color .4s var(--hp-ease); }
   {{ sid }} .hero-pop__text { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -42,7 +42,7 @@
   {{ sid }} .is-bursting .hero-pop__ring { animation: hp-ring .7s var(--hp-ease) forwards; }
   {{ sid }} .is-bursting .hero-pop__drop { animation: hp-drop .8s var(--hp-ease) var(--d) forwards; }
   {{ sid }} .hero-pop__pill { position: absolute; left: 50%; top: 109%; z-index: 5; transform: translateX(-50%); display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; white-space: nowrap; border-radius: 999px;
-    background: #EAEDE8; color: var(--ink); font-family: var(--ss-text); font-size: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; box-shadow: 0 8px 22px rgba(117,31,101,.16);
+    background: #F1F1E9; color: var(--ink); font-family: var(--ss-text); font-size: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; box-shadow: 0 8px 22px rgba(117,31,101,.16);
     transition: transform .25s var(--hp-ease), background-color .25s var(--hp-ease), color .25s var(--hp-ease); }
   {{ sid }} .hero-pop__bubble:hover .hero-pop__pill { transform: translateX(-50%) translateY(-4px); }
   {{ sid }} .hero-pop__pill:active { transform: translateX(-50%) scale(.97); transition-duration: .12s; }
