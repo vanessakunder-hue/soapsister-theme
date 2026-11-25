@@ -22,7 +22,8 @@
     {%- render 'card-hover-effect-styles' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
-    {%- render 'color-palette' -%}
+    {%- comment -%} Soapsister CI: Hintergrund #F1F1E9 statt #EAEDE8 und Textfarbe #1D1D1B statt #1D3F51 aus den Theme-Einstellungen, auf allen Seiten. Kann entfernt werden, sobald in den Theme-Einstellungen unter Farben Hintergrund #F1F1E9 und Text #1D1D1B stehen. {%- endcomment -%}
+    {%- capture ss_palette -%}{%- render 'color-palette' -%}{%- endcapture -%}{{ ss_palette | replace: '#1d3f51', '#1d1d1b' | replace: '#1D3F51', '#1D1D1B' | replace: '29 63 81', '29 29 27' | replace: '29, 63, 81', '29, 29, 27' | replace: '#eaede8', '#f1f1e9' | replace: '#EAEDE8', '#F1F1E9' | replace: '234 237 232', '241 241 233' | replace: '234, 237, 232', '241, 241, 233' }}
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
@@ -38,7 +39,7 @@
 
     <div class="page-wrapper">
       <div id="header-group">
-        {% sections 'header-group' %}
+        {%- capture ss_header -%}{% sections 'header-group' %}{%- endcapture -%}{{ ss_header | replace: '#1d3f51', '#1d1d1b' | replace: '#1D3F51', '#1D1D1B' | replace: '29 63 81', '29 29 27' | replace: '29, 63, 81', '29, 29, 27' | replace: '#eaede8', '#f1f1e9' | replace: '#EAEDE8', '#F1F1E9' | replace: '234 237 232', '241 241 233' | replace: '234, 237, 232', '241, 241, 233' }}
       </div>
 
       <script>
@@ -156,11 +157,11 @@
         data-product-transition="{{ settings.transition_to_main_product }}"
         data-template="{{ template }}"
       >
-        {{ content_for_layout }}
+        {%- capture ss_main -%}{{ content_for_layout }}{%- endcapture -%}{{ ss_main | replace: '#1d3f51', '#1d1d1b' | replace: '#1D3F51', '#1D1D1B' | replace: '29 63 81', '29 29 27' | replace: '29, 63, 81', '29, 29, 27' | replace: '#eaede8', '#f1f1e9' | replace: '#EAEDE8', '#F1F1E9' | replace: '234 237 232', '241 241 233' | replace: '234, 237, 232', '241, 241, 233' }}
       </main>
 
       <footer>
-        {% sections 'footer-group' %}
+        {%- capture ss_footer -%}{% sections 'footer-group' %}{%- endcapture -%}{{ ss_footer | replace: '#eaede8', '#f1f1e9' | replace: '#EAEDE8', '#F1F1E9' | replace: '234 237 232', '241 241 233' | replace: '234, 237, 232', '241, 241, 233' }}
       </footer>
     </div>
 
