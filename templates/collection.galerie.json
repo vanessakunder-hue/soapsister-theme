@@ -57,31 +57,12 @@
             "ink": "#1D1D1B",
             "button": "#1D3F52"
           }
-        },
-        "set": {
-          "type": "set",
-          "settings": {
-            "tab_label": "Set",
-            "title": "Lieber im Set?",
-            "text": "Mousse, Schwamm und Ente",
-            "set_product": "feelgood-set-lollipop",
-            "mousse": "duschmousse-lollipop",
-            "duck": "badeente-rosa",
-            "sponge": "netzschwamm-rosa",
-            "image": "shopify://shop_images/soapsister-plp-slide-set.jpg",
-            "focus": "object-position:50% 50%",
-            "tint": "#F6E2EE",
-            "ink": "#751F65",
-            "label": "Zu den Sets",
-            "link": "/collections/sets"
-          }
         }
       },
       "block_order": [
         "lollipop",
         "coconut",
-        "marshmallow",
-        "set"
+        "marshmallow"
       ]
     }
   },
