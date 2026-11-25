@@ -41,7 +41,7 @@
         <div class="ssh-band__body">
           <a class="ssh-band__jar" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
             {%- if c.jar != blank -%}
-              {{ c.jar | image_url: width: 900 | image_tag: alt: '', loading: 'lazy', sizes: '(max-width: 749px) 62vw, 28vw', widths: '400, 600, 900' }}
+              {{ c.jar | image_url: width: 1200 | image_tag: alt: '', loading: 'lazy', sizes: '(max-width: 749px) 62vw, 31vw', widths: '400, 600, 900, 1200' }}
             {%- elsif p.featured_image -%}
               {{ p.featured_image | image_url: width: 900 | image_tag: alt: '', loading: 'lazy', sizes: '(max-width: 749px) 62vw, 28vw' }}
             {%- endif -%}

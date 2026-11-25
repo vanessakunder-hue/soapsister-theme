@@ -27,7 +27,7 @@
             "name": "Lollipop",
             "scent": "Orange und Granatapfel",
             "band": "shopify://shop_images/soapsister-plp-band-lollipop.jpg",
-            "jar": "shopify://shop_images/nav-duschmousse-lollipop.png",
+            "jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller.png",
             "ink": "#751F65",
             "button": "#751F65"
           }
@@ -39,7 +39,7 @@
             "name": "Coconut",
             "scent": "Kokos",
             "band": "shopify://shop_images/soapsister-plp-band-coconut.jpg",
-            "jar": "shopify://shop_images/nav-duschmousse-coconut.png",
+            "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
             "ink": "#1D1D1B",
             "button": "#1D3F52"
           }
@@ -51,7 +51,7 @@
             "name": "Marshmallow",
             "scent": "Buttermilch",
             "band": "shopify://shop_images/soapsister-plp-band-marshmallow-v2.jpg",
-            "jar": "shopify://shop_images/nav-duschmousse-marshmallow.png",
+            "jar": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
             "ink": "#1D1D1B",
             "button": "#1D3F52"
           }
