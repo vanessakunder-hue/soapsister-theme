@@ -17,7 +17,7 @@
 {%- assign name = c.name | default: product.title -%}
 {%- assign sel = product.selected_or_first_available_variant -%}
 {%- assign fid = 'SshPdpForm-' | append: section.id -%}
-<ssh-pdp class="ss-scope ssh-pdp" id="SshPdp-{{ section.id }}" style="--ink:{{ ink }};--ink2:{{ ink2 }};--btn:{{ btn }};--tint:{{ tint }}">
+<ssh-pdp class="ss-scope ssh-pdp" id="SshPdp-{{ section.id }}" style="--ink:{{ ink }};--ink2:{{ ink2 }};--btn:{{ btn }};--tint:{{ tint }};--head:{{ c.heading_color | default: ink }}">
   <nav class="ssh-pdp__crumbs" aria-label="Brotkrümel"><a href="{{ st.crumb_link | default: '/collections/duschmousse' }}">{{ st.crumb_label | escape }}</a> <span aria-hidden="true">/</span> <span aria-current="page">{{ name | escape }}</span></nav>
 
   <section class="ssh-pdp__main">
@@ -296,7 +296,7 @@
   .ssh-pdp__play{position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center}
   .ssh-pdp__info{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:24px}
   .ssh-pdp__card{background:var(--tint);border-radius:32px;padding:40px 36px 32px;display:flex;flex-direction:column;gap:20px}
-  .ssh-pdp__h1{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(72px,6.4vw,100px);line-height:.88;color:var(--ink);white-space:nowrap;max-width:100%;overflow-wrap:normal}
+  .ssh-pdp__h1{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(72px,6.4vw,100px);line-height:.88;color:var(--head,var(--ink));white-space:nowrap;max-width:100%;overflow-wrap:normal}
   .ssh-pdp__sub{margin:10px 0 0;font-size:21px;color:var(--ink2)}
   .ssh-pdp__usps{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}
   .ssh-pdp__usps li{display:flex;align-items:center;gap:6px;font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--ink)}
@@ -656,6 +656,7 @@
         { "type": "richtext", "id": "description", "label": "Beschreibung (leer = Standardtext mit Duft)" },
         { "type": "textarea", "id": "inci", "label": "Inhaltsstoffe (INCI)" },
         { "type": "color", "id": "ink", "label": "Farbe Name und Preis", "default": "#751F65" },
+        { "type": "color", "id": "heading_color", "label": "Farbe Überschrift (leer = wie Name und Preis)" },
         { "type": "color", "id": "ink_soft", "label": "Farbe Nebentexte", "default": "#4A1240" },
         { "type": "color", "id": "button", "label": "Farbe Buttons", "default": "#751F65" },
         { "type": "color", "id": "dot", "label": "Farbpunkt im Duft-Umschalter", "default": "#E08FBC" },

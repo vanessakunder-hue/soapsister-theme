@@ -96,7 +96,8 @@
             "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg",
             "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg",
             "ink_soft": "#1D1D1B",
-            "set_items": "Netzschwamm und Badeente in Blau"
+            "set_items": "Netzschwamm und Badeente in Blau",
+            "heading_color": "#21B5EA"
           }
         }
       },
