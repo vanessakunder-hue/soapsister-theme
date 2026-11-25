@@ -81,12 +81,12 @@
   .ssh-seg__opt input:checked + span{background:var(--tint);color:var(--ink);box-shadow:0 3px 10px color-mix(in srgb,var(--ink) 25%,transparent)}
   .ssh-seg__opt input:focus-visible + span{outline:3px solid var(--ink);outline-offset:2px}
   .ssh-seg__opt input:disabled + span{opacity:.4}
-  .ssh-card__add{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--ink);color:#EAEDE8;padding:16px 24px;font-size:17px}
-  .ssh-card__add:disabled{opacity:.5;cursor:not-allowed}
+  .ssh-card .ssh-card__add{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--ink);color:#EAEDE8;padding:16px 24px;font-size:17px}
+  .ssh-card .ssh-card__add:disabled{opacity:.5;cursor:not-allowed}
   .ssh-card__note{display:block;text-align:center;font-size:12px;opacity:.7}
   .ssh-card{min-width:0}
   @media (max-width:989px){.ssh-sorten__grid{grid-template-columns:minmax(0,1fr);max-width:520px}}
-  @media (max-width:749px){.ssh-card__name{font-size:34px}.ssh-card__amount{font-size:22px}.ssh-card__add{font-size:15px;letter-spacing:.1em;padding:15px 18px}}
+  @media (max-width:749px){.ssh-card__name{font-size:34px}.ssh-card__amount{font-size:22px}.ssh-card .ssh-card__add{font-size:15px;letter-spacing:.1em;padding:15px 18px}}
 </style>
 
 <script>
