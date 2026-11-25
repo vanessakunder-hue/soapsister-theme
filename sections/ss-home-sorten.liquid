@@ -73,11 +73,12 @@
   .ssh-card__unit{font-size:13px;opacity:.75;white-space:nowrap}
   .ssh-card__scent{margin:0;font-size:16px;line-height:1.35;opacity:.85}
   .ssh-card__form{display:flex;flex-direction:column;gap:16px;margin-top:auto;padding-top:18px}
-  .ssh-seg{border:0;margin:0;padding:4px;display:flex;gap:4px;border-radius:999px;background:rgba(255,255,255,.6)}
+  .ssh-seg{border:2px solid color-mix(in srgb,var(--ink) 35%,transparent);margin:0;padding:4px;display:flex;gap:4px;border-radius:999px;background:#FFFFFF}
   .ssh-seg__opt{position:relative;flex:1 1 0;display:block}
   .ssh-seg__opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
   .ssh-seg__opt span{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:.08em;color:var(--ink);transition:background .2s,box-shadow .2s}
-  .ssh-seg__opt input:checked + span{background:#FFFFFF;box-shadow:0 2px 8px rgba(29,63,81,.14)}
+  .ssh-seg__opt input:not(:checked):not(:disabled):hover + span{background:color-mix(in srgb,var(--ink) 10%,#FFFFFF)}
+  .ssh-seg__opt input:checked + span{background:var(--tint);color:var(--ink);box-shadow:0 3px 10px color-mix(in srgb,var(--ink) 25%,transparent)}
   .ssh-seg__opt input:focus-visible + span{outline:3px solid var(--ink);outline-offset:2px}
   .ssh-seg__opt input:disabled + span{opacity:.4}
   .ssh-card__add{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--ink);color:#EAEDE8;padding:16px 24px;font-size:17px}
