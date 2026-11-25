@@ -23,12 +23,12 @@
     var ex = b.left + b.width / 2, ey = b.top + b.height / 2;
     var dx = ex - sx, dy = ey - sy;
     var lift = Math.min(220, Math.max(90, Math.abs(dx) * 0.35));
-    [58, 30, 22, 16, 12].forEach(function (sz, i) {
+    [62, 24, 44, 14, 34, 18, 52, 26].map(function (s) { return Math.round(s * (0.85 + Math.random() * 0.3)); }).forEach(function (sz, i) {
       var el = document.createElement('span');
       el.setAttribute('aria-hidden', 'true');
       el.style.cssText = 'position:fixed;z-index:2147483000;left:' + (sx - sz / 2) + 'px;top:' + (sy - sz / 2) + 'px;width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;pointer-events:none;will-change:transform,opacity;background:' + (src ? 'url(' + src + ') center/contain no-repeat,' : '') + 'radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 11%,rgba(255,255,255,0) 13%),radial-gradient(circle,color-mix(in srgb,' + c + ' 10%,transparent) 50%,color-mix(in srgb,' + c + ' 38%,transparent) 100%);border:' + (sz > 20 ? 2 : 1.5) + 'px solid rgba(255,255,255,.9);box-sizing:border-box;box-shadow:0 6px 18px color-mix(in srgb,' + c + ' 28%,transparent),inset 0 0 ' + Math.round(sz / 5) + 'px rgba(255,255,255,.65)';
       document.body.appendChild(el);
-      var wob = (i % 2 ? 1 : -1) * (10 + i * 8);
+      var wob = (i % 2 ? 1 : -1) * (14 + Math.random() * 46);
       var kf = [
         { transform: 'translate(0,0) scale(.2)', opacity: 0 },
         { transform: 'translate(' + (dx * 0.08 + wob * 0.3) + 'px,' + (-lift * 0.35) + 'px) scale(1)', opacity: 1, offset: 0.18 },
@@ -37,7 +37,7 @@
         { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.45)', opacity: 0.9, offset: 0.94 },
         { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(1.5)', opacity: 0 }
       ];
-      var anim = el.animate(kf, { duration: 1500 + i * 110, delay: i * 140, easing: 'cubic-bezier(.42,.02,.38,1)', fill: 'forwards' });
+      var anim = el.animate(kf, { duration: 2400 + Math.random() * 600, delay: i * 210, easing: 'cubic-bezier(.4,0,.35,1)', fill: 'forwards' });
       anim.onfinish = function () { el.remove(); if (i === 0) bump(to); };
     });
   };
