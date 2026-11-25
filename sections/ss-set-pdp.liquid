@@ -26,6 +26,14 @@
           {%- if im == blank -%}{%- continue -%}{%- endif -%}
           <button type="button" class="ssh-set__th" data-fl="{{ b.id }}" aria-label="Bild 1 zeigen" aria-pressed="true" data-src="{{ im | image_url: width: 1600 }}" data-srcset="{{ im | image_url: width: 600 }} 600w, {{ im | image_url: width: 900 }} 900w, {{ im | image_url: width: 1200 }} 1200w, {{ im | image_url: width: 1600 }} 1600w" data-alt="{{ b.settings.set_product.title | escape }}" {% unless b.id == cur.id %}hidden{% endunless %}>{{ im | image_url: width: 240 | image_tag: alt: '', loading: 'lazy', sizes: '120px', widths: '120, 240' }}</button>
         {%- endfor -%}
+        {%- for b in section.blocks -%}
+          {%- for i in (2..4) -%}
+            {%- assign key = 'gallery_' | append: i -%}
+            {%- assign im = b.settings[key] -%}
+            {%- if im == blank -%}{%- continue -%}{%- endif -%}
+            <button type="button" class="ssh-set__th" data-fl="{{ b.id }}" aria-label="Bild {{ i }} zeigen" aria-pressed="false" data-src="{{ im | image_url: width: 1600 }}" data-srcset="{{ im | image_url: width: 600 }} 600w, {{ im | image_url: width: 900 }} 900w, {{ im | image_url: width: 1200 }} 1200w, {{ im | image_url: width: 1600 }} 1600w" data-alt="{{ im.alt | escape }}" {% unless b.id == cur.id %}hidden{% endunless %}>{{ im | image_url: width: 240 | image_tag: alt: '', loading: 'lazy', sizes: '120px', widths: '120, 240' }}</button>
+          {%- endfor -%}
+        {%- endfor -%}
         {%- for i in (2..5) -%}
           {%- assign key = 'gallery_' | append: i -%}
           {%- assign im = st[key] -%}
@@ -174,7 +182,12 @@
 
   {%- if st.gift_heading != blank -%}
     <section class="ssh-set__gift" aria-labelledby="SshSetGift-{{ section.id }}">
-      {%- if st.gift_image != blank -%}{{ st.gift_image | image_url: width: 1400 | image_tag: class: 'ssh-set__gift-img', alt: st.gift_image.alt, loading: 'lazy', sizes: '(max-width: 749px) 100vw, 50vw', widths: '600, 900, 1200, 1400' }}{%- endif -%}
+      <div class="ssh-set__gift-media">
+        {%- for b in section.blocks -%}
+          {%- assign gim = b.settings.gift_image | default: st.gift_image -%}
+          {%- if gim != blank -%}<span data-fl="{{ b.id }}" {% unless b.id == cur.id %}hidden{% endunless %}>{{ gim | image_url: width: 1400 | image_tag: class: 'ssh-set__gift-img', alt: gim.alt, loading: 'lazy', sizes: '(max-width: 749px) 100vw, 50vw', widths: '600, 900, 1200, 1400' }}</span>{%- endif -%}
+        {%- endfor -%}
+      </div>
       <div class="ssh-set__gift-text">
         <h2 class="ssh-set__h2" id="SshSetGift-{{ section.id }}">{{ st.gift_heading | escape }}{% if st.gift_heading2 != blank %}<br>{{ st.gift_heading2 | escape }}{% endif %}</h2>
         {%- if st.gift_text != blank -%}<p>{{ st.gift_text | escape }}</p>{%- endif -%}
@@ -274,7 +287,9 @@
   .ssh-set__rlist h3{margin:0;font-weight:600;font-size:28px;letter-spacing:.08em;text-transform:uppercase;color:#FFFFFF}
   .ssh-set__rlist p{margin:0;font-size:19px;line-height:1.45;max-width:30ch}
   .ssh-set__gift{padding:110px 7.4% 120px;display:flex;gap:64px;flex-wrap:wrap;align-items:center}
-  .ssh-set__gift-img{flex:1 1 480px;min-width:0;width:100%;height:460px;object-fit:cover;object-position:50% 35%;border-radius:32px;display:block}
+  .ssh-set__gift-media{flex:1 1 480px;min-width:0}
+  .ssh-set__gift-media span{display:block}
+  .ssh-set__gift-img{width:100%;height:460px;object-fit:cover;object-position:50% 35%;border-radius:32px;display:block}
   .ssh-set__gift-text{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px;color:#751F65}
   .ssh-set__gift-text p{margin:0;font-size:20px;line-height:1.5;color:#4A1240;max-width:34ch}
   .ssh-set__ghost{align-self:flex-start;display:flex;align-items:center;gap:10px;border:2px solid #751F65;border-radius:999px;min-height:48px;padding:0 24px;font-weight:600;font-size:16px;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,color .2s}
@@ -307,7 +322,8 @@
     .ssh-set__ritual{margin-top:80px;padding:64px 20px}
     .ssh-set__rtile{height:220px}
     .ssh-set__gift{padding:72px 20px 80px;gap:32px}
-    .ssh-set__gift-img{height:340px;flex-basis:100%}
+    .ssh-set__gift-media{flex-basis:100%}
+    .ssh-set__gift-img{height:340px}
   }
   @media (prefers-reduced-motion:reduce){.ssh-set__stage,.ssh-set__card,.ssh-set__iimg,.ssh-set__add,.ssh-set__acc summary span{transition:none}}
 </style>
@@ -429,7 +445,7 @@
     { "type": "header", "content": "Kaufbereich" },
     { "type": "text", "id": "flavor_label", "label": "Überschrift Sorten", "default": "Deine Sorte" },
     { "type": "text", "id": "items_label", "label": "Überschrift Inhalt", "default": "Das steckt drin" },
-    { "type": "header", "content": "Galerie (Bild 1 = Bild des Sets)" },
+    { "type": "header", "content": "Weitere Bilder für alle Sorten" },
     { "type": "image_picker", "id": "gallery_2", "label": "Bild 2" },
     { "type": "image_picker", "id": "gallery_3", "label": "Bild 3" },
     { "type": "image_picker", "id": "gallery_4", "label": "Bild 4" },
@@ -469,7 +485,12 @@
         { "type": "color", "id": "ink", "label": "Farbe Überschrift und Preis", "default": "#751F65" },
         { "type": "color", "id": "button", "label": "Farbe Buttons", "default": "#751F65" },
         { "type": "color", "id": "tint", "label": "Hintergrund Kauffläche und Galerie", "default": "#F6E2EE" },
-        { "type": "color", "id": "dot", "label": "Farbpunkt", "default": "#E08FBC" }
+        { "type": "color", "id": "dot", "label": "Farbpunkt", "default": "#E08FBC" },
+        { "type": "header", "content": "Galerie dieser Sorte (nach dem Set-Bild)" },
+        { "type": "image_picker", "id": "gallery_2", "label": "Bild 2" },
+        { "type": "image_picker", "id": "gallery_3", "label": "Bild 3" },
+        { "type": "image_picker", "id": "gallery_4", "label": "Bild 4" },
+        { "type": "image_picker", "id": "gift_image", "label": "Bild bei Geschenk (leer = Bild für alle Sorten)" }
       ]
     }
   ],

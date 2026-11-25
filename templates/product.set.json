@@ -14,9 +14,6 @@
       "settings": {
         "crumb_label": "Shop",
         "crumb_link": "/collections/sets",
-        "gallery_2": "shopify://shop_images/soapsister-set-lifestyle.jpg",
-        "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
-        "gallery_4": "shopify://shop_images/soapsister-pdp-schritt-aufschaeumen.jpg",
         "gift_image": "shopify://shop_images/soapsister-set-lifestyle.jpg"
       },
       "blocks": {
@@ -32,7 +29,10 @@
             "ink": "#751F65",
             "button": "#751F65",
             "tint": "#F6E2EE",
-            "dot": "#E08FBC"
+            "dot": "#E08FBC",
+            "gallery_2": "shopify://shop_images/soapsister-set-lifestyle.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-1.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-lollipop-2b.jpg"
           }
         },
         "coconut": {
@@ -47,7 +47,11 @@
             "ink": "#1D1D1B",
             "button": "#1D3F52",
             "tint": "#E8E5DE",
-            "dot": "#F7F5F0"
+            "dot": "#F7F5F0",
+            "gallery_2": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-4.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-3.jpg",
+            "gift_image": "shopify://shop_images/soapsister-pdp-coconut-5.jpg"
           }
         },
         "marshmallow": {
@@ -62,7 +66,11 @@
             "ink": "#1D3F52",
             "button": "#1D3F52",
             "tint": "#DDF0FA",
-            "dot": "#21B5EA"
+            "dot": "#21B5EA",
+            "gallery_2": "shopify://shop_images/soapsister-pdp-marshmallow-1.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-4.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg",
+            "gift_image": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg"
           }
         }
       },
