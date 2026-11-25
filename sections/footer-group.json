@@ -481,7 +481,8 @@
             "subtitle": "Duftet nach Orange und Granatapfel",
             "link": "/products/duschmousse-lollipop",
             "tint": "#F6D3E6"
-          }
+          },
+          "disabled": true
         },
         "mc_coconut": {
           "type": "card",
@@ -492,7 +493,8 @@
             "subtitle": "Duftet nach Kokos",
             "link": "/products/duschmousse-coconut",
             "tint": "#F4F4F1"
-          }
+          },
+          "disabled": true
         },
         "mc_marshmallow": {
           "type": "card",
@@ -503,7 +505,8 @@
             "subtitle": "Duftet nach Buttermilch",
             "link": "/products/duschmousse-marshmallow",
             "tint": "#DDF0FA"
-          }
+          },
+          "disabled": true
         },
         "p_sets": {
           "type": "panel",
@@ -556,7 +559,8 @@
             "subtitle": "Set in Rosa",
             "link": "/products/feelgood-set-lollipop",
             "tint": "#F6D3E6"
-          }
+          },
+          "disabled": true
         },
         "sc_coconut": {
           "type": "card",
@@ -567,7 +571,8 @@
             "subtitle": "Set in Weiß",
             "link": "/products/feelgood-set-coconut",
             "tint": "#F4F4F1"
-          }
+          },
+          "disabled": true
         },
         "sc_marshmallow": {
           "type": "card",
@@ -578,6 +583,29 @@
             "subtitle": "Set in Blau",
             "link": "/products/feelgood-set-marshmallow",
             "tint": "#DDF0FA"
+          },
+          "disabled": true
+        },
+        "mc_all": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-navi-mousse-logo.jpg",
+            "focus": "object-position:50% 50%",
+            "title": "Alle Duschmousse",
+            "subtitle": "Lollipop, Coconut und Marshmallow im Überblick",
+            "link": "/collections/duschmousse",
+            "tint": "#F6D3E6"
+          }
+        },
+        "sc_all": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-navi-mousse-logo.jpg",
+            "focus": "object-position:50% 50%",
+            "title": "Alle Feelgood Sets",
+            "subtitle": "Mousse, Netzschwamm und Badeente im Set",
+            "link": "/collections/sets",
+            "tint": "#F6D3E6"
           }
         }
       },
@@ -600,6 +628,7 @@
         "mc_lollipop",
         "mc_coconut",
         "mc_marshmallow",
+        "mc_all",
         "p_sets",
         "s_lollipop",
         "s_coconut",
@@ -608,7 +637,8 @@
         "s_extras",
         "sc_lollipop",
         "sc_coconut",
-        "sc_marshmallow"
+        "sc_marshmallow",
+        "sc_all"
       ]
     }
   },
