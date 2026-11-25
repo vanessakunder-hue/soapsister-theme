@@ -11,7 +11,7 @@
   }
   function bump(el) {
     if (!el || !el.animate) return;
-    el.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.28)' }, { transform: 'scale(.92)' }, { transform: 'scale(1)' }], { duration: 520, easing: 'cubic-bezier(.3,1.6,.5,1)' });
+    el.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.28)' }, { transform: 'scale(.92)' }, { transform: 'scale(1)' }], { duration: 650, easing: 'cubic-bezier(.3,1.6,.5,1)' });
   }
   window.sshBubbleFly = function (from, src, color) {
     var c = (color || '#751F65').trim();
@@ -37,7 +37,7 @@
         { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.45)', opacity: 0.9, offset: 0.94 },
         { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(1.5)', opacity: 0 }
       ];
-      var anim = el.animate(kf, { duration: 900 + i * 70, delay: i * 85, easing: 'cubic-bezier(.45,.05,.4,1)', fill: 'forwards' });
+      var anim = el.animate(kf, { duration: 1500 + i * 110, delay: i * 140, easing: 'cubic-bezier(.42,.02,.38,1)', fill: 'forwards' });
       anim.onfinish = function () { el.remove(); if (i === 0) bump(to); };
     });
   };
