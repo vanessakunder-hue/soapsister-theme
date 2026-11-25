@@ -220,6 +220,7 @@
         });
         let raf = 0;
         this.track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => this.sync()); }, { passive: true });
+        this.track.addEventListener('scrollend', () => { clearTimeout(this.lt); this.lock = false; this.sync(); });
         this.addEventListener('change', (e) => { if (e.target.matches('input[type="radio"][name^="ssh-gsize-"]')) this.size(e.target.value); });
         this.render();
       }
@@ -230,8 +231,11 @@
         if (!s) return;
         this.track.scrollTo({ left: s.offsetLeft - this.base(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
         this.idx = k; this.render();
+        this.lock = true; clearTimeout(this.lt);
+        this.lt = setTimeout(() => { this.lock = false; this.sync(); }, 900);
       }
       sync() {
+        if (this.lock) return;
         const x = this.track.scrollLeft + this.base();
         let best = 0, d = Infinity;
         this.slides.forEach((s, i) => { const dd = Math.abs(s.offsetLeft - x); if (dd < d) { d = dd; best = i; } });
