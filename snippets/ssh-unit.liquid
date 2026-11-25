@@ -1,0 +1,5 @@
+{%- comment -%} Grundpreiszeile fuer eine Variante, z. B. "250 g · 63,60 €/kg". Erwartet: v {%- endcomment -%}
+{%- if v.unit_price_measurement -%}
+  {%- capture u -%}{{ v.title }} · {{ v.unit_price | money }}/{% if v.unit_price_measurement.reference_value != 1 %}{{ v.unit_price_measurement.reference_value }} {% endif %}{{ v.unit_price_measurement.reference_unit }}{%- endcapture -%}
+  {{- u | strip | escape -}}
+{%- endif -%}
