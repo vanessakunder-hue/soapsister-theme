@@ -71,8 +71,9 @@
             "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-1.jpg",
             "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg",
             "gift_image": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg",
-            "ritual_bg": "#1D1D1B",
-            "ritual_accent": "#21B5EA"
+            "ritual_bg": "#E08FBC",
+            "ritual_accent": "#FFFFFF",
+            "ritual_text_color": "#751F65"
           }
         }
       },
