@@ -1,121 +1,69 @@
 {%- comment -%}
-  Soapsister Mega-Menue: oeffnet sich beim Hovern ueber einen Hauptmenuepunkt (ab 990 px).
-  Jeder Block ist eine Kategorie. Bloecke mit demselben "Menuepunkt" bilden zusammen ein Panel.
+  Soapsister Mega-Menue nach Design "Navi 2: Sahnehauben-Menue" (25.11.2026).
+  Oeffnet sich beim Hovern ueber den eingestellten Hauptmenuepunkt (ab 990 px).
+  Links: Textlinks (Bloecke "Link"), rechts: Bildkarten (Bloecke "Karte"). Beim Hover ueber
+  eine Karte faerbt sich die Flaeche in deren Ton.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
-{%- assign bubble = 'soapsister-seifenblase-rosa.png' | file_url -%}
-{%- assign items = '' -%}
-{%- for b in section.blocks -%}
-  {%- assign key = b.settings.menu_item | strip -%}
-  {%- assign probe = '|' | append: key | append: '|' -%}
-  {%- assign hay = '|' | append: items | append: '|' -%}
-  {%- unless hay contains probe or key == blank -%}
-    {%- if items == '' -%}{%- assign items = key -%}{%- else -%}{%- assign items = items | append: '|' | append: key -%}{%- endif -%}
-  {%- endunless -%}
-{%- endfor -%}
-{%- assign item_list = items | split: '|' -%}
-
+{%- assign st = section.settings -%}
 <ssh-mega class="ss-scope ssh-mega" data-close-delay="220">
-  {%- for item in item_list -%}
-    <div class="ssh-mega__panel" id="SshMega-{{ section.id }}-{{ forloop.index }}" data-for="{{ item | downcase | escape }}" role="region" aria-label="{{ item | escape }}" hidden>
-      <span class="ssh-mega__float ssh-mega__float--a" aria-hidden="true" style="background-image:url({{ bubble }})"></span>
-      <span class="ssh-mega__float ssh-mega__float--b" aria-hidden="true" style="background-image:url({{ bubble }})"></span>
-      <div class="ssh-mega__in">
-        <div class="ssh-mega__groups">
-          {%- assign gi = 0 -%}
-          {%- for b in section.blocks -%}
-            {%- assign k = b.settings.menu_item | strip -%}
-            {%- if k == item -%}
-              <a class="ssh-mega__group{% if gi == 0 %} is-on{% endif %}" href="{{ b.settings.link | default: routes.all_products_collection_url }}" data-g="{{ gi }}" {{ b.shopify_attributes }}>
-                <span class="ssh-mega__gt">{{ b.settings.title | escape }}</span>
-                {%- if b.settings.subtitle != blank -%}<span class="ssh-mega__gs">{{ b.settings.subtitle | escape }}</span>{%- endif -%}
-              </a>
-              {%- assign gi = gi | plus: 1 -%}
-            {%- endif -%}
-          {%- endfor -%}
-          <a class="ssh-mega__all" href="{{ routes.all_products_collection_url }}">Alle Produkte ansehen <span aria-hidden="true">&rarr;</span></a>
-        </div>
-        <div class="ssh-mega__stage">
-          {%- assign gi = 0 -%}
-          {%- for b in section.blocks -%}
-            {%- assign k = b.settings.menu_item | strip -%}
-            {%- if k == item -%}
-              <ul class="ssh-mega__set{% if gi == 0 %} is-on{% endif %}" data-g="{{ gi }}" role="list">
-                {%- for p in b.settings.products -%}
-                  {%- assign h = p.handle -%}
-                  {%- assign ring = '#751F65' -%}
-                  {%- if h contains 'lollipop' or h contains 'rosa' -%}{%- assign ring = '#E08FBC' -%}
-                  {%- elsif h contains 'coconut' or h contains 'weiss' -%}{%- assign ring = '#CAC8C4' -%}
-                  {%- elsif h contains 'marshmallow' or h contains 'blau' -%}{%- assign ring = '#21B5EA' -%}{%- endif -%}
-                  {%- assign short = p.title | remove: 'Duschmousse ' | remove: 'Feelgood Set ' -%}
-                  <li style="--ring:{{ ring }};--i:{{ forloop.index0 }}">
-                    <a class="ssh-mega__bub{% if h contains 'feelgood-set' %} ssh-mega__bub--wide{% endif %}" href="{{ p.url }}">
-                      <span class="ssh-mega__ring">
-                        {%- if h contains 'duschmousse' or h contains 'feelgood-set' -%}{%- assign navf = 'nav-' | append: h | append: '.png' -%}<img src="{{ navf | file_url }}&width=600" alt="" loading="lazy" width="300" height="230">{%- elsif p.featured_image -%}{{ p.featured_image | image_url: width: 360 | image_tag: alt: '', loading: 'lazy', width: 180, height: 180 }}{%- endif -%}
-                      </span>
-                      <span class="ssh-mega__name">{{ short | escape }}</span>
-                      <span class="ssh-mega__price">{% if p.price_varies %}ab {% endif %}{{ p.price_min | money }}</span>
-                    </a>
-                  </li>
-                {%- endfor -%}
-              </ul>
-              {%- assign gi = gi | plus: 1 -%}
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
+  <div class="ssh-n2" id="SshNav2-{{ section.id }}" data-for="{{ st.menu_item | strip | downcase | escape }}" data-base="{{ st.base }}" role="region" aria-label="{{ st.menu_item | escape }}" style="--sheet:{{ st.base }}">
+    <div class="ssh-n2__sheet">
+      <ul class="ssh-n2__links" role="list">
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'link' -%}
+            <li {{ b.shopify_attributes }}><a class="ssh-n2__link" href="{{ b.settings.link | default: routes.all_products_collection_url }}">{{ b.settings.label | escape }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      <div class="ssh-n2__cards">
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'card' -%}
+            <a class="ssh-n2__card" href="{{ b.settings.link | default: routes.all_products_collection_url }}" data-tint="{{ b.settings.tint }}" {{ b.shopify_attributes }}>
+              <span class="ssh-n2__disc">
+                {%- if b.settings.image != blank -%}
+                  {{ b.settings.image | image_url: width: 700 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 22vw, 1px', widths: '400, 560, 700', style: b.settings.focus }}
+                {%- endif -%}
+              </span>
+              <span class="ssh-n2__t">{{ b.settings.title | escape }}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              {%- if b.settings.subtitle != blank -%}<span class="ssh-n2__s">{{ b.settings.subtitle | escape }}</span>{%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
-  {%- endfor -%}
+    <svg class="ssh-n2__edge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0H1440V30a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0Z"/></svg>
+  </div>
 </ssh-mega>
 
 <style>
-  .ssh-mega{position:fixed;left:0;right:0;top:var(--ssh-mega-top,80px);z-index:30;pointer-events:none;display:block;filter:drop-shadow(0 14px 18px rgba(117,31,101,.28)) drop-shadow(0 2px 3px rgba(117,31,101,.18))}
-  .ssh-mega__panel{position:absolute;left:0;right:0;top:0;pointer-events:auto;background:#EAEDE8;color:#1D1D1B;padding:40px 7.4% 64px;overflow:hidden;
-    -webkit-mask:radial-gradient(circle at 50% 0,#000 69%,transparent 71%) bottom/44px 22px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 21px) no-repeat;
-            mask:radial-gradient(circle at 50% 0,#000 69%,transparent 71%) bottom/44px 22px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 21px) no-repeat;
-    clip-path:inset(0 0 100% 0);transition:clip-path .45s cubic-bezier(.2,.8,.2,1)}
-  .ssh-mega__panel[hidden]{display:block;visibility:hidden}
-  .ssh-mega__panel.is-open{visibility:visible;clip-path:inset(0 0 -40px 0)}
-  .ssh-mega__in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:56px;align-items:start;max-width:1280px;margin:0 auto}
-  .ssh-mega__groups{display:flex;flex-direction:column;gap:6px}
-  .ssh-mega__group{display:flex;flex-direction:column;gap:2px;padding:10px 0 10px 26px;position:relative;color:inherit;text-decoration:none}
-  .ssh-mega__group::before{content:"";position:absolute;left:0;top:19px;width:14px;height:14px;border-radius:50%;border:2px solid #751F65;transform:scale(.4);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s}
-  .ssh-mega__group.is-on::before{transform:scale(1);opacity:1}
-  .ssh-mega__gt{font-family:var(--ss-display,sans-serif);font-weight:900;font-size:34px;line-height:1;text-transform:uppercase;transition:color .2s}
-  .ssh-mega__group.is-on .ssh-mega__gt,.ssh-mega__group:hover .ssh-mega__gt{color:#751F65}
-  .ssh-mega__gs{font-size:15px;opacity:.7}
-  .ssh-mega__all{margin-top:14px;padding-left:26px;font-weight:600;font-size:15px;letter-spacing:.06em;color:#751F65;text-decoration:none}
-  .ssh-mega__all:hover{text-decoration:underline}
-  .ssh-mega__stage{position:relative;min-height:250px}
-  .ssh-mega__set{list-style:none;margin:0;padding:0;display:flex;gap:44px;flex-wrap:wrap;position:absolute;inset:0 auto auto 0;visibility:hidden}
-  .ssh-mega__set.is-on{position:relative;visibility:visible}
-  .ssh-mega__bub{display:flex;flex-direction:column;align-items:center;gap:10px;width:170px;text-align:center;color:inherit;text-decoration:none}
-  .ssh-mega__ring{position:relative;width:170px;height:170px;display:grid;place-items:center;
-    transform:scale(.35);opacity:0;transition:transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}
-  .ssh-mega__bub--wide{width:250px}
-  .ssh-mega__bub--wide .ssh-mega__ring{width:250px;height:130px;margin-top:20px}
-  .ssh-mega__ring img{width:88%;height:88%;object-fit:contain;display:block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
-  .ssh-mega__name{font-family:var(--ss-display,sans-serif);font-weight:900;font-size:22px;line-height:1;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
-  .ssh-mega__price{font-size:15px;opacity:0;transition:opacity .3s}
-  .is-open .ssh-mega__set.is-on .ssh-mega__ring{transform:scale(1);opacity:1;transition-delay:calc(var(--i) * 70ms + 120ms)}
-  .is-open .ssh-mega__set.is-on .ssh-mega__name{opacity:1;transform:none;transition-delay:calc(var(--i) * 70ms + 220ms)}
-  .is-open .ssh-mega__set.is-on .ssh-mega__price{opacity:.75;transition-delay:calc(var(--i) * 70ms + 260ms)}
-  .ssh-mega__bub:hover .ssh-mega__ring,.ssh-mega__bub:focus-visible .ssh-mega__ring{transform:scale(1.07)!important;transition-delay:0s!important}
-  .ssh-mega__bub:hover img{transform:scale(1.08) rotate(-4deg)}
-  .ssh-mega__bub:focus-visible{outline:none}
-  .ssh-mega__bub:focus-visible .ssh-mega__ring{outline:3px solid #751F65;outline-offset:4px;border-radius:12px}
-  .ssh-mega__group:focus-visible,.ssh-mega__all:focus-visible{outline:3px solid #751F65;outline-offset:3px}
-  .ssh-mega__float{position:absolute;z-index:1;border-radius:50%;background-size:cover;opacity:.8;animation:sshMegaFloat 7s ease-in-out infinite}
-  .ssh-mega__float--a{width:90px;height:90px;right:4%;top:18px}
-  .ssh-mega__float--b{width:46px;height:46px;right:12%;bottom:48px;animation-delay:-3s}
-  @keyframes sshMegaFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
-
-
+  .ssh-mega{position:fixed;left:0;right:0;top:var(--ssh-mega-top,80px);z-index:30;pointer-events:none;display:block}
+  .ssh-n2{position:absolute;left:0;right:0;top:0;pointer-events:none;visibility:hidden;opacity:0;transform:translateY(-14px);
+    transition:opacity .3s,visibility .3s,transform .45s cubic-bezier(.3,1.3,.5,1);filter:drop-shadow(0 14px 14px rgba(117,31,101,.14))}
+  .ssh-n2.is-open{pointer-events:auto;visibility:visible;opacity:1;transform:none}
+  .ssh-n2__sheet{background:var(--sheet);padding:44px 7.8% 30px 7.4%;display:flex;gap:48px;align-items:flex-start;transition:background .35s}
+  .ssh-n2__edge{display:block;width:100%;height:44px;margin-top:-1px}
+  .ssh-n2__edge path{fill:var(--sheet);transition:fill .35s}
+  .ssh-n2__links{flex:0 0 220px;list-style:none;margin:0;padding:8px 0 0;display:flex;flex-direction:column;gap:4px}
+  .ssh-n2__link{display:flex;align-items:center;min-height:44px;font-family:var(--font-subheading--family,var(--ss-text));font-weight:600;font-size:24px;letter-spacing:.04em;color:#751F65;text-decoration:none;transition:transform .25s}
+  .ssh-n2__link:hover{transform:translateX(4px)}
+  .ssh-n2__cards{flex:1 1 auto;display:flex;gap:32px}
+  .ssh-n2__card{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:12px;color:inherit;text-decoration:none}
+  .ssh-n2__disc{width:100%;aspect-ratio:4/3;border-radius:26px;overflow:hidden;display:block;background:rgba(255,255,255,.4)}
+  .ssh-n2__disc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+  .ssh-n2__card:hover .ssh-n2__disc img,.ssh-n2__card:focus-visible .ssh-n2__disc img{transform:scale(1.06)}
+  .ssh-n2__t{display:flex;align-items:center;gap:10px;font-family:var(--font-subheading--family,var(--ss-text));font-weight:600;font-size:24px;letter-spacing:.06em;text-transform:uppercase;color:#751F65}
+  .ssh-n2__t svg{transition:transform .25s}
+  .ssh-n2__card:hover .ssh-n2__t svg{transform:translateX(4px)}
+  .ssh-n2__s{font-size:17px;color:#1D1D1B}
+  .ssh-n2__link:focus-visible,.ssh-n2__card:focus-visible{outline:3px solid #751F65;outline-offset:4px;border-radius:12px}
+  .ssh-n2-chev{display:inline-block;margin-left:6px;vertical-align:middle;transition:transform .3s}
+  [aria-expanded="true"] .ssh-n2-chev{transform:rotate(180deg)}
+  [data-ssh-mega] .menu-list__link-title{white-space:nowrap}
 
   @media (max-width:989px){.ssh-mega{display:none}}
   @media (prefers-reduced-motion:reduce){
-    .ssh-mega__panel,.ssh-mega__ring,.ssh-mega__name,.ssh-mega__price,.ssh-mega__ring img{transition:none!important}
-    .ssh-mega__float{animation:none}
+    .ssh-n2,.ssh-n2__sheet,.ssh-n2__edge path,.ssh-n2__disc img,.ssh-n2__link,.ssh-n2-chev,.ssh-n2__t svg{transition:none}
   }
 </style>
 
@@ -124,68 +72,61 @@
     customElements.define('ssh-mega', class extends HTMLElement {
       connectedCallback() {
         this.delay = Number(this.dataset.closeDelay || 220);
-        this.panels = [...this.querySelectorAll('.ssh-mega__panel')];
-        this.links = [];
-        const map = {};
-        this.panels.forEach((p) => { map[p.dataset.for.trim()] = p; });
+        this.panel = this.querySelector('.ssh-n2');
+        if (!this.panel) return;
+        const want = this.panel.dataset.for.trim();
+        const p = this.panel;
         document.querySelectorAll('#header-component .menu-list__link').forEach((a) => {
-          const t = (a.querySelector('.menu-list__link-title') || a).textContent.trim().toLowerCase();
-          const panel = map[t];
-          if (!panel || a.dataset.sshMega) return;
+          const titleEl = a.querySelector('.menu-list__link-title') || a;
+          if (titleEl.textContent.trim().toLowerCase() !== want || a.dataset.sshMega) return;
           a.dataset.sshMega = '1';
+          this.link = a;
           a.setAttribute('aria-expanded', 'false');
-          a.setAttribute('aria-controls', panel.id);
-          this.links.push({ a, panel });
-          a.addEventListener('mouseenter', () => this.open(panel, a));
+          a.setAttribute('aria-controls', p.id);
+          if (!a.querySelector('.ssh-n2-chev')) titleEl.insertAdjacentHTML('beforeend', '<svg class="ssh-n2-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+          a.addEventListener('mouseenter', () => this.open());
           a.addEventListener('mouseleave', () => this.later());
-          a.addEventListener('focus', () => this.open(panel, a));
+          a.addEventListener('focus', () => this.open());
           a.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowDown') { e.preventDefault(); this.open(panel, a); const f = panel.querySelector('a'); if (f) f.focus(); }
+            if (e.key === 'ArrowDown') { e.preventDefault(); this.open(); const f = p.querySelector('a'); if (f) f.focus(); }
             if (e.key === 'Escape') this.close();
           });
         });
-        this.panels.forEach((p) => {
-          p.addEventListener('mouseenter', () => clearTimeout(this.t));
-          p.addEventListener('mouseleave', () => this.later());
-          p.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const l = this.current && this.current.a; this.close(); if (l) l.focus(); } });
-          p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget) && !(this.current && e.relatedTarget === this.current.a)) this.later(); });
-          p.querySelectorAll('.ssh-mega__group').forEach((g) => {
-            const show = () => {
-              p.querySelectorAll('.ssh-mega__group').forEach((x) => x.classList.toggle('is-on', x === g));
-              p.querySelectorAll('.ssh-mega__set').forEach((s) => s.classList.toggle('is-on', s.dataset.g === g.dataset.g));
-            };
-            g.addEventListener('mouseenter', show);
-            g.addEventListener('focus', show);
-          });
+        p.addEventListener('mouseenter', () => clearTimeout(this.t));
+        p.addEventListener('mouseleave', () => this.later());
+        p.addEventListener('keydown', (e) => { if (e.key === 'Escape') { this.close(); if (this.link) this.link.focus(); } });
+        p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget) && e.relatedTarget !== this.link) this.later(); });
+        p.querySelectorAll('.ssh-n2__card').forEach((c) => {
+          const on = () => p.style.setProperty('--sheet', c.dataset.tint || p.dataset.base);
+          const off = () => p.style.setProperty('--sheet', p.dataset.base);
+          c.addEventListener('mouseenter', on);
+          c.addEventListener('focus', on);
+          c.addEventListener('mouseleave', off);
+          c.addEventListener('blur', off);
         });
-        this.onDoc = (e) => { if (this.current && !this.contains(e.target) && !this.links.some((l) => l.a.contains(e.target))) this.close(); };
+        this.onDoc = (e) => { if (this.isOpen && !p.contains(e.target) && !(this.link && this.link.contains(e.target))) this.close(); };
         document.addEventListener('pointerdown', this.onDoc);
       }
-      disconnectedCallback() { document.removeEventListener('pointerdown', this.onDoc); }
+      disconnectedCallback() { if (this.onDoc) document.removeEventListener('pointerdown', this.onDoc); }
       place() {
         const h = document.querySelector('#header-component');
         if (h) this.style.setProperty('--ssh-mega-top', Math.round(h.getBoundingClientRect().bottom) + 'px');
       }
-      open(panel, a) {
+      open() {
         if (!window.matchMedia('(min-width: 990px)').matches) return;
         clearTimeout(this.t);
         this.place();
-        if (this.current && this.current.panel === panel) return;
-        this.panels.forEach((p) => { if (p !== panel) { p.classList.remove('is-open'); p.hidden = true; } });
-        this.links.forEach((l) => l.a.setAttribute('aria-expanded', String(l.panel === panel)));
-        panel.hidden = false;
-        requestAnimationFrame(() => panel.classList.add('is-open'));
-        this.current = { panel, a };
+        this.panel.classList.add('is-open');
+        this.isOpen = true;
+        if (this.link) this.link.setAttribute('aria-expanded', 'true');
       }
       later() { clearTimeout(this.t); this.t = setTimeout(() => this.close(), this.delay); }
       close() {
         clearTimeout(this.t);
-        if (!this.current) return;
-        const p = this.current.panel;
-        p.classList.remove('is-open');
-        setTimeout(() => { if (!p.classList.contains('is-open')) p.hidden = true; }, 450);
-        this.links.forEach((l) => l.a.setAttribute('aria-expanded', 'false'));
-        this.current = null;
+        this.panel.classList.remove('is-open');
+        this.panel.style.setProperty('--sheet', this.panel.dataset.base);
+        this.isOpen = false;
+        if (this.link) this.link.setAttribute('aria-expanded', 'false');
       }
     });
   }
@@ -198,18 +139,33 @@
   "class": "ssh-mega-section",
   "enabled_on": { "groups": ["header", "footer"] },
   "settings": [
-    { "type": "paragraph", "content": "Öffnet sich beim Hovern über einen Hauptmenüpunkt (Desktop). Jeder Block ist eine Kategorie. Blöcke mit demselben Menüpunkt erscheinen zusammen in einem Panel." }
+    { "type": "paragraph", "content": "Sahnehauben-Menü: öffnet sich beim Hovern über den Menüpunkt (Desktop). Links Textlinks, rechts Bildkarten." },
+    { "type": "text", "id": "menu_item", "label": "Menüpunkt", "info": "Genau wie im Hauptmenü, z. B. Shop", "default": "Shop" },
+    { "type": "color", "id": "base", "label": "Flächenfarbe", "default": "#FBF0F6" }
   ],
   "blocks": [
     {
-      "type": "group",
-      "name": "Kategorie",
+      "type": "link",
+      "name": "Link",
       "settings": [
-        { "type": "text", "id": "menu_item", "label": "Menüpunkt", "info": "Genau wie im Hauptmenü, z. B. Shop", "default": "Shop" },
+        { "type": "text", "id": "label", "label": "Text", "default": "Lollipop" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Karte",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "select", "id": "focus", "label": "Bildausschnitt", "options": [
+          { "value": "object-position:50% 50%", "label": "Mitte" },
+          { "value": "object-position:50% 30%", "label": "Oben" },
+          { "value": "object-position:50% 70%", "label": "Unten" }
+        ], "default": "object-position:50% 50%" },
         { "type": "text", "id": "title", "label": "Titel", "default": "Duschmousse" },
         { "type": "text", "id": "subtitle", "label": "Unterzeile" },
         { "type": "url", "id": "link", "label": "Link" },
-        { "type": "product_list", "id": "products", "label": "Produkte", "limit": 4 }
+        { "type": "color", "id": "tint", "label": "Flächenfarbe beim Hover", "default": "#F6D3E6" }
       ]
     }
   ],

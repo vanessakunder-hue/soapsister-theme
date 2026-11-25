@@ -353,86 +353,89 @@
     },
     "ssh_mega": {
       "type": "ss-mega-menu",
-      "settings": {},
+      "settings": {
+        "menu_item": "Shop",
+        "base": "#FBF0F6"
+      },
       "blocks": {
-        "shop_mousse": {
-          "type": "group",
+        "l_lollipop": {
+          "type": "link",
           "settings": {
-            "menu_item": "Shop",
+            "label": "Lollipop",
+            "link": "/products/duschmousse-lollipop"
+          }
+        },
+        "l_coconut": {
+          "type": "link",
+          "settings": {
+            "label": "Coconut",
+            "link": "/products/duschmousse-coconut"
+          }
+        },
+        "l_marshmallow": {
+          "type": "link",
+          "settings": {
+            "label": "Marshmallow",
+            "link": "/products/duschmousse-marshmallow"
+          }
+        },
+        "l_probier": {
+          "type": "link",
+          "settings": {
+            "label": "Probiergröße 75 g",
+            "link": "/collections/duschmousse"
+          }
+        },
+        "l_alle": {
+          "type": "link",
+          "settings": {
+            "label": "Alle Produkte",
+            "link": "/collections/all"
+          }
+        },
+        "c_mousse": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-navi-duschmousse.jpg",
+            "focus": "object-position:50% 50%",
             "title": "Duschmousse",
             "subtitle": "Drei Düfte, luftig aufgeschlagen",
             "link": "/collections/duschmousse",
-            "products": [
-              "duschmousse-lollipop",
-              "duschmousse-coconut",
-              "duschmousse-marshmallow"
-            ]
+            "tint": "#F6D3E6"
           }
         },
-        "shop_sets": {
-          "type": "group",
+        "c_sets": {
+          "type": "card",
           "settings": {
-            "menu_item": "Shop",
+            "image": "shopify://shop_images/soapsister-navi-feelgood-sets.jpg",
+            "focus": "object-position:50% 30%",
             "title": "Feelgood Sets",
-            "subtitle": "Mousse, Netzschwamm und Badeente",
+            "subtitle": "Mousse, Schwamm und Ente im Set",
             "link": "/collections/sets",
-            "products": [
-              "feelgood-set-lollipop",
-              "feelgood-set-coconut",
-              "feelgood-set-marshmallow"
-            ]
+            "tint": "#F4F4F1"
           }
         },
-        "shop_extras": {
-          "type": "group",
+        "c_extras": {
+          "type": "card",
           "settings": {
-            "menu_item": "Shop",
-            "title": "Badeente & Netzschwamm",
-            "subtitle": "Für den extra Fluff",
+            "image": "shopify://shop_images/soapsister-navi-zubehoer.jpg",
+            "focus": "object-position:50% 70%",
+            "title": "Zubehör",
+            "subtitle": "Netzschwamm und Badeente",
             "link": "/collections/badeente-netzschwamm",
-            "products": [
-              "badeente-rosa",
-              "badeente-blau",
-              "netzschwamm-weiss",
-              "netzschwamm-rosa"
-            ]
-          }
-        },
-        "mousse": {
-          "type": "group",
-          "settings": {
-            "menu_item": "Duschmousse",
-            "title": "Duschmousse",
-            "subtitle": "Lollipop, Coconut und Marshmallow",
-            "link": "/collections/duschmousse",
-            "products": [
-              "duschmousse-lollipop",
-              "duschmousse-coconut",
-              "duschmousse-marshmallow"
-            ]
-          }
-        },
-        "sets": {
-          "type": "group",
-          "settings": {
-            "menu_item": "Feelgood Set",
-            "title": "Feelgood Sets",
-            "subtitle": "Dein Duschmoment im Set",
-            "link": "/collections/sets",
-            "products": [
-              "feelgood-set-lollipop",
-              "feelgood-set-coconut",
-              "feelgood-set-marshmallow"
-            ]
+            "tint": "#DDF0FA"
           }
         }
       },
       "block_order": [
-        "shop_mousse",
-        "shop_sets",
-        "shop_extras",
-        "mousse",
-        "sets"
+        "l_lollipop",
+        "l_coconut",
+        "l_marshmallow",
+        "l_probier",
+        "l_alle",
+        "c_mousse",
+        "c_sets",
+        "c_extras"
       ]
     }
   },
