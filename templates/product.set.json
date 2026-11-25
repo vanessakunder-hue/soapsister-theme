@@ -51,7 +51,10 @@
             "gallery_2": "shopify://shop_images/soapsister-set-coconut-schaum.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
             "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-3.jpg",
-            "gift_image": "shopify://shop_images/soapsister-pdp-coconut-5.jpg"
+            "gift_image": "shopify://shop_images/soapsister-pdp-coconut-5.jpg",
+            "ritual_bg": "#4A4D4F",
+            "ritual_accent": "#CAC8C4",
+            "ritual_text_color": "#FFFFFF"
           }
         },
         "marshmallow": {
