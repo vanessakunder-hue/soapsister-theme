@@ -1,0 +1,314 @@
+{%- comment -%}
+  Soapsister Kategorieseite nach Design "PLP Galerie zum Durchklicken" (25.11.2026).
+  Horizontale Galerie mit Scroll-Snap: pro Sorte eine Slide (Stimmungsbild, freigestellte Dose, Name, Duft, Preis, Warenkorb),
+  am Ende eine Set-Slide. Oben Groessen-Umschalter fuer alle Sorten, Sprung-Buttons je Slide, Zaehler, Pfeile und Fortschrittsbalken.
+{%- endcomment -%}
+{%- render 'ss-tokens' -%}
+{%- assign st = section.settings -%}
+{%- assign first = nil -%}
+{%- for b in section.blocks -%}{%- if b.type == 'slide' and b.settings.product != blank -%}{%- assign first = b.settings.product -%}{%- break -%}{%- endif -%}{%- endfor -%}
+{%- assign size_opt = first.options_with_values.first -%}
+{%- assign total = section.blocks.size -%}
+<ssh-gallery class="ss-scope ssh-gal" id="SshGal-{{ section.id }}">
+  <div class="ssh-gal__intro">
+    <div class="ssh-gal__head">
+      <h1 class="ssh-gal__h1">{{ st.heading | default: collection.title | escape }}</h1>
+      {%- if st.text != blank -%}<p class="ssh-gal__lead">{{ st.text | escape }}</p>{%- endif -%}
+    </div>
+    {%- if size_opt and size_opt.values.size > 1 -%}
+      <fieldset class="ssh-gal__sizes">
+        <legend class="visually-hidden">Größe für alle Sorten</legend><span class="ssh-gal__sizes-l" aria-hidden="true">Größe</span>
+        <div class="ssh-gal__seg">
+          {%- for v in size_opt.values -%}
+            <label><input type="radio" name="ssh-gsize-{{ section.id }}" value="{{ v | escape }}" {% if forloop.first %}checked{% endif %}><span>{{ v | escape }}</span></label>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endif -%}
+  </div>
+
+  <div class="ssh-gal__bar">
+    <div class="ssh-gal__tabs" role="group" aria-label="Zu einer Slide springen">
+      {%- for block in section.blocks -%}
+        {%- assign lbl = block.settings.tab_label | default: block.settings.name | default: block.settings.product.title -%}
+        <button type="button" class="ssh-gal__tab" data-go="{{ forloop.index0 }}" aria-controls="SshGalS-{{ block.id }}" {% if forloop.first %}aria-current="true"{% endif %}>{{ lbl | escape }}</button>
+      {%- endfor -%}
+    </div>
+    <span class="ssh-gal__count" aria-live="polite" data-count>01 / {% if total < 10 %}0{% endif %}{{ total }}</span>
+  </div>
+
+  <div class="ssh-gal__stage">
+    <div class="ssh-gal__track" data-track tabindex="0" aria-label="Galerie, mit Pfeiltasten oder Wischen blättern">
+      {%- for block in section.blocks -%}
+        {%- assign c = block.settings -%}
+        {%- if block.type == 'slide' -%}
+          {%- assign p = c.product -%}
+          {%- if p == blank -%}
+            <article class="ssh-gs" id="SshGalS-{{ block.id }}" {{ block.shopify_attributes }}><div class="ssh-gs__media"></div><p class="ssh-gs__line">Bitte im Editor ein Produkt wählen.</p></article>
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign v0 = p.variants.first -%}
+          {%- capture vmap -%}{ {%- for v in p.variants -%}"{{ v.option1 | escape }}":{"id":{{ v.id }},"price":"{{ v.price | money | escape }}","unit":"{% render 'ssh-unit', v: v %}","ok":{{ v.available }}}{% unless forloop.last %},{% endunless %}{%- endfor -%} }{%- endcapture -%}
+          <article class="ssh-gs" id="SshGalS-{{ block.id }}" style="--ink:{{ c.ink }};--btn:{{ c.button }}" data-variants="{{ vmap | strip | escape }}" {{ block.shopify_attributes }}>
+            <a class="ssh-gs__media" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+              <span class="ssh-gs__frame">
+                {%- if c.image != blank -%}
+                  {{ c.image | image_url: width: 1600 | image_tag: class: 'ssh-gs__bg', alt: '', loading: 'lazy', sizes: '(max-width: 749px) 86vw, min(54vw, 780px)', widths: '600, 900, 1200, 1600', style: c.focus }}
+                {%- endif -%}
+              </span>
+              {%- if c.jar != blank -%}
+                {{ c.jar | image_url: width: 900 | image_tag: class: 'ssh-gs__jar', alt: '', loading: 'lazy', sizes: '(max-width: 749px) 44vw, 260px', widths: '300, 520, 780, 900' }}
+              {%- endif -%}
+            </a>
+            <div class="ssh-gs__text">
+              <div class="ssh-gs__info">
+                <h2 class="ssh-gs__name"><a href="{{ p.url }}">{{ c.name | default: p.title | escape }}</a></h2>
+                <p class="ssh-gs__line" aria-live="polite">{% if c.scent != blank %}Duftet nach {{ c.scent | escape }} · {% endif %}<b data-price>{{ v0.price | money }}</b> · <span data-unit>{% render 'ssh-unit', v: v0 %}</span></p>
+              </div>
+              <form action="{{ routes.cart_add_url }}" method="post" class="ssh-gs__form">
+                <input type="hidden" name="id" value="{{ v0.id }}" data-id>
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="ssh-gs__btn" {% unless v0.available %}disabled{% endunless %} data-add>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+                  <span data-label>{% if v0.available %}In den Warenkorb{% else %}Ausverkauft{% endif %}</span>
+                </button>
+                <span class="ssh-gs__note">inkl. MwSt., zzgl. Versand</span>
+              </form>
+            </div>
+          </article>
+        {%- else -%}
+          {%- assign setp = c.set_product -%}
+          {%- assign sum = 0 -%}
+          {%- if c.mousse != blank -%}{%- assign sum = sum | plus: c.mousse.variants.first.price -%}{%- endif -%}
+          {%- if c.duck != blank -%}{%- assign sum = sum | plus: c.duck.price -%}{%- endif -%}
+          {%- if c.sponge != blank -%}{%- assign sum = sum | plus: c.sponge.price -%}{%- endif -%}
+          <article class="ssh-gs ssh-gs--set" id="SshGalS-{{ block.id }}" style="--ink:{{ c.ink }};--btn:{{ c.ink }}" {{ block.shopify_attributes }}>
+            <a class="ssh-gs__media" href="{{ c.link | default: '/collections/sets' }}" tabindex="-1" aria-hidden="true">
+              <span class="ssh-gs__frame" style="background:{{ c.tint }}">
+                {%- if c.image != blank -%}
+                  {{ c.image | image_url: width: 1600 | image_tag: class: 'ssh-gs__bg', alt: '', loading: 'lazy', sizes: '(max-width: 749px) 86vw, min(54vw, 780px)', widths: '600, 900, 1200, 1600', style: c.focus }}
+                {%- endif -%}
+              </span>
+              {%- if c.duck != blank and c.duck.featured_image -%}
+                {{ c.duck.featured_image | image_url: width: 400 | image_tag: class: 'ssh-gs__acc ssh-gs__acc--1', alt: '', loading: 'lazy', sizes: '150px' }}
+              {%- endif -%}
+              {%- if c.sponge != blank and c.sponge.featured_image -%}
+                {{ c.sponge.featured_image | image_url: width: 400 | image_tag: class: 'ssh-gs__acc ssh-gs__acc--2', alt: '', loading: 'lazy', sizes: '150px' }}
+              {%- endif -%}
+            </a>
+            <div class="ssh-gs__text">
+              <div class="ssh-gs__info">
+                <h2 class="ssh-gs__name"><a href="{{ c.link | default: '/collections/sets' }}">{{ c.title | escape }}</a></h2>
+                <p class="ssh-gs__line">{{ c.text | escape }}{% if setp != blank %} · <b>{{ setp.price | money }}</b>{% if sum > setp.price %} statt <s>{{ sum | money }}</s>{% endif %}{% endif %}</p>
+              </div>
+              <a class="ssh-gs__btn" href="{{ c.link | default: '/collections/sets' }}">{{ c.label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+      <div class="ssh-gal__end" aria-hidden="true"></div>
+    </div>
+    <button type="button" class="ssh-gal__arw ssh-gal__arw--prev" data-prev aria-label="Zurück" hidden><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+    <button type="button" class="ssh-gal__arw ssh-gal__arw--next" data-next aria-label="Weiter"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="ssh-gal__progress" aria-hidden="true"><span data-progress style="width:{{ 100.0 | divided_by: total }}%"></span></div>
+</ssh-gallery>
+
+<style>
+  .ssh-gal{display:block;background:var(--color-background,#F1F1E9);color:#1D1D1B;padding-bottom:110px;overflow:hidden;--gh:480px;--plum:#751F65}
+  .ssh-gal a{color:inherit;text-decoration:none}
+  .ssh-gal__intro{padding:64px 7.4% 72px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+  .ssh-gal__head{display:flex;flex-direction:column;gap:14px}
+  .ssh-gal__h1{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(64px,7vw,104px);line-height:.9;color:#1D1D1B}
+  .ssh-gal__lead{margin:0;font-size:20px;line-height:1.45;max-width:44ch}
+  .ssh-gal__sizes{border:0;margin:0;padding:0;display:flex;align-items:center;gap:14px}
+  .ssh-gal__sizes-l{font-size:15px;opacity:.75}
+  .ssh-gal__seg{display:flex;gap:4px;padding:5px;border-radius:999px;background:#FFFFFF}
+  .ssh-gal__seg label{position:relative;display:block}
+  .ssh-gal__seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+  .ssh-gal__seg span{display:flex;align-items:center;justify-content:center;min-width:84px;min-height:44px;padding:0 14px;border-radius:999px;font-weight:600;font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:#1D1D1B;transition:background .2s,color .2s}
+  .ssh-gal__seg input:checked + span{background:var(--plum);color:#F1F1E9}
+  .ssh-gal__seg input:focus-visible + span{outline:3px solid var(--plum);outline-offset:2px}
+  .ssh-gal__bar{padding:0 7.4% 32px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .ssh-gal__tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .ssh-gal__tab{min-height:44px;padding:0 20px;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:600;font-size:16px;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--plum);background:transparent;color:var(--plum);transition:background .25s,color .25s}
+  .ssh-gal__tab[aria-current="true"]{background:var(--plum);color:#F1F1E9}
+  .ssh-gal__tab:focus-visible{outline:3px solid var(--plum);outline-offset:3px}
+  .ssh-gal__count{font-weight:600;font-size:18px;letter-spacing:.14em;color:var(--plum);font-variant-numeric:tabular-nums}
+  .ssh-gal__stage{position:relative}
+  .ssh-gal__track{display:flex;gap:40px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:7.4vw;padding:0 7.4vw 60px;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+  .ssh-gal__track::-webkit-scrollbar{display:none}
+  .ssh-gal__track:focus-visible{outline:3px solid var(--plum);outline-offset:-3px}
+  .ssh-gal__end{flex:0 0 30vw}
+  .ssh-gs{flex:0 0 min(54vw,780px);scroll-snap-align:start;display:flex;flex-direction:column;gap:28px;min-width:0}
+  .ssh-gs__media{position:relative;display:block;height:var(--gh)}
+  .ssh-gs__frame{position:absolute;inset:0;border-radius:32px;overflow:hidden;display:block;background:#E7E5DC}
+  .ssh-gs__bg{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+  .ssh-gs:hover .ssh-gs__bg{transform:scale(1.04)}
+  .ssh-gs__jar{position:absolute;left:40px;bottom:-40px;width:260px;height:auto;display:block;filter:drop-shadow(0 18px 18px rgba(29,29,27,.24)) drop-shadow(0 4px 6px rgba(29,29,27,.14));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+  .ssh-gs__acc{position:absolute;bottom:-34px;width:150px;height:auto;display:block;filter:drop-shadow(0 18px 18px rgba(29,29,27,.22));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+  .ssh-gs__acc--1{left:40px}
+  .ssh-gs__acc--2{left:175px;bottom:-28px}
+  .ssh-gs:hover .ssh-gs__jar,.ssh-gs:hover .ssh-gs__acc{transform:translateY(-10px)}
+  .ssh-gs__text{padding-left:330px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px 24px;flex-wrap:wrap}
+  .ssh-gs__name{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:60px;line-height:.92;color:var(--ink)}
+  .ssh-gs__name a:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+  .ssh-gs__line{margin:6px 0 0;font-size:19px;line-height:1.4}
+  .ssh-gs__line b{color:var(--ink);font-weight:600;white-space:nowrap}
+  .ssh-gs__line [data-unit]{white-space:nowrap}
+  .ssh-gs__form{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0}
+  .ssh-gs__btn{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;border:2px solid var(--btn);background:transparent;color:var(--btn);cursor:pointer;font-family:inherit;font-weight:600;font-size:16px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transition:background .2s,color .2s}
+  .ssh-gal a.ssh-gs__btn{color:var(--btn)}
+  .ssh-gal .ssh-gs__btn:hover,.ssh-gal .ssh-gs__btn:focus-visible{background:var(--btn);color:#F1F1E9}
+  .ssh-gs__btn:focus-visible{outline:3px solid var(--btn);outline-offset:3px}
+  .ssh-gs__btn:disabled{opacity:.5;cursor:not-allowed}
+  .ssh-gs__note{font-size:12px;opacity:.7}
+  .ssh-gal__arw{position:absolute;z-index:5;top:calc(var(--gh) / 2 - 38px);width:76px;height:76px;border-radius:50%;border:0;background:var(--plum);color:#FFFFFF;display:grid;place-items:center;cursor:pointer;box-shadow:0 14px 30px rgba(117,31,101,.3);transition:transform .25s}
+  .ssh-gal__arw[hidden]{display:none}
+  .ssh-gal__arw:hover{transform:scale(1.08)}
+  .ssh-gal__arw:focus-visible{outline:3px solid var(--plum);outline-offset:4px}
+  .ssh-gal__arw--prev{left:3vw}
+  .ssh-gal__arw--next{right:3vw;animation:sshNudge 1.8s ease-in-out infinite}
+  @keyframes sshNudge{0%,100%{translate:0 0}50%{translate:8px 0}}
+  .ssh-gal__progress{margin:8px 7.4% 0;height:4px;border-radius:2px;background:rgba(117,31,101,.15);overflow:hidden}
+  .ssh-gal__progress span{display:block;height:100%;background:var(--plum);border-radius:2px;transition:width .4s ease}
+  @media (max-width:1199px){.ssh-gs__text{padding-left:0;padding-top:24px}}
+  @media (max-width:749px){
+    .ssh-gal{--gh:300px;padding-bottom:72px}
+    .ssh-gal__intro{padding:40px 20px 36px}
+    .ssh-gal__head{min-width:0;max-width:100%}
+    .ssh-gal__h1{font-size:clamp(44px,13vw,64px)}
+    .ssh-gal__lead{font-size:18px}
+    .ssh-gal__sizes-l{display:none}
+    .ssh-gal__bar{padding:0 20px 24px}
+    .ssh-gal__tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+    .ssh-gal__tabs::-webkit-scrollbar{display:none}
+    .ssh-gal__tab{flex:0 0 auto;padding:0 16px;font-size:15px}
+    .ssh-gal__count{display:none}
+    .ssh-gal__track{gap:16px;padding:0 20px 44px;scroll-padding-left:20px}
+    .ssh-gal__end{flex-basis:4px}
+    .ssh-gs{flex-basis:86vw;gap:20px}
+    .ssh-gs__frame{border-radius:24px}
+    .ssh-gs__jar{left:16px;bottom:-28px;width:44vw}
+    .ssh-gs__acc{width:96px}.ssh-gs__acc--1{left:16px;bottom:-22px}.ssh-gs__acc--2{left:104px;bottom:-18px}
+    .ssh-gs__text{padding-top:20px;flex-direction:column;align-items:flex-start}
+    .ssh-gs__name{font-size:44px}
+    .ssh-gs__line{font-size:17px}
+    .ssh-gs__form{align-items:flex-start}
+    .ssh-gal__arw{display:none}
+    .ssh-gal__progress{margin:0 20px}
+  }
+  @media (prefers-reduced-motion:reduce){.ssh-gal__track{scroll-behavior:auto}.ssh-gal__arw--next{animation:none}.ssh-gs__bg,.ssh-gs__jar,.ssh-gs__acc{transition:none}}
+</style>
+
+<script>
+  if (!customElements.get('ssh-gallery')) {
+    customElements.define('ssh-gallery', class extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('[data-track]');
+        this.slides = Array.from(this.track.querySelectorAll('.ssh-gs'));
+        this.tabs = Array.from(this.querySelectorAll('[data-go]'));
+        this.prevBtn = this.querySelector('[data-prev]');
+        this.nextBtn = this.querySelector('[data-next]');
+        this.idx = 0;
+        this.tabs.forEach((t) => t.addEventListener('click', () => this.go(+t.dataset.go)));
+        this.prevBtn.addEventListener('click', () => this.go(this.idx - 1));
+        this.nextBtn.addEventListener('click', () => this.go(this.idx + 1));
+        this.track.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') { e.preventDefault(); this.go(this.idx + 1); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); this.go(this.idx - 1); }
+        });
+        let raf = 0;
+        this.track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => this.sync()); }, { passive: true });
+        this.addEventListener('change', (e) => { if (e.target.matches('input[type="radio"][name^="ssh-gsize-"]')) this.size(e.target.value); });
+        this.render();
+      }
+      base() { return this.slides[0] ? this.slides[0].offsetLeft : 0; }
+      go(i) {
+        const k = Math.max(0, Math.min(this.slides.length - 1, i));
+        const s = this.slides[k];
+        if (!s) return;
+        this.track.scrollTo({ left: s.offsetLeft - this.base(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        this.idx = k; this.render();
+      }
+      sync() {
+        const x = this.track.scrollLeft + this.base();
+        let best = 0, d = Infinity;
+        this.slides.forEach((s, i) => { const dd = Math.abs(s.offsetLeft - x); if (dd < d) { d = dd; best = i; } });
+        if (this.track.scrollLeft + this.track.clientWidth >= this.track.scrollWidth - 4) best = this.slides.length - 1;
+        if (best !== this.idx) { this.idx = best; this.render(); }
+      }
+      render() {
+        const n = this.slides.length, i = this.idx;
+        const pad = (v) => (v < 10 ? '0' : '') + v;
+        this.tabs.forEach((t, k) => { if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+        const c = this.querySelector('[data-count]'); if (c) c.textContent = pad(i + 1) + ' / ' + pad(n);
+        const p = this.querySelector('[data-progress]'); if (p) p.style.width = ((i + 1) / n * 100) + '%';
+        this.prevBtn.hidden = i === 0;
+        this.nextBtn.hidden = i >= n - 1;
+      }
+      size(val) {
+        this.querySelectorAll('.ssh-gs[data-variants]').forEach((b) => {
+          let map; try { map = JSON.parse(b.dataset.variants); } catch (err) { return; }
+          const v = map[val]; if (!v) return;
+          b.querySelector('[data-id]').value = v.id;
+          b.querySelector('[data-price]').textContent = v.price;
+          b.querySelector('[data-unit]').textContent = v.unit;
+          const btn = b.querySelector('[data-add]');
+          btn.disabled = !v.ok;
+          btn.querySelector('[data-label]').textContent = v.ok ? 'In den Warenkorb' : 'Ausverkauft';
+        });
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Soapsister: Galerie",
+  "tag": "div",
+  "class": "ssh-gal-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift (leer = Name der Kollektion)", "default": "Duschmousse." },
+    { "type": "text", "id": "text", "label": "Text", "default": "Drei Düfte, luftig aufgeschlagen. Klick dich durch." }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Sorte",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produkt" },
+        { "type": "text", "id": "name", "label": "Name (leer = Produkttitel)" },
+        { "type": "text", "id": "tab_label", "label": "Text im Sprung-Button (leer = Name)" },
+        { "type": "text", "id": "scent", "label": "Duft", "info": "Erscheint als: Duftet nach ..." },
+        { "type": "image_picker", "id": "image", "label": "Stimmungsbild (Querformat)" },
+        { "type": "select", "id": "focus", "label": "Bildausschnitt", "options": [{ "value": "object-position:50% 50%", "label": "Mitte" }, { "value": "object-position:50% 20%", "label": "Oben" }, { "value": "object-position:50% 80%", "label": "Unten" }], "default": "object-position:50% 50%" },
+        { "type": "image_picker", "id": "jar", "label": "Freigestellte Dose" },
+        { "type": "color", "id": "ink", "label": "Farbe Name und Preis", "default": "#751F65" },
+        { "type": "color", "id": "button", "label": "Farbe Button", "default": "#751F65" }
+      ]
+    },
+    {
+      "type": "set",
+      "name": "Set-Hinweis",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Text im Sprung-Button", "default": "Set" },
+        { "type": "text", "id": "title", "label": "Überschrift", "default": "Lieber im Set?" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Mousse, Schwamm und Ente" },
+        { "type": "product", "id": "set_product", "label": "Set-Produkt für den Preis" },
+        { "type": "product", "id": "mousse", "label": "Einzelpreis: Duschmousse", "info": "Für den Vergleichspreis, erste Größe" },
+        { "type": "product", "id": "duck", "label": "Einzelpreis und Bild: Badeente" },
+        { "type": "product", "id": "sponge", "label": "Einzelpreis und Bild: Netzschwamm" },
+        { "type": "image_picker", "id": "image", "label": "Stimmungsbild (Querformat)" },
+        { "type": "select", "id": "focus", "label": "Bildausschnitt", "options": [{ "value": "object-position:50% 50%", "label": "Mitte" }, { "value": "object-position:50% 20%", "label": "Oben" }, { "value": "object-position:50% 80%", "label": "Unten" }], "default": "object-position:50% 50%" },
+        { "type": "color", "id": "tint", "label": "Hintergrund hinter dem Bild", "default": "#F6E2EE" },
+        { "type": "color", "id": "ink", "label": "Akzentfarbe", "default": "#751F65" },
+        { "type": "text", "id": "label", "label": "Link-Text", "default": "Zu den Sets" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Soapsister: Galerie" }]
+}
+{% endschema %}

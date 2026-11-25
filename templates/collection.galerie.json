@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-plp-galerie",
+      "settings": {
+        "heading": "Duschmousse.",
+        "text": "Drei Düfte, luftig aufgeschlagen. Klick dich durch."
+      },
+      "blocks": {
+        "lollipop": {
+          "type": "slide",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "name": "Lollipop",
+            "tab_label": "",
+            "scent": "Orange und Granatapfel",
+            "image": "shopify://shop_images/soapsister-plp-slide-lollipop.jpg",
+            "focus": "object-position:50% 50%",
+            "jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png",
+            "ink": "#751F65",
+            "button": "#751F65"
+          }
+        },
+        "coconut": {
+          "type": "slide",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "name": "Coconut",
+            "tab_label": "",
+            "scent": "Kokos",
+            "image": "shopify://shop_images/soapsister-plp-slide-coconut.jpg",
+            "focus": "object-position:50% 50%",
+            "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52"
+          }
+        },
+        "marshmallow": {
+          "type": "slide",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "name": "Marshmallow",
+            "tab_label": "",
+            "scent": "Buttermilch",
+            "image": "shopify://shop_images/soapsister-plp-slide-marshmallow.jpg",
+            "focus": "object-position:50% 50%",
+            "jar": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52"
+          }
+        },
+        "set": {
+          "type": "set",
+          "settings": {
+            "tab_label": "Set",
+            "title": "Lieber im Set?",
+            "text": "Mousse, Schwamm und Ente",
+            "set_product": "feelgood-set-lollipop",
+            "mousse": "duschmousse-lollipop",
+            "duck": "badeente-rosa",
+            "sponge": "netzschwamm-rosa",
+            "image": "shopify://shop_images/soapsister-plp-slide-set.jpg",
+            "focus": "object-position:50% 50%",
+            "tint": "#F6E2EE",
+            "ink": "#751F65",
+            "label": "Zu den Sets",
+            "link": "/collections/sets"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow",
+        "set"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
