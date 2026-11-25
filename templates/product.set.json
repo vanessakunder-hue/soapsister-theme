@@ -30,9 +30,9 @@
             "button": "#751F65",
             "tint": "#F6E2EE",
             "dot": "#E08FBC",
-            "gallery_2": "shopify://shop_images/soapsister-set-lifestyle.jpg",
+            "gallery_2": "shopify://shop_images/soapsister-set-lollipop-schaum.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-1.jpg",
-            "gallery_4": "shopify://shop_images/soapsister-pdp-lollipop-2b.jpg"
+            "gallery_4": "shopify://shop_images/soapsister-set-lifestyle.jpg"
           }
         },
         "coconut": {
@@ -48,8 +48,8 @@
             "button": "#1D3F52",
             "tint": "#E8E5DE",
             "dot": "#F7F5F0",
-            "gallery_2": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
-            "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-4.jpg",
+            "gallery_2": "shopify://shop_images/soapsister-set-coconut-schaum.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
             "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-3.jpg",
             "gift_image": "shopify://shop_images/soapsister-pdp-coconut-5.jpg"
           }
