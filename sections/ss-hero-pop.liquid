@@ -19,9 +19,9 @@
 <style>
   {{ sid }} { --hp-plum: var(--ss-plum); --hp-text: #751F65; --hp-ease: cubic-bezier(.16, 1, .3, 1);
     display: block; position: relative; background: #EAEDE8; color: var(--ss-ink); }
-  {{ sid }} .hero-pop__copy { position: absolute; z-index: 3; inset: 0 0 auto 0; padding: 2.6vw 4.4vw 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; pointer-events: none; }
-  {{ sid }} .hero-pop__title { margin: 0; max-width: 62%; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: clamp(40px, 5.2vw, 80px); line-height: .92; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--hp-plum); transition: color .4s var(--hp-ease); }
-  {{ sid }} .hero-pop__text { margin: 0; padding-top: 8px; max-width: 32ch; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; color: var(--hp-text); }
+  {{ sid }} .hero-pop__copy { position: absolute; z-index: 1; inset: auto 0 70.5% 0; padding: 0 2vw; display: flex; justify-content: center; pointer-events: none; }
+  {{ sid }} .hero-pop__title { margin: 0; max-width: none; width: 100%; text-align: center; white-space: nowrap; font-family: var(--ss-display); font-weight: var(--ss-display-weight); font-size: var(--hp-fs, 13.6vw); line-height: .85; letter-spacing: var(--ss-track-display); text-transform: uppercase; color: var(--hp-plum); transition: color .4s var(--hp-ease); }
+  {{ sid }} .hero-pop__text { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   {{ sid }} .hero-pop__stage { position: relative; aspect-ratio: {{ img_w }} / {{ img_h }}; overflow: hidden; }
   {{ sid }} .hero-pop__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   {{ sid }} .hero-pop__bubble { position: absolute; z-index: 2; width: 26.8%; height: 48%; }
@@ -60,9 +60,8 @@
   @keyframes hp-ring { from { transform: scale(.95); opacity: .95; } to { transform: scale(1.45); opacity: 0; } }
   @keyframes hp-drop { from { opacity: 1; transform: rotate(var(--a)) translateY(calc(var(--bw, 380px) * -.4)) scale(1); } to { opacity: 0; transform: rotate(var(--a)) translateY(calc(var(--bw, 380px) * -.9)) scale(.35); } }
   @media (max-width: 749px) {
-    {{ sid }} .hero-pop__copy { position: static; display: grid; gap: 10px; padding: 28px 16px 18px; pointer-events: auto; }
-    {{ sid }} .hero-pop__title { max-width: none; font-size: clamp(34px, 10vw, 48px); }
-    {{ sid }} .hero-pop__text { padding-top: 0; max-width: 40ch; font-size: 16px; }
+    {{ sid }} .hero-pop__copy { position: static; display: block; padding: 24px 16px 14px; pointer-events: auto; }
+    {{ sid }} .hero-pop__title { white-space: normal; font-size: clamp(34px, 11vw, 52px); }
     {{ sid }} .hero-pop__pill { top: 106%; min-height: 36px; padding: 0 12px; font-size: 11px; letter-spacing: .1em; }
     {{ sid }} .is-picked .hero-pop__pill-more { display: none; }
   }
@@ -134,6 +133,18 @@
         this.titleEl = this.querySelector('[data-hp-title]');
         this.textEl = this.querySelector('[data-hp-text]');
         this.querySelectorAll('[data-hp-pop]').forEach((btn) => btn.addEventListener('click', () => this.pick(btn)));
+        this.fit = this.fit.bind(this);
+        this.fit();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.fit);
+        window.addEventListener('resize', this.fit);
+      }
+      fit() {
+        const t = this.titleEl;
+        if (!t) return;
+        t.style.removeProperty('--hp-fs');
+        if (window.matchMedia('(max-width: 749px)').matches) return;
+        const max = this.clientWidth * 0.96, w = t.scrollWidth;
+        if (w > max) t.style.setProperty('--hp-fs', (parseFloat(getComputedStyle(t).fontSize) * max / w).toFixed(1) + 'px');
       }
       pick(btn) {
         const wrap = btn.closest('[data-hp-bubble]');
@@ -145,6 +156,7 @@
         if (btn.dataset.title) this.titleEl.textContent = btn.dataset.title;
         if (btn.dataset.text) this.textEl.textContent = btn.dataset.text;
         this.titleEl.style.color = btn.dataset.ink || '';
+        this.fit();
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         clearTimeout(wrap.hpTimer);
         wrap.style.setProperty('--bw', wrap.offsetWidth + 'px');

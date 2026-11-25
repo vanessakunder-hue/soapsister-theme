@@ -2020,7 +2020,7 @@
           "settings": {
             "label": "Coconut",
             "product": "duschmousse-coconut",
-            "title": "Pop. Coconut.",
+            "title": "Coconut.",
             "text": "Duftet nach Kokos, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D1D1B",
             "center_x": 20.8,
@@ -2034,7 +2034,7 @@
           "settings": {
             "label": "Marshmallow",
             "product": "duschmousse-marshmallow",
-            "title": "Pop. Marshmallow.",
+            "title": "Marshmallow.",
             "text": "Duftet nach Buttermilch, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D1D1B",
             "center_x": 50.2,
@@ -2048,7 +2048,7 @@
           "settings": {
             "label": "Lollipop",
             "product": "duschmousse-lollipop",
-            "title": "Pop. Lollipop.",
+            "title": "Lollipop.",
             "text": "Duftet nach Orange und Granatapfel, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#751F65",
             "center_x": 78.8,
