@@ -44,7 +44,7 @@
         {%- endif -%}
       </div>
       {%- if count > 1 -%}
-        <div class="ssh-pdp__thumbs">
+        <div class="ssh-pdp__thumbs"{% if count < 5 %} style="grid-template-columns:repeat({{ count }},minmax(0,1fr))"{% endif %}>
           {%- assign n = 0 -%}
           {%- if use_media -%}
             {%- for im in product.images -%}
