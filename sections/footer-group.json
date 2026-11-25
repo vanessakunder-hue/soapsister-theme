@@ -375,7 +375,7 @@
             "menu_item": "Shop",
             "title": "Feelgood Sets",
             "subtitle": "Mousse, Netzschwamm und Badeente",
-            "link": "/collections/all",
+            "link": "/collections/sets",
             "products": [
               "feelgood-set-lollipop",
               "feelgood-set-coconut",
@@ -389,7 +389,7 @@
             "menu_item": "Shop",
             "title": "Badeente & Netzschwamm",
             "subtitle": "Für den extra Fluff",
-            "link": "/collections/all",
+            "link": "/collections/badeente-netzschwamm",
             "products": [
               "badeente-rosa",
               "badeente-blau",
@@ -418,7 +418,7 @@
             "menu_item": "Feelgood Set",
             "title": "Feelgood Sets",
             "subtitle": "Dein Duschmoment im Set",
-            "link": "/collections/all",
+            "link": "/collections/sets",
             "products": [
               "feelgood-set-lollipop",
               "feelgood-set-coconut",

@@ -69,8 +69,8 @@
 </ssh-mega>
 
 <style>
-  .ssh-mega{position:fixed;left:0;right:0;top:var(--ssh-mega-top,80px);z-index:30;pointer-events:none;display:block}
-  .ssh-mega__panel{position:absolute;left:0;right:0;top:0;pointer-events:auto;background:color-mix(in srgb,#E08FBC 16%,#FFFFFF);color:#1D1D1B;padding:40px 7.4% 64px;overflow:hidden;
+  .ssh-mega{position:fixed;left:0;right:0;top:var(--ssh-mega-top,80px);z-index:30;pointer-events:none;display:block;filter:drop-shadow(0 14px 18px rgba(117,31,101,.28)) drop-shadow(0 2px 3px rgba(117,31,101,.18))}
+  .ssh-mega__panel{position:absolute;left:0;right:0;top:0;pointer-events:auto;background:#EAEDE8;color:#1D1D1B;padding:40px 7.4% 64px;overflow:hidden;
     -webkit-mask:radial-gradient(circle at 50% 0,#000 69%,transparent 71%) bottom/44px 22px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 21px) no-repeat;
             mask:radial-gradient(circle at 50% 0,#000 69%,transparent 71%) bottom/44px 22px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 21px) no-repeat;
     clip-path:inset(0 0 100% 0);transition:clip-path .45s cubic-bezier(.2,.8,.2,1)}
@@ -110,6 +110,7 @@
   .ssh-mega__float--a{width:90px;height:90px;right:4%;top:18px}
   .ssh-mega__float--b{width:46px;height:46px;right:12%;bottom:48px;animation-delay:-3s}
   @keyframes sshMegaFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+
 
   @media (max-width:989px){.ssh-mega{display:none}}
   @media (prefers-reduced-motion:reduce){
