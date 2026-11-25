@@ -2273,7 +2273,8 @@
     "ssh_faq": {
       "type": "ss-home-faq",
       "settings": {
-        "show_trail": true
+        "show_trail": true,
+        "ink": "#1D1D1B"
       },
       "blocks": {
         "accordion_row_7dgnx3": {
