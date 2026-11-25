@@ -1,0 +1,79 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-set-pdp",
+      "settings": {
+        "crumb_label": "Shop",
+        "crumb_link": "/collections/sets",
+        "gallery_2": "shopify://shop_images/soapsister-set-lifestyle.jpg",
+        "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
+        "gallery_4": "shopify://shop_images/soapsister-pdp-schritt-aufschaeumen.jpg",
+        "gift_image": "shopify://shop_images/soapsister-set-lifestyle.jpg"
+      },
+      "blocks": {
+        "lollipop": {
+          "type": "sorte",
+          "settings": {
+            "set_product": "feelgood-set-lollipop",
+            "name": "Lollipop",
+            "mousse": "duschmousse-lollipop",
+            "jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png",
+            "sponge": "netzschwamm-rosa",
+            "duck": "badeente-rosa",
+            "ink": "#751F65",
+            "button": "#751F65",
+            "tint": "#F6E2EE",
+            "dot": "#E08FBC"
+          }
+        },
+        "coconut": {
+          "type": "sorte",
+          "settings": {
+            "set_product": "feelgood-set-coconut",
+            "name": "Coconut",
+            "mousse": "duschmousse-coconut",
+            "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
+            "sponge": "netzschwamm-weiss",
+            "duck": "badeente-weiss",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52",
+            "tint": "#E8E5DE",
+            "dot": "#F7F5F0"
+          }
+        },
+        "marshmallow": {
+          "type": "sorte",
+          "settings": {
+            "set_product": "feelgood-set-marshmallow",
+            "name": "Marshmallow",
+            "mousse": "duschmousse-marshmallow",
+            "jar": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
+            "sponge": "netzschwamm-blau",
+            "duck": "badeente-blau",
+            "ink": "#1D3F52",
+            "button": "#1D3F52",
+            "tint": "#DDF0FA",
+            "dot": "#21B5EA"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
