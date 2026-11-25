@@ -17,7 +17,8 @@
         "kind": "Duschmousse",
         "step1_image": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
         "step2_image": "shopify://shop_images/soapsister-pdp-schritt-aufschaeumen.jpg",
-        "step3_image": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg"
+        "step3_image": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg",
+        "video": "shopify://files/videos/soapsister-pdp-bubbles.mp4"
       },
       "blocks": {
         "lollipop": {
@@ -41,7 +42,9 @@
             "gallery_1": "shopify://shop_images/soapsister-pdp-lollipop-1.jpg",
             "gallery_2": "shopify://shop_images/soapsister-pdp-lollipop-2b.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-3.jpg",
-            "gallery_4": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg"
+            "gallery_4": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
+            "ink_soft": "#4A1240",
+            "set_items": "Netzschwamm und Badeente in Rosa"
           }
         },
         "coconut": {
@@ -54,7 +57,7 @@
             "ink": "#1D1D1B",
             "button": "#1D3F52",
             "dot": "#F7F5F0",
-            "tint": "#ECEAE4",
+            "tint": "#E8E5DE",
             "circle": "#F8F7F3",
             "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
             "set_product": "feelgood-set-coconut",
@@ -65,7 +68,9 @@
             "gallery_1": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
             "gallery_2": "shopify://shop_images/soapsister-pdp-coconut-4.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-3.jpg",
-            "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-5.jpg"
+            "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-5.jpg",
+            "ink_soft": "#1D1D1B",
+            "set_items": "Netzschwamm und Badeente in Weiß"
           }
         },
         "marshmallow": {
@@ -89,7 +94,9 @@
             "gallery_1": "shopify://shop_images/soapsister-pdp-marshmallow-1.jpg",
             "gallery_2": "shopify://shop_images/soapsister-pdp-marshmallow-4.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg",
-            "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg"
+            "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg",
+            "ink_soft": "#1D1D1B",
+            "set_items": "Netzschwamm und Badeente in Blau"
           }
         }
       },
