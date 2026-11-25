@@ -13,7 +13,7 @@
         {%- assign p = block.settings.product -%}
         {%- assign c = block.settings -%}
         {%- assign sel = p.selected_or_first_available_variant -%}
-        <ssh-card class="ssh-card" style="--tint:{{ c.tint }};--mix:{{ c.tint_strength }}%;--ink:{{ c.ink }}" {{ block.shopify_attributes }}>
+        <ssh-card class="ssh-card" style="--tint:{{ c.tint }};--mix:{{ c.tint_strength }}%;--ink:{{ c.ink }};--txt:{{ c.text_color | default: c.ink }}" {{ block.shopify_attributes }}>
           {%- if c.image != blank -%}
             {{ c.image | image_url: width: 1000 | image_tag: class: 'ssh-card__img', alt: c.image_alt, loading: 'lazy', sizes: '(max-width: 749px) 100vw, 30vw', widths: '400, 600, 800, 1000' }}
           {%- elsif p != blank and p.featured_image -%}
@@ -63,11 +63,11 @@
 
 <style>
   .ssh-sorten__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-  .ssh-card{display:flex;flex-direction:column;padding:10px;border-radius:26px;background:color-mix(in srgb,var(--tint) var(--mix,24%),#FFFFFF);color:var(--ink)}
+  .ssh-card{display:flex;flex-direction:column;padding:10px;border-radius:26px;background:color-mix(in srgb,var(--tint) var(--mix,24%),#FFFFFF);color:var(--txt,var(--ink))}
   .ssh-card__img{width:100%;height:auto;aspect-ratio:4/3.5;object-fit:cover;object-position:50% 45%;border-radius:18px;display:block}
   .ssh-card__body{padding:20px 10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
   .ssh-card__top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-  .ssh-card__name{margin:0;overflow-wrap:normal;word-break:normal;font-family:var(--ss-display,sans-serif);font-weight:900;font-size:clamp(32px,2.8vw,46px);line-height:.95;text-transform:uppercase;color:var(--ink)}
+  .ssh-card__name{margin:0;overflow-wrap:normal;word-break:normal;font-family:var(--ss-display,sans-serif);font-weight:900;font-size:clamp(32px,2.8vw,46px);line-height:.95;text-transform:uppercase;color:var(--txt,var(--ink))}
   .ssh-card__price{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right;flex:0 0 auto;padding-top:4px}
   .ssh-card__amount{font-family:var(--ss-display,sans-serif);font-weight:900;font-size:clamp(22px,1.8vw,28px);line-height:1}
   .ssh-card__unit{font-size:13px;opacity:.75;white-space:nowrap}
@@ -76,9 +76,9 @@
   .ssh-seg{border:2px solid color-mix(in srgb,var(--ink) 35%,transparent);margin:0;padding:4px;display:flex;gap:4px;border-radius:999px;background:#FFFFFF}
   .ssh-seg__opt{position:relative;flex:1 1 0;display:block}
   .ssh-seg__opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
-  .ssh-seg__opt span{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:.08em;color:var(--ink);transition:background .2s,box-shadow .2s}
+  .ssh-seg__opt span{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:.08em;color:var(--txt,var(--ink));transition:background .2s,box-shadow .2s}
   .ssh-seg__opt input:not(:checked):not(:disabled):hover + span{background:color-mix(in srgb,var(--ink) 10%,#FFFFFF)}
-  .ssh-seg__opt input:checked + span{background:var(--tint);color:var(--ink);box-shadow:0 3px 10px color-mix(in srgb,var(--ink) 25%,transparent)}
+  .ssh-seg__opt input:checked + span{background:var(--tint);color:var(--txt,var(--ink));box-shadow:0 3px 10px color-mix(in srgb,var(--ink) 25%,transparent)}
   .ssh-seg__opt input:focus-visible + span{outline:3px solid var(--ink);outline-offset:2px}
   .ssh-seg__opt input:disabled + span{opacity:.4}
   .ssh-card .ssh-card__add{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:var(--ink);color:#EAEDE8;padding:16px 24px;font-size:17px}
@@ -115,7 +115,7 @@
     { "type": "text", "id": "heading", "label": "Überschrift", "default": "Deine Sorte." },
     { "type": "text", "id": "text", "label": "Text", "default": "Drei Düfte, ein Gefühl: luftig aufgeschlagen, mit Aloe Vera und Mandelöl." },
     { "type": "color", "id": "bg", "label": "Hintergrund", "default": "#EAEDE8" },
-    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#1D3F51" },
+    { "type": "color", "id": "ink", "label": "Textfarbe", "default": "#1D1D1B" },
     {"type": "header", "content": "Bubble-Pfad"},
     {"type": "checkbox", "id": "show_trail", "label": "Bubble-Pfad zeigen", "default": true},
     {"type": "select", "id": "tone", "label": "Bubble-Farbe", "options": [{"value": "light", "label": "Rosa (heller Hintergrund)"}, {"value": "dark", "label": "Hell (dunkler Hintergrund)"}], "default": "light"},
@@ -139,7 +139,8 @@
         { "type": "text", "id": "image_alt", "label": "Alt-Text Bild" },
         { "type": "color", "id": "tint", "label": "Farbe der Sorte (CI)", "default": "#E08FBC" },
         { "type": "range", "id": "tint_strength", "min": 8, "max": 100, "step": 2, "unit": "%", "label": "Stärke der Kartenfarbe", "default": 24 },
-        { "type": "color", "id": "ink", "label": "Akzentfarbe", "default": "#751F65" }
+        { "type": "color", "id": "ink", "label": "Akzentfarbe (Button, Rahmen)", "default": "#751F65" },
+        { "type": "color", "id": "text_color", "label": "Schriftfarbe (leer = Akzentfarbe)" }
       ]
     }
   ],

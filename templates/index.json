@@ -2022,7 +2022,7 @@
             "product": "duschmousse-coconut",
             "title": "Pop. Coconut.",
             "text": "Duftet nach Kokos, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
-            "ink": "#1D3F51",
+            "ink": "#1D1D1B",
             "center_x": 20.8,
             "center_y": 51.4,
             "duck": "shopify://shop_images/soapsister-hero-badeente-weiss.png",
@@ -2036,7 +2036,7 @@
             "product": "duschmousse-marshmallow",
             "title": "Pop. Marshmallow.",
             "text": "Duftet nach Buttermilch, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
-            "ink": "#1D3F51",
+            "ink": "#1D1D1B",
             "center_x": 50.2,
             "center_y": 51.4,
             "duck": "shopify://shop_images/soapsister-hero-badeente-blau.png",
@@ -2067,7 +2067,8 @@
     "ssh_sorten": {
       "type": "ss-home-sorten",
       "settings": {
-        "show_trail": true
+        "show_trail": true,
+        "ink": "#1D1D1B"
       },
       "blocks": {
         "lollipop": {
@@ -2091,7 +2092,8 @@
             "image": "shopify://shop_images/soapsister-duschmousse-coconut-karte.jpg",
             "image_alt": "Duschmousse Coconut mit Kokos-Duft zwischen frischen Kokosnüssen",
             "tint": "#CAC8C4",
-            "ink": "#1D3F51"
+            "ink": "#1D3F51",
+            "text_color": "#1D1D1B"
           }
         },
         "marshmallow": {
@@ -2104,7 +2106,8 @@
             "image_alt": "Duschmousse Marshmallow mit Buttermilch-Duft zwischen hellblauen Marshmallows",
             "tint": "#21B5EA",
             "ink": "#1D3F51",
-            "tint_strength": 16
+            "tint_strength": 16,
+            "text_color": "#1D1D1B"
           }
         }
       },
@@ -2227,7 +2230,8 @@
     "ssh_usp": {
       "type": "ss-home-usp",
       "settings": {
-        "show_trail": true
+        "show_trail": true,
+        "ink": "#1D1D1B"
       },
       "blocks": {
         "haut": {
