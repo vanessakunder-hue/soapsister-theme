@@ -353,11 +353,15 @@
     },
     "ssh_mega": {
       "type": "ss-mega-menu",
-      "settings": {
-        "menu_item": "Shop",
-        "base": "#FBF0F6"
-      },
+      "settings": {},
       "blocks": {
+        "p_shop": {
+          "type": "panel",
+          "settings": {
+            "menu_item": "Shop",
+            "base": "#FBF0F6"
+          }
+        },
         "l_lollipop": {
           "type": "link",
           "settings": {
@@ -425,9 +429,160 @@
             "link": "/collections/badeente-netzschwamm",
             "tint": "#DDF0FA"
           }
+        },
+        "p_mousse": {
+          "type": "panel",
+          "settings": {
+            "menu_item": "Duschmousse",
+            "base": "#FBF0F6"
+          }
+        },
+        "m_lollipop": {
+          "type": "link",
+          "settings": {
+            "label": "Lollipop",
+            "link": "/products/duschmousse-lollipop"
+          }
+        },
+        "m_coconut": {
+          "type": "link",
+          "settings": {
+            "label": "Coconut",
+            "link": "/products/duschmousse-coconut"
+          }
+        },
+        "m_marshmallow": {
+          "type": "link",
+          "settings": {
+            "label": "Marshmallow",
+            "link": "/products/duschmousse-marshmallow"
+          }
+        },
+        "m_probier": {
+          "type": "link",
+          "settings": {
+            "label": "Probiergröße 75 g",
+            "link": "/collections/duschmousse"
+          }
+        },
+        "m_alle": {
+          "type": "link",
+          "settings": {
+            "label": "Alle Duschmousse",
+            "link": "/collections/duschmousse"
+          }
+        },
+        "mc_lollipop": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-duschmousse-lollipop-karte.jpg",
+            "focus": "object-position:50% 50%",
+            "title": "Lollipop",
+            "subtitle": "Duftet nach Orange und Granatapfel",
+            "link": "/products/duschmousse-lollipop",
+            "tint": "#F6D3E6"
+          }
+        },
+        "mc_coconut": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-duschmousse-coconut-karte.jpg",
+            "focus": "object-position:50% 50%",
+            "title": "Coconut",
+            "subtitle": "Duftet nach Kokos",
+            "link": "/products/duschmousse-coconut",
+            "tint": "#F4F4F1"
+          }
+        },
+        "mc_marshmallow": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-duschmousse-marshmallow-karte.jpg",
+            "focus": "object-position:50% 50%",
+            "title": "Marshmallow",
+            "subtitle": "Duftet nach Buttermilch",
+            "link": "/products/duschmousse-marshmallow",
+            "tint": "#DDF0FA"
+          }
+        },
+        "p_sets": {
+          "type": "panel",
+          "settings": {
+            "menu_item": "Feelgood Set",
+            "base": "#FBF0F6"
+          }
+        },
+        "s_lollipop": {
+          "type": "link",
+          "settings": {
+            "label": "Set Lollipop",
+            "link": "/products/feelgood-set-lollipop"
+          }
+        },
+        "s_coconut": {
+          "type": "link",
+          "settings": {
+            "label": "Set Coconut",
+            "link": "/products/feelgood-set-coconut"
+          }
+        },
+        "s_marshmallow": {
+          "type": "link",
+          "settings": {
+            "label": "Set Marshmallow",
+            "link": "/products/feelgood-set-marshmallow"
+          }
+        },
+        "s_alle": {
+          "type": "link",
+          "settings": {
+            "label": "Alle Sets",
+            "link": "/collections/sets"
+          }
+        },
+        "s_extras": {
+          "type": "link",
+          "settings": {
+            "label": "Badeente & Netzschwamm",
+            "link": "/collections/badeente-netzschwamm"
+          }
+        },
+        "sc_lollipop": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/set_lollipop_tiegel_schwamm_ente_v3.png",
+            "focus": "object-position:50% 50%",
+            "title": "Lollipop",
+            "subtitle": "Set in Rosa",
+            "link": "/products/feelgood-set-lollipop",
+            "tint": "#F6D3E6"
+          }
+        },
+        "sc_coconut": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/set_coconut_tiegel_schwamm_ente.png",
+            "focus": "object-position:50% 50%",
+            "title": "Coconut",
+            "subtitle": "Set in Weiß",
+            "link": "/products/feelgood-set-coconut",
+            "tint": "#F4F4F1"
+          }
+        },
+        "sc_marshmallow": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/set_marshmallow_tiegel_schwamm_ente_5838e78a-170e-4a4f-9bdf-316946ab6238.png",
+            "focus": "object-position:50% 50%",
+            "title": "Marshmallow",
+            "subtitle": "Set in Blau",
+            "link": "/products/feelgood-set-marshmallow",
+            "tint": "#DDF0FA"
+          }
         }
       },
       "block_order": [
+        "p_shop",
         "l_lollipop",
         "l_coconut",
         "l_marshmallow",
@@ -435,7 +590,25 @@
         "l_alle",
         "c_mousse",
         "c_sets",
-        "c_extras"
+        "c_extras",
+        "p_mousse",
+        "m_lollipop",
+        "m_coconut",
+        "m_marshmallow",
+        "m_probier",
+        "m_alle",
+        "mc_lollipop",
+        "mc_coconut",
+        "mc_marshmallow",
+        "p_sets",
+        "s_lollipop",
+        "s_coconut",
+        "s_marshmallow",
+        "s_alle",
+        "s_extras",
+        "sc_lollipop",
+        "sc_coconut",
+        "sc_marshmallow"
       ]
     }
   },

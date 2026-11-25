@@ -1,39 +1,46 @@
 {%- comment -%}
   Soapsister Mega-Menue nach Design "Navi 2: Sahnehauben-Menue" (25.11.2026).
-  Oeffnet sich beim Hovern ueber den eingestellten Hauptmenuepunkt (ab 990 px).
-  Links: Textlinks (Bloecke "Link"), rechts: Bildkarten (Bloecke "Karte"). Beim Hover ueber
-  eine Karte faerbt sich die Flaeche in deren Ton.
+  Oeffnet sich beim Hovern ueber einen Hauptmenuepunkt (ab 990 px).
+  Ein Block "Panel" startet ein Menue fuer einen Menuepunkt. Die folgenden Bloecke "Link" (links)
+  und "Karte" (rechts) gehoeren zu diesem Panel. Beim Hover ueber eine Karte faerbt sich die Flaeche.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
-{%- assign st = section.settings -%}
+{%- assign edge = 'M0 0H1440V30a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0Z' -%}
 <ssh-mega class="ss-scope ssh-mega" data-close-delay="220">
-  <div class="ssh-n2" id="SshNav2-{{ section.id }}" data-for="{{ st.menu_item | strip | downcase | escape }}" data-base="{{ st.base }}" role="region" aria-label="{{ st.menu_item | escape }}" style="--sheet:{{ st.base }}">
-    <div class="ssh-n2__sheet">
-      <ul class="ssh-n2__links" role="list">
-        {%- for b in section.blocks -%}
-          {%- if b.type == 'link' -%}
-            <li {{ b.shopify_attributes }}><a class="ssh-n2__link" href="{{ b.settings.link | default: routes.all_products_collection_url }}">{{ b.settings.label | escape }}</a></li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-      <div class="ssh-n2__cards">
-        {%- for b in section.blocks -%}
-          {%- if b.type == 'card' -%}
-            <a class="ssh-n2__card" href="{{ b.settings.link | default: routes.all_products_collection_url }}" data-tint="{{ b.settings.tint }}" {{ b.shopify_attributes }}>
-              <span class="ssh-n2__disc">
-                {%- if b.settings.image != blank -%}
-                  {{ b.settings.image | image_url: width: 700 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 22vw, 1px', widths: '400, 560, 700', style: b.settings.focus }}
-                {%- endif -%}
-              </span>
-              <span class="ssh-n2__t">{{ b.settings.title | escape }}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-              {%- if b.settings.subtitle != blank -%}<span class="ssh-n2__s">{{ b.settings.subtitle | escape }}</span>{%- endif -%}
-            </a>
-          {%- endif -%}
-        {%- endfor -%}
+  {%- for p in section.blocks -%}
+    {%- if p.type == 'panel' -%}
+      {%- assign pnext = forloop.index -%}
+      <div class="ssh-n2" id="SshNav2-{{ section.id }}-{{ forloop.index }}" data-for="{{ p.settings.menu_item | strip | downcase | escape }}" data-base="{{ p.settings.base }}" role="region" aria-label="{{ p.settings.menu_item | escape }}" style="--sheet:{{ p.settings.base }}" {{ p.shopify_attributes }}>
+        <div class="ssh-n2__sheet">
+          <ul class="ssh-n2__links" role="list">
+            {%- for b in section.blocks offset: pnext -%}
+              {%- if b.type == 'panel' -%}{%- break -%}{%- endif -%}
+              {%- if b.type == 'link' -%}
+                <li {{ b.shopify_attributes }}><a class="ssh-n2__link" href="{{ b.settings.link | default: routes.all_products_collection_url }}">{{ b.settings.label | escape }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+          <div class="ssh-n2__cards">
+            {%- for b in section.blocks offset: pnext -%}
+              {%- if b.type == 'panel' -%}{%- break -%}{%- endif -%}
+              {%- if b.type == 'card' -%}
+                <a class="ssh-n2__card" href="{{ b.settings.link | default: routes.all_products_collection_url }}" data-tint="{{ b.settings.tint }}" {{ b.shopify_attributes }}>
+                  <span class="ssh-n2__disc">
+                    {%- if b.settings.image != blank -%}
+                      {{ b.settings.image | image_url: width: 700 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 18vw, 1px', widths: '400, 560, 700', style: b.settings.focus }}
+                    {%- endif -%}
+                  </span>
+                  <span class="ssh-n2__t">{{ b.settings.title | escape }}<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                  {%- if b.settings.subtitle != blank -%}<span class="ssh-n2__s">{{ b.settings.subtitle | escape }}</span>{%- endif -%}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        <svg class="ssh-n2__edge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="{{ edge }}"/></svg>
       </div>
-    </div>
-    <svg class="ssh-n2__edge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 0H1440V30a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0a30 30 0 0 1 -60 0Z"/></svg>
-  </div>
+    {%- endif -%}
+  {%- endfor -%}
 </ssh-mega>
 
 <style>
@@ -61,7 +68,6 @@
   [aria-expanded="true"] .ssh-n2-chev{transform:rotate(180deg)}
   [data-ssh-mega] .menu-list__link-title{white-space:nowrap}
 
-
   @media (max-width:989px){.ssh-mega{display:none}}
   @media (prefers-reduced-motion:reduce){
     .ssh-n2,.ssh-n2__sheet,.ssh-n2__edge path,.ssh-n2__disc img,.ssh-n2__link,.ssh-n2-chev,.ssh-n2__t svg{transition:none}
@@ -73,61 +79,70 @@
     customElements.define('ssh-mega', class extends HTMLElement {
       connectedCallback() {
         this.delay = Number(this.dataset.closeDelay || 220);
-        this.panel = this.querySelector('.ssh-n2');
-        if (!this.panel) return;
-        const want = this.panel.dataset.for.trim();
-        const p = this.panel;
+        this.panels = [...this.querySelectorAll('.ssh-n2')];
+        this.links = [];
+        const map = {};
+        this.panels.forEach((p) => { map[p.dataset.for.trim()] = p; });
+        const chev = '<svg class="ssh-n2-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
         document.querySelectorAll('#header-component .menu-list__link').forEach((a) => {
           const titleEl = a.querySelector('.menu-list__link-title') || a;
-          if (titleEl.textContent.trim().toLowerCase() !== want || a.dataset.sshMega) return;
+          const panel = map[titleEl.textContent.trim().toLowerCase()];
+          if (!panel || a.dataset.sshMega) return;
           a.dataset.sshMega = '1';
-          this.link = a;
           a.setAttribute('aria-expanded', 'false');
-          a.setAttribute('aria-controls', p.id);
-          if (!a.querySelector('.ssh-n2-chev')) titleEl.insertAdjacentHTML('beforeend', '<svg class="ssh-n2-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
-          a.addEventListener('mouseenter', () => this.open());
+          a.setAttribute('aria-controls', panel.id);
+          if (!a.querySelector('.ssh-n2-chev')) titleEl.insertAdjacentHTML('beforeend', chev);
+          this.links.push({ a, panel });
+          a.addEventListener('mouseenter', () => this.open(panel));
           a.addEventListener('mouseleave', () => this.later());
-          a.addEventListener('focus', () => this.open());
+          a.addEventListener('focus', () => this.open(panel));
           a.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowDown') { e.preventDefault(); this.open(); const f = p.querySelector('a'); if (f) f.focus(); }
+            if (e.key === 'ArrowDown') { e.preventDefault(); this.open(panel); const f = panel.querySelector('a'); if (f) f.focus(); }
             if (e.key === 'Escape') this.close();
           });
         });
-        p.addEventListener('mouseenter', () => clearTimeout(this.t));
-        p.addEventListener('mouseleave', () => this.later());
-        p.addEventListener('keydown', (e) => { if (e.key === 'Escape') { this.close(); if (this.link) this.link.focus(); } });
-        p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget) && e.relatedTarget !== this.link) this.later(); });
-        p.querySelectorAll('.ssh-n2__card').forEach((c) => {
-          const on = () => p.style.setProperty('--sheet', c.dataset.tint || p.dataset.base);
-          const off = () => p.style.setProperty('--sheet', p.dataset.base);
-          c.addEventListener('mouseenter', on);
-          c.addEventListener('focus', on);
-          c.addEventListener('mouseleave', off);
-          c.addEventListener('blur', off);
+        this.panels.forEach((p) => {
+          p.addEventListener('mouseenter', () => clearTimeout(this.t));
+          p.addEventListener('mouseleave', () => this.later());
+          p.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const l = this.linkFor(p); this.close(); if (l) l.focus(); } });
+          p.addEventListener('focusout', (e) => { if (!p.contains(e.relatedTarget) && e.relatedTarget !== this.linkFor(p)) this.later(); });
+          p.querySelectorAll('.ssh-n2__card').forEach((c) => {
+            const on = () => p.style.setProperty('--sheet', c.dataset.tint || p.dataset.base);
+            const off = () => p.style.setProperty('--sheet', p.dataset.base);
+            c.addEventListener('mouseenter', on);
+            c.addEventListener('focus', on);
+            c.addEventListener('mouseleave', off);
+            c.addEventListener('blur', off);
+          });
         });
-        this.onDoc = (e) => { if (this.isOpen && !p.contains(e.target) && !(this.link && this.link.contains(e.target))) this.close(); };
+        this.onDoc = (e) => {
+          if (!this.current) return;
+          if (this.current.contains(e.target) || this.links.some((l) => l.a.contains(e.target))) return;
+          this.close();
+        };
         document.addEventListener('pointerdown', this.onDoc);
       }
       disconnectedCallback() { if (this.onDoc) document.removeEventListener('pointerdown', this.onDoc); }
+      linkFor(p) { const l = this.links.find((x) => x.panel === p); return l ? l.a : null; }
       place() {
         const h = document.querySelector('#header-component');
         if (h) this.style.setProperty('--ssh-mega-top', Math.round(h.getBoundingClientRect().bottom) + 'px');
       }
-      open() {
+      open(panel) {
         if (!window.matchMedia('(min-width: 990px)').matches) return;
         clearTimeout(this.t);
         this.place();
-        this.panel.classList.add('is-open');
-        this.isOpen = true;
-        if (this.link) this.link.setAttribute('aria-expanded', 'true');
+        this.panels.forEach((p) => { if (p !== panel) { p.classList.remove('is-open'); p.style.setProperty('--sheet', p.dataset.base); } });
+        panel.classList.add('is-open');
+        this.links.forEach((l) => l.a.setAttribute('aria-expanded', String(l.panel === panel)));
+        this.current = panel;
       }
       later() { clearTimeout(this.t); this.t = setTimeout(() => this.close(), this.delay); }
       close() {
         clearTimeout(this.t);
-        this.panel.classList.remove('is-open');
-        this.panel.style.setProperty('--sheet', this.panel.dataset.base);
-        this.isOpen = false;
-        if (this.link) this.link.setAttribute('aria-expanded', 'false');
+        this.panels.forEach((p) => { p.classList.remove('is-open'); p.style.setProperty('--sheet', p.dataset.base); });
+        this.links.forEach((l) => l.a.setAttribute('aria-expanded', 'false'));
+        this.current = null;
       }
     });
   }
@@ -140,11 +155,17 @@
   "class": "ssh-mega-section",
   "enabled_on": { "groups": ["header", "footer"] },
   "settings": [
-    { "type": "paragraph", "content": "Sahnehauben-Menü: öffnet sich beim Hovern über den Menüpunkt (Desktop). Links Textlinks, rechts Bildkarten." },
-    { "type": "text", "id": "menu_item", "label": "Menüpunkt", "info": "Genau wie im Hauptmenü, z. B. Shop", "default": "Shop" },
-    { "type": "color", "id": "base", "label": "Flächenfarbe", "default": "#FBF0F6" }
+    { "type": "paragraph", "content": "Sahnehauben-Menü (Desktop). Ein Block \"Panel\" startet das Menü für einen Menüpunkt. Die Links und Karten darunter gehören zu diesem Panel, bis das nächste Panel kommt." }
   ],
   "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        { "type": "text", "id": "menu_item", "label": "Menüpunkt", "info": "Genau wie im Hauptmenü, z. B. Shop", "default": "Shop" },
+        { "type": "color", "id": "base", "label": "Flächenfarbe", "default": "#FBF0F6" }
+      ]
+    },
     {
       "type": "link",
       "name": "Link",
