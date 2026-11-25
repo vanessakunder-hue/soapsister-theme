@@ -223,7 +223,7 @@
           {%- assign ik = 'step' | append: i | append: '_image' -%}
           {%- if st[tk] == blank -%}{%- continue -%}{%- endif -%}
           <li>
-            {%- if st[ik] != blank -%}{{ st[ik] | image_url: width: 300 | image_tag: alt: '', loading: 'lazy', sizes: '120px', widths: '150, 240, 300', class: 'ssh-pdp__stepimg' }}{%- endif -%}
+            {%- if st[ik] != blank -%}{{ st[ik] | image_url: width: 480 | image_tag: alt: '', loading: 'lazy', sizes: '(max-width: 749px) 120px, 168px', widths: '200, 300, 400, 480', class: 'ssh-pdp__stepimg' }}{%- endif -%}
             <div><span class="ssh-pdp__steptitle">{{ st[tk] | escape }}</span><p>{{ st[xk] | escape }}</p></div>
           </li>
         {%- endfor -%}
@@ -374,10 +374,11 @@
   .ssh-pdp__steps{padding:120px 7.4% 0}
   .ssh-pdp__steps .ssh-pdp__h2{margin-bottom:40px}
   .ssh-pdp__steplist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
-  .ssh-pdp__steplist li{display:flex;gap:20px;align-items:center}
-  .ssh-pdp__stepimg{width:120px;height:120px;flex:0 0 120px;border-radius:50%;object-fit:cover;display:block}
-  .ssh-pdp__steptitle{display:block;font-weight:600;font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
-  .ssh-pdp__steplist p{margin:4px 0 0;font-size:18px;line-height:1.4}
+  .ssh-pdp__steplist li{display:flex;gap:22px;align-items:center;min-width:0}
+  .ssh-pdp__steplist li > div{min-width:0}
+  .ssh-pdp__stepimg{width:168px;height:168px;flex:0 0 168px;border-radius:50%;object-fit:cover;display:block}
+  .ssh-pdp__steptitle{display:block;font-weight:600;font-size:24px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+  .ssh-pdp__steplist p{margin:6px 0 0;font-size:19px;line-height:1.4}
   .ssh-pdp__set{margin-top:120px;background:var(--tint);color:var(--ink)}
   .ssh-pdp__set-in{padding:72px 7.4%;display:grid;grid-template-columns:minmax(0,40%) minmax(0,520px);justify-content:space-between;align-items:center;gap:56px}
   .ssh-pdp__set-media{position:relative}
@@ -441,7 +442,9 @@
     .ssh-pdp__h2{font-size:48px}
     .ssh-pdp__steps{padding:80px 20px 0}
     .ssh-pdp__steplist{grid-template-columns:minmax(0,1fr);gap:24px}
-    .ssh-pdp__stepimg{width:96px;height:96px;flex-basis:96px}
+    .ssh-pdp__stepimg{width:120px;height:120px;flex-basis:120px}
+    .ssh-pdp__steptitle{font-size:21px;letter-spacing:.04em}
+    .ssh-pdp__steplist li{gap:18px}
     .ssh-pdp__set{margin-top:80px}
     .ssh-pdp__set-in{padding:48px 20px 56px}
     .ssh-pdp__set-img{height:260px}
