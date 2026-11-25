@@ -17,8 +17,7 @@
         "kind": "Duschmousse",
         "step1_image": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
         "step2_image": "shopify://shop_images/soapsister-pdp-schritt-aufschaeumen.jpg",
-        "step3_image": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg",
-        "video": "shopify://files/videos/soapsister-pdp-bubbles.mp4"
+        "step3_image": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg"
       },
       "blocks": {
         "lollipop": {
