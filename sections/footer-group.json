@@ -350,6 +350,90 @@
         "legal": "<p>Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der <a href=\"/policies/privacy-policy\" title=\"Datenschutzerklärung\">Datenschutzerklärung</a>.</p>",
         "show_trail": true
       }
+    },
+    "ssh_mega": {
+      "type": "ss-mega-menu",
+      "settings": {},
+      "blocks": {
+        "shop_mousse": {
+          "type": "group",
+          "settings": {
+            "menu_item": "Shop",
+            "title": "Duschmousse",
+            "subtitle": "Drei Düfte, luftig aufgeschlagen",
+            "link": "/collections/duschmousse",
+            "products": [
+              "duschmousse-lollipop",
+              "duschmousse-coconut",
+              "duschmousse-marshmallow"
+            ]
+          }
+        },
+        "shop_sets": {
+          "type": "group",
+          "settings": {
+            "menu_item": "Shop",
+            "title": "Feelgood Sets",
+            "subtitle": "Mousse, Netzschwamm und Badeente",
+            "link": "/collections/all",
+            "products": [
+              "feelgood-set-lollipop",
+              "feelgood-set-coconut",
+              "feelgood-set-marshmallow"
+            ]
+          }
+        },
+        "shop_extras": {
+          "type": "group",
+          "settings": {
+            "menu_item": "Shop",
+            "title": "Badeente & Netzschwamm",
+            "subtitle": "Für den extra Fluff",
+            "link": "/collections/all",
+            "products": [
+              "badeente-rosa",
+              "badeente-blau",
+              "netzschwamm-weiss",
+              "netzschwamm-rosa"
+            ]
+          }
+        },
+        "mousse": {
+          "type": "group",
+          "settings": {
+            "menu_item": "Duschmousse",
+            "title": "Duschmousse",
+            "subtitle": "Lollipop, Coconut und Marshmallow",
+            "link": "/collections/duschmousse",
+            "products": [
+              "duschmousse-lollipop",
+              "duschmousse-coconut",
+              "duschmousse-marshmallow"
+            ]
+          }
+        },
+        "sets": {
+          "type": "group",
+          "settings": {
+            "menu_item": "Feelgood Set",
+            "title": "Feelgood Sets",
+            "subtitle": "Dein Duschmoment im Set",
+            "link": "/collections/all",
+            "products": [
+              "feelgood-set-lollipop",
+              "feelgood-set-coconut",
+              "feelgood-set-marshmallow"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "shop_mousse",
+        "shop_sets",
+        "shop_extras",
+        "mousse",
+        "sets"
+      ]
     }
   },
   "order": [
@@ -357,6 +441,7 @@
     "footer_utilities_jLGE8U",
     "ss_newsletter",
     "ssh_newsletter",
-    "ss_footer"
+    "ss_footer",
+    "ssh_mega"
   ]
 }
