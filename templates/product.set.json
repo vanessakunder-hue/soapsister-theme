@@ -70,7 +70,9 @@
             "gallery_2": "shopify://shop_images/soapsister-set-marshmallow-schaum.jpg",
             "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-1.jpg",
             "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg",
-            "gift_image": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg"
+            "gift_image": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg",
+            "ritual_bg": "#1D1D1B",
+            "ritual_accent": "#21B5EA"
           }
         }
       },

@@ -12,7 +12,7 @@
 {%- assign c = cur.settings -%}
 {%- assign sel = product.selected_or_first_available_variant -%}
 {%- assign fid = 'SshSetForm-' | append: section.id -%}
-<ssh-set class="ss-scope ssh-set" id="SshSet-{{ section.id }}" data-bubble="{{ 'soapsister-seifenblase-rosa.png' | file_url }}" style="--ink:{{ c.ink }};--btn:{{ c.button }};--tint:{{ c.tint }}">
+<ssh-set class="ss-scope ssh-set" id="SshSet-{{ section.id }}" data-bubble="{{ 'soapsister-seifenblase-rosa.png' | file_url }}" style="--ink:{{ c.ink }};--btn:{{ c.button }};--tint:{{ c.tint }};--rbg:{{ c.ritual_bg | default: '#751F65' }};--racc:{{ c.ritual_accent | default: '#E08FBC' }}">
   <nav class="ssh-set__crumbs" aria-label="Brotkrümel"><a href="{{ st.crumb_link | default: '/collections/sets' }}">{{ st.crumb_label | escape }}</a> <span aria-hidden="true">/</span> <span aria-current="page">{{ st.title | escape }}</span></nav>
 
   <section class="ssh-set__main">
@@ -88,7 +88,7 @@
                   {%- if sp == blank -%}{%- continue -%}{%- endif -%}
                   {%- assign sv = sp.selected_or_first_available_variant -%}
                   <label class="ssh-set__flav">
-                    <input type="radio" name="ssh-set-flavor" value="{{ b.id }}" data-id="{{ sv.id }}" data-ok="{{ sv.available }}" data-url="{{ sp.url }}" data-name="{{ b.settings.name | escape }}" data-ink="{{ b.settings.ink }}" data-btn="{{ b.settings.button }}" data-tint="{{ b.settings.tint }}" data-title="{{ sp.title | escape }}" {% if b.id == cur.id %}checked{% endif %}>
+                    <input type="radio" name="ssh-set-flavor" value="{{ b.id }}" data-id="{{ sv.id }}" data-ok="{{ sv.available }}" data-url="{{ sp.url }}" data-name="{{ b.settings.name | escape }}" data-ink="{{ b.settings.ink }}" data-btn="{{ b.settings.button }}" data-tint="{{ b.settings.tint }}" data-rbg="{{ b.settings.ritual_bg | default: '#751F65' }}" data-racc="{{ b.settings.ritual_accent | default: '#E08FBC' }}" data-title="{{ sp.title | escape }}" {% if b.id == cur.id %}checked{% endif %}>
                     <span class="ssh-set__flav-box"><span class="ssh-set__dot" style="background:{{ b.settings.dot }}" aria-hidden="true"></span><span class="ssh-set__flav-t">{{ b.settings.name | escape }}</span></span>
                   </label>
                 {%- endfor -%}
@@ -276,9 +276,9 @@
   .ssh-set__acc-body p{margin:0 0 10px}
   .ssh-set__acc-body a{text-decoration:underline;text-underline-offset:3px}
   .ssh-set__h2{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:72px;line-height:.92}
-  .ssh-set__ritual{margin-top:120px;background:#751F65;color:#FFFFFF;padding:96px 7.4%}
+  .ssh-set__ritual{margin-top:120px;background:var(--rbg,#751F65);transition:background .4s;color:#FFFFFF;padding:96px 7.4%}
   .ssh-set__ritual-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
-  .ssh-set__ritual-head .ssh-set__h2 span{color:#E08FBC}
+  .ssh-set__ritual-head .ssh-set__h2 span{color:var(--racc,#E08FBC)}
   .ssh-set__ritual-head p{margin:0;font-size:20px;line-height:1.45;max-width:34ch}
   .ssh-set__rlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
   .ssh-set__rlist li{display:flex;flex-direction:column;gap:16px}
@@ -364,6 +364,8 @@
         this.style.setProperty('--ink', r.dataset.ink);
         this.style.setProperty('--btn', r.dataset.btn);
         this.style.setProperty('--tint', r.dataset.tint);
+        this.style.setProperty('--rbg', r.dataset.rbg);
+        this.style.setProperty('--racc', r.dataset.racc);
         this.querySelectorAll('[data-fl]').forEach((el) => { el.hidden = el.dataset.fl !== k; });
         this.querySelector('[data-name]').textContent = r.dataset.name;
         this.fit();
@@ -488,6 +490,8 @@
         { "type": "color", "id": "button", "label": "Farbe Buttons", "default": "#751F65" },
         { "type": "color", "id": "tint", "label": "Hintergrund Kauffläche und Galerie", "default": "#F6E2EE" },
         { "type": "color", "id": "dot", "label": "Farbpunkt", "default": "#E08FBC" },
+        { "type": "color", "id": "ritual_bg", "label": "Hintergrund Drei Teile", "default": "#751F65" },
+        { "type": "color", "id": "ritual_accent", "label": "Farbe zweite Zeile Drei Teile", "default": "#E08FBC" },
         { "type": "header", "content": "Galerie dieser Sorte (nach dem Set-Bild)" },
         { "type": "image_picker", "id": "gallery_2", "label": "Bild 2" },
         { "type": "image_picker", "id": "gallery_3", "label": "Bild 3" },
