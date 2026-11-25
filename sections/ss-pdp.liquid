@@ -6,6 +6,7 @@
   In den Warenkorb nutzt die Horizon-Events, damit sich der Warenkorb-Drawer oeffnet.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
+<script src="{{ 'ssh-bubble-fly.js' | asset_url }}" defer></script>
 {%- assign st = section.settings -%}
 {%- assign cur = nil -%}
 {%- for b in section.blocks -%}{%- if b.settings.product.id == product.id -%}{%- assign cur = b -%}{%- break -%}{%- endif -%}{%- endfor -%}
@@ -17,7 +18,7 @@
 {%- assign name = c.name | default: product.title -%}
 {%- assign sel = product.selected_or_first_available_variant -%}
 {%- assign fid = 'SshPdpForm-' | append: section.id -%}
-<ssh-pdp class="ss-scope ssh-pdp" id="SshPdp-{{ section.id }}" style="--ink:{{ ink }};--ink2:{{ ink2 }};--btn:{{ btn }};--tint:{{ tint }};--head:{{ c.heading_color | default: ink }}">
+<ssh-pdp class="ss-scope ssh-pdp" id="SshPdp-{{ section.id }}" data-bubble="{{ 'soapsister-seifenblase-rosa.png' | file_url }}" style="--ink:{{ ink }};--ink2:{{ ink2 }};--btn:{{ btn }};--tint:{{ tint }};--head:{{ c.heading_color | default: ink }}">
   <nav class="ssh-pdp__crumbs" aria-label="Brotkrümel"><a href="{{ st.crumb_link | default: '/collections/duschmousse' }}">{{ st.crumb_label | escape }}</a> <span aria-hidden="true">/</span> <span aria-current="page">{{ name | escape }}</span></nav>
 
   <section class="ssh-pdp__main">
@@ -596,6 +597,7 @@
         } else {
           if (deferred) deferred.resolve({ cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { didError: false, items: cart.items, source: 'ssh-pdp', sourceId: form.id, itemCount: qty, productId: '{{ product.id }}', sections: data.sections } });
           if (!deferred) { location.href = routes.cart_url || '/cart'; return; }
+          if (window.sshBubbleFly) window.sshBubbleFly(e.submitter ? e.submitter : btn, root.dataset.bubble, getComputedStyle(root).getPropertyValue('--btn'));
           say('Hinzugefügt');
           setTimeout(() => { say(idle); }, 1800);
         }

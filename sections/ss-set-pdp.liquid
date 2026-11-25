@@ -5,13 +5,14 @@
   Warenkorb und Adresse. Ohne JavaScript fuehren die Sorten als Links zum jeweiligen Set.
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
+<script src="{{ 'ssh-bubble-fly.js' | asset_url }}" defer></script>
 {%- assign st = section.settings -%}
 {%- assign cur = section.blocks.first -%}
 {%- for b in section.blocks -%}{%- if b.settings.set_product.id == product.id -%}{%- assign cur = b -%}{%- break -%}{%- endif -%}{%- endfor -%}
 {%- assign c = cur.settings -%}
 {%- assign sel = product.selected_or_first_available_variant -%}
 {%- assign fid = 'SshSetForm-' | append: section.id -%}
-<ssh-set class="ss-scope ssh-set" id="SshSet-{{ section.id }}" style="--ink:{{ c.ink }};--btn:{{ c.button }};--tint:{{ c.tint }}">
+<ssh-set class="ss-scope ssh-set" id="SshSet-{{ section.id }}" data-bubble="{{ 'soapsister-seifenblase-rosa.png' | file_url }}" style="--ink:{{ c.ink }};--btn:{{ c.button }};--tint:{{ c.tint }}">
   <nav class="ssh-set__crumbs" aria-label="Brotkrümel"><a href="{{ st.crumb_link | default: '/collections/sets' }}">{{ st.crumb_label | escape }}</a> <span aria-hidden="true">/</span> <span aria-current="page">{{ st.title | escape }}</span></nav>
 
   <section class="ssh-set__main">
@@ -414,6 +415,7 @@
         } else {
           if (deferred) deferred.resolve({ cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { didError: false, items: cart.items, source: 'ssh-set', sourceId: form.id, itemCount: qty, sections: data.sections } });
           if (!deferred) { location.href = routes.cart_url || '/cart'; return; }
+          if (window.sshBubbleFly) window.sshBubbleFly(e.submitter ? e.submitter : btn, root.dataset.bubble, getComputedStyle(root).getPropertyValue('--btn'));
           label.textContent = 'Hinzugefügt';
           setTimeout(() => { label.textContent = idle; }, 1800);
         }
