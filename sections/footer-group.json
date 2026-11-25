@@ -600,12 +600,12 @@
         "sc_all": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/soapsister-navi-feelgood-pyjama.jpg",
-            "focus": "object-position:50% 70%",
+            "image": "shopify://shop_images/soapsister-navi-mousse-logo-blau.jpg",
+            "focus": "object-position:50% 50%",
             "title": "Alle Feelgood Sets",
             "subtitle": "Mousse, Netzschwamm und Badeente im Set",
             "link": "/collections/sets",
-            "tint": "#F6D3E6"
+            "tint": "#DDF0FA"
           }
         }
       },
