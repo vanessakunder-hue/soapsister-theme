@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-plp-welten",
+      "settings": {
+        "heading": "Duschmousse.",
+        "text": "Drei Düfte, luftig aufgeschlagen, mit Aloe Vera und Mandelöl.",
+        "set_text": "Lieber im Set? Mousse, Netzschwamm und Badeente",
+        "set_product": "feelgood-set-lollipop",
+        "set_label": "Zu den Feelgood Sets",
+        "set_link": "/collections/sets"
+      },
+      "blocks": {
+        "lollipop": {
+          "type": "band",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "name": "Lollipop",
+            "scent": "Orange und Granatapfel",
+            "band": "shopify://shop_images/soapsister-plp-band-lollipop.jpg",
+            "jar": "shopify://shop_images/nav-duschmousse-lollipop.png",
+            "ink": "#751F65",
+            "button": "#751F65"
+          }
+        },
+        "coconut": {
+          "type": "band",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "name": "Coconut",
+            "scent": "Kokos",
+            "band": "shopify://shop_images/soapsister-plp-band-coconut.jpg",
+            "jar": "shopify://shop_images/nav-duschmousse-coconut.png",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52"
+          }
+        },
+        "marshmallow": {
+          "type": "band",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "name": "Marshmallow",
+            "scent": "Buttermilch",
+            "band": "shopify://shop_images/soapsister-plp-band-marshmallow-v2.jpg",
+            "jar": "shopify://shop_images/nav-duschmousse-marshmallow.png",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
