@@ -1,0 +1,500 @@
+{%- comment -%}
+  Soapsister Produktseite nach Design "PDP: Lollipop" (25.11.2026).
+  Pro Sorte ein Block (Farben, Duft, Galerie, INCI, Set). Die Section sucht den Block zum aktuellen Produkt,
+  die uebrigen Bloecke erscheinen unten als "Die anderen Duefte". In den Warenkorb nutzt die Horizon-Events,
+  damit sich der Warenkorb-Drawer oeffnet. Ohne JavaScript schickt das Formular ganz normal an /cart/add.
+{%- endcomment -%}
+{%- render 'ss-tokens' -%}
+{%- assign st = section.settings -%}
+{%- assign cur = nil -%}
+{%- for b in section.blocks -%}{%- if b.settings.product.id == product.id -%}{%- assign cur = b -%}{%- break -%}{%- endif -%}{%- endfor -%}
+{%- assign c = cur.settings -%}
+{%- assign ink = c.ink | default: '#751F65' -%}
+{%- assign btn = c.button | default: ink -%}
+{%- assign tint = c.tint | default: '#F6E2EE' -%}
+{%- assign name = c.name | default: product.title -%}
+{%- assign sel = product.selected_or_first_available_variant -%}
+<ssh-pdp class="ss-scope ssh-pdp" id="SshPdp-{{ section.id }}" style="--ink:{{ ink }};--btn:{{ btn }};--tint:{{ tint }}">
+  <nav class="ssh-pdp__crumbs" aria-label="Brotkrümel"><a href="{{ st.crumb_link | default: '/collections/duschmousse' }}">{{ st.crumb_label | escape }}</a> <span aria-hidden="true">/</span> <span aria-current="page">{{ name | escape }}</span></nav>
+
+  <section class="ssh-pdp__main">
+    <div class="ssh-pdp__gallery">
+      {%- liquid
+        assign main = nil
+        assign count = 0
+        for i in (1..5)
+          assign key = 'gallery_' | append: i
+          if c[key] != blank
+            if main == nil
+              assign main = c[key]
+            endif
+            assign count = count | plus: 1
+          endif
+        endfor
+        assign use_media = false
+        if count == 0
+          assign use_media = true
+          assign main = product.featured_image
+          assign count = product.images.size
+        endif
+      -%}
+      <div class="ssh-pdp__stage">
+        {%- if main != blank -%}
+          {{ main | image_url: width: 1600 | image_tag: class: 'ssh-pdp__img', alt: main.alt | default: name, sizes: '(max-width: 989px) 100vw, 50vw', widths: '600, 900, 1200, 1600', fetchpriority: 'high' }}
+        {%- endif -%}
+      </div>
+      {%- if count > 1 -%}
+        <div class="ssh-pdp__thumbs">
+          {%- assign n = 0 -%}
+          {%- if use_media -%}
+            {%- for im in product.images -%}
+              {%- assign n = n | plus: 1 -%}
+              {%- render 'ssh-pdp-thumb', im: im, n: n, name: name -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..5) -%}
+              {%- assign key = 'gallery_' | append: i -%}
+              {%- if c[key] == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign n = n | plus: 1 -%}
+              {%- render 'ssh-pdp-thumb', im: c[key], n: n, name: name -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="ssh-pdp__info">
+      <div>
+        <h1 class="ssh-pdp__h1">{{ name | escape }}</h1>
+        <p class="ssh-pdp__sub">{{ st.kind | escape }}{% if c.scent != blank %} · duftet nach {{ c.scent | escape }}{% endif %}</p>
+      </div>
+      <div class="ssh-pdp__price" aria-live="polite"><span class="ssh-pdp__amount" data-price>{{ sel.price | money }}</span><span class="ssh-pdp__base"><span data-unit>{% render 'ssh-unit', v: sel %}</span> · inkl. MwSt., zzgl. Versand</span></div>
+      {%- if st.short != blank -%}<p class="ssh-pdp__short">{{ st.short | escape }}</p>{%- endif -%}
+
+      {%- form 'product', product, class: 'ssh-pdp__form' -%}
+        <input type="hidden" name="id" value="{{ sel.id }}" data-id>
+        {%- if product.variants.size > 1 -%}
+          <fieldset class="ssh-pdp__field">
+            <legend class="ssh-pdp__label">Größe</legend>
+            <div class="ssh-pdp__seg">
+              {%- for v in product.variants -%}
+                <label><input type="radio" name="ssh-pdp-size" value="{{ v.id }}" data-price="{{ v.price | money | escape }}" data-unit="{% render 'ssh-unit', v: v %}" data-ok="{{ v.available }}" {% if v.id == sel.id %}checked{% endif %}><span>{{ v.title | escape }}</span></label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 1 -%}
+          <div class="ssh-pdp__field">
+            <span class="ssh-pdp__label" id="SshPdpDuft-{{ section.id }}">Duft</span>
+            <ul class="ssh-pdp__scents" aria-labelledby="SshPdpDuft-{{ section.id }}">
+              {%- for b in section.blocks -%}
+                {%- assign bp = b.settings.product -%}
+                {%- if bp == blank -%}{%- continue -%}{%- endif -%}
+                <li><a href="{{ bp.url }}" class="ssh-pdp__scent" style="--dot:{{ b.settings.dot }}" {% if bp.id == product.id %}aria-current="true"{% endif %}><span class="ssh-pdp__dot" aria-hidden="true"></span>{{ b.settings.name | default: bp.title | escape }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <div class="ssh-pdp__buy">
+          <div class="ssh-pdp__qty">
+            <button type="button" data-qty="-1" aria-label="Weniger">−</button>
+            <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Menge" data-qty-input>
+            <button type="button" data-qty="1" aria-label="Mehr">+</button>
+          </div>
+          <button type="submit" class="ssh-pdp__add" data-add {% unless sel.available %}disabled{% endunless %}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span data-label>{% if sel.available %}In den Warenkorb{% else %}Ausverkauft{% endif %}</span>
+          </button>
+        </div>
+        <p class="ssh-pdp__error" role="alert" hidden data-error></p>
+      {%- endform -%}
+
+      {%- if st.usp != blank -%}<p class="ssh-pdp__usp">{{ st.usp | escape }}</p>{%- endif -%}
+
+      <div class="ssh-pdp__acc">
+        <details open>
+          <summary>Beschreibung<span aria-hidden="true">+</span></summary>
+          <div class="ssh-pdp__acc-body">{%- if c.description != blank -%}{{ c.description }}{%- else -%}<p>{{ st.desc_lead | escape }}{% if c.scent != blank %} Duftet nach {{ c.scent | escape }}.{% endif %} {{ st.desc_tail | escape }}</p>{%- endif -%}</div>
+        </details>
+        {%- if st.usage != blank -%}
+          <details>
+            <summary>Anwendung<span aria-hidden="true">+</span></summary>
+            <div class="ssh-pdp__acc-body">{{ st.usage }}</div>
+          </details>
+        {%- endif -%}
+        {%- if c.inci != blank -%}
+          <details>
+            <summary>Inhaltsstoffe<span aria-hidden="true">+</span></summary>
+            <div class="ssh-pdp__acc-body"><p>{{ c.inci | escape }}</p></div>
+          </details>
+        {%- endif -%}
+        {%- if st.shipping != blank -%}
+          <details>
+            <summary>Versand<span aria-hidden="true">+</span></summary>
+            <div class="ssh-pdp__acc-body">{{ st.shipping }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- if st.steps_heading != blank -%}
+    <section class="ssh-pdp__steps" aria-labelledby="SshPdpSteps-{{ section.id }}">
+      <h2 class="ssh-pdp__h2" id="SshPdpSteps-{{ section.id }}">{{ st.steps_heading | escape }}</h2>
+      <ol class="ssh-pdp__steplist">
+        {%- for i in (1..3) -%}
+          {%- assign tk = 'step' | append: i | append: '_title' -%}
+          {%- assign xk = 'step' | append: i | append: '_text' -%}
+          {%- assign ik = 'step' | append: i | append: '_image' -%}
+          {%- if st[tk] == blank -%}{%- continue -%}{%- endif -%}
+          <li>
+            {%- if st[ik] != blank -%}{{ st[ik] | image_url: width: 300 | image_tag: alt: '', loading: 'lazy', sizes: '120px', widths: '150, 240, 300', class: 'ssh-pdp__stepimg' }}{%- endif -%}
+            <div><span class="ssh-pdp__steptitle">{{ st[tk] | escape }}</span><p>{{ st[xk] | escape }}</p></div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </section>
+  {%- endif -%}
+
+  {%- assign setp = c.set_product -%}
+  {%- if setp != blank -%}
+    {%- assign sum = product.variants.first.price -%}
+    {%- if c.duck != blank -%}{%- assign sum = sum | plus: c.duck.price -%}{%- endif -%}
+    {%- if c.sponge != blank -%}{%- assign sum = sum | plus: c.sponge.price -%}{%- endif -%}
+    <section class="ssh-pdp__set" aria-labelledby="SshPdpSet-{{ section.id }}">
+      <div class="ssh-pdp__set-in">
+        <div class="ssh-pdp__set-media">
+          {%- assign simg = c.set_image | default: setp.featured_image -%}
+          {%- if simg != blank -%}{{ simg | image_url: width: 1200 | image_tag: class: 'ssh-pdp__set-img', alt: '', loading: 'lazy', sizes: '(max-width: 749px) 100vw, 40vw', widths: '600, 900, 1200' }}{%- endif -%}
+          <span class="ssh-pdp__set-acc" aria-hidden="true">
+            {%- if c.sponge.featured_image -%}{{ c.sponge.featured_image | image_url: width: 300 | image_tag: alt: '', loading: 'lazy', class: 'ssh-pdp__acc-sponge', sizes: '125px' }}{%- endif -%}
+            {%- if c.duck.featured_image -%}{{ c.duck.featured_image | image_url: width: 300 | image_tag: alt: '', loading: 'lazy', class: 'ssh-pdp__acc-duck', sizes: '118px' }}{%- endif -%}
+          </span>
+        </div>
+        <div class="ssh-pdp__set-text">
+          <h2 class="ssh-pdp__h2" id="SshPdpSet-{{ section.id }}">{{ name | escape }} im Set.</h2>
+          {%- if c.set_text != blank -%}<p class="ssh-pdp__set-sub">{{ c.set_text | escape }}</p>{%- endif -%}
+          <p class="ssh-pdp__set-price"><b>{{ setp.price | money }}</b>{% if sum > setp.price %}<span>statt <s>{{ sum | money }}</s></span>{% endif %}</p>
+          <a class="ssh-pdp__ghost" href="{{ setp.url }}">{{ st.set_label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 1 and st.others_heading != blank -%}
+    <section class="ssh-pdp__others" aria-labelledby="SshPdpOthers-{{ section.id }}">
+      <h2 class="ssh-pdp__h2" id="SshPdpOthers-{{ section.id }}">{{ st.others_heading | escape }}</h2>
+      <ul class="ssh-pdp__olist">
+        {%- for b in section.blocks -%}
+          {%- assign bp = b.settings.product -%}
+          {%- if bp == blank or bp.id == product.id -%}{%- continue -%}{%- endif -%}
+          <li>
+            <a class="ssh-pdp__ot" href="{{ bp.url }}" style="--oink:{{ b.settings.ink }};--circle:{{ b.settings.circle }}">
+              <span class="ssh-pdp__ot-media" aria-hidden="true">
+                <span class="ssh-pdp__ot-circle"></span>
+                {%- if b.settings.jar != blank -%}{{ b.settings.jar | image_url: width: 600 | image_tag: alt: '', loading: 'lazy', class: 'ssh-pdp__ot-jar', sizes: '270px', widths: '300, 540, 600' }}{%- endif -%}
+              </span>
+              <span class="ssh-pdp__ot-name">{{ b.settings.name | default: bp.title | escape }}</span>
+              <span class="ssh-pdp__ot-line">{% if b.settings.scent != blank %}Duftet nach {{ b.settings.scent | escape }} · {% endif %}ab {{ bp.price_min | money }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+  {%- endif -%}
+</ssh-pdp>
+
+<script type="application/ld+json">{{ product | structured_data }}</script>
+
+<style>
+  .ssh-pdp{display:block;background:var(--color-background,#F1F1E9);color:#1D1D1B;padding-bottom:120px}
+  .ssh-pdp a{color:inherit;text-decoration:none}
+  .ssh-pdp__crumbs{padding:8px 7.4% 0;font-size:15px;letter-spacing:.06em;opacity:.75}
+  .ssh-pdp__crumbs a:hover{text-decoration:underline;text-underline-offset:3px}
+  .ssh-pdp__main{padding:28px 7.4% 0;display:flex;gap:72px;flex-wrap:wrap;align-items:flex-start}
+  .ssh-pdp__gallery{flex:1.15 1 560px;min-width:0;display:flex;flex-direction:column;gap:14px}
+  .ssh-pdp__stage{position:relative;aspect-ratio:1/1;border-radius:32px;overflow:hidden;background:var(--tint)}
+  .ssh-pdp__img{width:100%;height:100%;object-fit:cover;display:block}
+  .ssh-pdp__thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .ssh-pdp__th{padding:0;border:0;border-radius:18px;overflow:hidden;aspect-ratio:1;cursor:pointer;opacity:.65;outline:3px solid transparent;outline-offset:3px;background:var(--tint);transition:opacity .2s,outline-color .2s}
+  .ssh-pdp__th img{width:100%;height:100%;object-fit:cover;display:block}
+  .ssh-pdp__th:hover{opacity:1}
+  .ssh-pdp__th[aria-pressed="true"]{opacity:1;outline-color:var(--ink)}
+  .ssh-pdp__th:focus-visible{opacity:1;outline-color:var(--ink)}
+  .ssh-pdp__info{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:22px;padding-top:8px}
+  .ssh-pdp__h1{margin:0;white-space:nowrap;max-width:100%;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(72px,7vw,104px);line-height:.88;color:var(--ink);overflow-wrap:normal}
+  .ssh-pdp__sub{margin:10px 0 0;font-size:21px}
+  .ssh-pdp__price{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
+  .ssh-pdp__amount{font-weight:600;font-size:40px;line-height:1;color:var(--ink)}
+  .ssh-pdp__base{font-size:16px;opacity:.75}
+  .ssh-pdp__short{margin:0;font-size:19px;line-height:1.5;max-width:40ch}
+  .ssh-pdp__form{display:flex;flex-direction:column;gap:22px;margin:0}
+  .ssh-pdp__field{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+  .ssh-pdp__label{padding:0;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+  .ssh-pdp__seg{display:flex;gap:4px;padding:5px;border-radius:999px;background:#FFFFFF;align-self:flex-start}
+  .ssh-pdp__seg label{position:relative;display:block}
+  .ssh-pdp__seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+  .ssh-pdp__seg span{display:flex;align-items:center;justify-content:center;min-width:110px;min-height:44px;padding:0 14px;border-radius:999px;font-weight:600;font-size:17px;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
+  .ssh-pdp__seg input:checked + span{background:var(--btn);color:#FFFFFF}
+  .ssh-pdp__seg input:focus-visible + span{outline:3px solid var(--btn);outline-offset:2px}
+  .ssh-pdp__scents{list-style:none;margin:0;padding:0;display:flex;gap:10px;flex-wrap:wrap}
+  .ssh-pdp__scent{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 8px;border-radius:999px;background:rgba(255,255,255,.55);font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+  .ssh-pdp__scent:hover{background:#FFFFFF}
+  .ssh-pdp__scent[aria-current="true"]{background:#FFFFFF;outline:2px solid var(--ink);color:var(--ink)}
+  .ssh-pdp__scent:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+  .ssh-pdp__dot{width:26px;height:26px;border-radius:50%;background:var(--dot);box-shadow:inset 0 0 0 2px rgba(29,29,27,.12)}
+  .ssh-pdp__buy{display:flex;gap:12px;align-items:stretch;margin-top:6px}
+  .ssh-pdp__qty{display:flex;align-items:center;border-radius:999px;background:#FFFFFF}
+  .ssh-pdp__qty button{width:52px;height:58px;border:0;background:transparent;cursor:pointer;font-size:26px;color:var(--btn);border-radius:999px}
+  .ssh-pdp__qty button:focus-visible{outline:3px solid var(--btn);outline-offset:-3px}
+  .ssh-pdp__qty input{width:34px;border:0;background:transparent;text-align:center;font:inherit;font-weight:600;font-size:20px;color:#1D1D1B;-moz-appearance:textfield;appearance:textfield}
+  .ssh-pdp__qty input::-webkit-outer-spin-button,.ssh-pdp__qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .ssh-pdp__add{flex:1 1 auto;display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px;border:0;border-radius:999px;background:var(--btn);color:#FFFFFF;cursor:pointer;font-family:inherit;font-weight:600;font-size:18px;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s}
+  .ssh-pdp__add:hover{filter:brightness(1.15)}
+  .ssh-pdp__add:focus-visible{outline:3px solid var(--btn);outline-offset:3px}
+  .ssh-pdp__add:disabled{opacity:.5;cursor:not-allowed;filter:none}
+  .ssh-pdp__error{margin:0;padding:12px 16px;border-radius:14px;background:#FFFFFF;color:#9B1C1C;font-size:16px}
+  .ssh-pdp__error[hidden]{display:none}
+  .ssh-pdp__usp{margin:0;font-size:16px;letter-spacing:.06em;opacity:.8}
+  .ssh-pdp__acc{border-top:2px solid rgba(29,29,27,.15);margin-top:8px}
+  .ssh-pdp__acc details{border-bottom:2px solid rgba(29,29,27,.15)}
+  .ssh-pdp__acc summary{min-height:62px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none;font-weight:600;font-size:19px;letter-spacing:.08em;text-transform:uppercase}
+  .ssh-pdp__acc summary::-webkit-details-marker{display:none}
+  .ssh-pdp__acc summary span{font-size:26px;color:var(--btn);transition:transform .25s}
+  .ssh-pdp__acc details[open] summary span{transform:rotate(45deg)}
+  .ssh-pdp__acc summary:focus-visible{outline:3px solid var(--btn);outline-offset:2px}
+  .ssh-pdp__acc-body{padding-bottom:18px;font-size:17px;line-height:1.55}
+  .ssh-pdp__acc-body p{margin:0 0 10px}
+  .ssh-pdp__acc-body p:last-child{margin-bottom:0}
+  .ssh-pdp__acc-body a{text-decoration:underline;text-underline-offset:3px}
+  .ssh-pdp__h2{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:64px;line-height:.92}
+  .ssh-pdp__steps{padding:120px 7.4% 0}
+  .ssh-pdp__steps .ssh-pdp__h2{margin-bottom:40px}
+  .ssh-pdp__steplist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+  .ssh-pdp__steplist li{display:flex;gap:20px;align-items:center}
+  .ssh-pdp__stepimg{width:120px;height:120px;flex:0 0 120px;border-radius:50%;object-fit:cover;display:block}
+  .ssh-pdp__steptitle{display:block;font-weight:600;font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  .ssh-pdp__steplist p{margin:4px 0 0;font-size:18px;line-height:1.4}
+  .ssh-pdp__set{margin-top:120px;background:var(--tint);color:var(--ink)}
+  .ssh-pdp__set-in{padding:72px 7.4%;display:grid;grid-template-columns:minmax(0,40%) minmax(0,520px);justify-content:space-between;align-items:center;gap:56px}
+  .ssh-pdp__set-media{position:relative}
+  .ssh-pdp__set-img{width:100%;height:340px;object-fit:cover;object-position:50% 62%;border-radius:28px;display:block}
+  .ssh-pdp__set-acc{position:absolute;right:-110px;bottom:-40px;width:260px;height:160px}
+  .ssh-pdp__acc-sponge{position:absolute;right:0;bottom:0;width:125px;height:auto;filter:drop-shadow(0 14px 14px rgba(29,29,27,.22))}
+  .ssh-pdp__acc-duck{position:absolute;left:20px;bottom:0;width:118px;height:auto;filter:drop-shadow(0 14px 14px rgba(29,29,27,.24))}
+  .ssh-pdp__set-text{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+  .ssh-pdp__set-sub{margin:0;font-size:19px;line-height:1.45;color:#1D1D1B}
+  .ssh-pdp__set-price{margin:0 0 10px;display:flex;align-items:baseline;gap:12px}
+  .ssh-pdp__set-price b{font-weight:600;font-size:22px}
+  .ssh-pdp__set-price span{font-size:17px;color:#1D1D1B}
+  .ssh-pdp__ghost{display:flex;align-items:center;gap:10px;border:2px solid var(--ink);border-radius:999px;min-height:48px;padding:0 24px;font-weight:600;font-size:16px;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,color .2s}
+  .ssh-pdp .ssh-pdp__ghost{color:var(--ink)}
+  .ssh-pdp .ssh-pdp__ghost:hover,.ssh-pdp .ssh-pdp__ghost:focus-visible{background:var(--ink);color:#FFFFFF}
+  .ssh-pdp__ghost:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .ssh-pdp__others{padding:110px 7.4% 0}
+  .ssh-pdp__others .ssh-pdp__h2{margin-bottom:24px}
+  .ssh-pdp__olist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;max-width:900px}
+  .ssh-pdp__ot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .ssh-pdp__ot-media{position:relative;width:100%;height:280px;display:block}
+  .ssh-pdp__ot-circle{position:absolute;left:50%;top:10px;width:230px;height:230px;margin-left:-115px;border-radius:50%;background:var(--circle)}
+  .ssh-pdp__ot-jar{position:absolute;left:50%;bottom:10px;width:270px;height:auto;margin-left:-135px;display:block;filter:drop-shadow(0 14px 14px rgba(29,29,27,.16));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+  .ssh-pdp__ot:hover .ssh-pdp__ot-jar{transform:translateY(-10px)}
+  .ssh-pdp__ot-name{font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:40px;line-height:1;color:var(--oink)}
+  .ssh-pdp__ot-line{font-size:17px}
+  .ssh-pdp__ot:focus-visible{outline:3px solid var(--oink);outline-offset:6px;border-radius:12px}
+  @media (max-width:989px){
+    .ssh-pdp__main{gap:40px}
+    .ssh-pdp__set-in{grid-template-columns:minmax(0,1fr);gap:72px}
+    .ssh-pdp__set-acc{right:0}
+  }
+  @media (max-width:749px){
+    .ssh-pdp{padding-bottom:72px}
+    .ssh-pdp__crumbs{padding:8px 20px 0}
+    .ssh-pdp__main{padding:20px 20px 0}
+    .ssh-pdp__gallery,.ssh-pdp__info{flex-basis:100%}
+    .ssh-pdp__stage{border-radius:24px}
+    .ssh-pdp__thumbs{gap:8px}
+    .ssh-pdp__th{border-radius:12px}
+    .ssh-pdp__h1{font-size:clamp(56px,16vw,80px)}
+    .ssh-pdp__sub{font-size:18px}
+    .ssh-pdp__amount{font-size:34px}
+    .ssh-pdp__short{font-size:17px}
+    .ssh-pdp__seg span{min-width:96px}
+    .ssh-pdp__add{font-size:15px;letter-spacing:.06em;gap:8px;white-space:nowrap}
+    .ssh-pdp__qty button{width:42px}
+    .ssh-pdp__qty input{width:28px}
+    .ssh-pdp__h2{font-size:48px}
+    .ssh-pdp__steps{padding:80px 20px 0}
+    .ssh-pdp__steplist{grid-template-columns:minmax(0,1fr);gap:24px}
+    .ssh-pdp__stepimg{width:96px;height:96px;flex-basis:96px}
+    .ssh-pdp__set{margin-top:80px}
+    .ssh-pdp__set-in{padding:48px 20px 56px}
+    .ssh-pdp__set-img{height:260px}
+    .ssh-pdp__set-acc{width:200px;height:120px;bottom:-36px}
+    .ssh-pdp__acc-sponge{width:96px}.ssh-pdp__acc-duck{width:90px}
+    .ssh-pdp__others{padding:80px 20px 0}
+    .ssh-pdp__olist{gap:16px}
+    .ssh-pdp__ot-media{height:170px}
+    .ssh-pdp__ot-circle{width:130px;height:130px;margin-left:-65px;top:24px}
+    .ssh-pdp__ot-jar{width:140px;margin-left:-70px}
+    .ssh-pdp__ot-name{font-size:30px}
+    .ssh-pdp__ot-line{font-size:15px}
+  }
+  @media (prefers-reduced-motion:reduce){.ssh-pdp__ot-jar,.ssh-pdp__acc summary span,.ssh-pdp__th{transition:none}}
+</style>
+
+<script>
+  if (!customElements.get('ssh-pdp')) {
+    customElements.define('ssh-pdp', class extends HTMLElement {
+      connectedCallback() {
+        this.main = this.querySelector('.ssh-pdp__img');
+        this.fit();
+        if (document.fonts) document.fonts.ready.then(() => this.fit());
+        window.addEventListener('resize', () => this.fit(), { passive: true });
+        this.querySelectorAll('.ssh-pdp__th').forEach((t) => t.addEventListener('click', () => this.show(t)));
+        const qi = this.querySelector('[data-qty-input]');
+        this.querySelectorAll('[data-qty]').forEach((b) => b.addEventListener('click', () => {
+          qi.value = Math.max(1, (parseInt(qi.value, 10) || 1) + Number(b.dataset.qty));
+        }));
+        this.addEventListener('change', (e) => { if (e.target.name === 'ssh-pdp-size') this.pick(e.target); });
+      }
+      fit() {
+        const h = this.querySelector('.ssh-pdp__h1');
+        if (!h) return;
+        h.style.fontSize = '';
+        let s = parseFloat(getComputedStyle(h).fontSize), guard = 40;
+        while (h.scrollWidth > h.clientWidth + 1 && s > 32 && guard--) { s -= 2; h.style.fontSize = s + 'px'; }
+      }
+      show(t) {
+        if (!this.main) return;
+        this.main.srcset = t.dataset.srcset; this.main.src = t.dataset.src; this.main.alt = t.dataset.alt;
+        this.querySelectorAll('.ssh-pdp__th').forEach((x) => x.setAttribute('aria-pressed', x === t ? 'true' : 'false'));
+      }
+      pick(r) {
+        this.querySelector('[data-id]').value = r.value;
+        this.querySelector('[data-price]').textContent = r.dataset.price;
+        this.querySelector('[data-unit]').textContent = r.dataset.unit;
+        const ok = r.dataset.ok === 'true', btn = this.querySelector('[data-add]');
+        btn.disabled = !ok;
+        btn.querySelector('[data-label]').textContent = ok ? 'In den Warenkorb' : 'Ausverkauft';
+        const u = new URL(location.href); u.searchParams.set('variant', r.value);
+        history.replaceState(history.state, '', u.toString());
+      }
+    });
+  }
+</script>
+<script type="module">
+  import { CartLinesUpdateEvent, CartErrorEvent } from '@shopify/events';
+  const root = document.getElementById('SshPdp-{{ section.id }}');
+  const form = root && root.querySelector('form.ssh-pdp__form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('[data-add]'), label = btn.querySelector('[data-label]'), err = form.querySelector('[data-error]');
+      if (btn.disabled) return;
+      btn.disabled = true; err.hidden = true; label.textContent = 'Wird hinzugefügt';
+      const fd = new FormData(form);
+      fd.delete('ssh-pdp-size');
+      const ids = Array.from(document.querySelectorAll('cart-items-component')).map((el) => el.dataset.sectionId).filter(Boolean);
+      if (ids.length) fd.append('sections', ids.join(','));
+      const qty = Number(fd.get('quantity')) || 1;
+      let deferred = null;
+      try {
+        deferred = CartLinesUpdateEvent.createPromise();
+      form.dispatchEvent(new CartLinesUpdateEvent({ action: 'add', context: 'product', lines: [{ merchandiseId: String(fd.get('id')), quantity: qty }], promise: deferred.promise }));
+      } catch (x) { deferred = null; }
+      const routes = (window.Theme && window.Theme.routes) || {};
+      let added = false;
+      try {
+        const res = await fetch(routes.cart_add_url || '/cart/add', { method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/javascript' } });
+        const data = await res.json();
+        added = !data.status;
+        const cart = await fetch((routes.cart_url || '/cart') + '.json', { headers: { Accept: 'application/json' } }).then((r) => r.json());
+        if (data.status) {
+          err.textContent = data.description || data.message || 'Das hat leider nicht geklappt.'; err.hidden = false;
+          form.dispatchEvent(new CartErrorEvent({ error: data.message || 'Add to cart failed', code: 'INVALID', detail: { description: data.description } }));
+          if (deferred) deferred.resolve({ cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { didError: true, items: cart.items, source: 'ssh-pdp', sourceId: form.id, itemCount: qty, productId: '{{ product.id }}' } });
+          label.textContent = 'In den Warenkorb';
+        } else {
+          if (deferred) deferred.resolve({ cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { didError: false, items: cart.items, source: 'ssh-pdp', sourceId: form.id, itemCount: qty, productId: '{{ product.id }}', sections: data.sections } });
+          if (!deferred) { location.href = routes.cart_url || '/cart'; return; }
+          label.textContent = 'Hinzugefügt';
+          setTimeout(() => { label.textContent = 'In den Warenkorb'; }, 1800);
+        }
+      } catch (x) {
+        if (deferred && deferred.reject) deferred.reject(x);
+        if (added) { location.href = routes.cart_url || '/cart'; } else { form.submit(); }
+        return;
+      }
+      btn.disabled = false;
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Soapsister: Produktseite",
+  "tag": "div",
+  "class": "ssh-pdp-section",
+  "settings": [
+    { "type": "text", "id": "crumb_label", "label": "Brotkrümel: Kategorie", "default": "Duschmousse" },
+    { "type": "url", "id": "crumb_link", "label": "Brotkrümel: Link" },
+    { "type": "text", "id": "kind", "label": "Produktart unter dem Namen", "default": "Duschmousse" },
+    { "type": "text", "id": "short", "label": "Kurztext", "default": "Luftig aufgeschlagen, mit Aloe Vera und Mandelöl. Für Face, Body und Shave." },
+    { "type": "text", "id": "usp", "label": "Vorteile unter dem Button", "default": "Vegan · Handmade in Germany · Ohne Silikone, Parabene und Sulfate" },
+    { "type": "header", "content": "Aufklapper" },
+    { "type": "text", "id": "desc_lead", "label": "Beschreibung: Anfang", "default": "Luftig aufgeschlagenes Duschmousse mit Aloe Vera und Mandelöl." },
+    { "type": "text", "id": "desc_tail", "label": "Beschreibung: Ende", "info": "Dazwischen steht automatisch der Duft der Sorte.", "default": "Vegan, handmade in Germany und zu 96 % aus natürlichen Inhaltsstoffen." },
+    { "type": "richtext", "id": "usage", "label": "Anwendung", "default": "<p>Nimm eine Fingerspitze Mousse aus dem Tiegel, schäum sie mit dem nassen Netzschwamm auf und spül den Schaum gründlich ab. Für Face, Body und Shave.</p>" },
+    { "type": "richtext", "id": "shipping", "label": "Versand", "default": "<p>Versand mit DHL in 1 bis 3 Werktagen.</p>" },
+    { "type": "header", "content": "So geht's" },
+    { "type": "text", "id": "steps_heading", "label": "Überschrift (leer = ausblenden)", "default": "So geht's." },
+    { "type": "text", "id": "step1_title", "label": "Schritt 1", "default": "Nehmen" },
+    { "type": "text", "id": "step1_text", "label": "Text 1", "default": "Eine Fingerspitze Mousse aus dem Tiegel." },
+    { "type": "image_picker", "id": "step1_image", "label": "Bild 1" },
+    { "type": "text", "id": "step2_title", "label": "Schritt 2", "default": "Aufschäumen" },
+    { "type": "text", "id": "step2_text", "label": "Text 2", "default": "Mit dem nassen Netzschwamm aufschäumen." },
+    { "type": "image_picker", "id": "step2_image", "label": "Bild 2" },
+    { "type": "text", "id": "step3_title", "label": "Schritt 3", "default": "Abspülen" },
+    { "type": "text", "id": "step3_text", "label": "Text 3", "default": "Den Schaum gründlich abspülen." },
+    { "type": "image_picker", "id": "step3_image", "label": "Bild 3" },
+    { "type": "header", "content": "Set und andere Düfte" },
+    { "type": "text", "id": "set_label", "label": "Button zum Set", "default": "Zum Feelgood Set" },
+    { "type": "text", "id": "others_heading", "label": "Überschrift andere Düfte (leer = ausblenden)", "default": "Die anderen Düfte." }
+  ],
+  "blocks": [
+    {
+      "type": "sorte",
+      "name": "Sorte",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produkt" },
+        { "type": "text", "id": "name", "label": "Name (leer = Produkttitel)" },
+        { "type": "text", "id": "scent", "label": "Duft", "info": "Erscheint als: duftet nach ..." },
+        { "type": "richtext", "id": "description", "label": "Beschreibung (leer = Standardtext mit Duft)" },
+        { "type": "textarea", "id": "inci", "label": "Inhaltsstoffe (INCI)" },
+        { "type": "color", "id": "ink", "label": "Farbe Name und Preis", "default": "#751F65" },
+        { "type": "color", "id": "button", "label": "Farbe Buttons", "default": "#751F65" },
+        { "type": "color", "id": "dot", "label": "Farbpunkt im Duft-Umschalter", "default": "#E08FBC" },
+        { "type": "color", "id": "tint", "label": "Hintergrund Galerie und Set", "default": "#F6E2EE" },
+        { "type": "color", "id": "circle", "label": "Kreis bei Die anderen Düfte", "default": "#F6E2EE" },
+        { "type": "image_picker", "id": "jar", "label": "Freigestellte Dose (für Die anderen Düfte)" },
+        { "type": "header", "content": "Galerie (leer = Produktbilder)" },
+        { "type": "image_picker", "id": "gallery_1", "label": "Bild 1" },
+        { "type": "image_picker", "id": "gallery_2", "label": "Bild 2" },
+        { "type": "image_picker", "id": "gallery_3", "label": "Bild 3" },
+        { "type": "image_picker", "id": "gallery_4", "label": "Bild 4" },
+        { "type": "image_picker", "id": "gallery_5", "label": "Bild 5" },
+        { "type": "header", "content": "Set" },
+        { "type": "product", "id": "set_product", "label": "Set-Produkt" },
+        { "type": "text", "id": "set_text", "label": "Text zum Set", "default": "Mit Netzschwamm und Badeente." },
+        { "type": "image_picker", "id": "set_image", "label": "Bild zum Set" },
+        { "type": "product", "id": "duck", "label": "Badeente (Bild und Einzelpreis)" },
+        { "type": "product", "id": "sponge", "label": "Netzschwamm (Bild und Einzelpreis)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Soapsister: Produktseite" }]
+}
+{% endschema %}

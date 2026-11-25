@@ -1,0 +1,4 @@
+{%- comment -%} Vorschaubild der Soapsister-Produktgalerie. Erwartet im (Bild), n (Position), name (Produktname fuer Alt-Text). {%- endcomment -%}
+<button type="button" class="ssh-pdp__th" aria-label="Bild {{ n }} zeigen" aria-pressed="{% if n == 1 %}true{% else %}false{% endif %}" data-src="{{ im | image_url: width: 1600 }}" data-srcset="{{ im | image_url: width: 600 }} 600w, {{ im | image_url: width: 900 }} 900w, {{ im | image_url: width: 1200 }} 1200w, {{ im | image_url: width: 1600 }} 1600w" data-alt="{{ im.alt | default: name | escape }}">
+  {{ im | image_url: width: 240 | image_tag: alt: '', loading: 'lazy', sizes: '120px', widths: '120, 240' }}
+</button>

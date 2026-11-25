@@ -1,0 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-pdp",
+      "settings": {
+        "crumb_label": "Duschmousse",
+        "crumb_link": "/collections/duschmousse",
+        "kind": "Duschmousse",
+        "step1_image": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
+        "step2_image": "shopify://shop_images/soapsister-pdp-schritt-aufschaeumen.jpg",
+        "step3_image": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg"
+      },
+      "blocks": {
+        "lollipop": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-lollipop",
+            "name": "Lollipop",
+            "scent": "Orange und Granatapfel",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, CI 16255.",
+            "ink": "#751F65",
+            "button": "#751F65",
+            "dot": "#E08FBC",
+            "tint": "#F6E2EE",
+            "circle": "#F6E2EE",
+            "jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png",
+            "set_product": "feelgood-set-lollipop",
+            "set_text": "Mit Netzschwamm und Badeente in Rosa.",
+            "set_image": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
+            "duck": "badeente-rosa",
+            "sponge": "netzschwamm-rosa",
+            "gallery_1": "shopify://shop_images/soapsister-pdp-lollipop-1.jpg",
+            "gallery_2": "shopify://shop_images/soapsister-pdp-lollipop-2.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-lollipop-3.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-lollipop-4.jpg",
+            "gallery_5": "shopify://shop_images/soapsister-pdp-lollipop-5.jpg"
+          }
+        },
+        "coconut": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-coconut",
+            "name": "Coconut",
+            "scent": "Kokos",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, Vanillin, Linalool, Coumarin, Tetramethyl Acetyloctahydronaphthalenes, Alpha Isomethyl Ionone, Citrus Aurantium Peel Oil.",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52",
+            "dot": "#F7F5F0",
+            "tint": "#ECEAE4",
+            "circle": "#F8F7F3",
+            "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
+            "set_product": "feelgood-set-coconut",
+            "set_text": "Mit Netzschwamm und Badeente in Weiß.",
+            "set_image": "shopify://shop_images/soapsister-pdp-set-coconut.jpg",
+            "duck": "badeente-weiss",
+            "sponge": "netzschwamm-weiss",
+            "gallery_1": "shopify://shop_images/soapsister-pdp-coconut-1.jpg",
+            "gallery_2": "shopify://shop_images/soapsister-pdp-coconut-2.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-coconut-3.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-coconut-4.jpg",
+            "gallery_5": "shopify://shop_images/soapsister-pdp-coconut-5.jpg"
+          }
+        },
+        "marshmallow": {
+          "type": "sorte",
+          "settings": {
+            "product": "duschmousse-marshmallow",
+            "name": "Marshmallow",
+            "scent": "Buttermilch",
+            "inci": "Aqua, Glycerin, Sorbitol, Sodium Cocoyl Isethionate, Disodium Lauryl -Sulfosuccinate, Maris Sal, Parfum, Aloe Barbadensis Leaf Juice, Phenoxyethanol, Prunus Amygdalus Dulcis Oil, Ethylhexylglycerin, Tetrasodium EDTA, Potassium Sorbate, Sodium Benzoate, Limonene, Citral, Citrus Limon Peel Oil, Citrus Aurantium Peel Oil, Pinene, Coumarin, CI 42090.",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52",
+            "dot": "#21B5EA",
+            "tint": "#DDF0FA",
+            "circle": "#C4E7F7",
+            "jar": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
+            "set_product": "feelgood-set-marshmallow",
+            "set_text": "Mit Netzschwamm und Badeente in Blau.",
+            "set_image": "shopify://shop_images/soapsister-pdp-marshmallow-4.jpg",
+            "duck": "badeente-blau",
+            "sponge": "netzschwamm-blau",
+            "gallery_1": "shopify://shop_images/soapsister-pdp-marshmallow-1.jpg",
+            "gallery_2": "shopify://shop_images/soapsister-pdp-marshmallow-2.jpg",
+            "gallery_3": "shopify://shop_images/soapsister-pdp-marshmallow-3.jpg",
+            "gallery_4": "shopify://shop_images/soapsister-pdp-marshmallow-4.jpg",
+            "gallery_5": "shopify://shop_images/soapsister-pdp-marshmallow-5.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
