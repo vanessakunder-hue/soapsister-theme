@@ -1,0 +1,117 @@
+/* Soapsister: schwebende Navigation (Claude Design "Hero mit schwebender Navigation") */
+#header-component{
+  --ssh-plum:#751F65;--ssh-pill-y:20px;--ssh-pill-x:5.2vw;
+  --color-foreground:#751F65;--color-foreground-rgb:117 31 101;
+  padding:var(--ssh-pill-y) var(--ssh-pill-x) 0;
+  background:transparent!important;
+}
+#header-component .header__underlay{display:none!important}
+#header-component .header__row--top{
+  display:block;
+  background-color:rgba(250,246,249,.96)!important;
+  border-radius:999px;
+  box-shadow:0 16px 40px rgba(117,31,101,.16);
+  transition:box-shadow .35s ease,background-color .35s ease;
+}
+#header-component .header__row--top .header__columns{
+  --padding-block-start:10px;--padding-block-end:10px;
+  padding:10px 12px 10px 30px;
+  max-width:none;
+  grid-gap:clamp(20px,3vw,48px);
+  min-height:72px;
+  align-items:center;
+}
+#header-component .header__column--left{gap:clamp(20px,3vw,48px)}
+#header-component .header-logo__image{max-height:28px;width:auto}
+
+/* Menüpunkte mit Ring */
+/* Abstand über Padding, damit overflow-list richtig misst */
+#header-component .menu-list__link{
+  font-family:var(--font-subheading--family);
+  font-weight:600;
+  font-size:clamp(13px,.93vw,17px);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ssh-plum);
+  min-height:44px;
+}
+#header-component .menu-list__link-title{
+  display:inline-flex;align-items:center;gap:8px;padding-inline:clamp(5px,.5vw,17px);
+}
+#header-component .menu-list__link-title::before{
+  content:"";flex:none;width:13px;height:13px;border-radius:50%;
+  border:3px solid currentColor;box-sizing:border-box;
+  transition:background-color .25s,transform .3s cubic-bezier(.3,1.6,.5,1);
+}
+#header-component .menu-list__link:hover .menu-list__link-title::before,
+#header-component .menu-list__link:focus-visible .menu-list__link-title::before,
+#header-component .menu-list__link[aria-expanded="true"] .menu-list__link-title::before{
+  background-color:currentColor;transform:scale(1.15);
+}
+#header-component .menu-list__link--active .menu-list__link-title::before,
+#header-component .menu-list__link[aria-current="page"] .menu-list__link-title::before{background-color:currentColor}
+#header-component .ssh-n2-chev{display:none}
+#header-component .menu-list__link:hover{opacity:1}
+
+/* Icons rund, Warenkorb als Pflaume */
+#header-component header-actions{gap:6px}
+#header-component .header__column--right{gap:clamp(12px,1.6vw,28px)}
+#header-component .header-actions__action,
+#header-component .search-action button,
+#header-component .header__icon--menu{
+  border-radius:50%;
+  color:var(--ssh-plum);
+  transition:background-color .2s,transform .25s;
+}
+#header-component .header-actions__action:not([data-testid="cart-drawer-trigger"]):not(.action__cart):hover,
+#header-component .search-action button:hover{background-color:rgba(117,31,101,.1)}
+#header-component .header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover){opacity:1}
+#header-component [data-testid="cart-drawer-trigger"],
+#header-component .action__cart{
+  width:52px;height:52px;margin-left:6px;
+  background-color:var(--ssh-plum);color:#fff;
+  display:grid;place-items:center;
+  --button-color:#fff;
+}
+#header-component [data-testid="cart-drawer-trigger"]:hover,
+#header-component .action__cart:hover{transform:scale(1.06);--button-color:#fff}
+#header-component [data-testid="cart-drawer-trigger"] svg,
+#header-component .action__cart svg{color:#fff}
+#header-component .header-actions__cart-icon{--cart-bubble-size:22px;--cart-bubble-top:-14px;--cart-bubble-right:-14px}
+#header-component .header-actions__cart-icon .cart-bubble{
+  min-width:22px;height:22px;width:auto;aspect-ratio:auto;border-radius:11px;
+  color:var(--ssh-plum);box-shadow:0 0 0 3px #fff;padding-inline:5px;
+}
+#header-component .header-actions__cart-icon .cart-bubble__background{background:#E08FBC!important;border-radius:11px}
+#header-component .header-actions__cart-icon .cart-bubble__text{font-weight:700;font-size:13px;color:var(--ssh-plum)}
+
+/* Startseite: Hero läuft unter die Pille */
+@media screen and (min-width:990px){.content-for-layout[data-template="index"] > .shopify-section:first-child{margin-top:calc(-1 * var(--header-height,92px))}}
+
+@media screen and (max-width:989px){
+  #header-component .menu-list__link{font-size:14px;letter-spacing:.1em}
+}
+@media screen and (max-width:749px){
+  #header-component{--ssh-pill-y:10px;--ssh-pill-x:16px}
+  #header-component .header__row--top .header__columns{padding:6px 6px 6px 10px;min-height:56px;grid-gap:8px}
+  #header-component .header-logo__image{max-height:22px}
+  #header-component [data-testid="cart-drawer-trigger"],
+  #header-component .action__cart{width:44px;height:44px;margin-left:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  #header-component .menu-list__link-title::before,
+  #header-component .header-actions__action{transition:none}
+}
+
+/* Mega-Menü fließt hinter der Pille herunter */
+.ssh-mega{top:calc(var(--ssh-mega-top,92px) - 40px)!important;z-index:17}
+.ssh-mega .ssh-n2__sheet{padding-top:80px}
+
+/* Menü startet direkt nach dem Logo und nutzt die ganze Breite */
+@media screen and (min-width:750px){
+  #header-component .header__row--top .header__columns{--header-left:auto;--header-right:minmax(0,1fr)}
+  #header-component .header__column--right header-menu{flex:1 1 auto;min-width:0}
+  #header-component .header__column--right .overflow-menu::part(list){justify-content:flex-start}
+}
+/* Abstand Pille zum Inhalt auf Unterseiten */
+.content-for-layout:not([data-template="index"]){padding-top:14px}
