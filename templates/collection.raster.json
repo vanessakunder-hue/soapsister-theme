@@ -15,10 +15,16 @@
         "heading": "Badeente & Netzschwamm.",
         "text": "Für den extra Fluff und gute Laune unter der Dusche. Passend zu deiner Sorte in Rosa, Weiß und Blau.",
         "button": "#1D3F52",
-        "set_text": "Lieber im Set? Mousse, Netzschwamm und Badeente",
+        "set_text": "Mousse, Netzschwamm und Badeente zusammen",
         "set_product": "feelgood-set-lollipop",
-        "set_label": "Zu den Feelgood Sets",
-        "set_link": "/collections/sets"
+        "set_label": "Set zusammenstellen",
+        "set_link": "/collections/sets",
+        "set_title": "Mit Duschmousse",
+        "set_title2": "wird's ein Set.",
+        "set_mousse": "duschmousse-lollipop",
+        "set_duck": "badeente-rosa",
+        "set_sponge": "netzschwamm-rosa",
+        "set_jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png"
       },
       "blocks": {
         "ente": {

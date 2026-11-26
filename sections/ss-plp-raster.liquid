@@ -62,17 +62,39 @@
 
   <p class="ssh-ras__note">inkl. MwSt., zzgl. Versand</p>
 
-  {%- if st.set_text != blank -%}
-    {%- assign setp = st.set_product -%}
-    <div class="ssh-ras__set">
-      <span>{{ st.set_text | escape }}{% if setp != blank %} für {{ setp.price | money }}{% endif %}.</span>
-      <a href="{{ st.set_link | default: '/collections/sets' }}">{{ st.set_label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  {%- if st.set_title != blank -%}
+    {%- liquid
+      assign setp = st.set_product
+      assign sum = 0
+      if st.set_mousse != blank
+        assign sum = sum | plus: st.set_mousse.variants.first.price
+      endif
+      if st.set_duck != blank
+        assign sum = sum | plus: st.set_duck.price
+      endif
+      if st.set_sponge != blank
+        assign sum = sum | plus: st.set_sponge.price
+      endif
+    -%}
+    <div class="ssh-ras__band">
+      <div class="ssh-ras__band-in">
+        <div class="ssh-ras__band-media" aria-hidden="true">
+          {%- if st.set_duck.featured_image -%}{{ st.set_duck.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy', class: 'ssh-ras__band-duck', sizes: '110px' }}{%- endif -%}
+          {%- if st.set_jar != blank -%}{{ st.set_jar | image_url: width: 400 | image_tag: alt: '', loading: 'lazy', class: 'ssh-ras__band-jar', sizes: '140px' }}{%- endif -%}
+          {%- if st.set_sponge.featured_image -%}{{ st.set_sponge.featured_image | image_url: width: 320 | image_tag: alt: '', loading: 'lazy', class: 'ssh-ras__band-sponge', sizes: '100px' }}{%- endif -%}
+        </div>
+        <div class="ssh-ras__band-text">
+          <h2 class="ssh-ras__band-h">{{ st.set_title | escape }}{% if st.set_title2 != blank %}<br>{{ st.set_title2 | escape }}{% endif %}</h2>
+          {%- if st.set_text != blank -%}<p>{{ st.set_text | escape }}{% if setp != blank %} für {{ setp.price | money }}{% if sum > setp.price %} statt {{ sum | money }}{% endif %}{% endif %}.</p>{%- endif -%}
+        </div>
+        <a class="ssh-ras__band-btn" href="{{ st.set_link | default: '/collections/sets' }}">{{ st.set_label | escape }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
     </div>
   {%- endif -%}
 </section>
 
 <style>
-  .ssh-ras{background:var(--color-background,#F1F1E9);color:#1D1D1B;padding-bottom:110px}
+  .ssh-ras{background:var(--color-background,#F1F1E9);color:#1D1D1B;padding-bottom:0}
   .ssh-ras a{color:inherit;text-decoration:none}
   .ssh-ras__intro{padding:64px 7.4% 56px;display:flex;flex-direction:column;gap:14px}
   .ssh-ras__h1{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(56px,6.4vw,96px);line-height:.92;overflow-wrap:normal}
@@ -100,9 +122,24 @@
   .ssh-ras__set{margin:72px 7.4% 0;padding:28px 0;border-top:2px solid rgba(29,29,27,.15);border-bottom:2px solid rgba(29,29,27,.15);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-size:20px}
   .ssh-ras__set a{display:flex;align-items:center;gap:8px;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase}
   .ssh-ras .ssh-ras__set a{color:var(--btn)}
+  .ssh-ras__band{margin-top:72px;background:var(--band,#F6E2EE);color:#751F65}
+  .ssh-ras__band-in{padding:40px 7.4%;display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .ssh-ras__band-media{position:relative;flex:0 0 auto;width:300px;height:150px}
+  .ssh-ras__band-media img{position:absolute;bottom:0;height:auto;display:block;filter:drop-shadow(0 12px 12px rgba(117,31,101,.18))}
+  .ssh-ras__band-duck{left:0;width:100px;z-index:1}
+  .ssh-ras__band-jar{left:70px;width:150px;bottom:6px}
+  .ssh-ras__band-sponge{left:200px;width:96px;z-index:2}
+  .ssh-ras__band-text{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:10px}
+  .ssh-ras__band-h{margin:0;font-family:var(--ss-display,sans-serif);font-weight:900;text-transform:uppercase;font-size:clamp(34px,3.2vw,48px);line-height:.95;color:#751F65}
+  .ssh-ras__band-text p{margin:0;font-size:17px;line-height:1.45;color:#4A1240}
+  .ssh-ras__band-btn{display:flex;align-items:center;gap:10px;border:2px solid #751F65;border-radius:999px;min-height:48px;padding:0 24px;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transition:background .2s,color .2s}
+  .ssh-ras .ssh-ras__band-btn{color:#751F65}
+  .ssh-ras .ssh-ras__band-btn:hover,.ssh-ras .ssh-ras__band-btn:focus-visible{background:#751F65;color:#FFFFFF}
+  .ssh-ras__band-btn:focus-visible{outline:3px solid #751F65;outline-offset:3px}
+  @media (max-width:749px){.ssh-ras__band{margin-top:48px}.ssh-ras__band-in{padding:32px 20px;gap:24px}.ssh-ras__band-media{width:260px;height:130px}.ssh-ras__band-duck{width:86px}.ssh-ras__band-jar{left:60px;width:130px}.ssh-ras__band-sponge{left:172px;width:84px}}
   @media (max-width:1099px){.ssh-ras__row{grid-template-columns:minmax(0,1fr);gap:24px}.ssh-ras__head{position:static}}
   @media (max-width:749px){
-    .ssh-ras{padding-bottom:72px}
+    .ssh-ras{padding-bottom:0}
     .ssh-ras__intro{padding:40px 20px 36px}
     .ssh-ras__h1{font-size:clamp(40px,11vw,56px)}
     .ssh-ras__lead{font-size:18px}
@@ -177,9 +214,15 @@
     { "type": "text", "id": "text", "label": "Text" },
     { "type": "color", "id": "button", "label": "Farbe Buttons", "default": "#1D3F52" },
     { "type": "header", "content": "Hinweis auf die Sets" },
-    { "type": "text", "id": "set_text", "label": "Text", "default": "Lieber im Set? Mousse, Netzschwamm und Badeente" },
+    { "type": "text", "id": "set_title", "label": "Überschrift (leer = ausblenden)", "default": "Mit Duschmousse" },
+    { "type": "text", "id": "set_title2", "label": "Überschrift Zeile 2", "default": "wird's ein Set." },
+    { "type": "text", "id": "set_text", "label": "Text", "default": "Mousse, Netzschwamm und Badeente zusammen" },
+    { "type": "product", "id": "set_mousse", "label": "Duschmousse (Einzelpreis, erste Größe)" },
+    { "type": "product", "id": "set_duck", "label": "Badeente (Bild und Einzelpreis)" },
+    { "type": "product", "id": "set_sponge", "label": "Netzschwamm (Bild und Einzelpreis)" },
+    { "type": "image_picker", "id": "set_jar", "label": "Freigestellte Dose" },
     { "type": "product", "id": "set_product", "label": "Set-Produkt für den Preis" },
-    { "type": "text", "id": "set_label", "label": "Link-Text", "default": "Zu den Feelgood Sets" },
+    { "type": "text", "id": "set_label", "label": "Link-Text", "default": "Set zusammenstellen" },
     { "type": "url", "id": "set_link", "label": "Link" }
   ],
   "blocks": [
