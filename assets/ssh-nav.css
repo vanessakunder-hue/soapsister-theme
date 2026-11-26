@@ -167,3 +167,9 @@ ssh-mega.ssh-mega .ssh-n2__sheet{
   -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 19px) no-repeat,radial-gradient(28px 20px at 50% 0,#000 97%,transparent 100%) bottom/56px 20px round no-repeat;
   mask:linear-gradient(#000 0 0) top/100% calc(100% - 19px) no-repeat,radial-gradient(28px 20px at 50% 0,#000 97%,transparent 100%) bottom/56px 20px round no-repeat;
 }
+/* Volle Bögen bei jeder Breite: 24 Bögen exakt über die Panelbreite */
+ssh-mega.ssh-mega .ssh-n2{container-type:inline-size}
+ssh-mega.ssh-mega .ssh-n2__sheet{
+  -webkit-mask:linear-gradient(#000 0 0) left top/100% calc(100% - 19px) no-repeat,radial-gradient(50% 100% at 50% 0,#000 97%,transparent 100%) left bottom/calc(100cqw / 24) 20px repeat-x;
+  mask:linear-gradient(#000 0 0) left top/100% calc(100% - 19px) no-repeat,radial-gradient(50% 100% at 50% 0,#000 97%,transparent 100%) left bottom/calc(100cqw / 24) 20px repeat-x;
+}
