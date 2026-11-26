@@ -1,0 +1,36 @@
+/* Soapsister: Mobil-Optimierung (26.11.2026) */
+
+/* Mehrzeilige Überschriften: Platz für Umlaut-Pünktchen */
+.ssh-pdp__h2{line-height:1.02}
+
+@media (max-width:749px){
+  .ssh-sec .ssh-h2,.ssh-set .ssh-set__h2,.ssh-pdp .ssh-pdp__h2{line-height:1.12}
+
+  /* Wischbare Reihen statt langer Listen */
+  .ssh-sec .ssh-sorten__grid,
+  .ssh-sec .ssh-steps__list,
+  .ssh-set .ssh-set__rlist{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;
+    gap:14px;margin:0 -20px;padding:4px 20px 16px;max-width:none;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain
+  }
+  .ssh-sec .ssh-sorten__grid::-webkit-scrollbar,
+  .ssh-sec .ssh-steps__list::-webkit-scrollbar,
+  .ssh-set .ssh-set__rlist::-webkit-scrollbar{display:none}
+  .ssh-sec .ssh-sorten__grid > .ssh-card{flex:0 0 84%;scroll-snap-align:start}
+  .ssh-sec .ssh-steps__list > .ssh-step{flex:0 0 80%;scroll-snap-align:start}
+  .ssh-set .ssh-set__rlist > li{flex:0 0 80%;scroll-snap-align:start}
+  .ssh-set .ssh-set__rtile{height:210px}
+
+  /* Sortenkarte: Preis darf unter den Namen rutschen */
+  .ssh-sec .ssh-card__top{flex-wrap:wrap;gap:6px 12px}
+  .ssh-sec .ssh-card__name{font-size:30px}
+
+  /* Footer zweispaltig */
+  .ssf .ssf__top{grid-template-columns:1fr 1fr!important;gap:28px 20px!important}
+  .ssf .ssf__brand{grid-column:1 / -1!important}
+  .ssf .ssf__top > .ssf__col:last-child{grid-column:1 / -1!important}
+}
+@media (max-width:749px){
+  .ssh-sec .ssh-step > img,.ssh-sec .ssh-step picture img,.ssh-sec .ssh-step__img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+}
