@@ -136,3 +136,27 @@ ssh-mega.ssh-mega .ssh-n2__card:only-child .ssh-n2__disc{aspect-ratio:auto;heigh
 #header-component .action__cart{position:relative;overflow:visible}
 #header-component .header-actions__cart-icon{position:static!important}
 #header-component .header-actions__cart-icon .cart-bubble{position:absolute!important;top:-3px!important;right:-3px!important;left:auto!important;bottom:auto!important;inset-inline-end:-3px!important;transform:none!important;margin:0!important}
+
+/* Navi 3: normale Schreibweise (überschreibt Ring-Stil oben) */
+#header-component .menu-list__link{
+  font-size:clamp(16px,1.25vw,20px);letter-spacing:.02em;text-transform:none;color:#1D1D1B;
+  transition:color .2s;
+}
+#header-component .menu-list__link-title{gap:0;padding-inline:clamp(8px,1.1vw,18px);text-decoration:none}
+#header-component .menu-list__link-title::before{content:none;display:none}
+#header-component .menu-list__link:hover,
+#header-component .menu-list__link:focus-visible,
+#header-component .menu-list__link[aria-expanded="true"]{color:#B0478F}
+#header-component .menu-list__link--active,
+#header-component .menu-list__link[aria-current="page"]{color:#751F65}
+#header-component .menu-list__link--active .menu-list__link-title,
+#header-component .menu-list__link[aria-current="page"] .menu-list__link-title{
+  text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px;text-decoration-color:#E08FBC;
+}
+@media screen and (min-width:750px){
+  #header-component .header__column--right .overflow-menu::part(list){justify-content:center}
+}
+@media screen and (min-width:750px){
+  #header-component .header__column--right header-menu{display:flex;justify-content:center}
+  #header-component .header__column--right header-menu .overflow-menu{width:max-content;max-width:100%;margin-inline:auto}
+}
