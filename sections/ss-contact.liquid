@@ -5,7 +5,7 @@
 {%- endcomment -%}
 {%- render 'ss-tokens' -%}
 {%- assign sid = '#SshContact-' | append: section.id -%}
-{%- assign bubble = 'soapsister-seifenblase-hell.png' | file_url -%}
+{%- assign bubble = 'soapsister-seifenblase-rosa.png' | file_url -%}
 <style>
   {{ sid }}{--plum:#751F65;--ink:#1D1D1B;--line:rgba(29,29,27,.18);background:#F1F1E9;color:var(--ink)}
   {{ sid }} .ct-main{padding:72px 7.4% 110px;display:flex;gap:80px;align-items:flex-start}
@@ -73,24 +73,11 @@
   {{ sid }} .ct-list details[open] .ct-pl{transform:rotate(45deg);background:var(--plum);color:#fff}
   {{ sid }} .ct-list .ct-a{margin:14px 0 0;font-size:18px;line-height:1.55;color:#4A1240;max-width:60ch}
   {{ sid }} .ct-list .ct-a p{margin:0}
-  /* Formular-Karte in Lila */
-  {{ sid }} .ct-card{background:var(--plum);color:#fff;box-shadow:0 24px 50px rgba(117,31,101,.22)}
-  {{ sid }} .ct-form__h{color:#fff}
-  {{ sid }} .ct-card .ct-lab,{{ sid }} .ct-card .ct-field{color:#F6D3E6}
-  {{ sid }} .ct-card .ct-in{border-color:transparent}
-  {{ sid }} .ct-card .ct-in:focus{border-color:#E08FBC;box-shadow:0 0 0 4px rgba(224,143,188,.45)}
-  {{ sid }} .ct-card .ct-chip span{background:transparent;color:#fff;border-color:rgba(246,211,230,.5)}
-  {{ sid }} .ct-card .ct-chip span:hover{border-color:#fff}
-  {{ sid }} .ct-card .ct-chip input:checked + span{background:#E08FBC;border-color:#E08FBC;color:var(--plum)}
-  {{ sid }} .ct-card .ct-note{color:#F6D3E6;opacity:1}
-  {{ sid }} .ct-card .ct-btn{background:#E08FBC;color:var(--plum)}
-  {{ sid }} .ct-card .ct-btn:hover{filter:brightness(1.06)}
-  {{ sid }} .ct-card .ct-btn:focus-visible{outline-color:#fff}
-  {{ sid }} .ct-card .ct-err{background:#fff}
-  {{ sid }} .ct-card .ct-done__h{color:#fff}
-  {{ sid }} .ct-card .ct-done p{color:#F6D3E6}
-  {{ sid }} .ct-card .ct-again{border-color:#fff;color:#fff}
-  {{ sid }} .ct-card .ct-again:hover{background:#fff;color:var(--plum)}
+  /* Formular-Karte zartrosa */
+  {{ sid }} .ct-card{background:#F6E2EE;box-shadow:none}
+  {{ sid }} .ct-card .ct-in{border-color:rgba(117,31,101,.14);background:#FFFDFE}
+  {{ sid }} .ct-card .ct-chip span{background:transparent;border-color:rgba(117,31,101,.22)}
+  {{ sid }} .ct-card .ct-chip input:checked + span{background:var(--plum);border-color:var(--plum);color:#fff}
   @media (max-width:989px){
     {{ sid }} .ct-main,{{ sid }} .ct-faq{flex-direction:column;align-items:stretch;gap:48px}
     {{ sid }} .ct-intro,{{ sid }} .ct-card,{{ sid }} .ct-faq__intro,{{ sid }} .ct-list{flex:none}
