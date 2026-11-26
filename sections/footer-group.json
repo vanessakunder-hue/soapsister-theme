@@ -668,7 +668,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/soapsister-navi-zubehoer.jpg",
-            "focus": "object-position:50% 70%",
+            "focus": "object-position:50% 30%",
             "title": "Badeente & Netzschwamm",
             "subtitle": "Passend zu deiner Sorte in Rosa, Weiß und Blau",
             "link": "/collections/badeente-netzschwamm",
