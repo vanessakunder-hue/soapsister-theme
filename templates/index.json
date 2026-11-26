@@ -89,6 +89,7 @@
         "text_cxjNew",
         "button_H9gpTf"
       ],
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -120,8 +121,7 @@
         "reflection_opacity": 75,
         "padding-block-start": 24,
         "padding-block-end": 24
-      },
-      "disabled": true
+      }
     },
     "soapsister_sorten_BeGNQG": {
       "type": "soapsister-sorten",
@@ -168,6 +168,7 @@
         "sorte_gtXtUV",
         "sorte_HEyaqd"
       ],
+      "disabled": true,
       "name": "Soapsister Sortenkarten",
       "settings": {
         "heading": "Wähle deine Sorte",
@@ -180,8 +181,7 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      },
-      "disabled": true
+      }
     },
     "section_GVLLAH": {
       "type": "section",
@@ -627,6 +627,7 @@
         "set_iK8kfU",
         "set_Wr8hEk"
       ],
+      "disabled": true,
       "name": "Soapsister Feelgood-Sets",
       "settings": {
         "heading": "Dein Duschmoment im Set",
@@ -638,8 +639,7 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      },
-      "disabled": true
+      }
     },
     "soapsister_tutorial_7BPLyk": {
       "type": "soapsister-tutorial",
@@ -671,6 +671,7 @@
         "step_PdQwNX",
         "step_66qgHw"
       ],
+      "disabled": true,
       "name": "Soapsister Tutorial",
       "settings": {
         "heading": "So geht's: in 3 Schritten",
@@ -681,8 +682,7 @@
         "corner_radius": 24,
         "padding-block-start": 48,
         "padding-block-end": 48
-      },
-      "disabled": true
+      }
     },
     "section_ek76at": {
       "type": "section",
@@ -1500,6 +1500,7 @@
         "group_ikgdQ8",
         "group_7ULzbF"
       ],
+      "disabled": true,
       "name": "t:names.icons_with_text",
       "settings": {
         "content_direction": "row",
@@ -1528,8 +1529,7 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48
-      },
-      "disabled": true
+      }
     },
     "section_78Kybe": {
       "type": "section",
@@ -1677,6 +1677,7 @@
         "group_bTAHHb",
         "image_BwU6rp"
       ],
+      "disabled": true,
       "name": "t:names.image_with_text",
       "settings": {
         "content_direction": "row",
@@ -1705,8 +1706,7 @@
         "border_radius": 0,
         "padding-block-start": 40,
         "padding-block-end": 40
-      },
-      "disabled": true
+      }
     },
     "section_nw73tP": {
       "type": "section",
@@ -1958,6 +1958,7 @@
         "text_TUrVQR",
         "accordion_c4yNb9"
       ],
+      "disabled": true,
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",
@@ -1986,34 +1987,22 @@
         "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48
-      },
-      "disabled": true
+      }
     },
     "ss_hero": {
       "type": "ss-hero-scene",
-      "settings": {},
-      "disabled": true
+      "disabled": true,
+      "settings": {}
     },
     "ss_about": {
       "type": "ss-about",
+      "disabled": true,
       "settings": {
-        "heading": "Über uns",
-        "claim": "For skin, soul and sisterhood.",
-        "text": "<p>Soapsister ist eine Marke aus München, gegründet von Veronika Löwen. Die Idee dahinter: Duschen soll nicht nur sauber machen, sondern sich gut anfühlen. Für deine Haut, für deine Seele und für all die Frauen, die dir wichtig sind.</p><p>Darum gibt es bei uns Duschmousse statt Duschgel. Luftig, mit Aloe Vera und Mandelöl und zu 96 % aus natürlichen Inhaltsstoffen. Mit drei leckeren Düften, die gute Laune machen: Lollipop, Coconut und Marshmallow.</p><p>Together in care heißt für uns: Wir kümmern uns umeinander. Und manchmal fängt das mit einer kleinen Auszeit unter der Dusche an.</p>",
-        "button_label": "Mehr über uns",
-        "button_link": "/",
-        "image_1": "shopify://shop_images/image-1793632160546.png"
-      },
-      "disabled": true
+        "heading": "Über uns"
+      }
     },
     "ss_hero_pop": {
       "type": "ss-hero-pop",
-      "settings": {
-        "image": "shopify://shop_images/soapsister-hero-pop-duschmousse-2400.jpg",
-        "image_alt": "Duschmousse Coconut, Marshmallow und Lollipop in Seifenblasen",
-        "heading": "Duschmousse statt Duschgel.",
-        "text": "Tipp auf eine Bubble und entdeck dein Duschmousse: luftig aufgeschlagen, mit Aloe Vera und Mandelöl."
-      },
       "blocks": {
         "flavour_coconut": {
           "type": "flavour",
@@ -2023,10 +2012,10 @@
             "title": "Coconut.",
             "text": "Duftet nach Kokos, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D1D1B",
-            "center_x": 20.8,
-            "center_y": 51.4,
             "duck": "shopify://shop_images/soapsister-hero-badeente-weiss.png",
-            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-weiss.png"
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-weiss.png",
+            "center_x": 20.8,
+            "center_y": 51.4
           }
         },
         "flavour_marshmallow": {
@@ -2037,10 +2026,10 @@
             "title": "Marshmallow.",
             "text": "Duftet nach Buttermilch, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#1D1D1B",
-            "center_x": 50.2,
-            "center_y": 51.4,
             "duck": "shopify://shop_images/soapsister-hero-badeente-blau.png",
-            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-blau.png"
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-blau.png",
+            "center_x": 50.2,
+            "center_y": 51.4
           }
         },
         "flavour_lollipop": {
@@ -2051,10 +2040,10 @@
             "title": "Lollipop.",
             "text": "Duftet nach Orange und Granatapfel, luftig aufgeschlagen mit Aloe Vera und Mandelöl. Für Face, Body und Shave.",
             "ink": "#751F65",
-            "center_x": 78.8,
-            "center_y": 51.4,
             "duck": "shopify://shop_images/soapsister-hero-badeente-rosa.png",
-            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-rosa.png"
+            "sponge": "shopify://shop_images/soapsister-hero-netzschwamm-rosa.png",
+            "center_x": 78.8,
+            "center_y": 51.4
           }
         }
       },
@@ -2062,14 +2051,16 @@
         "flavour_coconut",
         "flavour_marshmallow",
         "flavour_lollipop"
-      ]
+      ],
+      "settings": {
+        "image": "shopify://shop_images/soapsister-hero-pop-duschmousse-2400.jpg",
+        "image_alt": "Duschmousse Coconut, Marshmallow und Lollipop in Seifenblasen",
+        "heading": "Duschmousse statt Duschgel.",
+        "text": "Tipp auf eine Bubble und entdeck dein Duschmousse: luftig aufgeschlagen, mit Aloe Vera und Mandelöl."
+      }
     },
     "ssh_sorten": {
       "type": "ss-home-sorten",
-      "settings": {
-        "show_trail": true,
-        "ink": "#1D1D1B"
-      },
       "blocks": {
         "lollipop": {
           "type": "card",
@@ -2105,8 +2096,8 @@
             "image": "shopify://shop_images/soapsister-duschmousse-marshmallow-karte.jpg",
             "image_alt": "Duschmousse Marshmallow mit Buttermilch-Duft zwischen hellblauen Marshmallows",
             "tint": "#21B5EA",
-            "ink": "#1D3F52",
             "tint_strength": 16,
+            "ink": "#1D3F52",
             "text_color": "#1D1D1B"
           }
         }
@@ -2115,13 +2106,14 @@
         "lollipop",
         "coconut",
         "marshmallow"
-      ]
+      ],
+      "settings": {
+        "ink": "#1D1D1B",
+        "show_trail": true
+      }
     },
     "ssh_set": {
       "type": "ss-home-set",
-      "settings": {
-        "show_trail": true
-      },
       "blocks": {
         "lollipop": {
           "type": "flavour",
@@ -2133,6 +2125,7 @@
             "mousse": "duschmousse-lollipop",
             "sponge": "netzschwamm-rosa",
             "duck": "badeente-rosa",
+            "jar": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png",
             "bubble": "shopify://shop_images/soapsister-set-blase-lollipop.jpg",
             "bubble_alt": "Duschmousse Lollipop in einer Seifenblase",
             "duck_img": "shopify://shop_images/soapsister-hero-badeente-rosa.png",
@@ -2151,6 +2144,7 @@
             "mousse": "duschmousse-coconut",
             "sponge": "netzschwamm-weiss",
             "duck": "badeente-weiss",
+            "jar": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
             "bubble": "shopify://shop_images/soapsister-set-blase-coconut.jpg",
             "bubble_alt": "Duschmousse Coconut in einer Seifenblase",
             "duck_img": "shopify://shop_images/soapsister-hero-badeente-weiss.png",
@@ -2169,6 +2163,7 @@
             "mousse": "duschmousse-marshmallow",
             "sponge": "netzschwamm-blau",
             "duck": "badeente-blau",
+            "jar": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
             "bubble": "shopify://shop_images/soapsister-set-blase-marshmallow.jpg",
             "bubble_alt": "Duschmousse Marshmallow in einer Seifenblase",
             "duck_img": "shopify://shop_images/soapsister-hero-badeente-blau.png",
@@ -2182,13 +2177,13 @@
         "lollipop",
         "coconut",
         "marshmallow"
-      ]
+      ],
+      "settings": {
+        "show_trail": true
+      }
     },
     "ssh_steps": {
       "type": "ss-home-steps",
-      "settings": {
-        "show_trail": true
-      },
       "blocks": {
         "nehmen": {
           "type": "step",
@@ -2225,14 +2220,13 @@
         "nehmen",
         "aufschaeumen",
         "abspuelen"
-      ]
+      ],
+      "settings": {
+        "show_trail": true
+      }
     },
     "ssh_usp": {
       "type": "ss-home-usp",
-      "settings": {
-        "show_trail": true,
-        "ink": "#1D1D1B"
-      },
       "blocks": {
         "haut": {
           "type": "usp",
@@ -2260,7 +2254,11 @@
         "haut",
         "natur",
         "muenchen"
-      ]
+      ],
+      "settings": {
+        "ink": "#1D1D1B",
+        "show_trail": true
+      }
     },
     "ssh_about": {
       "type": "ss-home-about",
@@ -2276,10 +2274,6 @@
     },
     "ssh_faq": {
       "type": "ss-home-faq",
-      "settings": {
-        "show_trail": true,
-        "ink": "#1D1D1B"
-      },
       "blocks": {
         "accordion_row_7dgnx3": {
           "type": "question",
@@ -2315,12 +2309,16 @@
         "accordion_row_ygg69G",
         "accordion_row_H3HGCU",
         "accordion_row_y7jiPc"
-      ]
+      ],
+      "settings": {
+        "ink": "#1D1D1B",
+        "show_trail": true
+      }
     },
     "ssh_ballpit": {
       "type": "ss-home-ballpit",
-      "settings": {},
-      "disabled": true
+      "disabled": true,
+      "settings": {}
     }
   },
   "order": [

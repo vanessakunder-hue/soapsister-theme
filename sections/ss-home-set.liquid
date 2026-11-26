@@ -9,8 +9,12 @@
       {%- for block in section.blocks -%}
         {%- assign c = block.settings -%}
         <div class="ssh-set__visual" data-panel="{{ block.id }}" {% unless forloop.first %}hidden{% endunless %}>
-          {%- if c.bubble != blank -%}{{ c.bubble | image_url: width: 900 | image_tag: class: 'ssh-set__bubble', alt: c.bubble_alt, loading: 'lazy', sizes: '(max-width: 749px) 52vw, 25vw' }}{%- endif -%}
           <img class="ssh-set__ring" src="{{ ring }}" alt="" aria-hidden="true" loading="lazy" width="440" height="440">
+          {%- if c.jar != blank -%}
+            {{ c.jar | image_url: width: 900 | image_tag: class: 'ssh-set__jar', alt: c.bubble_alt, loading: 'lazy', sizes: '(max-width: 749px) 60vw, 30vw' }}
+          {%- elsif c.bubble != blank -%}
+            {{ c.bubble | image_url: width: 900 | image_tag: class: 'ssh-set__bubble', alt: c.bubble_alt, loading: 'lazy', sizes: '(max-width: 749px) 52vw, 25vw' }}
+          {%- endif -%}
           {%- if c.duck_img != blank -%}{{ c.duck_img | image_url: width: 500 | image_tag: class: 'ssh-set__duck', alt: c.duck_alt, loading: 'lazy' }}{%- endif -%}
           {%- if c.sponge_img != blank -%}{{ c.sponge_img | image_url: width: 500 | image_tag: class: 'ssh-set__sponge', alt: c.sponge_alt, loading: 'lazy' }}{%- endif -%}
         </div>
@@ -99,13 +103,14 @@
 <style>
   .ssh-set__row{display:flex;gap:64px;flex-wrap:wrap;align-items:center}
   .ssh-set .ssh-h2{font-size:clamp(48px,4.4vw,76px)}
-  .ssh-set__stage{flex:1.1 1 520px;min-width:0;position:relative;aspect-ratio:1/.86;border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#F1F1E9 0%,#F1F1E9 62%,#CAC8C4 62%,#CAC8C4 100%)}
+  .ssh-set__stage{flex:1.1 1 520px;min-width:0;position:relative;aspect-ratio:1/.82}
   .ssh-set__visual{position:absolute;inset:0}
   .ssh-set__visual[hidden]{display:none}
+  .ssh-set__ring{position:absolute;left:10%;top:-4%;width:80%;height:auto;display:block;opacity:.95;pointer-events:none}
+  .ssh-set__jar{position:absolute;left:24%;top:24%;width:52%;height:auto;display:block;filter:drop-shadow(0 26px 30px rgba(117,31,101,.28))}
   .ssh-set__bubble{position:absolute;left:24%;top:9%;width:52%;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 44%;display:block;box-shadow:0 30px 60px rgba(117,31,101,.22)}
-  .ssh-set__ring{position:absolute;left:22.2%;top:7.2%;width:55.6%;height:auto;display:block}
-  .ssh-set__duck{position:absolute;left:9%;bottom:7%;width:25%;height:auto;display:block;filter:drop-shadow(0 14px 14px rgba(117,31,101,.22))}
-  .ssh-set__sponge{position:absolute;right:8%;bottom:8%;width:24%;height:auto;display:block;filter:drop-shadow(0 14px 14px rgba(117,31,101,.2))}
+  .ssh-set__duck{position:absolute;left:4%;bottom:4%;width:29%;height:auto;display:block;z-index:2;filter:drop-shadow(0 16px 18px rgba(117,31,101,.26))}
+  .ssh-set__sponge{position:absolute;right:4%;bottom:6%;width:28%;height:auto;display:block;z-index:2;filter:drop-shadow(0 16px 18px rgba(117,31,101,.24))}
   .ssh-set__copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px}
   .ssh-set__tabs{display:flex;gap:10px;flex-wrap:wrap}
   .ssh-set__tab{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 20px 0 10px;border-radius:999px;cursor:pointer;font-family:inherit;font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#751F65;background:rgba(241,241,233,.6);border:0;transition:background .2s,color .2s}
@@ -183,6 +188,7 @@
         { "type": "product", "id": "mousse", "label": "Duschmousse" },
         { "type": "product", "id": "sponge", "label": "Netzschwamm" },
         { "type": "product", "id": "duck", "label": "Badeente" },
+        { "type": "image_picker", "id": "jar", "label": "Tiegel freigestellt", "info": "Wenn gesetzt, steht der Tiegel frei auf der Fläche statt des Blasen-Fotos." },
         { "type": "image_picker", "id": "bubble", "label": "Bild in der Blase" },
         { "type": "text", "id": "bubble_alt", "label": "Alt-Text Blase" },
         { "type": "image_picker", "id": "duck_img", "label": "Bild Badeente" },
