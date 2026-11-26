@@ -607,6 +607,73 @@
             "link": "/collections/sets",
             "tint": "#DDF0FA"
           }
+        },
+        "p_extras": {
+          "type": "panel",
+          "settings": {
+            "menu_item": "Zubehör",
+            "base": "#FBF0F6"
+          }
+        },
+        "x_ente_rosa": {
+          "type": "link",
+          "settings": {
+            "label": "Badeente Rosa",
+            "link": "/products/badeente-rosa"
+          }
+        },
+        "x_ente_weiss": {
+          "type": "link",
+          "settings": {
+            "label": "Badeente Weiß",
+            "link": "/products/badeente-weiss"
+          }
+        },
+        "x_ente_blau": {
+          "type": "link",
+          "settings": {
+            "label": "Badeente Blau",
+            "link": "/products/badeente-blau"
+          }
+        },
+        "x_schwamm_rosa": {
+          "type": "link",
+          "settings": {
+            "label": "Netzschwamm Rosa",
+            "link": "/products/netzschwamm-rosa"
+          }
+        },
+        "x_schwamm_weiss": {
+          "type": "link",
+          "settings": {
+            "label": "Netzschwamm Weiß",
+            "link": "/products/netzschwamm-weiss"
+          }
+        },
+        "x_schwamm_blau": {
+          "type": "link",
+          "settings": {
+            "label": "Netzschwamm Blau",
+            "link": "/products/netzschwamm-blau"
+          }
+        },
+        "x_alle": {
+          "type": "link",
+          "settings": {
+            "label": "Alle Badeenten & Netzschwämme",
+            "link": "/collections/badeente-netzschwamm"
+          }
+        },
+        "xc_all": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/soapsister-navi-zubehoer.jpg",
+            "focus": "object-position:50% 70%",
+            "title": "Badeente & Netzschwamm",
+            "subtitle": "Passend zu deiner Sorte in Rosa, Weiß und Blau",
+            "link": "/collections/badeente-netzschwamm",
+            "tint": "#DDF0FA"
+          }
         }
       },
       "block_order": [
@@ -638,7 +705,16 @@
         "sc_lollipop",
         "sc_coconut",
         "sc_marshmallow",
-        "sc_all"
+        "sc_all",
+        "p_extras",
+        "x_ente_rosa",
+        "x_ente_weiss",
+        "x_ente_blau",
+        "x_schwamm_rosa",
+        "x_schwamm_weiss",
+        "x_schwamm_blau",
+        "x_alle",
+        "xc_all"
       ]
     }
   },
