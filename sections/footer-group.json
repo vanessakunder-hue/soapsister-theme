@@ -348,7 +348,11 @@
       "type": "ss-home-newsletter",
       "settings": {
         "legal": "<p>Ja, ich möchte den Soapsister-Newsletter mit Neuheiten und Angeboten per E-Mail bekommen. Deine Einwilligung kannst du jederzeit widerrufen, zum Beispiel über den Abmeldelink in jeder E-Mail. Mehr dazu in der <a href=\"/policies/privacy-policy\" title=\"Datenschutzerklärung\">Datenschutzerklärung</a>.</p>",
-        "show_trail": true
+        "show_trail": true,
+        "bg": "#F6E2EE",
+        "ink": "#751F65",
+        "accent": "#B0478F",
+        "tone": "light"
       }
     },
     "ssh_mega": {
