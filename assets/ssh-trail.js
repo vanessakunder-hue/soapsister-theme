@@ -1,6 +1,8 @@
 /* Soapsister: Bubble-Pfad zwischen den Startseiten-Sections.
    Die Blasen sind nur beim Scrollen sichtbar: sie poppen auf, solange gescrollt wird,
-   und verschwinden kurz nach dem Stillstand sowie am oberen Bildschirmrand. */
+   und verschwinden kurz nach dem Stillstand sowie am oberen Bildschirmrand.
+   Ein Pfad, der einmal komplett nach oben durchgescrollt wurde, bleibt beim Zurückscrollen aus.
+   Erst wenn der Hero wieder im Bild ist, werden alle Pfade zurückgesetzt. */
 (function () {
   var trails = [], ticking = false, active = false, idle = 0;
   var IDLE_MS = 650;
@@ -36,15 +38,18 @@
       seg(a, sp); seg(sp, e);
     } else seg(a, e);
     el.appendChild(frag);
-    trails.push({ el: el, items: items });
+    trails.push({ el: el, items: items, done: false });
   }
   function update() {
     ticking = false;
     var vh = window.innerHeight, start = vh * 0.45, end = vh * 0.08;
+    var hero = document.querySelector(".content-for-layout > .shopify-section:first-child");
+    if (hero && hero.getBoundingClientRect().bottom > vh * 0.6) { for (var h = 0; h < trails.length; h++) trails[h].done = false; }
     for (var i = 0; i < trails.length; i++) {
       var r = trails[i].el.getBoundingClientRect();
       var list = trails[i].items;
-      var near = !(r.bottom < -200 || r.top > vh + 200);
+      if (r.bottom < 0) trails[i].done = true;
+      var near = !trails[i].done && !(r.bottom < -200 || r.top > vh + 200);
       for (var j = 0; j < list.length; j++) {
         var f = 0;
         if (active && near) {
