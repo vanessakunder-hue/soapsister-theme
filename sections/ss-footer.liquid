@@ -5,7 +5,7 @@
 {%- render 'ss-tokens' -%}
 {%- assign sid = '#SsFooter-' | append: section.id -%}
 <style>
-  {{ sid }} { display: grid; gap: 40px; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px) 24px; background: var(--ss-plum); border-top: 1px solid rgba(234, 237, 232, .22); color: var(--ss-coconut); font-size: 18px; }
+  {{ sid }} { display: grid; gap: 40px; padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 48px) 24px; background: var(--ss-plum); color: var(--ss-coconut); font-size: 18px; }
   {{ sid }} a { color: inherit; }
   {{ sid }} .ssf__top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 32px clamp(16px, 3vw, 48px); }
   {{ sid }} .ssf__lockup { display: block; width: clamp(220px, 24vw, 380px); max-width: 100%; aspect-ratio: 455.527 / 126.929; background: var(--ss-coconut); -webkit-mask: var(--ssf-lockup) center / contain no-repeat; mask: var(--ssf-lockup) center / contain no-repeat; }
