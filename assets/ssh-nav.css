@@ -104,7 +104,7 @@
 }
 
 /* Mega-Menü fließt hinter der Pille herunter */
-.ssh-mega{top:calc(var(--ssh-mega-top,92px) - 40px)!important;z-index:17}
+ssh-mega.ssh-mega{top:calc(var(--ssh-mega-top,92px) - 40px)!important;z-index:17!important}
 .ssh-mega .ssh-n2__sheet{padding-top:80px}
 
 /* Menü startet direkt nach dem Logo und nutzt die ganze Breite */
