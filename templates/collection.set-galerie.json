@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-plp-galerie",
+      "settings": {
+        "heading": "Feelgood Sets.",
+        "text": "Mousse, Netzschwamm und Badeente im Set. Klick dich durch."
+      },
+      "blocks": {
+        "lollipop": {
+          "type": "slide",
+          "settings": {
+            "product": "feelgood-set-lollipop",
+            "name": "Lollipop",
+            "tab_label": "",
+            "scent": "",
+            "subline": "Mousse, Netzschwamm und Badeente in Rosa",
+            "focus": "object-position:50% 50%",
+            "ink": "#751F65",
+            "button": "#751F65"
+          }
+        },
+        "coconut": {
+          "type": "slide",
+          "settings": {
+            "product": "feelgood-set-coconut",
+            "name": "Coconut",
+            "tab_label": "",
+            "scent": "",
+            "subline": "Mousse, Netzschwamm und Badeente in Weiß",
+            "focus": "object-position:50% 50%",
+            "ink": "#1D1D1B",
+            "button": "#1D3F52"
+          }
+        },
+        "marshmallow": {
+          "type": "slide",
+          "settings": {
+            "product": "feelgood-set-marshmallow",
+            "name": "Marshmallow",
+            "tab_label": "",
+            "scent": "",
+            "subline": "Mousse, Netzschwamm und Badeente in Blau",
+            "focus": "object-position:50% 50%",
+            "ink": "#1D3F52",
+            "button": "#1D3F52"
+          }
+        }
+      },
+      "block_order": [
+        "lollipop",
+        "coconut",
+        "marshmallow"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
