@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "contact": {
+      "type": "ss-contact",
+      "settings": {
+        "heading": "Schreib uns.",
+        "lead": "Fragen zu deiner Bestellung, zu unseren Sorten oder einfach Lust, Hallo zu sagen? Wir freuen uns, von dir zu hören.",
+        "form_title": "Deine Nachricht",
+        "topics_label": "Worum geht's?",
+        "topics": "Bestellung, Produkte, Geschenk und Set, Kooperation, Etwas anderes",
+        "submit_label": "Nachricht senden",
+        "privacy_link": "/policies/privacy-policy",
+        "done_title": "Danke!",
+        "done_text": "Deine Nachricht ist unterwegs. Wir melden uns so schnell wie möglich bei dir.",
+        "again_label": "Noch eine Nachricht",
+        "faq_title": "Schon gefragt?",
+        "faq_text": "Vielleicht findest du die Antwort schon hier.",
+        "faq_link_label": "Alle Fragen",
+        "faq_link": "/#faq"
+      },
+      "blocks": {
+        "r_mail": { "type": "row", "settings": { "icon": "mail", "label": "E-Mail", "value": "hello@soapsister.de", "link": "mailto:hello@soapsister.de" } },
+        "r_tiktok": { "type": "row", "settings": { "icon": "tiktok", "label": "TikTok", "value": "@soapsister.de", "link": "https://www.tiktok.com/@soapsister.de" } },
+        "r_insta": { "type": "row", "settings": { "icon": "instagram", "label": "Instagram", "value": "", "link": "" } },
+        "r_time": { "type": "row", "settings": { "icon": "clock", "label": "Antwortzeit", "value": "", "link": "" } },
+        "f1": { "type": "faq", "settings": { "question": "Was ist im Duschmousse drin?", "answer": "<p>Alle Sorten enthalten Aloe Vera und Mandelöl und bestehen zu 96 % aus natürlichen Inhaltsstoffen. Die vollständige Liste findest du bei jedem Produkt und auf dem Tiegel.</p>" } },
+        "f2": { "type": "faq", "settings": { "question": "Wie benutze ich das Duschmousse?", "answer": "<p>Nimm etwas Mousse aus dem Tiegel, schäume sie mit dem nassen Netzschwamm auf und spüle sie gründlich ab.</p>" } },
+        "f3": { "type": "faq", "settings": { "question": "Wie lange dauert der Versand?", "answer": "<p>Wir versenden mit DHL. Innerhalb Deutschlands dauert die Lieferung in der Regel 1 bis 3 Werktage.</p>" } }
+      },
+      "block_order": ["r_mail", "r_tiktok", "r_insta", "r_time", "f1", "f2", "f3"]
+    }
+  },
+  "order": ["contact"]
+}

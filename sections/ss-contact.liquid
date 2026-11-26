@@ -1,0 +1,259 @@
+{%- comment -%}
+  Kontakt A: ruhig mit Formular (Claude Design, 26.11.2026).
+  Links Überschrift, Text und Kontaktwege (Blöcke "row", leere Werte werden ausgeblendet), rechts das Shopify-Kontaktformular
+  mit Anliegen-Chips und Bestellnummer, darunter "Schon gefragt?" mit Fragen (Blöcke "faq").
+{%- endcomment -%}
+{%- render 'ss-tokens' -%}
+{%- assign sid = '#SshContact-' | append: section.id -%}
+{%- assign bubble = 'soapsister-seifenblase-rosa.png' | file_url -%}
+<style>
+  {{ sid }}{--plum:#751F65;--ink:#1D1D1B;--line:rgba(29,29,27,.18);background:#F1F1E9;color:var(--ink)}
+  {{ sid }} .ct-main{padding:72px 7.4% 110px;display:flex;gap:80px;align-items:flex-start}
+  {{ sid }} .ct-intro{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:22px;padding-top:12px}
+  {{ sid }} .ct-h1{margin:0;font-family:var(--ss-display);font-weight:900;text-transform:uppercase;font-size:clamp(72px,9.4vw,144px);line-height:.9;color:var(--plum);overflow-wrap:normal;word-break:normal;hyphens:manual}
+  {{ sid }} .ct-lead{margin:0;font-size:21px;line-height:1.55;color:#4A1240;max-width:36ch}
+  {{ sid }} .ct-rows{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-direction:column}
+  {{ sid }} .ct-row{display:flex;align-items:center;gap:16px;padding:18px 0;border-top:2px solid rgba(117,31,101,.18);color:var(--ink);text-decoration:none}
+  {{ sid }} a.ct-row:hover .ct-row__v{color:var(--plum)}
+  {{ sid }} .ct-row__i{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--plum);display:grid;place-items:center;flex:0 0 48px;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  {{ sid }} a.ct-row:hover .ct-row__i{transform:scale(1.08)}
+  {{ sid }} .ct-row__t{display:flex;flex-direction:column;gap:2px}
+  {{ sid }} .ct-row__l{font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+  {{ sid }} .ct-row__v{font-size:20px;transition:color .2s}
+  {{ sid }} .ct-card{flex:1.25 1 560px;min-width:0;background:#fff;border-radius:36px;padding:40px 40px 36px;position:relative;overflow:hidden}
+  {{ sid }} .ct-form{display:flex;flex-direction:column;gap:22px}
+  {{ sid }} .ct-form__h{margin:0;font-weight:600;font-size:26px;letter-spacing:.02em;color:var(--plum)}
+  {{ sid }} .ct-fs{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  {{ sid }} .ct-lab{font-weight:600;font-size:16px;letter-spacing:.04em;color:var(--ink);padding:0;margin-bottom:4px}
+  {{ sid }} .ct-chips{display:flex;flex-wrap:wrap;gap:8px}
+  {{ sid }} .ct-chip{position:relative}
+  {{ sid }} .ct-chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  {{ sid }} .ct-chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-size:16px;letter-spacing:.02em;transition:background-color .2s,color .2s,border-color .2s}
+  {{ sid }} .ct-chip span:hover{border-color:var(--plum)}
+  {{ sid }} .ct-chip input:checked + span{background:var(--plum);border-color:var(--plum);color:#fff}
+  {{ sid }} .ct-chip input:focus-visible + span{outline:3px solid #E08FBC;outline-offset:3px}
+  {{ sid }} .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  {{ sid }} .ct-field{display:flex;flex-direction:column;gap:8px;font-weight:600;font-size:16px;letter-spacing:.04em;color:var(--ink)}
+  {{ sid }} .ct-field small{font-weight:400;letter-spacing:0;opacity:.7;font-size:15px}
+  {{ sid }} .ct-in{width:100%;box-sizing:border-box;min-height:54px;border:2px solid var(--line);border-radius:18px;background:#fff;padding:12px 18px;font-family:var(--ss-text);font-size:17px;font-weight:400;letter-spacing:normal;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+  {{ sid }} .ct-in:focus{border-color:var(--plum);box-shadow:0 0 0 4px rgba(224,143,188,.35)}
+  {{ sid }} textarea.ct-in{resize:vertical;line-height:1.45;min-height:150px}
+  {{ sid }} .ct-order{display:none}
+  {{ sid }} .ct-form:has(.ct-chip--order input:checked) .ct-order{display:flex}
+  {{ sid }} .ct-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  {{ sid }} .ct-note{margin:0;font-size:15px;line-height:1.45;color:var(--ink);opacity:.8;max-width:36ch}
+  {{ sid }} .ct-note a{color:inherit;text-decoration:underline}
+  {{ sid }} .ct-btn{display:inline-flex;align-items:center;gap:12px;min-height:58px;padding:0 32px;border-radius:999px;border:0;background:var(--plum);color:#fff;cursor:pointer;font-family:var(--ss-text);font-weight:600;font-size:16px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:filter .2s,transform .25s}
+  {{ sid }} .ct-btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+  {{ sid }} .ct-btn svg{transition:transform .25s}
+  {{ sid }} .ct-btn:hover svg{transform:translateX(4px)}
+  {{ sid }} .ct-btn:focus-visible{outline:3px solid #E08FBC;outline-offset:4px}
+  {{ sid }} .ct-err{margin:0;padding:14px 18px;border-radius:18px;background:#FBE4EE;color:#7A1236;font-size:16px}
+  {{ sid }} .ct-err ul{margin:6px 0 0;padding-left:18px}
+  {{ sid }} .ct-done{min-height:520px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px;position:relative}
+  {{ sid }} .ct-done__h{margin:0;font-family:var(--ss-display);font-weight:900;text-transform:uppercase;font-size:clamp(80px,8vw,120px);line-height:.9;color:var(--plum);position:relative}
+  {{ sid }} .ct-done p{margin:0;font-size:21px;line-height:1.55;color:#4A1240;max-width:34ch;position:relative}
+  {{ sid }} .ct-again{position:relative;margin-top:8px;display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:999px;border:2px solid var(--plum);color:var(--plum);font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+  {{ sid }} .ct-again:hover{background:var(--plum);color:#fff}
+  {{ sid }} .ct-bubbles{position:absolute;inset:0;pointer-events:none}
+  {{ sid }} .ct-bubbles img{position:absolute;bottom:0;opacity:0;animation:ct-up 3.2s ease-out infinite}
+  @keyframes ct-up{0%{opacity:0;transform:translateY(30px) scale(.5)}20%{opacity:.95}100%{opacity:0;transform:translateY(-260px) scale(1.2)}}
+  {{ sid }} .ct-faq{background:#F6E2EE;padding:100px 7.4% 120px;display:flex;gap:80px;align-items:flex-start}
+  {{ sid }} .ct-faq__intro{flex:0 1 420px;display:flex;flex-direction:column;gap:18px}
+  {{ sid }} .ct-h2{margin:0;font-family:var(--ss-display);font-weight:900;text-transform:uppercase;font-size:clamp(56px,6vw,92px);line-height:.9;color:var(--plum)}
+  {{ sid }} .ct-faq__intro p{margin:0;font-size:20px;line-height:1.55;color:#4A1240;max-width:30ch}
+  {{ sid }} .ct-more{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--plum);text-decoration:none}
+  {{ sid }} .ct-more svg{transition:transform .25s}
+  {{ sid }} .ct-more:hover svg{transform:translateX(4px)}
+  {{ sid }} .ct-list{flex:1 1 560px;min-width:0;border-bottom:2px solid rgba(117,31,101,.2)}
+  {{ sid }} .ct-list details{border-top:2px solid rgba(117,31,101,.2);padding:22px 0}
+  {{ sid }} .ct-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;font-weight:600;font-size:22px;color:var(--plum)}
+  {{ sid }} .ct-list summary::-webkit-details-marker{display:none}
+  {{ sid }} .ct-pl{width:40px;height:40px;border-radius:50%;border:2px solid var(--plum);display:grid;place-items:center;flex:0 0 40px;transition:transform .25s,background-color .2s,color .2s}
+  {{ sid }} .ct-list details[open] .ct-pl{transform:rotate(45deg);background:var(--plum);color:#fff}
+  {{ sid }} .ct-list .ct-a{margin:14px 0 0;font-size:18px;line-height:1.55;color:#4A1240;max-width:60ch}
+  {{ sid }} .ct-list .ct-a p{margin:0}
+  @media (max-width:989px){
+    {{ sid }} .ct-main,{{ sid }} .ct-faq{flex-direction:column;align-items:stretch;gap:48px}
+    {{ sid }} .ct-intro,{{ sid }} .ct-card,{{ sid }} .ct-faq__intro,{{ sid }} .ct-list{flex:none}
+  }
+  @media (max-width:749px){
+    {{ sid }} .ct-main{padding:40px 16px 64px}
+    {{ sid }} .ct-h1{font-size:clamp(56px,17vw,88px)}
+    {{ sid }} .ct-lead{font-size:18px}
+    {{ sid }} .ct-card{padding:28px 20px 24px;border-radius:28px}
+    {{ sid }} .ct-grid{grid-template-columns:1fr}
+    {{ sid }} .ct-btn{width:100%;justify-content:center}
+    {{ sid }} .ct-faq{padding:64px 16px 72px}
+    {{ sid }} .ct-h2{font-size:clamp(48px,14vw,72px)}
+    {{ sid }} .ct-list summary{font-size:19px}
+    {{ sid }} .ct-done{min-height:380px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    {{ sid }} .ct-bubbles img{animation:none;display:none}
+    {{ sid }} .ct-btn,{{ sid }} .ct-btn svg,{{ sid }} .ct-row__i,{{ sid }} .ct-pl,{{ sid }} .ct-more svg{transition:none}
+  }
+</style>
+
+<div id="SshContact-{{ section.id }}" class="ss-scope">
+  <section class="ct-main">
+    <div class="ct-intro">
+      <h1 class="ct-h1">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.lead != blank -%}<p class="ct-lead">{{ section.settings.lead | escape }}</p>{%- endif -%}
+      {%- assign rows = section.blocks | where: 'type', 'row' -%}
+      {%- capture rows_html -%}
+        {%- for b in rows -%}
+          {%- if b.settings.value != blank -%}
+            {%- capture icon -%}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {%- case b.settings.icon -%}
+                {%- when 'instagram' -%}<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                {%- when 'clock' -%}<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+                {%- when 'tiktok' -%}<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/>
+                {%- when 'pin' -%}<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>
+                {%- else -%}<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/>
+              {%- endcase -%}
+              </svg>
+            {%- endcapture -%}
+            <li {{ b.shopify_attributes }}>
+              {%- if b.settings.link != blank -%}<a class="ct-row" href="{{ b.settings.link }}"{% if b.settings.link contains 'http' %} target="_blank" rel="noopener"{% endif %}>{%- else -%}<div class="ct-row">{%- endif -%}
+                <span class="ct-row__i">{{ icon }}</span>
+                <span class="ct-row__t"><span class="ct-row__l">{{ b.settings.label | escape }}</span><span class="ct-row__v">{{ b.settings.value | escape }}</span></span>
+              {%- if b.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if rows_html != blank -%}<ul class="ct-rows">{{ rows_html }}</ul>{%- endif -%}
+    </div>
+
+    <div class="ct-card">
+      {%- form 'contact', id: 'ContactForm', class: 'ct-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="ct-done" role="status">
+            <div class="ct-bubbles" aria-hidden="true">
+              <img src="{{ bubble }}" alt="" width="60" height="60" style="left:8%;width:60px;animation-delay:0s">
+              <img src="{{ bubble }}" alt="" width="38" height="38" style="left:30%;width:38px;animation-delay:.6s">
+              <img src="{{ bubble }}" alt="" width="74" height="74" style="left:55%;width:74px;animation-delay:1.2s">
+              <img src="{{ bubble }}" alt="" width="44" height="44" style="left:78%;width:44px;animation-delay:.3s">
+              <img src="{{ bubble }}" alt="" width="56" height="56" style="left:90%;width:56px;animation-delay:1.8s">
+              <img src="{{ bubble }}" alt="" width="30" height="30" style="left:66%;width:30px;animation-delay:2.4s">
+            </div>
+            <h2 class="ct-done__h">{{ section.settings.done_title | escape }}</h2>
+            <p>{{ section.settings.done_text | escape }}</p>
+            <a class="ct-again" href="{{ request.path }}">{{ section.settings.again_label | escape }}</a>
+          </div>
+        {%- else -%}
+          <p class="ct-form__h">{{ section.settings.form_title | escape }}</p>
+          {%- if form.errors -%}
+            <div class="ct-err" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          {%- assign topics = section.settings.topics | split: ',' -%}
+          {%- if topics.size > 0 -%}
+            <fieldset class="ct-fs">
+              <legend class="ct-lab">{{ section.settings.topics_label | escape }}</legend>
+              <div class="ct-chips">
+                {%- for t in topics -%}
+                  {%- assign tt = t | strip -%}
+                  <label class="ct-chip{% if forloop.first %} ct-chip--order{% endif %}"><input type="radio" name="contact[Anliegen]" value="{{ tt | escape }}"{% if forloop.first %} checked{% endif %}><span>{{ tt | escape }}</span></label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endif -%}
+          <div class="ct-grid">
+            <label class="ct-field" for="CtName-{{ section.id }}">Name
+              <input class="ct-in" id="CtName-{{ section.id }}" type="text" name="contact[name]" autocomplete="name" required value="{{ form.name }}">
+            </label>
+            <label class="ct-field" for="CtMail-{{ section.id }}">E-Mail
+              <input class="ct-in" id="CtMail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" spellcheck="false" autocapitalize="off" required value="{{ form.email }}">
+            </label>
+          </div>
+          <label class="ct-field ct-order" for="CtOrder-{{ section.id }}">
+            <span>Bestellnummer <small>(wenn du sie zur Hand hast)</small></span>
+            <input class="ct-in" id="CtOrder-{{ section.id }}" type="text" name="contact[Bestellnummer]" placeholder="#1001">
+          </label>
+          <label class="ct-field" for="CtMsg-{{ section.id }}">Nachricht
+            <textarea class="ct-in" id="CtMsg-{{ section.id }}" name="contact[body]" rows="5" required>{{ form.body }}</textarea>
+          </label>
+          <div class="ct-foot">
+            <p class="ct-note">Mit dem Absenden stimmst du unserer <a href="{{ section.settings.privacy_link | default: '/policies/privacy-policy' }}">Datenschutzerklärung</a> zu.</p>
+            <button type="submit" class="ct-btn">{{ section.settings.submit_label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </section>
+
+  {%- assign faqs = section.blocks | where: 'type', 'faq' -%}
+  {%- if faqs.size > 0 -%}
+    <section class="ct-faq">
+      <div class="ct-faq__intro">
+        <h2 class="ct-h2">{{ section.settings.faq_title | escape }}</h2>
+        {%- if section.settings.faq_text != blank -%}<p>{{ section.settings.faq_text | escape }}</p>{%- endif -%}
+        {%- if section.settings.faq_link_label != blank -%}
+          <a class="ct-more" href="{{ section.settings.faq_link | default: '/#faq' }}">{{ section.settings.faq_link_label | escape }}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        {%- endif -%}
+      </div>
+      <div class="ct-list">
+        {%- for b in faqs -%}
+          <details {{ b.shopify_attributes }}>
+            <summary>{{ b.settings.question | escape }}<span class="ct-pl" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+            <div class="ct-a">{{ b.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Soapsister: Kontakt",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Schreib uns." },
+    { "type": "textarea", "id": "lead", "label": "Text" },
+    { "type": "header", "content": "Formular" },
+    { "type": "text", "id": "form_title", "label": "Titel", "default": "Deine Nachricht" },
+    { "type": "text", "id": "topics_label", "label": "Frage zum Anliegen", "default": "Worum geht's?" },
+    { "type": "text", "id": "topics", "label": "Anliegen (mit Komma getrennt)", "info": "Beim ersten Anliegen erscheint das Feld Bestellnummer.", "default": "Bestellung, Produkte, Geschenk und Set, Kooperation, Etwas anderes" },
+    { "type": "text", "id": "submit_label", "label": "Button", "default": "Nachricht senden" },
+    { "type": "url", "id": "privacy_link", "label": "Link Datenschutz" },
+    { "type": "text", "id": "done_title", "label": "Danke-Titel", "default": "Danke!" },
+    { "type": "textarea", "id": "done_text", "label": "Danke-Text", "default": "Deine Nachricht ist unterwegs. Wir melden uns so schnell wie möglich bei dir." },
+    { "type": "text", "id": "again_label", "label": "Button nach dem Senden", "default": "Noch eine Nachricht" },
+    { "type": "header", "content": "Fragen" },
+    { "type": "text", "id": "faq_title", "label": "Überschrift", "default": "Schon gefragt?" },
+    { "type": "text", "id": "faq_text", "label": "Text", "default": "Vielleicht findest du die Antwort schon hier." },
+    { "type": "text", "id": "faq_link_label", "label": "Link-Text", "default": "Alle Fragen" },
+    { "type": "url", "id": "faq_link", "label": "Link" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Kontaktweg",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "mail", "label": "E-Mail" },
+          { "value": "instagram", "label": "Instagram" },
+          { "value": "tiktok", "label": "TikTok" },
+          { "value": "clock", "label": "Uhr" },
+          { "value": "pin", "label": "Ort" }
+        ], "default": "mail" },
+        { "type": "text", "id": "label", "label": "Bezeichnung", "default": "E-Mail" },
+        { "type": "text", "id": "value", "label": "Wert", "info": "Leer lassen blendet die Zeile aus." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Frage",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage" },
+        { "type": "richtext", "id": "answer", "label": "Antwort" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Soapsister: Kontakt" }]
+}
+{% endschema %}
