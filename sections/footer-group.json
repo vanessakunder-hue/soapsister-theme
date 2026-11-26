@@ -589,7 +589,7 @@
         "mc_all": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/soapsister-navi-mousse-logo.jpg",
+            "image": "shopify://shop_images/soapsister-navi-duschmousse.jpg",
             "focus": "object-position:50% 50%",
             "title": "Alle Duschmousse",
             "subtitle": "Lollipop, Coconut und Marshmallow im Überblick",
@@ -600,8 +600,8 @@
         "sc_all": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/soapsister-navi-feelgood-pool.jpg",
-            "focus": "object-position:50% 50%",
+            "image": "shopify://shop_images/soapsister-navi-feelgood-sets.jpg",
+            "focus": "object-position:50% 30%",
             "title": "Alle Feelgood Sets",
             "subtitle": "Mousse, Netzschwamm und Badeente im Set",
             "link": "/collections/sets",
