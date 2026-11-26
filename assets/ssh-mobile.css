@@ -34,3 +34,7 @@
 @media (max-width:749px){
   .ssh-sec .ssh-step > img,.ssh-sec .ssh-step picture img,.ssh-sec .ssh-step__img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
 }
+/* Mobil: keine animierten Bubble-Pfade, nur die großen Weiter-Blasen */
+@media (max-width:749px){
+  .ssh-trail{display:none!important}
+}
