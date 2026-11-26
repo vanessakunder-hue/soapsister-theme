@@ -125,3 +125,9 @@ ssh-mega.ssh-mega .ssh-n2{filter:drop-shadow(0 16px 24px rgba(117,31,101,.16))}
 #header-group .announcement-bar{padding-block:8px!important;--color-foreground:#FFFFFF;color:#FFFFFF}
 #header-group .announcement-bar__slider .slideshow-control{height:32px;color:#FFFFFF}
 #header-group .announcement-bar__slide,#header-group .announcement-bar__slide *{color:#FFFFFF!important}
+#header-group .announcement-bar__slider .slideshow-control{display:none!important}
+/* Alle Mega-Panels so hoch wie das Shop-Panel */
+ssh-mega.ssh-mega .ssh-n2__links{flex:0 0 auto;min-width:0;display:grid;grid-template-rows:repeat(5,auto);grid-auto-flow:column;grid-auto-columns:max-content;column-gap:44px;align-content:start}
+ssh-mega.ssh-mega .ssh-n2__link{white-space:nowrap}
+ssh-mega.ssh-mega .ssh-n2__cards{flex:1 1 0;min-width:0;max-width:780px}
+ssh-mega.ssh-mega .ssh-n2__card:only-child .ssh-n2__disc{aspect-ratio:auto;height:204px}
