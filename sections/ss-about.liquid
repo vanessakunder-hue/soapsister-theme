@@ -17,11 +17,11 @@
   {{ sid }} .ab-values{padding:0 7.4% 96px}
   {{ sid }} .ab-values ul{list-style:none;margin:0;padding:20px 44px;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:14px 28px;background:var(--plum);border-radius:999px;box-shadow:0 18px 40px rgba(117,31,101,.22)}
   {{ sid }} .ab-values li{display:flex;align-items:center;gap:12px;color:#fff}
-  {{ sid }} .ab-values img{width:40px;height:40px;flex:none;display:block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
-  {{ sid }} .ab-values li:hover img{transform:scale(1.15) rotate(-8deg)}
+  {{ sid }} .ab-ico{width:50px;height:50px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(246,211,230,.16);color:#FFFFFF;box-shadow:inset 0 0 0 1.5px rgba(246,211,230,.35);transition:transform .35s cubic-bezier(.3,1.6,.5,1),background-color .25s}
+  {{ sid }} .ab-values li:hover .ab-ico{transform:scale(1.12) rotate(-8deg);background:rgba(246,211,230,.26)}
   {{ sid }} .ab-values strong{font-family:var(--ss-display);font-weight:900;font-size:28px;line-height:1;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
-  {{ sid }} .ab-values span{font-size:17px;line-height:1.25;color:#F6D3E6;max-width:13ch}
-  @media (max-width:1199px){ {{ sid }} .ab-values ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 32px;padding:26px 36px;border-radius:36px} {{ sid }} .ab-values span{max-width:none} }
+  {{ sid }} .ab-values .ab-vt{font-size:17px;line-height:1.25;color:#F6D3E6;max-width:13ch}
+  @media (max-width:1199px){ {{ sid }} .ab-values ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 32px;padding:26px 36px;border-radius:36px} {{ sid }} .ab-values .ab-vt{max-width:none} }
   {{ sid }} .ab-pillar{background:var(--bg);color:var(--tx);padding:110px 7.4%;display:flex;gap:88px;align-items:center}
   {{ sid }} .ab-pillar--rev{flex-direction:row-reverse}
   {{ sid }} .ab-pillar__copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px}
@@ -60,7 +60,7 @@
     {{ sid }} .ab-values{padding:0 16px 64px}
     {{ sid }} .ab-values ul{flex-direction:column;align-items:flex-start;gap:16px;padding:26px 24px;border-radius:32px}
     {{ sid }} .ab-values strong{font-size:26px}
-    {{ sid }} .ab-values span{max-width:none}
+    {{ sid }} .ab-values .ab-vt{max-width:none}
     {{ sid }} .ab-pillar{padding:56px 16px}
     {{ sid }} .ab-h2{font-size:clamp(48px,14vw,72px)}
     {{ sid }} .ab-pillar__text,{{ sid }} .ab-cta__text{font-size:18px}
@@ -69,7 +69,7 @@
     {{ sid }} .ab-jars img{height:84px}
     {{ sid }} .ab-jars img:nth-child(2){height:106px;margin:0 -10px}
   }
-  @media (prefers-reduced-motion:reduce){ {{ sid }} .ab-btn,{{ sid }} .ab-btn svg,{{ sid }} .ab-values img{transition:none} }
+  @media (prefers-reduced-motion:reduce){ {{ sid }} .ab-btn,{{ sid }} .ab-btn svg,{{ sid }} .ab-ico{transition:none} }
 </style>
 
 <div id="SshAbout-{{ section.id }}" class="ss-scope">
@@ -92,7 +92,15 @@
     <div class="ab-values">
       <ul aria-label="{{ section.settings.values_label | escape }}">
         {%- for b in values -%}
-          <li {{ b.shopify_attributes }}><img src="{{ 'soapsister-seifenblase-hell.png' | file_url }}" alt="" width="40" height="40" loading="lazy"><strong>{{ b.settings.strong | escape }}</strong><span>{{ b.settings.text | escape }}</span></li>
+          <li {{ b.shopify_attributes }}><span class="ab-ico" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            {%- case b.settings.icon -%}
+              {%- when 'sprout' -%}<path d="M12 21v-8"/><path d="M12 13c0-4-3-6.5-7.5-6.5 0 4.2 3 6.5 7.5 6.5z"/><path d="M12 11c0-4 3-6.5 7.5-6.5 0 4.2-3 6.5-7.5 6.5z"/>
+              {%- when 'hand' -%}<path d="M12 11.6c-1.1-1.8-4-1.5-4 .8 0 1.6 2 3 4 4.4 2-1.4 4-2.8 4-4.4 0-2.3-2.9-2.6-4-.8z"/><path d="M2.5 19.5h3.2l3.6 1.5h6.2l5.6-3.6c.6-.4.7-1.3.1-1.8-.5-.4-1.2-.4-1.7 0L16 17.6"/>
+              {%- when 'nodrop' -%}<path d="M12 3.5c3.2 4.1 5.2 6.8 5.2 9.6a5.2 5.2 0 0 1-10.4 0c0-2.8 2-5.5 5.2-9.6z"/><path d="M4 20L20 4"/>
+              {%- when 'heart' -%}<path d="M12 20s-7.5-4.6-7.5-10A4.2 4.2 0 0 1 12 7.6 4.2 4.2 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>
+              {%- else -%}<path d="M5 19.5c0-8.5 5.5-15 15-15 0 10-6 15.5-14 15.5"/><path d="M5 19.5c3-4.5 6.5-7.5 10.5-9.5"/>
+            {%- endcase -%}
+          </svg></span><strong>{{ b.settings.strong | escape }}</strong><span class="ab-vt">{{ b.settings.text | escape }}</span></li>
         {%- endfor -%}
       </ul>
     </div>
@@ -158,7 +166,14 @@
       "name": "Wert",
       "settings": [
         { "type": "text", "id": "strong", "label": "Fett", "default": "Vegan" },
-        { "type": "text", "id": "text", "label": "Text", "default": "in allen drei Sorten" }
+        { "type": "text", "id": "text", "label": "Text", "default": "in allen drei Sorten" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "leaf", "label": "Blatt" },
+          { "value": "sprout", "label": "Keimling" },
+          { "value": "hand", "label": "Herz in der Hand" },
+          { "value": "nodrop", "label": "Tropfen durchgestrichen" },
+          { "value": "heart", "label": "Herz" }
+        ], "default": "leaf" }
       ]
     },
     {
