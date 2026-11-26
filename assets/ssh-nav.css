@@ -160,3 +160,10 @@ ssh-mega.ssh-mega .ssh-n2__card:only-child .ssh-n2__disc{aspect-ratio:auto;heigh
   #header-component .header__column--right header-menu{display:flex;justify-content:center}
   #header-component .header__column--right header-menu .overflow-menu{width:max-content;max-width:100%;margin-inline:auto}
 }
+/* Sahnehauben-Kante per Maske: links und rechts symmetrisch, keine Stufe am Rand */
+ssh-mega.ssh-mega .ssh-n2__edge{display:none}
+ssh-mega.ssh-mega .ssh-n2__sheet{
+  padding-bottom:46px;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 19px) no-repeat,radial-gradient(28px 20px at 50% 0,#000 97%,transparent 100%) bottom/56px 20px round no-repeat;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 19px) no-repeat,radial-gradient(28px 20px at 50% 0,#000 97%,transparent 100%) bottom/56px 20px round no-repeat;
+}
