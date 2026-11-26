@@ -26,7 +26,7 @@
             "subline": "Mousse, Netzschwamm und Badeente in Rosa",
             "focus": "object-position:50% 50%",
             "ink": "#751F65",
-            "button": "#1D3F52"
+            "button": "#1D1D1B"
           }
         },
         "coconut": {
@@ -39,7 +39,7 @@
             "subline": "Mousse, Netzschwamm und Badeente in Weiß",
             "focus": "object-position:50% 50%",
             "ink": "#1D1D1B",
-            "button": "#1D3F52"
+            "button": "#1D1D1B"
           }
         },
         "marshmallow": {
@@ -52,7 +52,7 @@
             "subline": "Mousse, Netzschwamm und Badeente in Blau",
             "focus": "object-position:50% 50%",
             "ink": "#1D3F52",
-            "button": "#1D3F52"
+            "button": "#1D1D1B"
           }
         }
       },
