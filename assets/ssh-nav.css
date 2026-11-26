@@ -103,9 +103,6 @@
   #header-component .header-actions__action{transition:none}
 }
 
-/* Mega-Menü fließt hinter der Pille herunter */
-ssh-mega.ssh-mega{top:calc(var(--ssh-mega-top,92px) - 40px)!important;z-index:17!important}
-.ssh-mega .ssh-n2__sheet{padding-top:80px}
 
 /* Menü startet direkt nach dem Logo und nutzt die ganze Breite */
 @media screen and (min-width:750px){
@@ -115,3 +112,8 @@ ssh-mega.ssh-mega{top:calc(var(--ssh-mega-top,92px) - 40px)!important;z-index:17
 }
 /* Abstand Pille zum Inhalt auf Unterseiten */
 .content-for-layout:not([data-template="index"]){padding-top:14px}
+/* Mega-Menü als Karte direkt unter der Pille, gleiche Breite */
+ssh-mega.ssh-mega{top:calc(var(--ssh-mega-top,92px) + 10px)!important;left:5.2vw!important;right:5.2vw!important;z-index:17!important}
+ssh-mega.ssh-mega .ssh-n2__sheet{border-radius:36px 36px 0 0;padding:40px 40px 18px 38px;gap:48px}
+ssh-mega.ssh-mega .ssh-n2__edge{height:34px}
+ssh-mega.ssh-mega .ssh-n2{filter:drop-shadow(0 16px 24px rgba(117,31,101,.16))}
