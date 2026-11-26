@@ -1,7 +1,7 @@
 /* Soapsister: Bubble-Pfad zwischen den Startseiten-Sections.
    Die Blasen sind nur beim Scrollen sichtbar: sie poppen auf, solange gescrollt wird,
    und verschwinden kurz nach dem Stillstand sowie am oberen Bildschirmrand.
-   Ein Pfad, der einmal komplett nach oben durchgescrollt wurde, bleibt beim Zurückscrollen aus.
+   Beim Hochscrollen erscheinen keine Blasen, und jede Blase, die einmal zu sehen war, bleibt danach aus.
    Erst wenn der Hero wieder im Bild ist, werden alle Pfade zurückgesetzt. */
 (function () {
   var trails = [], ticking = false, active = false, idle = 0;
@@ -38,27 +38,35 @@
       seg(a, sp); seg(sp, e);
     } else seg(a, e);
     el.appendChild(frag);
-    trails.push({ el: el, items: items, done: false });
+    trails.push({ el: el, items: items });
   }
+  var prevRef = null, goingUp = false;
   function update() {
     ticking = false;
     var vh = window.innerHeight, start = vh * 0.45, end = vh * 0.08;
-    var hero = document.querySelector(".content-for-layout > .shopify-section:first-child");
-    if (hero && hero.getBoundingClientRect().bottom > vh * 0.6) { for (var h = 0; h < trails.length; h++) trails[h].done = false; }
+    if (!trails.length) return;
+    var ref = trails[0].el.getBoundingClientRect().top;
+    if (prevRef !== null && Math.abs(ref - prevRef) > 0.5) goingUp = ref > prevRef;
+    prevRef = ref;
+    var hero = document.querySelector('.content-for-layout > .shopify-section:first-child');
+    var atHero = hero && hero.getBoundingClientRect().bottom > vh * 0.6;
     for (var i = 0; i < trails.length; i++) {
       var r = trails[i].el.getBoundingClientRect();
       var list = trails[i].items;
-      if (r.bottom < 0) trails[i].done = true;
-      var near = !trails[i].done && !(r.bottom < -200 || r.top > vh + 200);
+      var near = !(r.bottom < -200 || r.top > vh + 200);
       for (var j = 0; j < list.length; j++) {
-        var f = 0;
-        if (active && near) {
-          var vy = r.top + list[j].y * r.height;
+        var it = list[j], f = 0;
+        if (atHero) { it.done = false; it.seen = false; }
+        else if (goingUp && it.seen) it.done = true;
+        if (active && near && !goingUp && !it.done) {
+          var vy = r.top + it.y * r.height;
           f = Math.min(1, Math.max(0, (vy - end) / (start - end)));
           if (vy > vh) f = 0;
           f = Math.round(f * 100) / 100;
+          if (f > 0) it.seen = true;
+          if (vy < end && it.seen) it.done = true;
         }
-        if (list[j].f !== f) { list[j].f = f; list[j].el.style.setProperty('--fade', f); }
+        if (it.f !== f) { it.f = f; it.el.style.setProperty('--fade', f); }
       }
     }
   }
