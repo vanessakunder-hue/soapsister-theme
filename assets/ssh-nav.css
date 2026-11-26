@@ -131,3 +131,8 @@ ssh-mega.ssh-mega .ssh-n2__links{flex:0 0 auto;min-width:0;display:grid;grid-tem
 ssh-mega.ssh-mega .ssh-n2__link{white-space:nowrap}
 ssh-mega.ssh-mega .ssh-n2__cards{flex:1 1 0;min-width:0;max-width:780px}
 ssh-mega.ssh-mega .ssh-n2__card:only-child .ssh-n2__disc{aspect-ratio:auto;height:204px}
+/* Anzahl-Badge oben rechts am Pflaumen-Kreis, nicht über dem Icon */
+#header-component [data-testid="cart-drawer-trigger"],
+#header-component .action__cart{position:relative;overflow:visible}
+#header-component .header-actions__cart-icon{position:static!important}
+#header-component .header-actions__cart-icon .cart-bubble{position:absolute!important;top:-3px!important;right:-3px!important;left:auto!important;bottom:auto!important;inset-inline-end:-3px!important;transform:none!important;margin:0!important}
