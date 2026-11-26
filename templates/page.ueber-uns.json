@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about": {
+      "type": "ss-about",
+      "settings": {
+        "heading": "Together\nin care.",
+        "subline": "For skin, soul and sisterhood.",
+        "intro": "Soapsister ist eine Marke aus München, gegründet von Veronika Löwen. Die Idee dahinter: Duschen soll nicht nur sauber machen, sondern sich gut anfühlen. Für deine Haut, für deine Seele und für all die Frauen, die dir wichtig sind.",
+        "image": "shopify://shop_images/soapsister-veronika-loewen-dose.jpg",
+        "image_alt": "Veronika Löwen sitzt auf einer großen Soapsister Dose",
+        "image_focus": "object-position:50% 25%",
+        "caption": "Veronika Löwen, Gründerin",
+        "values_label": "Das steckt in Soapsister",
+        "cta_title": "Lust auf Fluff?",
+        "cta_text": "Drei Sorten, ein Gefühl. Such dir deinen Lieblingsduft aus.",
+        "jar_1": "shopify://shop_images/soapsister-dose-coconut-freisteller.png",
+        "jar_2": "shopify://shop_images/soapsister-dose-lollipop-freisteller-v2.png",
+        "jar_3": "shopify://shop_images/soapsister-dose-marshmallow-freisteller.png",
+        "cta_label": "Zum Duschmousse",
+        "cta_link": "/collections/duschmousse"
+      },
+      "blocks": {
+        "v1": { "type": "value", "settings": { "strong": "Vegan", "text": "in allen drei Sorten" } },
+        "v2": { "type": "value", "settings": { "strong": "96 %", "text": "natürliche Inhaltsstoffe" } },
+        "v3": { "type": "value", "settings": { "strong": "Handmade", "text": "in Germany" } },
+        "v4": { "type": "value", "settings": { "strong": "Ohne", "text": "Silikone, Parabene und Sulfate" } },
+        "p1": { "type": "pillar", "settings": { "title": "For skin.", "subline": "Weich wie ein Löffel Sahne.", "text": "Unser Duschmousse ist luftig aufgeschlagen, mit Aloe Vera und Mandelöl. Es reinigt sanft und hinterlässt ein zartes, gepflegtes Hautgefühl.", "image": "shopify://shop_images/soapsister-anwendung-2-aufschaeumen.jpg", "image_alt": "Hände mit rosa Schaum", "focus": "object-position:50% 50%", "bg": "#F6E2EE", "ink": "#751F65" } },
+        "p2": { "type": "pillar", "settings": { "title": "For soul.", "subline": "Dein kleiner Feelgood-Moment.", "text": "Drei Düfte, die gute Laune machen: Lollipop, Coconut und Marshmallow. Schon beim Öffnen der Dose fängt die Auszeit an.", "image": "shopify://shop_images/soapsister-navi-feelgood-pyjama.jpg", "image_alt": "Füße in flauschigen rosa und weißen Hausschuhen", "focus": "object-position:50% 60%", "bg": "#FFFFFF", "ink": "#1D1D1B" } },
+        "p3": { "type": "pillar", "settings": { "title": "For sisterhood.", "subline": "Für die Frauen, die dir wichtig sind.", "text": "Soapsister ist für dich und für deine Freundinnen, Schwestern und Mütter. Zum Selbstbehalten oder als Geschenk, das von Herzen kommt.", "image": "shopify://shop_images/soapsister-navi-feelgood-sets.jpg", "image_alt": "Frauen in Pink zwischen rosa Schaumwolken", "focus": "object-position:50% 40%", "bg": "#E1F0F8", "ink": "#1D3F52" } }
+      },
+      "block_order": ["v1", "v2", "v3", "v4", "p1", "p2", "p3"]
+    }
+  },
+  "order": ["about"]
+}
